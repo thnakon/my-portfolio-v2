@@ -14,23 +14,15 @@ export function AboutSection() {
           <h2 className="text-3xl font-bold tracking-tight uppercase">About Me</h2>
           <div className="h-1 w-12 bg-foreground" />
         </div>
-        <p className="text-muted-foreground text-lg leading-relaxed font-medium">
-          I am a developer driven by the intersection of AI and elegant user experiences.
+        <p className="text-muted-foreground text-md leading-relaxed font-medium">
+          Hello, I&apos;m Thanakon Dungkumwattanasiri, an AI-Augmented Software Developer. I don&apos;t see AI merely as a tool for writing code; I integrate it into the entire process of thinking, designing, and building systems from start to finish.
         </p>
         <p className="text-muted-foreground text-sm leading-relaxed">
-          Based in Thailand, I specialize in building highly interactive, AI-integrated applications that don&apos;t just work—they feel magical.
+          I specialize in applying LLMs and AI Agents to real-world workflows, elevating software to be more intelligent—capable of thinking, analyzing, and performing more efficiently than ever through technologies like Laravel and Next.js, built with an AI-first mindset.
         </p>
-        
-        <div className="pt-4 grid grid-cols-2 gap-4">
-          <div className="flex flex-col gap-1">
-            <span className="text-2xl font-bold font-mono">5+</span>
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Years Experience</span>
-          </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-2xl font-bold font-mono">20+</span>
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Projects Built</span>
-          </div>
-        </div>
+        <p className="text-muted-foreground text-sm leading-relaxed">
+          I believe the future of software development lies in integrating AI as the core of the system to create technology that grows sustainably with businesses.
+        </p>
       </div>
 
       {/* Right side: Interactive Content */}
