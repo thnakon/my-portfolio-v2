@@ -130,7 +130,7 @@ export default function Home() {
             
             {/* Subtitle & Image */}
             <div className={`mx-auto max-w-[800px] text-muted-foreground text-base md:text-lg mb-10 leading-relaxed flex items-center justify-center flex-wrap gap-x-3 transition-all duration-1000 delay-500 ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-              <span>Hello I&apos;m Thanakon</span>
+              <span>Hello, I&apos;m Thanakon.</span>
               <div className="relative group cursor-pointer inline-flex items-center justify-center align-middle mx-1">
                 <span className="absolute bottom-0 -right-1 text-2xl opacity-0 group-hover:opacity-100 animate-wave pointer-events-none transition-opacity duration-300 z-30">
                   👋
@@ -145,7 +145,7 @@ export default function Home() {
                   />
                 </span>
               </div>
-              <span>AI Driven Developer</span>
+              <span>AI-driven developer building intelligent web solutions.</span>
             </div>
             
             {/* Buttons */}
