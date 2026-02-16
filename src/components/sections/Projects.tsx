@@ -2,8 +2,9 @@
 
 import { Section } from "@/components/Section";
 import { useLanguage } from "@/context/LanguageContext";
-import { ExternalLink, Github } from "lucide-react";
-import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 
 const projects = [
   {
@@ -13,6 +14,7 @@ const projects = [
     tech: ["Next.js", "Tailwind", "Python"],
     link: "#",
     github: "#",
+    icon: "lni-graph",
   },
   {
     id: 2,
@@ -21,6 +23,7 @@ const projects = [
     tech: ["React", "Node.js", "MongoDB"],
     link: "#",
     github: "#",
+    icon: "lni-cart",
   },
   {
     id: 3,
@@ -29,61 +32,74 @@ const projects = [
     tech: ["Vue", "Firebase", "WebRTC"],
     link: "#",
     github: "#",
+    icon: "lni-comments",
   },
 ];
 
 export function Projects() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <Section id="projects">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold tracking-tight mb-12">{t("projects")}</h2>
+      <div className="container mx-auto max-w-5xl px-4">
+        <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
+          <div className="space-y-2">
+            <h2 className="text-4xl font-bold tracking-tighter flex items-center gap-4">
+               <i className="lni lni-layers text-primary"></i>
+               {t("projects")}
+            </h2>
+            <p className="text-muted-foreground">{language === 'en' ? 'Selected works and experiments.' : 'ผลงานและโปรเจกต์ที่ได้รับเลือก'}</p>
+          </div>
+          <Button variant="outline" className="gap-2">
+            View All <i className="lni lni-arrow-right"></i>
+          </Button>
+        </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
-            <div
+            <Card
               key={project.id}
-              className="group relative bg-card rounded-[28px] border-2 border-border overflow-hidden hover:-translate-y-2 transition-transform duration-300"
+              className="group hover:border-primary/50 transition-colors"
             >
-              <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-                <a
-                  href={project.github}
-                  className="p-2 rounded-full bg-background border border-border hover:bg-accent"
-                  title="View Source"
-                >
-                  <Github className="w-4 h-4" />
-                </a>
-                <a
-                  href={project.link}
-                  className="p-2 rounded-full bg-background border border-border hover:bg-accent"
-                  title="View Live"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                </a>
+              <div className="aspect-[16/10] bg-zinc-50 dark:bg-zinc-900/50 flex items-center justify-center text-zinc-300 dark:text-zinc-700 border-b border-border overflow-hidden relative">
+                <i className={`lni ${project.icon} text-6xl opacity-20 group-hover:scale-110 group-hover:opacity-40 transition-all duration-500`}></i>
+                
+                <div className="absolute top-4 right-4 flex gap-2">
+                  <a
+                    href={project.github}
+                    className="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                    title="View Source"
+                  >
+                    <i className="lni lni-github-original"></i>
+                  </a>
+                  <a
+                    href={project.link}
+                    className="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                    title="View Live"
+                  >
+                    <i className="lni lni-world"></i>
+                  </a>
+                </div>
               </div>
               
-              <div className="aspect-video bg-muted flex items-center justify-center text-muted-foreground border-b border-border">
-                [Preview Image]
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-muted-foreground mb-4 text-sm">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
+                <p className="text-muted-foreground mb-6 text-sm line-clamp-2 leading-relaxed">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((tech) => (
-                    <span
+                    <Badge
                       key={tech}
-                      className="px-3 py-1 rounded-full text-xs font-medium bg-secondary text-secondary-foreground border border-border/10"
+                      variant="secondary"
+                      className="text-[10px] font-bold px-2.5"
                     >
                       {tech}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

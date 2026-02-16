@@ -8,7 +8,7 @@ export function LanguageSwitch() {
   return (
     <button
       onClick={() => setLanguage(language === "en" ? "th" : "en")}
-      className="px-3 py-1 rounded-full border border-border hover:bg-accent transition-colors font-medium text-sm w-12"
+      className="h-9 px-3 rounded-full border border-border bg-background hover:bg-accent transition-all duration-300 font-bold text-[10px] tracking-widest flex items-center justify-center"
       aria-label="Switch language"
     >
       {language.toUpperCase()}
