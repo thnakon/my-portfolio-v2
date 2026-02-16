@@ -74,7 +74,7 @@ const techStack = {
 
 export default function Home() {
   const [text, setText] = useState("");
-  const fullText = "Developing innovative tools to empower students and businesses";
+  const fullText = "Developing innovative tools to\nempower students and businesses";
   const { isDone, setDone } = useIntro();
 
   useEffect(() => {
@@ -121,7 +121,7 @@ export default function Home() {
             </div>
             
             {/* Animated H1 */}
-            <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl mb-6 min-h-[1.2em] flex items-center justify-center">
+            <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl mb-6 min-h-[1.2em] flex items-center justify-center whitespace-pre-line">
               {text}
               {!isDone && (
                 <span className="inline-block w-[3px] h-[0.8em] bg-foreground ml-1 animate-pulse" />
