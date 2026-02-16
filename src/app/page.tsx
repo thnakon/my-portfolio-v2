@@ -74,7 +74,7 @@ const techStack = {
 
 export default function Home() {
   const [text, setText] = useState("");
-  const fullText = "Building things for the web";
+  const fullText = "Developing innovative tools to empower students and businesses";
   const { isDone, setDone } = useIntro();
 
   useEffect(() => {
