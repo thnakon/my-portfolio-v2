@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 
 import { Navbar } from "@/components/Navbar";
 import { SidebarLabel } from "@/components/SidebarLabel";
+import { Footer } from "@/components/Footer";
 import { IntroProvider } from "@/components/intro-context";
 
 export default function RootLayout({
@@ -35,10 +36,13 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <IntroProvider>
-            <div className="relative min-h-screen">
+            <div className="relative min-h-screen flex flex-col">
               <SidebarLabel />
               <Navbar />
-              {children}
+              <main className="flex-1">
+                {children}
+              </main>
+              <Footer />
             </div>
           </IntroProvider>
         </ThemeProvider>
