@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   },
 };
 
+import { Navbar } from "@/components/Navbar";
+import { SidebarLabel } from "@/components/SidebarLabel";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,7 +33,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="relative min-h-screen">
+            <SidebarLabel />
+            <Navbar />
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>

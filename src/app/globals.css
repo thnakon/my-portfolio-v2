@@ -118,13 +118,16 @@
 
 @layer utilities {
   .animate-shimmer-text {
+    --shimmer-shine: oklch(1 0 0 / 0.9);
     background: linear-gradient(
-      to right,
-      currentColor 20%,
-      rgba(255, 255, 255, 0.7) 50%,
-      currentColor 80%
+      90deg,
+      var(--foreground) 0%,
+      var(--foreground) 40%,
+      var(--shimmer-shine) 50%,
+      var(--foreground) 60%,
+      var(--foreground) 100%
     );
-    background-size: 200% auto;
+    background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -132,9 +135,28 @@
   }
 
   @keyframes shimmer-text {
-    to {
-      background-position: 200% center;
+    0% {
+      background-position: 100% 0;
     }
+    100% {
+      background-position: -100% 0;
+    }
+  }
+
+  @keyframes wave {
+    0% { transform: rotate(0deg); }
+    15% { transform: rotate(14deg); }
+    30% { transform: rotate(-8deg); }
+    45% { transform: rotate(14deg); }
+    60% { transform: rotate(-4deg); }
+    75% { transform: rotate(10deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  .animate-wave {
+    animation: wave 1.5s infinite ease-in-out;
+    transform-origin: 75% 75%;
+    display: inline-block;
   }
 }
 

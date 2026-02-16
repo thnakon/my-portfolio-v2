@@ -4,8 +4,10 @@ import Link from "next/link"
 import Image from "next/image"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
+import { NavMegaMenu } from "./NavMegaMenu"
 import { ModeToggle } from "./mode-toggle"
 import { SearchCommand } from "./SearchCommand"
+import { MobileNav } from "./MobileNav"
 
 export function Navbar() {
   const { theme, resolvedTheme } = useTheme()
@@ -21,7 +23,7 @@ export function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-14 items-center justify-between px-4">
+      <div className="max-w-[1600px] mx-auto flex h-14 items-center justify-between px-8">
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center space-x-2">
             <Image 
@@ -32,11 +34,13 @@ export function Navbar() {
               className="rounded-full border"
             />
           </Link>
-          <div className="hidden md:flex gap-6 text-[13px] font-medium text-foreground">
-            <Link href="/docs" className="transition-colors hover:text-foreground/80">Docs</Link>
-            <Link href="/components" className="transition-colors hover:text-foreground/80">Components</Link>
-            <Link href="/examples" className="transition-colors hover:text-foreground/80">Examples</Link>
+          <div className="hidden md:flex gap-1 text-[13px] font-medium text-foreground">
+            <Link href="/about" className="px-3 py-1.5 rounded-md transition-colors hover:bg-muted hover:text-foreground">About</Link>
+            <Link href="/work" className="px-3 py-1.5 rounded-md transition-colors hover:bg-muted hover:text-foreground">Work</Link>
+            <Link href="/blog" className="px-3 py-1.5 rounded-md transition-colors hover:bg-muted hover:text-foreground">Blog</Link>
+            <NavMegaMenu />
           </div>
+          <MobileNav />
         </div>
         <div className="flex flex-1 items-center justify-end space-x-4">
           <div className="hidden lg:block">
