@@ -1,57 +1,51 @@
-"use client";
-
-import Link from "next/link";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { LanguageSwitch } from "@/components/LanguageSwitch";
-import { useLanguage } from "@/context/LanguageContext";
-import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
+import Link from "next/link"
+import Image from "next/image"
+import { ModeToggle } from "./mode-toggle"
+import { SearchCommand } from "./SearchCommand"
 
 export function Navbar() {
-  const { t, language } = useLanguage();
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 pt-6",
-      scrolled ? "pt-4" : "pt-6"
-    )}>
-      <div className={cn(
-        "container mx-auto max-w-5xl h-14 flex items-center justify-between px-6 rounded-full border transition-all duration-300",
-        scrolled 
-          ? "bg-background/80 backdrop-blur-md border-border shadow-sm h-12" 
-          : "bg-transparent border-transparent"
-      )}>
-        <Link href="/" className="text-lg font-bold tracking-tighter hover:opacity-70 transition-opacity flex items-center gap-2">
-          <i className="lni lni-pulse font-bold"></i>
-          DEV.AI
-        </Link>
-
+    <nav className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto flex h-14 items-center justify-between px-4">
         <div className="flex items-center gap-8">
-          <div className="hidden md:flex items-center gap-8 text-[13px] font-medium tracking-tight">
-            <Link href="#about" className="text-muted-foreground hover:text-foreground transition-colors uppercase tracking-widest">
-              {t("about")}
-            </Link>
-            <Link href="#projects" className="text-muted-foreground hover:text-foreground transition-colors uppercase tracking-widest">
-              {t("projects")}
-            </Link>
-            <Link href="#contact" className="text-muted-foreground hover:text-foreground transition-colors uppercase tracking-widest">
-              {t("contact")}
-            </Link>
+          <Link href="/" className="flex items-center space-x-2">
+            <Image 
+              src="/logo.png" 
+              alt="Logo" 
+              width={32} 
+              height={32} 
+              className="rounded-full border"
+            />
+          </Link>
+          <div className="hidden md:flex gap-6 text-[13px] font-medium text-foreground">
+            <Link href="/docs" className="transition-colors hover:text-foreground/80">Docs</Link>
+            <Link href="/components" className="transition-colors hover:text-foreground/80">Components</Link>
+            <Link href="/examples" className="transition-colors hover:text-foreground/80">Examples</Link>
           </div>
-
-          <div className="flex items-center gap-3 pl-4 border-l border-border/50">
-            <LanguageSwitch />
-            <ThemeToggle />
+        </div>
+        <div className="flex flex-1 items-center justify-end space-x-4">
+          <div className="hidden lg:block">
+            <SearchCommand />
+          </div>
+          <div className="flex items-center gap-2">
+            <Link
+              href="https://github.com"
+              target="_blank"
+              rel="noreferrer"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                className="h-5 w-5 fill-current"
+              >
+                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+              </svg>
+            </Link>
+            <ModeToggle />
           </div>
         </div>
       </div>
     </nav>
-  );
+  )
 }
