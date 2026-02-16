@@ -253,28 +253,22 @@ export default function Home() {
 
       {/* AI Workflow Section */}
       <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1600ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
-        <div className="rounded-3xl border bg-muted/30 p-8 md:p-16 relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-8 opacity-5">
-            <Sparkles className="h-48 w-48 rotate-12" />
-          </div>
-          
-          <div className="text-center mb-16 relative z-10">
-            <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-foreground/40 mb-4 block">Process</span>
-            <h2 className="text-3xl font-bold tracking-tight uppercase mb-4">AI Driven Workflow</h2>
-            <p className="text-muted-foreground text-sm max-w-[500px] mx-auto">
-              How I leverage artificial intelligence to build faster, smarter, and more reliable web applications.
-            </p>
-          </div>
+        <div className="text-center mb-16 relative z-10">
+          <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-foreground/40 mb-4 block">Process</span>
+          <h2 className="text-3xl font-bold tracking-tight uppercase mb-4">AI Driven Workflow</h2>
+          <p className="text-muted-foreground text-sm max-w-[500px] mx-auto">
+            How I leverage artificial intelligence to build faster, smarter, and more reliable web applications.
+          </p>
+        </div>
 
-          <div className="flex flex-col md:flex-row gap-8 relative z-10">
-            {workflow.map((step, index) => (
-              <WorkflowStep 
-                key={step.number}
-                {...step}
-                isLast={index === workflow.length - 1}
-              />
-            ))}
-          </div>
+        <div className="flex flex-col md:flex-row gap-8 relative z-10 px-4 md:px-0">
+          {workflow.map((step, index) => (
+            <WorkflowStep 
+              key={step.number}
+              {...step}
+              isLast={index === workflow.length - 1}
+            />
+          ))}
         </div>
       </section>
 
