@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 
 import { Navbar } from "@/components/Navbar";
 import { SidebarLabel } from "@/components/SidebarLabel";
+import { IntroProvider } from "@/components/intro-context";
 
 export default function RootLayout({
   children,
@@ -33,11 +34,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative min-h-screen">
-            <SidebarLabel />
-            <Navbar />
-            {children}
-          </div>
+          <IntroProvider>
+            <div className="relative min-h-screen">
+              <SidebarLabel />
+              <Navbar />
+              {children}
+            </div>
+          </IntroProvider>
         </ThemeProvider>
       </body>
     </html>

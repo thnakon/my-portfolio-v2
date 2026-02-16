@@ -1,8 +1,12 @@
 "use client"
 
+import { useIntro } from "./intro-context"
+
 export function SidebarLabel() {
+  const { isDone } = useIntro()
+
   return (
-    <div className="fixed inset-0 pointer-events-none z-40 hidden xl:block">
+    <div className={`fixed inset-0 pointer-events-none z-40 hidden xl:block transition-all duration-1000 delay-500 ${isDone ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"}`}>
       <div className="max-w-[1600px] mx-auto h-full px-8 relative">
         <div className="absolute left-8 top-0 bottom-0 flex flex-col items-center justify-between py-24 w-8">
           {/* Top Text */}
