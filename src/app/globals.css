@@ -116,6 +116,28 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@layer utilities {
+  .animate-shimmer-text {
+    background: linear-gradient(
+      to right,
+      currentColor 20%,
+      rgba(255, 255, 255, 0.7) 50%,
+      currentColor 80%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer-text 3s linear infinite;
+  }
+
+  @keyframes shimmer-text {
+    to {
+      background-position: 200% center;
+    }
+  }
+}
+
 @layer base {
   html {
     font-size: 15px;

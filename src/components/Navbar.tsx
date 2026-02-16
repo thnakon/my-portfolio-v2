@@ -1,16 +1,31 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 import { ModeToggle } from "./mode-toggle"
 import { SearchCommand } from "./SearchCommand"
 
 export function Navbar() {
+  const { theme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  // Avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const currentTheme = mounted ? resolvedTheme : "light"
+  const logoSrc = currentTheme === "dark" ? "/logo-dark.png" : "/logo.png"
+
   return (
     <nav className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-14 items-center justify-between px-4">
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center space-x-2">
             <Image 
-              src="/logo.png" 
+              src={logoSrc}
               alt="Logo" 
               width={32} 
               height={32} 
