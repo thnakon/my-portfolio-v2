@@ -42,13 +42,14 @@ export function Navbar() {
           </div>
           <MobileNav />
         </div>
-        <div className="flex flex-1 items-center justify-end space-x-4">
-          <div className="hidden lg:block">
+        <div className="flex flex-1 items-center justify-end space-x-1 sm:space-x-4">
+          <div className="hidden lg:flex items-center gap-4">
             <SearchCommand />
+            <div className="h-4 w-[1px] bg-border/60 mx-1" />
           </div>
           <div className="flex items-center gap-2">
             <Link
-              href="https://github.com"
+              href="https://github.com/thnakon"
               target="_blank"
               rel="noreferrer"
               className="text-muted-foreground transition-colors hover:text-foreground"

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ChevronRight, ArrowDown, ArrowRight } from "lucide-react";
 import { CopyEmailButton } from "@/components/CopyEmailButton";
+import { ContactModal } from "@/components/ContactModal";
 import Image from "next/image";
 
 export default function Home() {
@@ -10,7 +11,7 @@ export default function Home() {
         <section className="container mx-auto px-4 pb-16 text-center relative z-10">
           <div className="flex justify-center mb-8">
             <div className="flex items-center gap-2.5 px-0 py-0 text-[12px] font-medium transition-colors cursor-pointer group">
-              <span className="px-2 py-0.5 rounded-full bg-blue-600 text-white font-semibold text-[11px]">
+              <span className="px-2 py-0.5 rounded-full bg-muted/80 text-muted-foreground border border-muted-foreground/20 font-bold text-[10px] uppercase tracking-wider">
                 Upcoming
               </span>
               <span className="text-foreground/90 font-medium animate-shimmer-text">A new project is launching soon!</span>
@@ -42,9 +43,11 @@ export default function Home() {
           </div>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="rounded-xl px-8 font-semibold transition-all hover:scale-[1.02] flex items-center gap-2">
-              Let&apos;s Connect <ArrowRight className="h-4 w-4" />
-            </Button>
+            <ContactModal>
+              <Button size="lg" className="rounded-xl px-8 font-semibold transition-all hover:scale-[1.02] flex items-center gap-2">
+                Let&apos;s Connect <ArrowRight className="h-4 w-4" />
+              </Button>
+            </ContactModal>
             <CopyEmailButton />
           </div>
         </section>
