@@ -14,7 +14,7 @@ export function AboutSection() {
           <h2 className="text-3xl font-bold tracking-tight uppercase">About Me</h2>
           <div className="h-1 w-12 bg-foreground" />
         </div>
-        <p className="text-muted-foreground text-md leading-relaxed font-medium">
+        <p className="text-muted-foreground text-sm leading-relaxed">
           Hello, I&apos;m Thanakon Dungkumwattanasiri, an AI-Augmented Software Developer. I don&apos;t see AI merely as a tool for writing code; I integrate it into the entire process of thinking, designing, and building systems from start to finish.
         </p>
         <p className="text-muted-foreground text-sm leading-relaxed">
