@@ -8,8 +8,15 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useIntro } from "@/components/intro-context";
 import { ProjectCard } from "@/components/ProjectCard";
-import { TechBadge } from "@/components/TechBadge";
 import { TimelineItem } from "@/components/TimelineItem";
+import { AboutSection } from "@/components/AboutSection";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const projects = [
   {
@@ -169,8 +176,13 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Selected Work Section */}
+      {/* About Section */}
       <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1200ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+        <AboutSection />
+      </section>
+
+      {/* Selected Work Section */}
+      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1400ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
         <div className="flex items-center justify-between mb-12">
           <div className="space-y-1">
             <h2 className="text-2xl font-bold tracking-tight uppercase">Selected Work</h2>
@@ -192,39 +204,73 @@ export default function Home() {
       </section>
 
       {/* Tech Toolkit Section */}
-      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1400ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
-        <div className="flex flex-col md:flex-row gap-16">
-          <div className="md:w-1/3">
-            <h2 className="text-2xl font-bold tracking-tight uppercase mb-4">Tech Toolkit</h2>
+      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1600ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 items-start">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold tracking-tight uppercase">Tech Toolkit</h2>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-[300px]">
               My current stack of preferred technologies and tools for building modern, AI-integrated software.
             </p>
           </div>
-          <div className="md:w-2/3 space-y-8">
-            <div className="space-y-4">
-              <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">Core Stack</h4>
-              <div className="flex flex-wrap gap-2">
-                {techStack.core.map(tech => <TechBadge key={tech} name={tech} />)}
-              </div>
-            </div>
-            <div className="space-y-4">
-              <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">AI & Intelligence</h4>
-              <div className="flex flex-wrap gap-2">
-                {techStack.ai.map(tech => <TechBadge key={tech} name={tech} />)}
-              </div>
-            </div>
-            <div className="space-y-4">
-              <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">Preferred Tools</h4>
-              <div className="flex flex-wrap gap-2">
-                {techStack.tools.map(tech => <TechBadge key={tech} name={tech} />)}
-              </div>
-            </div>
+          <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <Card className="border bg-card/30 backdrop-blur-sm shadow-none border-dashed">
+              <CardHeader className="pb-3">
+                <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">Core Stack</h4>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {techStack.core.map(tech => (
+                  <Tooltip key={tech}>
+                    <TooltipTrigger asChild>
+                      <Badge variant="outline" className="px-3 py-1 font-mono text-[11px] bg-background hover:bg-muted transition-colors cursor-default">
+                        {tech}
+                      </Badge>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p className="text-[10px] uppercase tracking-widest font-bold">In-depth expertise</p>
+                    </TooltipContent>
+                  </Tooltip>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card className="border bg-card/30 backdrop-blur-sm shadow-none border-dashed">
+              <CardHeader className="pb-3">
+                <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">AI & Intelligence</h4>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {techStack.ai.map(tech => (
+                  <Tooltip key={tech}>
+                    <TooltipTrigger asChild>
+                      <Badge variant="secondary" className="px-3 py-1 font-mono text-[11px] cursor-default">
+                        {tech}
+                      </Badge>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p className="text-[10px] uppercase tracking-widest font-bold">AI Native</p>
+                    </TooltipContent>
+                  </Tooltip>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card className="border bg-card/30 backdrop-blur-sm shadow-none border-dashed sm:col-span-2">
+              <CardHeader className="pb-3">
+                <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">Preferred Tools</h4>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {techStack.tools.map(tech => (
+                  <Badge key={tech} variant="outline" className="px-3 py-1 font-mono text-[11px] bg-muted/50 border-foreground/5 cursor-default">
+                    {tech}
+                  </Badge>
+                ))}
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Experience Section */}
-      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1600ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1800ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
         <div className="flex flex-col md:flex-row gap-16">
           <div className="md:w-1/3">
             <h2 className="text-2xl font-bold tracking-tight uppercase mb-4">Experience</h2>

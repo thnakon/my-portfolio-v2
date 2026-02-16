@@ -20,6 +20,7 @@ import { Navbar } from "@/components/Navbar";
 import { SidebarLabel } from "@/components/SidebarLabel";
 import { Footer } from "@/components/Footer";
 import { IntroProvider } from "@/components/intro-context";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export default function RootLayout({
   children,
@@ -35,16 +36,18 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <IntroProvider>
-            <div className="relative min-h-screen flex flex-col">
-              <SidebarLabel />
-              <Navbar />
-              <main className="flex-1">
-                {children}
-              </main>
-              <Footer />
-            </div>
-          </IntroProvider>
+          <TooltipProvider>
+            <IntroProvider>
+              <div className="relative min-h-screen flex flex-col">
+                <SidebarLabel />
+                <Navbar />
+                <main className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+            </IntroProvider>
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
