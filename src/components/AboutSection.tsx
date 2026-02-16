@@ -15,13 +15,13 @@ export function AboutSection() {
           <div className="h-1 w-12 bg-foreground" />
         </div>
         <p className="text-muted-foreground text-sm leading-relaxed">
-          Hello, I&apos;m Thanakon Dungkumwattanasiri, an AI-Augmented Software Developer. I don&apos;t see AI merely as a tool for writing code; I integrate it into the entire process of thinking, designing, and building systems from start to finish.
+          Hello, I&apos;m Thanakon. A software developer redefining system architecture through the lens of AI. I don&apos;t just use AI to write code; I embrace it as a &apos;co-thinker and co-builder&apos; at every stage of the process.
         </p>
         <p className="text-muted-foreground text-sm leading-relaxed">
-          I specialize in applying LLMs and AI Agents to real-world workflows, elevating software to be more intelligent—capable of thinking, analyzing, and performing more efficiently than ever through technologies like Laravel and Next.js, built with an AI-first mindset.
+          I specialize in integrating LLMs and AI Agents into real-world workflows, elevating software with the ability to think and analyze beyond traditional limits. By leveraging Laravel and Next.js with an AI-first mindset, I build intelligent systems that transform how users interact with technology.
         </p>
         <p className="text-muted-foreground text-sm leading-relaxed">
-          I believe the future of software development lies in integrating AI as the core of the system to create technology that grows sustainably with businesses.
+          I believe the future of software development lies in AI-driven innovation. My goal is to create high-performance, intelligent applications that drive sustainable business growth and deliver lasting value in an ever-evolving digital landscape.
         </p>
       </div>
 
