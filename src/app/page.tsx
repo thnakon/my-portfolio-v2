@@ -7,7 +7,13 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="flex min-h-[calc(100vh-3.5rem)] flex-col relative overflow-hidden">
-      <main className="flex-1 flex flex-col items-center pt-20 lg:pt-32">
+      {/* Background Layer */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-grid" />
+        <div className="absolute inset-0 bg-glow" />
+      </div>
+
+      <main className="flex-1 flex flex-col items-center pt-20 lg:pt-32 relative z-10">
         <section className="container mx-auto px-4 pb-16 text-center relative z-10">
           <div className="flex justify-center mb-8">
             <div className="flex items-center gap-2.5 px-0 py-0 text-[12px] font-medium transition-colors cursor-pointer group">

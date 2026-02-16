@@ -20,8 +20,8 @@
   --color-chart-5: var(--chart-5);
   --color-chart-4: var(--chart-4);
   --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--color-chart-2);
+  --color-chart-1: var(--color-chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -135,12 +135,8 @@
   }
 
   @keyframes shimmer-text {
-    0% {
-      background-position: 100% 0;
-    }
-    100% {
-      background-position: -100% 0;
-    }
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
   }
 
   @keyframes wave {
@@ -157,6 +153,19 @@
     animation: wave 1.5s infinite ease-in-out;
     transform-origin: 75% 75%;
     display: inline-block;
+  }
+
+  .bg-grid {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    opacity: 0.4;
+    mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, #000 70%, transparent 100%);
+  }
+
+  .bg-glow {
+    background: radial-gradient(circle at 50% 0%, oklch(1 0 0 / 0.1), transparent 70%);
   }
 }
 
