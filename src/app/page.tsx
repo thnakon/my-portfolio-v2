@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { ChevronRight, ArrowDown, ArrowRight, Sparkles, Zap, ShieldCheck, Rocket } from "lucide-react";
+import { ChevronRight, ArrowDown, ArrowRight } from "lucide-react";
 import { CopyEmailButton } from "@/components/CopyEmailButton";
 import { ContactModal } from "@/components/ContactModal";
 import Image from "next/image";
@@ -9,7 +9,6 @@ import { useState, useEffect } from "react";
 import { useIntro } from "@/components/intro-context";
 import { ProjectCard } from "@/components/ProjectCard";
 import { TechBadge } from "@/components/TechBadge";
-import { WorkflowStep } from "@/components/WorkflowStep";
 import { TimelineItem } from "@/components/TimelineItem";
 
 const projects = [
@@ -63,35 +62,8 @@ const experiences = [
 const techStack = {
   core: ["Next.js", "React", "TypeScript", "Tailwind CSS", "PostgreSQL", "Node.js"],
   ai: ["OpenAI", "Claude", "LangChain", "Vercel AI SDK", "Prompt Engineering"],
-  tools: ["Cursor", "GitHub", "Vercel", "Docker", "Framer Motion"]
+  tools: ["Cursor", "GitHub"]
 };
-
-const workflow = [
-  {
-    number: "01",
-    title: "Intelligence",
-    description: "Deep research and architectural planning using advanced LLMs.",
-    icon: Sparkles
-  },
-  {
-    number: "02",
-    title: "Speed",
-    description: "Rapid component generation and AI-assisted iterative coding.",
-    icon: Zap
-  },
-  {
-    number: "03",
-    title: "Refine",
-    description: "Automated testing and design polishing for premium feel.",
-    icon: ShieldCheck
-  },
-  {
-    number: "04",
-    title: "Deploy",
-    description: "Continuous delivery and automated performance monitoring.",
-    icon: Rocket
-  }
-];
 
 export default function Home() {
   const [text, setText] = useState("");
@@ -251,29 +223,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI Workflow Section */}
-      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1600ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
-        <div className="text-center mb-16 relative z-10">
-          <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-foreground/40 mb-4 block">Process</span>
-          <h2 className="text-3xl font-bold tracking-tight uppercase mb-4">AI Driven Workflow</h2>
-          <p className="text-muted-foreground text-sm max-w-[500px] mx-auto">
-            How I leverage artificial intelligence to build faster, smarter, and more reliable web applications.
-          </p>
-        </div>
-
-        <div className="flex flex-col md:flex-row gap-8 relative z-10 px-4 md:px-0">
-          {workflow.map((step, index) => (
-            <WorkflowStep 
-              key={step.number}
-              {...step}
-              isLast={index === workflow.length - 1}
-            />
-          ))}
-        </div>
-      </section>
-
       {/* Experience Section */}
-      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1800ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1600ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
         <div className="flex flex-col md:flex-row gap-16">
           <div className="md:w-1/3">
             <h2 className="text-2xl font-bold tracking-tight uppercase mb-4">Experience</h2>
