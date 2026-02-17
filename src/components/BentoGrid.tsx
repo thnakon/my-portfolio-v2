@@ -52,22 +52,35 @@ export function BentoGrid() {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[220px]">
       {/* Cell 1: About Me — wide (col-span-2) */}
       <Card className="md:col-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
-        <CardContent className="p-8 h-full flex flex-col justify-between">
-          <div className="space-y-3">
-            <p className="text-xs font-bold text-muted-foreground/60">
-              About Me
-            </p>
-            <h3 className="text-xl font-bold tracking-tight leading-snug max-w-md">
-              AI-Augmented Developer redefining how software is built — from concept to deployment.
-            </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-lg">
-              I integrate AI as a co-thinker and co-builder at every stage, creating intelligent systems through Laravel & Next.js.
-            </p>
-          </div>
-          <div className="flex justify-end">
-            <a href="#about" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors w-fit">
-              Learn more <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-            </a>
+        <CardContent className="p-0 h-full">
+          <div className="grid grid-cols-1 md:grid-cols-5 h-full">
+            <div className="md:col-span-3 p-8 flex flex-col justify-between">
+              <div className="space-y-3">
+                <p className="text-xs font-bold text-muted-foreground/60">
+                  About Me
+                </p>
+                <h3 className="text-xl font-bold tracking-tight leading-snug">
+                  I&apos;m Thanakon, an AI-Augmented Developer.
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  I don&apos;t just write code; I embrace AI as a co-thinker to build intelligent systems that transform how users interact with technology.
+                </p>
+              </div>
+              <div className="flex justify-start mt-4">
+                <a href="#about" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors w-fit">
+                  Learn more <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </a>
+              </div>
+            </div>
+            <div className="md:col-span-2 relative h-[200px] md:h-full overflow-hidden border-l border-muted-foreground/10">
+              <Image 
+                src="/profile-v3.jpg" 
+                alt="Thanakon" 
+                fill 
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-background/20 to-transparent" />
+            </div>
           </div>
         </CardContent>
       </Card>
