@@ -3,7 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Sparkles, ArrowRight, ArrowUpRight, MapPin, Folder, FileText } from "lucide-react"
+import { Sparkles, ArrowRight, ArrowUpRight, MapPin, Folder, FileText, Plane } from "lucide-react"
 import { ContactModal } from "@/components/ContactModal"
 import { CopyEmailButton } from "@/components/CopyEmailButton"
 import Image from "next/image"
@@ -168,8 +168,8 @@ export function BentoGrid() {
         </CardContent>
       </Card>
 
-      <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
-        <CardContent className="pt-5 px-8 pb-8 h-full flex flex-col justify-between">
+      <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors relative">
+        <CardContent className="pt-5 px-8 pb-8 h-full flex flex-col justify-between relative z-10">
           <div className="space-y-3">
             <p className="text-xs font-bold text-muted-foreground/60">
               Location
@@ -184,6 +184,12 @@ export function BentoGrid() {
             <span className="text-xs text-muted-foreground/60">• Available for remote work</span>
           </div>
         </CardContent>
+        {/* Animated Plane */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <Plane 
+            className="absolute -left-12 top-1/2 -translate-y-1/2 h-6 w-6 text-muted-foreground/20 rotate-45 transition-all duration-1000 ease-in-out group-hover:left-[110%] group-hover:-translate-y-[100px] opacity-0 group-hover:opacity-100" 
+          />
+        </div>
       </Card>
 
       {/* Cell 5: Tech Stack Marquee — 2 Rows */}
