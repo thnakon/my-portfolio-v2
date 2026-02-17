@@ -13,14 +13,14 @@ const techRow1 = [
 ]
 
 const techRow2 = [
-  "Laravel", "Node.js", "MySQL", "SQL Server", "Supabase", "Bun", "ChatGPT", "Gemini", "Claude", "OpenClaw", "LLMs", "RAG", "Agentic Workflows", "Docker", "Git", "GitLab", "SourceTree"
+  "Laravel", "Node.js", "MySQL", "Supabase", "Bun", "ChatGPT", "Gemini", "Claude", "OpenClaw", "LLMs", "RAG", "Agentic Workflows", "Docker", "Git", "GitLab", "SourceTree"
 ]
 
 const techIcons: Record<string, string> = {
   "Next.js": "nextdotjs",
   "React": "react",
   "Tailwind CSS": "tailwindcss",
-  "CSS": "css3",
+  "CSS": "/logos/css-logo.png",
   "Figma": "figma",
   "GSAP": "gsap",
   "Framer Motion": "framer",
@@ -29,10 +29,9 @@ const techIcons: Record<string, string> = {
   "Laravel": "laravel",
   "Node.js": "nodedotjs",
   "MySQL": "mysql",
-  "SQL Server": "microsoftsqlserver",
   "Supabase": "supabase",
   "Bun": "bun",
-  "ChatGPT": "openai",
+  "ChatGPT": "/logos/chatgpt-logo.png",
   "Gemini": "googlegemini",
   "Claude": "claude",
   "Docker": "docker",
@@ -45,6 +44,7 @@ export function BentoGrid() {
   const getIconUrl = (tech: string) => {
     const slug = techIcons[tech];
     if (!slug) return null;
+    if (slug.startsWith('/')) return slug;
     return `https://cdn.simpleicons.org/${slug}`;
   }
 
