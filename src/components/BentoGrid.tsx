@@ -72,14 +72,22 @@ export function BentoGrid() {
                 </a>
               </div>
             </div>
-            <div className="md:col-span-2 relative h-[200px] md:h-full overflow-hidden border-l border-muted-foreground/10">
-              <Image 
-                src="/profile-v3.jpg" 
-                alt="Thanakon" 
-                fill 
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-background/20 to-transparent" />
+            <div className="md:col-span-2 relative h-[240px] md:h-full flex items-center justify-center">
+              {/* Hanging String */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-12 bg-muted-foreground/30 z-0" />
+              
+              {/* Circular Suspended Image */}
+              <div className="relative w-32 h-32 md:w-36 md:h-36 rounded-full border-4 border-card shadow-2xl overflow-hidden z-10 group-hover:scale-105 transition-transform duration-500 mt-8">
+                <Image 
+                  src="/profile-v3.jpg" 
+                  alt="Thanakon" 
+                  fill 
+                  className="object-cover"
+                />
+              </div>
+              
+              {/* Subtle light effect behind image */}
+              <div className="absolute inset-0 bg-radial-gradient from-foreground/5 to-transparent pointer-events-none" />
             </div>
           </div>
         </CardContent>
