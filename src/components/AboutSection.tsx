@@ -4,12 +4,26 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Sparkles, Code2, BrainCircuit, User } from "lucide-react"
+import Image from "next/image"
 
 export function AboutSection() {
   return (
-    <div className="flex flex-col md:flex-row gap-16 items-start">
-      {/* Left side: Hero-like Intro */}
-      <div className="md:w-1/3 space-y-6">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      {/* Left Column: Image */}
+      <div className="lg:col-span-3 space-y-4">
+        <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border bg-muted group">
+          <Image 
+            src="/profile-v3.jpg" 
+            alt="Thanakon" 
+            fill 
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
+        </div>
+      </div>
+
+      {/* Middle Column: Intro Text */}
+      <div className="lg:col-span-4 space-y-6">
         <div className="space-y-2">
           <h2 className="text-3xl font-bold tracking-tight uppercase">About Me</h2>
           <div className="h-1 w-12 bg-foreground" />
@@ -25,8 +39,8 @@ export function AboutSection() {
         </p>
       </div>
 
-      {/* Right side: Interactive Content */}
-      <div className="md:w-2/3 w-full">
+      {/* Right Column: Interactive Content */}
+      <div className="lg:col-span-5 w-full">
         <Tabs defaultValue="skills" className="w-full">
           <TabsList className="grid w-full grid-cols-3 bg-muted/50 rounded-xl p-1 mb-8">
             <TabsTrigger value="skills" className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
