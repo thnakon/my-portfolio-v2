@@ -3,15 +3,15 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Card, CardContent } from "@/components/ui/card"
-import { Sparkles, Code2, BrainCircuit, User } from "lucide-react"
+import { Sparkles, Code2, BrainCircuit, User, Linkedin, Github, Instagram } from "lucide-react"
 import Image from "next/image"
 
 export function AboutSection() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
       {/* Left Column: Image */}
-      <div className="lg:col-span-3 space-y-4">
-        <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border bg-muted group">
+      <div className="lg:col-span-3 space-y-6">
+        <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border bg-muted group shadow-2xl shadow-foreground/5">
           <Image 
             src="/profile-v3.jpg" 
             alt="Thanakon" 
@@ -19,6 +19,19 @@ export function AboutSection() {
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
+        </div>
+
+        {/* Social Icons */}
+        <div className="flex gap-4">
+          <a href="https://linkedin.com/in/thanakon-d" target="_blank" className="h-12 w-12 rounded-2xl border bg-card shadow-sm flex items-center justify-center transition-all hover:shadow-md hover:translate-y-[-2px] group">
+            <Linkedin className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+          </a>
+          <a href="https://github.com/thnakon" target="_blank" className="h-12 w-12 rounded-2xl border bg-card shadow-sm flex items-center justify-center transition-all hover:shadow-md hover:translate-y-[-2px] group">
+            <Github className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+          </a>
+          <a href="https://instagram.com/thnakon" target="_blank" className="h-12 w-12 rounded-2xl border bg-card shadow-sm flex items-center justify-center transition-all hover:shadow-md hover:translate-y-[-2px] group">
+            <Instagram className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+          </a>
         </div>
       </div>
 
