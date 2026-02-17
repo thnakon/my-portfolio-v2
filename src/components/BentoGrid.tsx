@@ -16,7 +16,7 @@ const allTechs = [
 
 export function BentoGrid() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[200px]">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[220px]">
 
       {/* Cell 1: About Me — wide (col-span-2) */}
       <Card className="md:col-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
