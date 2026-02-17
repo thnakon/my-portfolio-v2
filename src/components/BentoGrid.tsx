@@ -187,7 +187,7 @@ export function BentoGrid() {
         {/* Animated Plane */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <Plane 
-            className="absolute -left-12 top-1/2 -translate-y-1/2 h-6 w-6 text-muted-foreground/20 rotate-45 transition-all duration-1000 ease-in-out group-hover:left-[110%] group-hover:-translate-y-[100px] opacity-0 group-hover:opacity-100" 
+            className="absolute -left-12 top-1/2 -translate-y-1/2 h-6 w-6 text-muted-foreground/20 rotate-45 transition-all duration-[3000ms] ease-in-out group-hover:left-[110%] group-hover:-translate-y-[100px] opacity-0 group-hover:opacity-100" 
           />
         </div>
       </Card>
