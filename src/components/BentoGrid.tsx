@@ -8,82 +8,33 @@ import { ContactModal } from "@/components/ContactModal"
 import { CopyEmailButton } from "@/components/CopyEmailButton"
 import Image from "next/image"
 
-const allTechs = [
-  "Next.js", "React", "TypeScript", "Tailwind CSS", "PostgreSQL", "Node.js",
-  "Laravel", "OpenAI", "Claude", "LangChain", "Vercel AI SDK", "Prisma",
-  "Docker", "Git", "Figma", "Supabase"
-]
+const techRows = {
+  row1: ["Next.js", "React", "Tailwind CSS", "CSS", "Figma", "GSAP", "Framer Motion", "HTML", "PHP"],
+  row2: ["Laravel", "Node.js", "MySQL", "MS SQL Server", "Supabase", "Bun", "PostgreSQL", "Prisma"],
+  row3: ["ChatGPT", "Gemini", "Claude", "OpenClaw", "Docker", "Git", "GitLab", "SourceTree", "Singha Internship", "Oboun ERP", "ScribeHub", "Mai lon", "Rublom Resort"]
+}
 
 export function BentoGrid() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[220px]">
 
-      {/* Cell 1: About Me & Tech Stack — wide (col-span-2) */}
-      <Card className="md:col-span-2 md:row-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
-        <CardContent className="p-8 h-full flex flex-col gap-6">
-          <div className="space-y-2">
+      {/* Cell 1: About Me — wide (col-span-2) */}
+      <Card className="md:col-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
+        <CardContent className="p-8 h-full flex flex-col justify-between">
+          <div className="space-y-3">
             <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">
-              Technical Profile & Experience
+              About Me
             </p>
-            <h3 className="text-xl font-bold tracking-tight leading-snug">
-              AI-Augmented Developer specializing in intelligent, scalable web ecosystems.
+            <h3 className="text-xl font-bold tracking-tight leading-snug max-w-md">
+              AI-Augmented Developer redefining how software is built — from concept to deployment.
             </h3>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-lg">
+              I integrate AI as a co-thinker and co-builder at every stage, creating intelligent systems through Laravel & Next.js.
+            </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex-1">
-            {/* Column 1: Frontend & Design */}
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <h4 className="text-[10px] font-bold uppercase tracking-wider text-foreground/80 border-b border-foreground/5 pb-1">Frontend Development</h4>
-                <div className="text-[12px] space-y-2 text-muted-foreground leading-snug">
-                  <p><span className="text-foreground/70 font-semibold block">Frameworks:</span> Next.js, React</p>
-                  <p><span className="text-foreground/70 font-semibold block">Styling & UI:</span> Tailwind CSS, CSS, Figma</p>
-                  <p><span className="text-foreground/70 font-semibold block">Animation:</span> GSAP, Framer Motion</p>
-                  <p><span className="text-foreground/70 font-semibold block">Languages:</span> HTML, PHP</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Column 2: Backend & AI */}
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <h4 className="text-[10px] font-bold uppercase tracking-wider text-foreground/80 border-b border-foreground/5 pb-1">Backend & Systems</h4>
-                <div className="text-[12px] space-y-2 text-muted-foreground leading-snug">
-                  <p><span className="text-foreground/70 font-semibold block">Core:</span> Laravel, Node.js, Bun</p>
-                  <p><span className="text-foreground/70 font-semibold block">Databases:</span> MySQL, SQL Server, Supabase</p>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <h4 className="text-[10px] font-bold uppercase tracking-wider text-foreground/80 border-b border-foreground/5 pb-1">AI Intelligence</h4>
-                <div className="text-[12px] space-y-2 text-muted-foreground leading-snug">
-                  <p><span className="text-foreground/70 font-semibold block">Models:</span> GPT-4, Gemini, Claude</p>
-                  <p><span className="text-foreground/70 font-semibold block">Workflows:</span> RAG, AI Agents</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Column 3: Tools & Projects */}
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <h4 className="text-[10px] font-bold uppercase tracking-wider text-foreground/80 border-b border-foreground/5 pb-1">Professional Tools</h4>
-                <div className="text-[12px] space-y-2 text-muted-foreground leading-snug">
-                  <p><span className="text-foreground/70 font-semibold block">DevOps:</span> Docker, Git, GitLab</p>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <h4 className="text-[10px] font-bold uppercase tracking-wider text-foreground/80 border-b border-foreground/5 pb-1">Key Background</h4>
-                <div className="text-[12px] space-y-1 text-muted-foreground leading-snug">
-                  <p>• Intern at Singha Corp</p>
-                  <p>• Oboun ERP | ScribeHub</p>
-                  <p>• Mai lon | Rublom Resort</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex justify-end pt-2 mt-auto">
-            <a href="#about" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors group/link">
-              Full Profile <ArrowRight className="h-3 w-3 transition-transform group-hover/link:translate-x-1" />
+          <div className="flex justify-end">
+            <a href="#about" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors w-fit">
+              Learn more <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
             </a>
           </div>
         </CardContent>
@@ -162,19 +113,43 @@ export function BentoGrid() {
 
       {/* Cell 5: Tech Stack Marquee — wide (col-span-2) */}
       <Card className="md:col-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden">
-        <CardContent className="p-8 h-full flex flex-col justify-between">
-          <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60 mb-4">
-            Tech Stack
+        <CardContent className="p-6 h-full flex flex-col">
+          <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60 mb-6">
+            Tech Stack & Experience
           </p>
-          <div className="relative overflow-hidden flex-1 flex items-center">
-            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-card/80 to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-card/80 to-transparent z-10" />
-            <div className="flex animate-marquee gap-3 whitespace-nowrap">
-              {[...allTechs, ...allTechs].map((tech, i) => (
-                <Badge key={i} variant="outline" className="px-4 py-2 font-mono text-[12px] bg-background hover:bg-muted transition-colors cursor-default shrink-0">
-                  {tech}
-                </Badge>
-              ))}
+          
+          <div className="space-y-4 flex-1 flex flex-col justify-center overflow-hidden">
+            {/* Row 1 */}
+            <div className="relative overflow-hidden">
+              <div className="flex animate-marquee gap-3 whitespace-nowrap">
+                {[...techRows.row1, ...techRows.row1].map((tech, i) => (
+                  <Badge key={i} variant="outline" className="px-3 py-1 font-mono text-[11px] bg-background border-muted transition-colors cursor-default shrink-0">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            {/* Row 2 */}
+            <div className="relative overflow-hidden">
+              <div className="flex animate-marquee gap-3 whitespace-nowrap" style={{ animationDirection: 'reverse', animationDuration: '30s' }}>
+                {[...techRows.row2, ...techRows.row2].map((tech, i) => (
+                  <Badge key={i} variant="secondary" className="px-3 py-1 font-mono text-[11px] transition-colors cursor-default shrink-0">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            {/* Row 3 */}
+            <div className="relative overflow-hidden">
+              <div className="flex animate-marquee gap-3 whitespace-nowrap" style={{ animationDuration: '35s' }}>
+                {[...techRows.row3, ...techRows.row3].map((tech, i) => (
+                  <Badge key={i} variant="outline" className="px-3 py-1 font-mono text-[11px] bg-muted/30 border-muted transition-colors cursor-default shrink-0">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
             </div>
           </div>
         </CardContent>
