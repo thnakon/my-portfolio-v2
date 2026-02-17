@@ -8,16 +8,48 @@ import { ContactModal } from "@/components/ContactModal"
 import { CopyEmailButton } from "@/components/CopyEmailButton"
 import Image from "next/image"
 
-const techRows = {
-  row1: ["Next.js", "React", "Tailwind CSS", "CSS", "Figma", "GSAP", "Framer Motion", "HTML", "PHP"],
-  row2: ["Laravel", "Node.js", "MySQL", "MS SQL Server", "Supabase", "Bun", "PostgreSQL", "Prisma"],
-  row3: ["ChatGPT", "Gemini", "Claude", "OpenClaw", "Docker", "Git", "GitLab", "SourceTree", "Singha Internship", "Oboun ERP", "ScribeHub", "Mai lon", "Rublom Resort"]
+const techRow1 = [
+  "Next.js", "React", "Tailwind CSS", "CSS", "Figma", "GSAP", "Framer Motion", "HTML", "PHP"
+]
+
+const techRow2 = [
+  "Laravel", "Node.js", "MySQL", "SQL Server", "Supabase", "Bun", "ChatGPT", "Gemini", "Claude", "OpenClaw", "LLMs", "RAG", "Agentic Workflows", "Docker", "Git", "GitLab", "SourceTree"
+]
+
+const techIcons: Record<string, string> = {
+  "Next.js": "nextdotjs",
+  "React": "react",
+  "Tailwind CSS": "tailwindcss",
+  "CSS": "css3",
+  "Figma": "figma",
+  "GSAP": "gsap",
+  "Framer Motion": "framer",
+  "HTML": "html5",
+  "PHP": "php",
+  "Laravel": "laravel",
+  "Node.js": "nodedotjs",
+  "MySQL": "mysql",
+  "SQL Server": "microsoftsqlserver",
+  "Supabase": "supabase",
+  "Bun": "bun",
+  "ChatGPT": "openai",
+  "Gemini": "googlegemini",
+  "Claude": "claude",
+  "Docker": "docker",
+  "Git": "git",
+  "GitLab": "gitlab",
+  "SourceTree": "sourcetree"
 }
 
 export function BentoGrid() {
+  const getIconUrl = (tech: string) => {
+    const slug = techIcons[tech];
+    if (!slug) return null;
+    return `https://cdn.simpleicons.org/${slug}`;
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[220px]">
-
       {/* Cell 1: About Me — wide (col-span-2) */}
       <Card className="md:col-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
         <CardContent className="p-8 h-full flex flex-col justify-between">
@@ -40,7 +72,6 @@ export function BentoGrid() {
         </CardContent>
       </Card>
 
-      {/* Cell 2: Work — tall (row-span-2) */}
       <Card className="md:row-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
         <CardContent className="p-0 h-full flex flex-col">
           <div className="relative flex-1 overflow-hidden">
@@ -64,7 +95,6 @@ export function BentoGrid() {
         </CardContent>
       </Card>
 
-      {/* Cell 3: Let's Work Together */}
       <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
         <CardContent className="p-8 h-full flex flex-col justify-between">
           <div className="space-y-2">
@@ -89,7 +119,6 @@ export function BentoGrid() {
         </CardContent>
       </Card>
 
-      {/* Cell 4: Based in Thailand */}
       <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
         <CardContent className="p-8 h-full flex flex-col justify-between">
           <div className="space-y-3">
@@ -111,46 +140,48 @@ export function BentoGrid() {
         </CardContent>
       </Card>
 
-      {/* Cell 5: Tech Stack Marquee — wide (col-span-2) */}
+      {/* Cell 5: Tech Stack Marquee — 2 Rows */}
       <Card className="md:col-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden">
-        <CardContent className="p-6 h-full flex flex-col">
-          <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60 mb-6">
-            Tech Stack & Experience
+        <CardContent className="p-8 h-full flex flex-col justify-between">
+          <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60 mb-2">
+            Tech Stack
           </p>
-          
-          <div className="space-y-4 flex-1 flex flex-col justify-center overflow-hidden">
+          <div className="relative overflow-hidden flex-1 flex flex-col justify-center gap-4">
             {/* Row 1 */}
-            <div className="relative overflow-hidden">
-              <div className="flex animate-marquee gap-3 whitespace-nowrap">
-                {[...techRows.row1, ...techRows.row1].map((tech, i) => (
-                  <Badge key={i} variant="outline" className="px-3 py-1 font-mono text-[11px] bg-background border-muted transition-colors cursor-default shrink-0">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
+            <div className="flex animate-marquee gap-3 whitespace-nowrap">
+              {[...techRow1, ...techRow1].map((tech, i) => (
+                <Badge key={i} variant="outline" className="px-4 py-2 font-mono text-[11px] bg-background border-muted-foreground/20 cursor-default shrink-0 flex items-center gap-2">
+                  {getIconUrl(tech) && (
+                    <img 
+                      src={getIconUrl(tech)!} 
+                      alt={tech} 
+                      className="w-3.5 h-3.5" 
+                      onError={(e) => (e.currentTarget.style.display = 'none')}
+                    />
+                  )}
+                  {tech}
+                </Badge>
+              ))}
             </div>
-
             {/* Row 2 */}
-            <div className="relative overflow-hidden">
-              <div className="flex animate-marquee gap-3 whitespace-nowrap" style={{ animationDirection: 'reverse', animationDuration: '30s' }}>
-                {[...techRows.row2, ...techRows.row2].map((tech, i) => (
-                  <Badge key={i} variant="secondary" className="px-3 py-1 font-mono text-[11px] transition-colors cursor-default shrink-0">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
+            <div className="flex animate-marquee-reverse gap-3 whitespace-nowrap">
+              {[...techRow2, ...techRow2].map((tech, i) => (
+                <Badge key={i} variant="outline" className="px-4 py-2 font-mono text-[11px] bg-background border-muted-foreground/20 cursor-default shrink-0 flex items-center gap-2">
+                  {getIconUrl(tech) && (
+                    <img 
+                      src={getIconUrl(tech)!} 
+                      alt={tech} 
+                      className="w-3.5 h-3.5" 
+                      onError={(e) => (e.currentTarget.style.display = 'none')}
+                    />
+                  )}
+                  {tech}
+                </Badge>
+              ))}
             </div>
-
-            {/* Row 3 */}
-            <div className="relative overflow-hidden">
-              <div className="flex animate-marquee gap-3 whitespace-nowrap" style={{ animationDuration: '35s' }}>
-                {[...techRows.row3, ...techRows.row3].map((tech, i) => (
-                  <Badge key={i} variant="outline" className="px-3 py-1 font-mono text-[11px] bg-muted/30 border-muted transition-colors cursor-default shrink-0">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
-            </div>
+            {/* Gradients */}
+            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background/30 to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background/30 to-transparent z-10 pointer-events-none" />
           </div>
         </CardContent>
       </Card>
