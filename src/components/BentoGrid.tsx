@@ -130,14 +130,14 @@ export function BentoGrid() {
       </Card>
 
       {/* Cell 6: Modular Intelligence */}
-      <Card className="border bg-foreground text-background rounded-2xl overflow-hidden group hover:opacity-90 transition-opacity">
+      <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
         <CardContent className="p-8 h-full flex flex-col justify-between">
           <div className="space-y-3">
             <Sparkles className="h-6 w-6" />
             <h3 className="text-lg font-bold tracking-tight">
               Modular Intelligence
             </h3>
-            <p className="text-xs leading-relaxed opacity-70">
+            <p className="text-xs text-muted-foreground leading-relaxed">
               Every system I build is designed to be AI-native — modular, adaptive, and ready to evolve.
             </p>
           </div>
