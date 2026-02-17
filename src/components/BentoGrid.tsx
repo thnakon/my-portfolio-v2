@@ -1,117 +1,149 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { BatteryCharging, BrainCircuit, Code, Send } from "lucide-react"
-import Link from "next/link"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Sparkles, ArrowRight, ArrowUpRight, MapPin } from "lucide-react"
+import { ContactModal } from "@/components/ContactModal"
+import { CopyEmailButton } from "@/components/CopyEmailButton"
+import Image from "next/image"
 
-const techStack = [
-  "Next.js", "React", "TypeScript", "Tailwind", "Node.js", "PostgreSQL",
-  "OpenAI", "Anthropic", "LangChain", "Vercel", "Supabase", "Prisma"
+const allTechs = [
+  "Next.js", "React", "TypeScript", "Tailwind CSS", "PostgreSQL", "Node.js",
+  "Laravel", "OpenAI", "Claude", "LangChain", "Vercel AI SDK", "Prisma",
+  "Docker", "Git", "Figma", "Supabase"
 ]
 
 export function BentoGrid() {
   return (
-    <section className="container mx-auto px-4 py-8 relative z-20">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[300px]">
-        {/* Modular Intelligence - Large Card */}
-        <Card className="md:col-span-2 group overflow-hidden relative border-muted/40 bg-card/30 backdrop-blur-md">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-background z-0" />
-          <CardHeader className="relative z-10">
-            <div className="bg-primary/10 w-fit p-3 rounded-xl mb-4 text-primary">
-              <BrainCircuit className="w-8 h-8" />
-            </div>
-            <CardTitle className="text-2xl md:text-3xl font-bold">Modular Intelligence</CardTitle>
-          </CardHeader>
-          <CardContent className="relative z-10">
-             <p className="text-muted-foreground text-lg mt-2 max-w-md">
-               Building systems where AI isn't just an add-on, but the architectural core. Integrating LLMs to create adaptive user experiences.
-             </p>
-          </CardContent>
-          {/* Decorative Pattern */}
-          <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-1000" />
-        </Card>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[200px]">
 
-        {/* Selected Work - Preview */}
-        <Card className="md:col-span-1 group overflow-hidden relative border-muted/40 bg-card/30 backdrop-blur-md cursor-pointer hover:border-primary/50 transition-colors">
-          <Link href="#projects" className="absolute inset-0 z-20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent z-10" />
-          
-          {/* Abstract visual for work */}
-          <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-sky-500/20 rounded-full blur-2xl group-hover:bg-sky-500/30 transition-all duration-500" />
-
-          <CardHeader className="relative z-10 h-full flex flex-col justify-end pb-8">
-            <div className="bg-sky-500/10 w-fit p-2 rounded-lg mb-2 text-sky-500">
-              <Code className="w-6 h-6" />
-            </div>
-            <CardTitle className="text-xl">Selected Work</CardTitle>
-            <p className="text-sm text-muted-foreground mt-1">
-              Explore my latest projects and architectural experiments.
+      {/* Cell 1: About Me — wide (col-span-2) */}
+      <Card className="md:col-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
+        <CardContent className="p-8 h-full flex flex-col justify-between">
+          <div className="space-y-3">
+            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">
+              About Me
             </p>
-          </CardHeader>
-        </Card>
+            <h3 className="text-xl font-bold tracking-tight leading-snug max-w-md">
+              AI-Augmented Developer redefining how software is built — from concept to deployment.
+            </h3>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-lg">
+              I integrate AI as a co-thinker and co-builder at every stage, creating intelligent systems through Laravel & Next.js.
+            </p>
+          </div>
+          <a href="#about" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors w-fit">
+            Learn more <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          </a>
+        </CardContent>
+      </Card>
 
-        {/* Tech Stack - Marquee */}
-        <Card className="md:col-span-2 group overflow-hidden relative border-muted/40 bg-card/30 backdrop-blur-md flex flex-col justify-center">
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10 pointer-events-none" />
-           <CardHeader className="relative z-20 pb-2">
-            <div className="flex items-center gap-2 mb-2">
-               <div className="bg-emerald-500/10 w-fit p-2 rounded-lg text-emerald-500">
-                  <BatteryCharging className="w-5 h-5" />
-               </div>
-               <span className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Powering My Build</span>
+      {/* Cell 2: Work — tall (row-span-2) */}
+      <Card className="md:row-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
+        <CardContent className="p-0 h-full flex flex-col">
+          <div className="relative flex-1 overflow-hidden">
+            <Image 
+              src="/projects/ai-toolkit.png" 
+              alt="AI Toolkit" 
+              fill 
+              className="object-cover transition-transform duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+          </div>
+          <div className="p-6 space-y-2">
+            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">
+              Featured Work
+            </p>
+            <h3 className="font-bold text-lg tracking-tight">AI Toolkit v2.5</h3>
+            <a href="#selected-work" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors">
+              View all projects <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Cell 3: Let's Work Together */}
+      <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
+        <CardContent className="p-8 h-full flex flex-col justify-between">
+          <div className="space-y-2">
+            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">
+              Collaborate
+            </p>
+            <h3 className="text-lg font-bold tracking-tight">
+              Let&apos;s work together
+            </h3>
+            <p className="text-xs text-muted-foreground">
+              Open for freelance & full-time opportunities.
+            </p>
+          </div>
+          <div className="flex gap-2 items-center">
+            <ContactModal>
+              <Button size="sm" className="rounded-xl text-xs font-semibold">
+                Get in touch
+              </Button>
+            </ContactModal>
+            <CopyEmailButton />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Cell 4: Based in Thailand */}
+      <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
+        <CardContent className="p-8 h-full flex flex-col justify-between">
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <MapPin className="h-4 w-4 text-muted-foreground" />
+              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">
+                Location
+              </p>
             </div>
-          </CardHeader>
-          <div className="relative flex overflow-hidden py-4 z-0">
-            <div className="animate-marquee whitespace-nowrap flex gap-4">
-              {techStack.map((tech) => (
-                <Badge key={tech} variant="outline" className="text-lg py-2 px-6 border-muted-foreground/20 bg-background/50">
-                  {tech}
-                </Badge>
-              ))}
-               {techStack.map((tech) => (
-                <Badge key={`${tech}-duplicate`} variant="outline" className="text-lg py-2 px-6 border-muted-foreground/20 bg-background/50">
-                  {tech}
-                </Badge>
-              ))}
-            </div>
-            <div className="absolute top-0 animate-marquee2 whitespace-nowrap flex gap-4">
-               {techStack.map((tech) => (
-                <Badge key={`${tech}-2`} variant="outline" className="text-lg py-2 px-6 border-muted-foreground/20 bg-background/50">
-                  {tech}
-                </Badge>
-              ))}
-               {techStack.map((tech) => (
-                <Badge key={`${tech}-2-duplicate`} variant="outline" className="text-lg py-2 px-6 border-muted-foreground/20 bg-background/50">
+            <h3 className="text-lg font-bold tracking-tight">
+              Based in Thailand 🇹🇭
+            </h3>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-sm font-mono text-muted-foreground">GMT+7</span>
+            <span className="text-xs text-muted-foreground/60">• Available for remote work</span>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Cell 5: Tech Stack Marquee — wide (col-span-2) */}
+      <Card className="md:col-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden">
+        <CardContent className="p-8 h-full flex flex-col justify-between">
+          <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60 mb-4">
+            Tech Stack
+          </p>
+          <div className="relative overflow-hidden flex-1 flex items-center">
+            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-card/80 to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-card/80 to-transparent z-10" />
+            <div className="flex animate-marquee gap-3 whitespace-nowrap">
+              {[...allTechs, ...allTechs].map((tech, i) => (
+                <Badge key={i} variant="outline" className="px-4 py-2 font-mono text-[12px] bg-background hover:bg-muted transition-colors cursor-default shrink-0">
                   {tech}
                 </Badge>
               ))}
             </div>
           </div>
-        </Card>
+        </CardContent>
+      </Card>
 
-        {/* Contact - CTA */}
-        <Card className="md:col-span-1 group overflow-hidden relative border-muted/40 bg-primary text-primary-foreground backdrop-blur-md flex flex-col justify-between cursor-pointer hover:brightness-110 transition-all">
-          <Link href="#contact" className="absolute inset-0 z-20" />
-           <div className="absolute top-0 right-0 p-32 bg-white/10 rounded-full blur-2xl -translate-y-16 translate-x-16 group-hover:translate-x-12 transition-transform duration-700" />
-           
-          <CardHeader className="relative z-10">
-             <div className="bg-white/20 w-fit p-3 rounded-full mb-4">
-               <Send className="w-6 h-6" />
-             </div>
-            <CardTitle className="text-2xl leading-tight">Let&apos;s Work Together</CardTitle>
-          </CardHeader>
-          <CardContent className="relative z-10">
-             <p className="text-primary-foreground/80 text-sm">
-               Have an idea? Let&apos;s build something intelligent.
-             </p>
-          </CardContent>
-          <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity -rotate-45 group-hover:rotate-0 transform duration-300">
-             <Send className="w-8 h-8" />
+      {/* Cell 6: Modular Intelligence */}
+      <Card className="border bg-foreground text-background rounded-2xl overflow-hidden group hover:opacity-90 transition-opacity">
+        <CardContent className="p-8 h-full flex flex-col justify-between">
+          <div className="space-y-3">
+            <Sparkles className="h-6 w-6" />
+            <h3 className="text-lg font-bold tracking-tight">
+              Modular Intelligence
+            </h3>
+            <p className="text-xs leading-relaxed opacity-70">
+              Every system I build is designed to be AI-native — modular, adaptive, and ready to evolve.
+            </p>
           </div>
-        </Card>
-      </div>
-    </section>
+        </CardContent>
+      </Card>
+
+    </div>
   )
 }

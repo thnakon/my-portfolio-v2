@@ -155,6 +155,15 @@
     display: inline-block;
   }
 
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 25s linear infinite;
+  }
+
   .bg-grid {
     background-size: 40px 40px;
     background-image: 
@@ -166,33 +175,6 @@
 
   .bg-glow {
     background: radial-gradient(circle at 50% 0%, oklch(1 0 0 / 0.1), transparent 70%);
-  }
-
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  .animate-marquee {
-    display: flex;
-    white-space: nowrap;
-    animation: marquee 30s linear infinite;
-  }
-  
-  @keyframes marquee2 {
-    from { transform: translateX(100%); }
-    to { transform: translateX(50%); }
-  }
-
-  .animate-marquee2 {
-    display: flex;
-    white-space: nowrap;
-    animation: marquee2 30s linear infinite;
-  }
-
-  /* Pause on hover */
-  .animate-marquee:hover, .animate-marquee2:hover {
-    animation-play-state: paused;
   }
 }
 

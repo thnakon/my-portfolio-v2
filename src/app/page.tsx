@@ -177,18 +177,18 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Bento Grid Section */}
+      <section className={`container mx-auto px-8 pb-20 transition-all duration-1000 delay-[1000ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+        <BentoGrid />
+      </section>
+
       {/* About Section */}
-      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1200ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+      <section id="about" className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1200ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
         <AboutSection />
       </section>
 
-      {/* Bento Grid Section */}
-      <div className={`transition-all duration-1000 delay-[1300ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
-        <BentoGrid />
-      </div>
-
       {/* Selected Work Section */}
-      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1400ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+      <section id="selected-work" className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1400ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
         <div className="flex items-center justify-between mb-12">
           <div className="space-y-1">
             <h2 className="text-2xl font-bold tracking-tight uppercase">Selected Work</h2>
