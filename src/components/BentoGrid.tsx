@@ -3,7 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Sparkles, ArrowRight, ArrowUpRight, MapPin } from "lucide-react"
+import { Sparkles, ArrowRight, ArrowUpRight, MapPin, Folder, FileText } from "lucide-react"
 import { ContactModal } from "@/components/ContactModal"
 import { CopyEmailButton } from "@/components/CopyEmailButton"
 import Image from "next/image"
@@ -93,17 +93,45 @@ export function BentoGrid() {
         </CardContent>
       </Card>
 
-      <Card className="md:row-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
+      <Card className="md:row-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-all duration-500">
         <CardContent className="p-0 h-full flex flex-col">
-          <div className="relative flex-1 overflow-hidden">
-            <Image 
-              src="/projects/ai-toolkit.png" 
-              alt="AI Toolkit" 
-              fill 
-              className="object-cover transition-transform duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+          <div className="relative flex-1 overflow-hidden flex items-center justify-center bg-muted/5">
+            {/* Background Grid Pattern */}
+            <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px] dark:bg-[radial-gradient(#fff_1px,transparent_1px)]" />
+            
+            <div className="relative flex items-center justify-center w-full h-48 mt-12">
+               {/* Files Popping Up from Folder */}
+               <div className="absolute transition-all duration-700 ease-out group-hover:-translate-y-20 group-hover:-translate-x-12 group-hover:rotate-[-15deg] opacity-0 group-hover:opacity-100">
+                  <div className="bg-card/80 backdrop-blur-md border border-foreground/5 p-2.5 rounded-xl shadow-xl">
+                    <FileText className="h-8 w-8 text-blue-500 opacity-80" />
+                  </div>
+               </div>
+               
+               <div className="absolute transition-all duration-700 ease-out group-hover:-translate-y-28 group-hover:rotate-[-2deg] opacity-0 group-hover:opacity-100 delay-75">
+                  <div className="bg-card/80 backdrop-blur-md border border-foreground/5 p-2.5 rounded-xl shadow-xl">
+                    <FileText className="h-8 w-8 text-purple-500 opacity-80" />
+                  </div>
+               </div>
+               
+               <div className="absolute transition-all duration-700 ease-out group-hover:-translate-y-20 group-hover:translate-x-12 group-hover:rotate-[15deg] opacity-0 group-hover:opacity-100 delay-150">
+                  <div className="bg-card/80 backdrop-blur-md border border-foreground/5 p-2.5 rounded-xl shadow-xl">
+                    <FileText className="h-8 w-8 text-emerald-500 opacity-80" />
+                  </div>
+               </div>
+
+               {/* Main Folder Icon */}
+               <div className="relative z-10 transition-all duration-500 transform group-hover:scale-110">
+                  <div className="relative">
+                    <Folder className="h-24 w-24 text-muted-foreground/20 fill-muted-foreground/5 group-hover:text-muted-foreground/40 group-hover:fill-muted-foreground/10 transition-all duration-500" />
+                    {/* Visual line inside folder to make it look 'openable' */}
+                    <div className="absolute top-[45%] left-1/2 -translate-x-1/2 w-16 h-0.5 bg-muted-foreground/5 group-hover:opacity-0 transition-opacity" />
+                  </div>
+               </div>
+            </div>
+            
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
           </div>
+          
           <div className="pt-4 px-6 pb-6 space-y-2">
             <p className="text-xs font-bold text-muted-foreground/60">
               Featured Work
