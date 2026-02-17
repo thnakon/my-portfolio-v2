@@ -20,7 +20,7 @@ const techIcons: Record<string, string> = {
   "Next.js": "nextdotjs",
   "React": "react",
   "Tailwind CSS": "tailwindcss",
-  "CSS": "/logos/css-logo.png",
+  "CSS": "css3",
   "Figma": "figma",
   "GSAP": "gsap",
   "Framer Motion": "framer",
@@ -31,7 +31,7 @@ const techIcons: Record<string, string> = {
   "MySQL": "mysql",
   "Supabase": "supabase",
   "Bun": "bun",
-  "ChatGPT": "/logos/chatgpt-logo.png",
+  "ChatGPT": "openai",
   "Gemini": "googlegemini",
   "Claude": "claude",
   "Docker": "docker",
@@ -54,7 +54,7 @@ export function BentoGrid() {
       <Card className="md:col-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
         <CardContent className="p-8 h-full flex flex-col justify-between">
           <div className="space-y-3">
-            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">
+            <p className="text-xs font-bold text-muted-foreground/60">
               About Me
             </p>
             <h3 className="text-xl font-bold tracking-tight leading-snug max-w-md">
@@ -84,7 +84,7 @@ export function BentoGrid() {
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
           </div>
           <div className="p-6 space-y-2">
-            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">
+            <p className="text-xs font-bold text-muted-foreground/60">
               Featured Work
             </p>
             <h3 className="font-bold text-lg tracking-tight">AI Toolkit v2.5</h3>
@@ -98,7 +98,7 @@ export function BentoGrid() {
       <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
         <CardContent className="p-8 h-full flex flex-col justify-between">
           <div className="space-y-2">
-            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">
+            <p className="text-xs font-bold text-muted-foreground/60">
               Collaborate
             </p>
             <h3 className="text-lg font-bold tracking-tight">
@@ -122,12 +122,9 @@ export function BentoGrid() {
       <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
         <CardContent className="p-8 h-full flex flex-col justify-between">
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-muted-foreground" />
-              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">
-                Location
-              </p>
-            </div>
+            <p className="text-xs font-bold text-muted-foreground/60">
+              Location
+            </p>
             <h3 className="text-lg font-bold tracking-tight">
               Based in Thailand 🇹🇭
             </h3>
@@ -143,7 +140,7 @@ export function BentoGrid() {
       {/* Cell 5: Tech Stack Marquee — 2 Rows */}
       <Card className="md:col-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden">
         <CardContent className="p-8 h-full flex flex-col justify-between">
-          <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60 mb-2">
+          <p className="text-xs font-bold text-muted-foreground/60 mb-2">
             Tech Stack
           </p>
           <div className="relative overflow-hidden flex-1 flex flex-col justify-center gap-4">
