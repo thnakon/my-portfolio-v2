@@ -187,7 +187,6 @@ export function BentoGrid() {
       <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
         <CardContent className="p-8 h-full flex flex-col justify-between">
           <div className="space-y-3">
-            <Sparkles className="h-6 w-6" />
             <h3 className="text-lg font-bold tracking-tight">
               Modular Intelligence
             </h3>
