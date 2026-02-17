@@ -16,6 +16,14 @@ const techRow2 = [
   "Laravel", "Node.js", "MySQL", "Supabase", "Bun", "ChatGPT", "Gemini", "Claude", "OpenClaw", "LLMs", "RAG", "Agentic Workflows", "Docker", "Git", "GitLab", "SourceTree"
 ]
 
+const projectFolders = [
+  { name: "Singha", image: "/projects/singha-preview.png", color: "text-amber-500" },
+  { name: "Klin Dental", image: "/projects/klin-dental-preview.png", color: "text-blue-500" },
+  { name: "Babybib", image: "/projects/babybib-preview.png", color: "text-purple-500" },
+  { name: "Oboun", image: "/projects/oboun-preview.png", color: "text-emerald-500" },
+  { name: "Portfolio v1", image: "/projects/portfolio-v1-preview.png", color: "text-slate-500" },
+]
+
 const techIcons: Record<string, string> = {
   "Next.js": "nextdotjs",
   "React": "react",
@@ -95,38 +103,36 @@ export function BentoGrid() {
 
       <Card className="md:row-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-all duration-500">
         <CardContent className="p-0 h-full flex flex-col">
-          <div className="relative flex-1 overflow-hidden flex items-center justify-center bg-muted/5">
+          <div className="relative flex-1 overflow-hidden flex flex-col bg-muted/5">
             {/* Background Grid Pattern */}
             <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px] dark:bg-[radial-gradient(#fff_1px,transparent_1px)]" />
             
-            <div className="relative flex items-center justify-center w-full h-48 mt-12">
-               {/* Files Popping Up from Folder */}
-               <div className="absolute transition-all duration-700 ease-out group-hover:-translate-y-20 group-hover:-translate-x-12 group-hover:rotate-[-15deg] opacity-0 group-hover:opacity-100">
-                  <div className="bg-card/80 backdrop-blur-md border border-foreground/5 p-2.5 rounded-xl shadow-xl">
-                    <FileText className="h-8 w-8 text-blue-500 opacity-80" />
+            <div className="relative flex-1 flex items-center mt-4">
+              <div className="flex animate-marquee gap-8 items-center py-4">
+                {[...projectFolders, ...projectFolders].map((project, i) => (
+                  <div key={i} className="group/folder relative shrink-0 cursor-pointer">
+                    {/* Project Preview Popping Up */}
+                    <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-40 h-24 rounded-lg overflow-hidden border border-foreground/10 shadow-xl opacity-0 scale-50 group-hover/folder:opacity-100 group-hover/folder:scale-100 group-hover/folder:-translate-y-4 transition-all duration-500 z-20 pointer-events-none">
+                      <Image 
+                        src={project.image} 
+                        alt={project.name} 
+                        fill 
+                        className="object-cover"
+                      />
+                    </div>
+                    
+                    {/* Folder Icon */}
+                    <div className="relative transition-all duration-300 group-hover/folder:scale-110">
+                      <Folder className={`h-16 w-16 ${project.color} fill-current/10 opacity-60 group-hover/folder:opacity-100 transition-opacity`} />
+                      <div className="absolute inset-0 flex items-center justify-center pt-2">
+                        <span className="text-[8px] font-bold text-foreground/50 truncate max-w-[40px] px-1">
+                          {project.name}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-               </div>
-               
-               <div className="absolute transition-all duration-700 ease-out group-hover:-translate-y-28 group-hover:rotate-[-2deg] opacity-0 group-hover:opacity-100 delay-75">
-                  <div className="bg-card/80 backdrop-blur-md border border-foreground/5 p-2.5 rounded-xl shadow-xl">
-                    <FileText className="h-8 w-8 text-purple-500 opacity-80" />
-                  </div>
-               </div>
-               
-               <div className="absolute transition-all duration-700 ease-out group-hover:-translate-y-20 group-hover:translate-x-12 group-hover:rotate-[15deg] opacity-0 group-hover:opacity-100 delay-150">
-                  <div className="bg-card/80 backdrop-blur-md border border-foreground/5 p-2.5 rounded-xl shadow-xl">
-                    <FileText className="h-8 w-8 text-emerald-500 opacity-80" />
-                  </div>
-               </div>
-
-               {/* Main Folder Icon */}
-               <div className="relative z-10 transition-all duration-500 transform group-hover:scale-110">
-                  <div className="relative">
-                    <Folder className="h-24 w-24 text-muted-foreground/20 fill-muted-foreground/5 group-hover:text-muted-foreground/40 group-hover:fill-muted-foreground/10 transition-all duration-500" />
-                    {/* Visual line inside folder to make it look 'openable' */}
-                    <div className="absolute top-[45%] left-1/2 -translate-x-1/2 w-16 h-0.5 bg-muted-foreground/5 group-hover:opacity-0 transition-opacity" />
-                  </div>
-               </div>
+                ))}
+              </div>
             </div>
             
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
@@ -136,9 +142,9 @@ export function BentoGrid() {
             <p className="text-xs font-bold text-muted-foreground/60">
               Featured Work
             </p>
-            <h3 className="font-bold text-lg tracking-tight">AI Toolkit v2.5</h3>
+            <h3 className="font-bold text-lg tracking-tight">Project Archives</h3>
             <a href="#selected-work" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors">
-              View all projects <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              View all project details <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
         </CardContent>
