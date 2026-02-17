@@ -32,9 +32,11 @@ export function BentoGrid() {
               I integrate AI as a co-thinker and co-builder at every stage, creating intelligent systems through Laravel & Next.js.
             </p>
           </div>
-          <a href="#about" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors w-fit">
-            Learn more <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-          </a>
+          <div className="flex justify-end">
+            <a href="#about" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors w-fit">
+              Learn more <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+            </a>
+          </div>
         </CardContent>
       </Card>
 
