@@ -10,6 +10,7 @@ import { useIntro } from "@/components/intro-context";
 import { ProjectCard } from "@/components/ProjectCard";
 import { TimelineItem } from "@/components/TimelineItem";
 import { AboutSection } from "@/components/AboutSection";
+import { BentoGrid } from "@/components/BentoGrid";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
@@ -180,6 +181,11 @@ export default function Home() {
       <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1200ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
         <AboutSection />
       </section>
+
+      {/* Bento Grid Section */}
+      <div className={`transition-all duration-1000 delay-[1300ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+        <BentoGrid />
+      </div>
 
       {/* Selected Work Section */}
       <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1400ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
