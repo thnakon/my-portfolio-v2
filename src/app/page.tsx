@@ -270,7 +270,7 @@ export default function Home() {
       </section>
 
       {/* Experience Section */}
-      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1800ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+      <section id="experience" className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1800ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
         <div className="flex flex-col md:flex-row gap-16">
           <div className="md:w-1/3">
             <h2 className="text-2xl font-bold tracking-tight uppercase mb-4">Experience</h2>

@@ -3,7 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Card, CardContent } from "@/components/ui/card"
-import { Sparkles, Code2, BrainCircuit, User, Linkedin, Github, Instagram } from "lucide-react"
+import { Sparkles, Code2, BrainCircuit, User, Linkedin, Github, Instagram, ArrowRight } from "lucide-react"
 import Image from "next/image"
 
 export function AboutSection() {
@@ -129,6 +129,16 @@ export function AboutSection() {
             </Card>
           </TabsContent>
         </Tabs>
+
+        <div className="flex justify-end mt-6">
+          <a 
+            href="#experience" 
+            className="group flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Review Experience
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          </a>
+        </div>
       </div>
     </div>
   )
