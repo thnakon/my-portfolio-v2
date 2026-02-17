@@ -54,7 +54,7 @@ export function BentoGrid() {
       <Card className="md:col-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
         <CardContent className="p-0 h-full">
           <div className="grid grid-cols-1 md:grid-cols-5 h-full">
-            <div className="md:col-span-3 p-8 flex flex-col justify-between">
+            <div className="md:col-span-3 pt-5 px-8 pb-8 flex flex-col justify-between">
               <div className="space-y-3">
                 <p className="text-xs font-bold text-muted-foreground/60">
                   About Me
@@ -104,7 +104,7 @@ export function BentoGrid() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
           </div>
-          <div className="p-6 space-y-2">
+          <div className="pt-4 px-6 pb-6 space-y-2">
             <p className="text-xs font-bold text-muted-foreground/60">
               Featured Work
             </p>
@@ -117,7 +117,7 @@ export function BentoGrid() {
       </Card>
 
       <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
-        <CardContent className="p-8 h-full flex flex-col justify-between">
+        <CardContent className="pt-5 px-8 pb-8 h-full flex flex-col justify-between">
           <div className="space-y-2">
             <p className="text-xs font-bold text-muted-foreground/60">
               Collaborate
@@ -141,7 +141,7 @@ export function BentoGrid() {
       </Card>
 
       <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
-        <CardContent className="p-8 h-full flex flex-col justify-between">
+        <CardContent className="pt-5 px-8 pb-8 h-full flex flex-col justify-between">
           <div className="space-y-3">
             <p className="text-xs font-bold text-muted-foreground/60">
               Location
@@ -160,7 +160,7 @@ export function BentoGrid() {
 
       {/* Cell 5: Tech Stack Marquee — 2 Rows */}
       <Card className="md:col-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden">
-        <CardContent className="p-8 h-full flex flex-col justify-between">
+        <CardContent className="pt-5 px-8 pb-8 h-full flex flex-col justify-between">
           <p className="text-xs font-bold text-muted-foreground/60 mb-2">
             Tech Stack
           </p>
@@ -206,7 +206,7 @@ export function BentoGrid() {
 
       {/* Cell 6: Modular Intelligence */}
       <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
-        <CardContent className="p-8 h-full flex flex-col justify-between">
+        <CardContent className="pt-5 px-8 pb-8 h-full flex flex-col justify-between">
           <div className="space-y-3">
             <h3 className="text-lg font-bold tracking-tight">
               Modular Intelligence
