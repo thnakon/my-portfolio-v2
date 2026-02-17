@@ -1,161 +1,142 @@
 "use client"
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Card, CardContent } from "@/components/ui/card"
-import { Sparkles, Code2, BrainCircuit, User, Linkedin, Github, Instagram, ArrowRight, Zap } from "lucide-react"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Linkedin, Github, Instagram, ArrowRight, BrainCircuit, Sparkles, MessageSquare } from "lucide-react"
 import Image from "next/image"
+import { ContactModal } from "./ContactModal"
 
 export function AboutSection() {
+  const flowingTech = [
+    "Next.js", "React", "TypeScript", "Tailwind CSS", "Laravel", "PHP", 
+    "OpenAI", "Claude", "LangChain", "PostgreSQL", "Node.js", "Python"
+  ];
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-auto">
-      {/* 1. Main Intro - High Visual Weight */}
-      <Card className="md:col-span-8 border bg-card/50 backdrop-blur-sm rounded-3xl overflow-hidden p-8 flex flex-col justify-between group hover:border-foreground/20 transition-all duration-500">
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight uppercase flex items-center gap-3">
-              About Me <Sparkles className="h-5 w-5 text-muted-foreground/50" />
-            </h2>
-            <div className="h-1 w-12 bg-foreground" />
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 items-stretch">
+      
+      {/* 1. Profile Card (Tall) */}
+      <Card className="lg:col-span-3 md:row-span-2 border bg-card/50 backdrop-blur-sm rounded-3xl overflow-hidden flex flex-col group border-dashed">
+        <div className="relative aspect-[3/4] w-full overflow-hidden">
+          <Image 
+            src="/profile-v3.jpg" 
+            alt="Thanakon" 
+            fill 
+            className="object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
+        </div>
+        <CardContent className="p-6 mt-auto">
+          <h3 className="text-xl font-bold uppercase tracking-tight mb-4">Thanakon D.</h3>
+          <div className="flex gap-3">
+            <a href="https://linkedin.com/in/thanakon-d" target="_blank" className="h-10 w-10 rounded-xl border bg-background/50 flex items-center justify-center transition-all hover:bg-foreground hover:text-background group/icon">
+              <Linkedin className="h-4 w-4" />
+            </a>
+            <a href="https://github.com/thnakon" target="_blank" className="h-10 w-10 rounded-xl border bg-background/50 flex items-center justify-center transition-all hover:bg-foreground hover:text-background group/icon">
+              <Github className="h-4 w-4" />
+            </a>
+            <a href="https://instagram.com/thnakon" target="_blank" className="h-10 w-10 rounded-xl border bg-background/50 flex items-center justify-center transition-all hover:bg-foreground hover:text-background group/icon">
+              <Instagram className="h-4 w-4" />
+            </a>
           </div>
-          <div className="space-y-4 max-w-2xl">
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Hello, I&apos;m Thanakon. A software developer redefining system architecture through the lens of AI. I don&apos;t just use AI to write code; I embrace it as a &apos;co-thinker and co-builder&apos; at every stage of the process.
-            </p>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              I specialize in integrating LLMs and AI Agents into real-world workflows, elevating software with the ability to think and analyze beyond traditional limits.
-            </p>
+        </CardContent>
+      </Card>
+
+      {/* 2. Main About Card (Wide) */}
+      <Card className="lg:col-span-6 border bg-card/50 backdrop-blur-sm rounded-3xl p-8 flex flex-col justify-center border-dashed relative overflow-hidden group">
+        <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+          <Sparkles className="h-24 w-24" />
+        </div>
+        <div className="space-y-4 relative z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-[10px] font-bold uppercase tracking-widest text-foreground/70">
+            <span className="h-1.5 w-1.5 rounded-full bg-foreground animate-pulse" />
+            About Me
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight uppercase leading-tight">
+            Redefining Architecture <br /> <span className="text-muted-foreground">Through AI.</span>
+          </h2>
+          <p className="text-muted-foreground text-sm leading-relaxed max-w-[500px]">
+            Hello, I&apos;m Thanakon. A software developer who doesn&apos;t just use AI to write code; I embrace it as a &apos;co-thinker and co-builder&apos; at every stage of the process, from architecture to deployment.
+          </p>
+        </div>
+      </Card>
+
+      {/* 3. Tech Stack Flowing Card (Square-ish) */}
+      <Card className="lg:col-span-3 border bg-card/50 backdrop-blur-sm rounded-3xl overflow-hidden border-dashed flex flex-col">
+        <CardHeader className="p-6 pb-2">
+          <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">Tech Stack</h4>
+        </CardHeader>
+        <CardContent className="p-0 flex-1 flex flex-col justify-center overflow-hidden">
+          <div className="relative flex overflow-hidden group/marquee">
+            <div className="flex gap-4 items-center py-6 animate-marquee whitespace-nowrap">
+              {flowingTech.map((tech) => (
+                <Badge 
+                  key={tech} 
+                  variant="outline" 
+                  className="px-4 py-1.5 font-mono text-[11px] bg-background/50 hover:bg-foreground hover:text-background transition-all cursor-default border-dashed"
+                >
+                  {tech}
+                </Badge>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {flowingTech.map((tech) => (
+                <Badge 
+                  key={`${tech}-2`} 
+                  variant="outline" 
+                  className="px-4 py-1.5 font-mono text-[11px] bg-background/50 hover:bg-foreground hover:text-background transition-all cursor-default border-dashed"
+                >
+                  {tech}
+                </Badge>
+              ))}
+            </div>
+            {/* Mask gradients for smooth edges */}
+            <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-card to-transparent z-10" />
+            <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-card to-transparent z-10" />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 4. Modular Intelligence Card (Wide) */}
+      <Card className="lg:col-span-5 border bg-card/50 backdrop-blur-sm rounded-3xl p-8 border-dashed group hover:bg-card/80 transition-colors">
+        <div className="flex items-start justify-between mb-6">
+          <div className="h-12 w-12 rounded-2xl bg-foreground/5 border border-foreground/10 flex items-center justify-center">
+            <BrainCircuit className="h-6 w-6 text-foreground" />
           </div>
         </div>
-        <div className="mt-8">
+        <h3 className="text-xl font-bold uppercase tracking-tight mb-3">Modular Intelligence</h3>
+        <p className="text-muted-foreground text-sm leading-relaxed">
+          I specialize in integrating LLMs and AI Agents into real-world workflows, elevating software with the ability to think and analyze beyond traditional limits.
+        </p>
+      </Card>
+
+      {/* 5. CTA & Experience Card (Medium) */}
+      <Card className="lg:col-span-4 border bg-foreground text-background rounded-3xl p-8 flex flex-col justify-between border-none shadow-2xl shadow-foreground/10 group overflow-hidden">
+        <div className="absolute top-0 right-0 p-4 translate-x-4 -translate-y-4 opacity-10 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500">
+          <MessageSquare className="h-32 w-32" />
+        </div>
+        <div className="space-y-4 relative z-10">
+          <h3 className="text-2xl font-bold uppercase tracking-tight leading-none">Let&apos;s Work <br /> Together</h3>
+          <p className="text-background/70 text-sm leading-tight">
+            I believe the future lies in AI-driven innovation. Let&apos;s build something intelligent.
+          </p>
+        </div>
+        <div className="pt-8 flex items-center justify-between relative z-10">
+          <ContactModal>
+            <Button variant="outline" className="bg-transparent border-background/20 text-background hover:bg-background hover:text-foreground rounded-xl px-6 font-bold uppercase text-[10px] tracking-widest transition-all">
+              Connect
+            </Button>
+          </ContactModal>
           <a 
             href="#experience" 
-            className="group flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors"
+            className="group/link flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-background/60 hover:text-background transition-colors"
           >
-            Review Experience
-            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+            Experience
+            <ArrowRight className="h-3 w-3 transition-transform group-hover/link:translate-x-1" />
           </a>
         </div>
       </Card>
 
-      {/* 2. Neural Suite - Replacing Image Block */}
-      <Card className="md:col-span-4 border bg-card/50 backdrop-blur-sm rounded-3xl overflow-hidden group p-8 flex flex-col gap-6 shadow-sm hover:border-foreground/20 transition-all duration-500 min-h-[400px]">
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-muted-foreground/40" />
-            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">Neural Suite</span>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-2xl font-bold tracking-tight">Modular Intelligence</h3>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Commanding and orchestrating advanced AI for rapid engineering.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 mt-2">
-          {/* Tool cards */}
-          {[
-            { name: "ChatGPT", role: "Logic & Reasoning", icon: <Sparkles className="h-4 w-4" />, color: "bg-emerald-500/10 text-emerald-500" },
-            { name: "Gemini", role: "Multi-modal Vision", icon: <BrainCircuit className="h-4 w-4" />, color: "bg-blue-500/10 text-blue-500" },
-            { name: "Claude", role: "Creative Context", icon: <Code2 className="h-4 w-4" />, color: "bg-orange-500/10 text-orange-500" },
-            { name: "OpenClaw", role: "System Control", icon: <Zap className="h-4 w-4" />, color: "bg-red-500/10 text-red-500" }
-          ].map((tool) => (
-            <div key={tool.name} className="flex items-center gap-3 p-3 rounded-2xl border bg-background/50 group/tool hover:bg-background transition-colors">
-              <div className={`h-10 w-10 rounded-xl ${tool.color} flex items-center justify-center`}>
-                {tool.icon}
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-bold">{tool.name}</span>
-                <span className="text-[10px] text-muted-foreground">{tool.role}</span>
-              </div>
-              <div className="ml-auto w-1 h-1 rounded-full bg-muted-foreground/20 group-hover/tool:bg-foreground/40 transition-colors" />
-            </div>
-          ))}
-        </div>
-      </Card>
-
-      {/* 3. Skillset - Mid weight */}
-      <Card className="md:col-span-12 lg:col-span-7 border bg-card/50 backdrop-blur-sm rounded-3xl overflow-hidden p-0 h-fit">
-        <Tabs defaultValue="skills" className="w-full">
-          <div className="px-8 pt-8">
-            <TabsList className="bg-muted/50 rounded-xl p-1 mb-6">
-              <TabsTrigger value="skills" className="rounded-lg text-[11px] uppercase tracking-wider font-bold">
-                <Code2 className="h-3 w-3 mr-2" />
-                Skillset
-              </TabsTrigger>
-              <TabsTrigger value="philosophy" className="rounded-lg text-[11px] uppercase tracking-wider font-bold">
-                <BrainCircuit className="h-3 w-3 mr-2" />
-                Philosophy
-              </TabsTrigger>
-            </TabsList>
-          </div>
-          
-          <TabsContent value="skills" className="m-0 focus-visible:outline-none px-8 pb-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              <div className="space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-foreground/70">Frontend Craft</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Expertise in Next.js, React, and motion-driven interfaces.
-                </p>
-              </div>
-              <div className="space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-foreground/70">AI Integration</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  LLMs, RAG, and agentic workflows for intelligent solutions.
-                </p>
-              </div>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="philosophy" className="m-0 focus-visible:outline-none px-8 pb-8">
-            <p className="text-sm text-muted-foreground leading-relaxed italic border-l-2 pl-4 border-muted-foreground/20">
-              &ldquo;Software should be invisible yet indispensable. My goal is to leverage AI to handle complexity while keeping experience simple.&rdquo;
-            </p>
-          </TabsContent>
-        </Tabs>
-      </Card>
-
-      {/* 4. Identity & FAQ */}
-      <Card className="md:col-span-8 lg:col-span-3 border bg-card/50 backdrop-blur-sm rounded-3xl overflow-hidden p-6 flex flex-col justify-center">
-        <div className="space-y-4">
-          <div className="flex items-center gap-2 text-foreground/70 mb-2">
-            <User className="h-4 w-4" />
-            <span className="text-xs font-bold uppercase tracking-widest">Identity</span>
-          </div>
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1" className="border-b-0">
-              <AccordionTrigger className="hover:no-underline py-2 text-xs font-bold text-left">
-                Curiosity?
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground text-xs leading-relaxed">
-                The evolution of LLMs and potential to transform digital interaction.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2" className="border-b-0">
-              <AccordionTrigger className="hover:no-underline py-2 text-xs font-bold text-left">
-                Outside Coding?
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground text-xs leading-relaxed">
-                Design trends, architectural patterns, and a coffee enthusiast.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
-      </Card>
-
-      {/* 5. Social Presence - Smallest block */}
-      <Card className="md:col-span-4 lg:col-span-2 border bg-card/50 backdrop-blur-sm rounded-3xl overflow-hidden p-6 flex flex-col items-center justify-center gap-4 group">
-        <a href="https://linkedin.com/in/thanakon-d" target="_blank" className="h-12 w-12 rounded-2xl border bg-background shadow-sm flex items-center justify-center transition-all hover:bg-muted group/link">
-          <Linkedin className="h-5 w-5 text-muted-foreground group-hover/link:text-foreground transition-colors" />
-        </a>
-        <a href="https://github.com/thnakon" target="_blank" className="h-12 w-12 rounded-2xl border bg-background shadow-sm flex items-center justify-center transition-all hover:bg-muted group/link">
-          <Github className="h-5 w-5 text-muted-foreground group-hover/link:text-foreground transition-colors" />
-        </a>
-        <a href="https://instagram.com/thnakon" target="_blank" className="h-12 w-12 rounded-2xl border bg-background shadow-sm flex items-center justify-center transition-all hover:bg-muted group/link">
-          <Instagram className="h-5 w-5 text-muted-foreground group-hover/link:text-foreground transition-colors" />
-        </a>
-      </Card>
     </div>
   )
 }

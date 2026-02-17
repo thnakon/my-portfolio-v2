@@ -167,6 +167,15 @@
   .bg-glow {
     background: radial-gradient(circle at 50% 0%, oklch(1 0 0 / 0.1), transparent 70%);
   }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
 }
 
 @layer base {
