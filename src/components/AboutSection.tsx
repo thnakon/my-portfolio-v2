@@ -3,7 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Card, CardContent } from "@/components/ui/card"
-import { Sparkles, Code2, BrainCircuit, User, Linkedin, Github, Instagram, ArrowRight } from "lucide-react"
+import { Sparkles, Code2, BrainCircuit, User, Linkedin, Github, Instagram, ArrowRight, Zap } from "lucide-react"
 import Image from "next/image"
 
 export function AboutSection() {
@@ -38,15 +38,41 @@ export function AboutSection() {
         </div>
       </Card>
 
-      {/* 2. Image Block */}
-      <Card className="md:col-span-4 border bg-card/50 backdrop-blur-sm rounded-3xl overflow-hidden group p-0 min-h-[300px] relative">
-        <Image 
-          src="/profile-v3.jpg" 
-          alt="Thanakon" 
-          fill 
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-60" />
+      {/* 2. Neural Suite - Replacing Image Block */}
+      <Card className="md:col-span-4 border bg-card/50 backdrop-blur-sm rounded-3xl overflow-hidden group p-8 flex flex-col gap-6 shadow-sm hover:border-foreground/20 transition-all duration-500 min-h-[400px]">
+        <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            <div className="h-2 w-2 rounded-full bg-muted-foreground/40" />
+            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">Neural Suite</span>
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-2xl font-bold tracking-tight">Modular Intelligence</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Commanding and orchestrating advanced AI for rapid engineering.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 mt-2">
+          {/* Tool cards */}
+          {[
+            { name: "ChatGPT", role: "Logic & Reasoning", icon: <Sparkles className="h-4 w-4" />, color: "bg-emerald-500/10 text-emerald-500" },
+            { name: "Gemini", role: "Multi-modal Vision", icon: <BrainCircuit className="h-4 w-4" />, color: "bg-blue-500/10 text-blue-500" },
+            { name: "Claude", role: "Creative Context", icon: <Code2 className="h-4 w-4" />, color: "bg-orange-500/10 text-orange-500" },
+            { name: "OpenClaw", role: "System Control", icon: <Zap className="h-4 w-4" />, color: "bg-red-500/10 text-red-500" }
+          ].map((tool) => (
+            <div key={tool.name} className="flex items-center gap-3 p-3 rounded-2xl border bg-background/50 group/tool hover:bg-background transition-colors">
+              <div className={`h-10 w-10 rounded-xl ${tool.color} flex items-center justify-center`}>
+                {tool.icon}
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xs font-bold">{tool.name}</span>
+                <span className="text-[10px] text-muted-foreground">{tool.role}</span>
+              </div>
+              <div className="ml-auto w-1 h-1 rounded-full bg-muted-foreground/20 group-hover/tool:bg-foreground/40 transition-colors" />
+            </div>
+          ))}
+        </div>
       </Card>
 
       {/* 3. Skillset - Mid weight */}
