@@ -226,7 +226,7 @@ export function BentoGrid() {
                     <img 
                       src={getIconUrl(tech)!} 
                       alt={tech} 
-                      className="w-3.5 h-3.5" 
+                      className="w-3.5 h-3.5 dark:invert" 
                       onError={(e) => (e.currentTarget.style.display = 'none')}
                     />
                   )}
@@ -242,7 +242,7 @@ export function BentoGrid() {
                     <img 
                       src={getIconUrl(tech)!} 
                       alt={tech} 
-                      className="w-3.5 h-3.5" 
+                      className="w-3.5 h-3.5 dark:invert" 
                       onError={(e) => (e.currentTarget.style.display = 'none')}
                     />
                   )}
@@ -284,7 +284,7 @@ export function BentoGrid() {
                     <img 
                       src={`https://cdn.jsdelivr.net/npm/simple-icons@13/icons/${ide.logo}.svg`} 
                       alt={ide.name} 
-                      className="w-3 h-3 opacity-80"
+                      className="w-3 h-3 opacity-80 dark:invert"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
                         const parent = e.currentTarget.parentElement;
