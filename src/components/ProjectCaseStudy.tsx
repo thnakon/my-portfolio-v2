@@ -83,7 +83,7 @@ export function ProjectCaseStudy({
 
         {/* Feature Bullets */}
         {features.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+          <div className="flex flex-col gap-4 pt-4">
             {features.map((feature, i) => {
               const Icon = iconMap[feature.icon] || CheckCircle2
               return (
