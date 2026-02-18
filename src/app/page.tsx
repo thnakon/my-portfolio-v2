@@ -26,7 +26,12 @@ const projects = [
     longDescription: "A high-performance command center for AI engineers. Built with a focus on real-time data visualization and modularity, allowing users to orchestrate complex model training and deployment pipelines with ease.",
     image: "/projects/ai-toolkit.png",
     tags: ["Next.js", "OpenAI", "Tailwind CSS", "TypeScript", "Vercel AI SDK"],
-    features: [],
+    features: [
+      { text: "Modular Agentic Workflows with LangChain", icon: "Bot" },
+      { text: "Real-time training performance tracking", icon: "BarChart3" },
+      { text: "Seamless Vercel AI SDK integration", icon: "Zap" },
+      { text: "Advanced model & dataset orchestration", icon: "Inbox" }
+    ],
     isAI: true
   },
   {
