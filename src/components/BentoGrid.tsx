@@ -32,7 +32,7 @@ const techIcons: Record<string, string> = {
   "Tailwind CSS": "tailwindcss",
   "CSS": "css3",
   "Figma": "figma",
-  "GSAP": "gsap",
+  "GSAP": "greensock",
   "Framer Motion": "framer",
   "HTML": "html5",
   "PHP": "php",
@@ -222,8 +222,8 @@ export function BentoGrid() {
                     <img 
                       src={getIconUrl(tech)!} 
                       alt={tech} 
-                      className="w-3.5 h-3.5" 
-                      onLoad={(e) => (e.currentTarget.style.display = 'block')}
+                      className="w-3.5 h-3.5 hidden shadow-sm" 
+                      onLoad={(e) => (e.currentTarget.classList.remove('hidden'))}
                       onError={(e) => (e.currentTarget.style.display = 'none')}
                     />
                   )}
@@ -239,8 +239,8 @@ export function BentoGrid() {
                     <img 
                       src={getIconUrl(tech)!} 
                       alt={tech} 
-                      className="w-3.5 h-3.5" 
-                      onLoad={(e) => (e.currentTarget.style.display = 'block')}
+                      className="w-3.5 h-3.5 hidden shadow-sm" 
+                      onLoad={(e) => (e.currentTarget.classList.remove('hidden'))}
                       onError={(e) => (e.currentTarget.style.display = 'none')}
                     />
                   )}
@@ -282,9 +282,9 @@ export function BentoGrid() {
                     <img 
                       src={`https://cdn.simpleicons.org/${ide.logo}`} 
                       alt={ide.name} 
-                      className="w-3 h-3 opacity-80"
+                      className="w-3 h-3 opacity-80 hidden"
                       onLoad={(e) => {
-                        (e.currentTarget as HTMLImageElement).style.display = 'block';
+                        (e.currentTarget as HTMLImageElement).classList.remove('hidden');
                       }}
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
