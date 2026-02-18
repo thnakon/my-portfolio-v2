@@ -86,15 +86,15 @@ export function AboutSection() {
 
       {/* Right Column: Interactive Content */}
       <div className="lg:col-span-5 w-full">
-        <Tabs defaultValue="skills" className="w-full">
+        <Tabs defaultValue="github" className="w-full">
           <TabsList className="grid w-full grid-cols-3 bg-muted/50 rounded-xl p-1 mb-8">
-            <TabsTrigger value="skills" className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
-              <Code2 className="h-3.5 w-3.5 mr-2" />
-              Skillset
-            </TabsTrigger>
             <TabsTrigger value="github" className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
               <Github className="h-3.5 w-3.5 mr-2" />
               GitHub
+            </TabsTrigger>
+            <TabsTrigger value="skills" className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
+              <Code2 className="h-3.5 w-3.5 mr-2" />
+              Skillset
             </TabsTrigger>
             <TabsTrigger value="identity" className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
               <User className="h-3.5 w-3.5 mr-2" />
@@ -102,27 +102,6 @@ export function AboutSection() {
             </TabsTrigger>
           </TabsList>
           
-          <TabsContent value="skills" className="mt-0 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-            <Card className="border bg-card/50 backdrop-blur-sm rounded-2xl overflow-hidden">
-              <CardContent className="p-8 space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-bold uppercase tracking-widest text-foreground/70">Frontend Craft</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Expertise in Next.js, React, and GSAP/Framer Motion for creating fluid, motion-driven interfaces.
-                    </p>
-                  </div>
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-bold uppercase tracking-widest text-foreground/70">AI Integration</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Implementing LLMs, vector databases (RAG), and agentic workflows to build intelligent software solutions.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
           <TabsContent value="github" className="mt-0 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
             <Card className="border bg-card/50 backdrop-blur-sm rounded-2xl overflow-hidden">
               <CardContent className="p-6 space-y-6">
@@ -167,6 +146,27 @@ export function AboutSection() {
                       <span className="text-lg font-bold">{loading ? "--" : stats.stars}</span>
                       <span className="text-[10px] uppercase tracking-wider text-muted-foreground/60 font-medium">Stars</span>
                     </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="skills" className="mt-0 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+            <Card className="border bg-card/50 backdrop-blur-sm rounded-2xl overflow-hidden">
+              <CardContent className="p-8 space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-bold uppercase tracking-widest text-foreground/70">Frontend Craft</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Expertise in Next.js, React, and GSAP/Framer Motion for creating fluid, motion-driven interfaces.
+                    </p>
+                  </div>
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-bold uppercase tracking-widest text-foreground/70">AI Integration</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Implementing LLMs, vector databases (RAG), and agentic workflows to build intelligent software solutions.
+                    </p>
                   </div>
                 </div>
               </CardContent>
