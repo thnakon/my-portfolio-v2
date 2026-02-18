@@ -31,6 +31,7 @@ export function ProjectCard({ title, description, image, tags, isAI, className =
               src={image} 
               alt={title} 
               fill 
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover transition-transform duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
             />
           </AspectRatio>

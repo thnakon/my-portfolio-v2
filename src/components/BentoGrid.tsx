@@ -92,7 +92,8 @@ export function BentoGrid() {
                   src="/profile-v3.jpg" 
                   alt="Thanakon" 
                   fill 
-                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 25vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
               
@@ -125,6 +126,7 @@ export function BentoGrid() {
                           src={project.image} 
                           alt={project.name} 
                           fill 
+                          sizes="(max-width: 768px) 100vw, 256px"
                           className="object-cover opacity-80 group-hover/folder:opacity-100 transition-opacity duration-300"
                         />
                         {/* Overlay gradient */}
@@ -221,6 +223,7 @@ export function BentoGrid() {
                       src={getIconUrl(tech)!} 
                       alt={tech} 
                       className="w-3.5 h-3.5" 
+                      onLoad={(e) => (e.currentTarget.style.display = 'block')}
                       onError={(e) => (e.currentTarget.style.display = 'none')}
                     />
                   )}
@@ -237,6 +240,7 @@ export function BentoGrid() {
                       src={getIconUrl(tech)!} 
                       alt={tech} 
                       className="w-3.5 h-3.5" 
+                      onLoad={(e) => (e.currentTarget.style.display = 'block')}
                       onError={(e) => (e.currentTarget.style.display = 'none')}
                     />
                   )}
@@ -279,9 +283,13 @@ export function BentoGrid() {
                       src={`https://cdn.simpleicons.org/${ide.logo}`} 
                       alt={ide.name} 
                       className="w-3 h-3 opacity-80"
+                      onLoad={(e) => {
+                        (e.currentTarget as HTMLImageElement).style.display = 'block';
+                      }}
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
-                        const fallback = e.currentTarget.parentElement?.querySelector('.fallback-icon');
+                        const parent = e.currentTarget.parentElement;
+                        const fallback = parent?.querySelector('.fallback-icon');
                         if (fallback) (fallback as HTMLElement).style.display = 'block';
                       }}
                     />

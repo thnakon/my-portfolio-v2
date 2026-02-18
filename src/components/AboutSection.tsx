@@ -16,6 +16,7 @@ export function AboutSection() {
             src="/profile-v3.jpg" 
             alt="Thanakon" 
             fill 
+            sizes="(max-width: 1024px) 100vw, 25vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
