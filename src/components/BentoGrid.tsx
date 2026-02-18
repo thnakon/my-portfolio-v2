@@ -44,6 +44,10 @@ const techIcons: Record<string, string> = {
   "ChatGPT": "openai",
   "Gemini": "googlegemini",
   "Claude": "claude",
+  "OpenClaw": "openaigym",
+  "LLMs": "openai",
+  "RAG": "databricks",
+  "Agentic Workflows": "langchain",
   "Docker": "docker",
   "Git": "git",
   "GitLab": "gitlab",
@@ -55,7 +59,7 @@ export function BentoGrid() {
     const slug = techIcons[tech];
     if (!slug) return null;
     if (slug.startsWith('/')) return slug;
-    return `https://cdn.simpleicons.org/${slug}`;
+    return `https://cdn.jsdelivr.net/npm/simple-icons@13/icons/${slug}.svg`;
   }
 
   return (
@@ -222,8 +226,7 @@ export function BentoGrid() {
                     <img 
                       src={getIconUrl(tech)!} 
                       alt={tech} 
-                      className="w-3.5 h-3.5 hidden shadow-sm" 
-                      onLoad={(e) => (e.currentTarget.classList.remove('hidden'))}
+                      className="w-3.5 h-3.5" 
                       onError={(e) => (e.currentTarget.style.display = 'none')}
                     />
                   )}
@@ -239,8 +242,7 @@ export function BentoGrid() {
                     <img 
                       src={getIconUrl(tech)!} 
                       alt={tech} 
-                      className="w-3.5 h-3.5 hidden shadow-sm" 
-                      onLoad={(e) => (e.currentTarget.classList.remove('hidden'))}
+                      className="w-3.5 h-3.5" 
                       onError={(e) => (e.currentTarget.style.display = 'none')}
                     />
                   )}
@@ -264,7 +266,7 @@ export function BentoGrid() {
           <div className="pt-5 px-8 pb-8 h-full flex flex-col justify-between relative z-10">
             <div className="space-y-4">
               <div className="space-y-1">
-                <p className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">
+                <p className="text-[10px] font-bold text-muted-foreground/60 tracking-widest">
                   Agentic IDE
                 </p>
                 <h3 className="text-lg font-bold tracking-tight">
@@ -280,12 +282,9 @@ export function BentoGrid() {
                 ].map((ide) => (
                   <div key={ide.name} className="flex items-center gap-1.5 bg-background/50 backdrop-blur-md border border-foreground/5 px-2.5 py-1 rounded-lg">
                     <img 
-                      src={`https://cdn.simpleicons.org/${ide.logo}`} 
+                      src={`https://cdn.jsdelivr.net/npm/simple-icons@13/icons/${ide.logo}.svg`} 
                       alt={ide.name} 
-                      className="w-3 h-3 opacity-80 hidden"
-                      onLoad={(e) => {
-                        (e.currentTarget as HTMLImageElement).classList.remove('hidden');
-                      }}
+                      className="w-3 h-3 opacity-80"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
                         const parent = e.currentTarget.parentElement;
