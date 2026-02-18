@@ -8,6 +8,8 @@ import { ContactModal } from "@/components/ContactModal"
 import { CopyEmailButton } from "@/components/CopyEmailButton"
 import Image from "next/image"
 
+import { Orb } from "@/components/ui/orb"
+
 const techRow1 = [
   "Next.js", "React", "Tailwind CSS", "CSS", "Figma", "GSAP", "Framer Motion", "HTML", "PHP"
 ]
@@ -103,31 +105,36 @@ export function BentoGrid() {
 
       <Card className="md:row-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-all duration-500">
         <CardContent className="p-0 h-full flex flex-col">
-          <div className="relative flex-1 overflow-hidden flex flex-col bg-muted/5">
+          <div className="relative flex-1 flex flex-col bg-muted/5">
             {/* Background Grid Pattern */}
             <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px] dark:bg-[radial-gradient(#fff_1px,transparent_1px)]" />
             
-            <div className="relative flex-1 flex items-center mt-4">
-              <div className="flex animate-marquee gap-8 items-center py-4">
+            <div className="relative flex-1 flex items-center overflow-hidden">
+              <div className="flex animate-marquee gap-6 items-center py-6 px-4">
                 {[...projectFolders, ...projectFolders].map((project, i) => (
                   <div key={i} className="group/folder relative shrink-0 cursor-pointer">
-                    {/* Project Preview Popping Up */}
-                    <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-40 h-24 rounded-lg overflow-hidden border border-foreground/10 shadow-xl opacity-0 scale-50 group-hover/folder:opacity-100 group-hover/folder:scale-100 group-hover/folder:-translate-y-4 transition-all duration-500 z-20 pointer-events-none">
-                      <Image 
-                        src={project.image} 
-                        alt={project.name} 
-                        fill 
-                        className="object-cover"
-                      />
-                    </div>
-                    
-                    {/* Folder Icon */}
-                    <div className="relative transition-all duration-300 group-hover/folder:scale-110">
-                      <Folder className={`h-16 w-16 ${project.color} fill-current/10 opacity-60 group-hover/folder:opacity-100 transition-opacity`} />
-                      <div className="absolute inset-0 flex items-center justify-center pt-2">
-                        <span className="text-[8px] font-bold text-foreground/50 truncate max-w-[40px] px-1">
-                          {project.name}
-                        </span>
+                    {/* Folder Card with Image */}
+                    <div className="relative w-28 transition-all duration-300 group-hover/folder:scale-110">
+                      {/* Folder Tab */}
+                      <div className={`absolute -top-2.5 left-2 w-10 h-4 rounded-t-md ${project.color.replace('text-', 'bg-')}/20 border border-b-0 border-foreground/5`} />
+                      
+                      {/* Folder Body */}
+                      <div className={`relative w-full h-20 rounded-lg border border-foreground/10 bg-card/80 backdrop-blur-sm shadow-md overflow-hidden group-hover/folder:shadow-xl transition-shadow`}>
+                        {/* Project Preview Image */}
+                        <Image 
+                          src={project.image} 
+                          alt={project.name} 
+                          fill 
+                          className="object-cover opacity-70 group-hover/folder:opacity-100 transition-opacity duration-300"
+                        />
+                        {/* Overlay gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                        {/* Project Name */}
+                        <div className="absolute bottom-1.5 left-2 right-2">
+                          <span className="text-[10px] font-bold text-white drop-shadow-md truncate block">
+                            {project.name}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -245,15 +252,50 @@ export function BentoGrid() {
       </Card>
 
       {/* Cell 6: Modular Intelligence */}
-      <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors">
-        <CardContent className="pt-5 px-8 pb-8 h-full flex flex-col justify-between">
-          <div className="space-y-3">
-            <h3 className="text-lg font-bold tracking-tight">
-              Modular Intelligence
-            </h3>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Every system I build is designed to be AI-native — modular, adaptive, and ready to evolve.
-            </p>
+      <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors relative">
+        <CardContent className="p-0 h-full flex flex-col relative z-10">
+          <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
+            <Orb agentState="thinking" className="h-full w-full scale-150" />
+          </div>
+          <div className="pt-5 px-8 pb-8 h-full flex flex-col justify-between relative z-10">
+            <div className="space-y-4">
+              <div className="space-y-1">
+                <p className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">
+                  Agentic IDE
+                </p>
+                <h3 className="text-lg font-bold tracking-tight">
+                  The Future of Work
+                </h3>
+              </div>
+              
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { name: "Antigravity", logo: "googlegemini", color: "text-blue-500" },
+                  { name: "Windsurf", logo: "codeium", color: "text-emerald-500" },
+                  { name: "Cursor", logo: "cursor", color: "text-cyan-500" },
+                  { name: "VS Code", logo: "visualstudiocode", color: "text-blue-600" }
+                ].map((ide) => (
+                  <div key={ide.name} className="flex items-center gap-1.5 bg-background/50 backdrop-blur-md border border-foreground/5 px-2.5 py-1 rounded-lg">
+                    <img 
+                      src={`https://cdn.simpleicons.org/${ide.logo}`} 
+                      alt={ide.name} 
+                      className="w-3 h-3 opacity-80"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        const fallback = e.currentTarget.parentElement?.querySelector('.fallback-icon');
+                        if (fallback) (fallback as HTMLElement).style.display = 'block';
+                      }}
+                    />
+                    <Sparkles className="w-3 h-3 text-foreground/40 hidden fallback-icon" style={{ display: 'none' }} />
+                    <span className="text-[10px] font-medium text-foreground/80">{ide.name}</span>
+                  </div>
+                ))}
+              </div>
+
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Pioneering the transition to <strong>Agent-First Automation</strong>. Utilizing autonomous AI agents to orchestrate complex development tasks across modular environments.
+              </p>
+            </div>
           </div>
         </CardContent>
       </Card>
