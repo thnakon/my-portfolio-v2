@@ -254,8 +254,8 @@ export function BentoGrid() {
       {/* Cell 6: Modular Intelligence */}
       <Card className="border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-colors relative">
         <CardContent className="p-0 h-full flex flex-col relative z-10">
-          <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
-            <Orb agentState="thinking" className="h-full w-full scale-150" />
+          <div className="absolute -right-24 -bottom-24 z-0 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
+            <Orb agentState="thinking" className="h-[250px] w-[250px]" />
           </div>
           <div className="pt-5 px-8 pb-8 h-full flex flex-col justify-between relative z-10">
             <div className="space-y-4">
@@ -272,8 +272,7 @@ export function BentoGrid() {
                 {[
                   { name: "Antigravity", logo: "googlegemini", color: "text-blue-500" },
                   { name: "Windsurf", logo: "codeium", color: "text-emerald-500" },
-                  { name: "Cursor", logo: "cursor", color: "text-cyan-500" },
-                  { name: "VS Code", logo: "visualstudiocode", color: "text-blue-600" }
+                  { name: "Cursor", logo: "cursor", color: "text-cyan-500" }
                 ].map((ide) => (
                   <div key={ide.name} className="flex items-center gap-1.5 bg-background/50 backdrop-blur-md border border-foreground/5 px-2.5 py-1 rounded-lg">
                     <img 
