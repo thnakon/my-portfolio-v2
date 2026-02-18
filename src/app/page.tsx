@@ -7,7 +7,7 @@ import { ContactModal } from "@/components/ContactModal";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useIntro } from "@/components/intro-context";
-import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectCaseStudy } from "@/components/ProjectCaseStudy";
 import { TimelineItem } from "@/components/TimelineItem";
 import { AboutSection } from "@/components/AboutSection";
 import { BentoGrid } from "@/components/BentoGrid";
@@ -23,26 +23,41 @@ const projects = [
   {
     title: "AI Toolkit v2.5",
     description: "A comprehensive dashboard for managing LLM models, datasets, and compute resources with a premium glassmorphic interface.",
+    longDescription: "A high-performance command center for AI engineers. Built with a focus on real-time data visualization and modularity, allowing users to orchestrate complex model training and deployment pipelines with ease.",
     image: "/projects/ai-toolkit.png",
-    tags: ["Next.js", "OpenAI", "Tailwind"],
-    isAI: true,
-    className: "md:col-span-2 md:row-span-2"
+    tags: ["Next.js", "OpenAI", "Tailwind CSS", "TypeScript", "Vercel AI SDK"],
+    features: [
+      { text: "Partial Prerendering for instant page loads", icon: "Zap" },
+      { text: "Modular Agentic Workflows with LangChain", icon: "Bot" },
+      { text: "Real-time cost and usage analytics", icon: "BarChart3" }
+    ],
+    isAI: true
   },
   {
     title: "Smart Guestbook",
     description: "Digital guestbook with sentiment analysis and automated moderation using AI.",
+    longDescription: "An interactive guestbook that uses natural language processing to understand user sentiment. It automatically filters spam and highlights positive testimonials, providing a seamless experience for visitors.",
     image: "/projects/guestbook.png",
-    tags: ["Next.js", "AppScript", "AI"],
-    isAI: true,
-    className: "md:col-span-1 md:row-span-1"
+    tags: ["Next.js", "AppScript", "OpenAI", "Supabase", "GSAP"],
+    features: [
+      { text: "AI-driven sentiment analysis", icon: "Heart" },
+      { text: "Automated spam and toxic content filtering", icon: "ShieldCheck" },
+      { text: "Interactive GSAP-powered animations", icon: "MousePointer2" }
+    ],
+    isAI: true
   },
   {
     title: "Valentine's Surprise",
     description: "A minimal, elegant web experience for a special Valentine's Day surprise.",
+    longDescription: "A personalized, animated experience designed to deliver a special message. Focused on silky-smooth animations and a playful yet premium aesthetic, making every interaction feel meaningful.",
     image: "/projects/valentines.png",
-    tags: ["React", "Framer Motion"],
-    isAI: false,
-    className: "md:col-span-1 md:row-span-1"
+    tags: ["React", "Framer Motion", "Tailwind CSS"],
+    features: [
+      { text: "Physics-based heart animations", icon: "Activity" },
+      { text: "Responsive paper-fold transitions", icon: "FoldVertical" },
+      { text: "Optimized performance on mobile devices", icon: "Smartphone" }
+    ],
+    isAI: false
   }
 ];
 
@@ -199,10 +214,11 @@ export default function Home() {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[340px]">
+        <div className="space-y-16 lg:space-y-32">
           {projects.map((project, index) => (
-            <ProjectCard 
+            <ProjectCaseStudy 
               key={index}
+              index={index}
               {...project}
             />
           ))}
