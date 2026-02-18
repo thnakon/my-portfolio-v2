@@ -22,15 +22,11 @@ import {
 const projects = [
   {
     title: "AI Toolkit v2.5",
-    description: "A comprehensive dashboard for managing LLM models, datasets, and compute resources with a premium glassmorphic interface.",
+    description: "",
     longDescription: "A high-performance command center for AI engineers. Built with a focus on real-time data visualization and modularity, allowing users to orchestrate complex model training and deployment pipelines with ease.",
     image: "/projects/ai-toolkit.png",
     tags: ["Next.js", "OpenAI", "Tailwind CSS", "TypeScript", "Vercel AI SDK"],
-    features: [
-      { text: "Partial Prerendering for instant page loads", icon: "Zap" },
-      { text: "Modular Agentic Workflows with LangChain", icon: "Bot" },
-      { text: "Real-time cost and usage analytics", icon: "BarChart3" }
-    ],
+    features: [],
     isAI: true
   },
   {

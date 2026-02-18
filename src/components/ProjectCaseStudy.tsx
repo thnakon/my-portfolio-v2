@@ -75,9 +75,11 @@ export function ProjectCaseStudy({
             <h3 className="text-2xl lg:text-3xl font-bold tracking-tight uppercase">{title}</h3>
           </div>
           
-          <p className="text-muted-foreground text-base lg:text-lg leading-relaxed font-medium">
-            {description}
-          </p>
+          {description && (
+            <p className="text-muted-foreground text-base lg:text-lg leading-relaxed font-medium">
+              {description}
+            </p>
+          )}
 
           <p className="text-muted-foreground/70 text-sm leading-relaxed">
             {longDescription}
@@ -85,19 +87,21 @@ export function ProjectCaseStudy({
         </div>
 
         {/* Feature Bullets */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-          {features.map((feature, i) => {
-            const Icon = iconMap[feature.icon] || CheckCircle2
-            return (
-              <div key={i} className="flex items-start gap-3 group/item">
-                <div className="h-6 w-6 rounded-lg bg-primary/5 border border-primary/10 flex items-center justify-center shrink-0 group-hover/item:bg-primary/10 transition-colors">
-                  <Icon className="h-3.5 w-3.5 text-primary/70" />
+        {features.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+            {features.map((feature, i) => {
+              const Icon = iconMap[feature.icon] || CheckCircle2
+              return (
+                <div key={i} className="flex items-start gap-3 group/item">
+                  <div className="h-6 w-6 rounded-lg bg-primary/5 border border-primary/10 flex items-center justify-center shrink-0 group-hover/item:bg-primary/10 transition-colors">
+                    <Icon className="h-3.5 w-3.5 text-primary/70" />
+                  </div>
+                  <span className="text-sm text-foreground/80 leading-snug pt-0.5">{feature.text}</span>
                 </div>
-                <span className="text-sm text-foreground/80 leading-snug pt-0.5">{feature.text}</span>
-              </div>
-            )
-          })}
-        </div>
+              )
+            })}
+          </div>
+        )}
 
         {/* Tech Chips */}
         <div className="space-y-3 pt-6 border-t border-dashed">
