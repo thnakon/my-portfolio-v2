@@ -67,11 +67,6 @@ export function ProjectCaseStudy({
       <div className="w-full lg:w-1/2 space-y-8">
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            {isAI && (
-              <Badge className="bg-foreground text-background font-bold text-[10px] uppercase tracking-[0.2em] rounded-full px-3 py-0.5">
-                AI Driven
-              </Badge>
-            )}
             <h3 className="text-2xl lg:text-3xl font-bold tracking-tight uppercase">{title}</h3>
           </div>
           
