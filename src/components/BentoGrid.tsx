@@ -110,28 +110,28 @@ export function BentoGrid() {
             <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px] dark:bg-[radial-gradient(#fff_1px,transparent_1px)]" />
             
             <div className="relative flex-1 flex items-center overflow-hidden">
-              <div className="flex animate-marquee gap-6 items-center py-6 px-4">
+              <div className="flex animate-marquee gap-10 items-center py-10 px-6">
                 {[...projectFolders, ...projectFolders].map((project, i) => (
                   <div key={i} className="group/folder relative shrink-0 cursor-pointer">
                     {/* Folder Card with Image */}
-                    <div className="relative w-28 transition-all duration-300 group-hover/folder:scale-110">
+                    <div className="relative w-64 transition-all duration-300 group-hover/folder:scale-105">
                       {/* Folder Tab */}
-                      <div className={`absolute -top-2.5 left-2 w-10 h-4 rounded-t-md ${project.color.replace('text-', 'bg-')}/20 border border-b-0 border-foreground/5`} />
+                      <div className={`absolute -top-4 left-3 w-24 h-7 rounded-t-xl ${project.color.replace('text-', 'bg-')}/20 border border-b-0 border-foreground/5`} />
                       
                       {/* Folder Body */}
-                      <div className={`relative w-full h-20 rounded-lg border border-foreground/10 bg-card/80 backdrop-blur-sm shadow-md overflow-hidden group-hover/folder:shadow-xl transition-shadow`}>
+                      <div className={`relative w-full h-44 rounded-2xl border border-foreground/10 bg-card/80 backdrop-blur-sm shadow-md overflow-hidden group-hover/folder:shadow-2xl transition-shadow`}>
                         {/* Project Preview Image */}
                         <Image 
                           src={project.image} 
                           alt={project.name} 
                           fill 
-                          className="object-cover opacity-70 group-hover/folder:opacity-100 transition-opacity duration-300"
+                          className="object-cover opacity-80 group-hover/folder:opacity-100 transition-opacity duration-300"
                         />
                         {/* Overlay gradient */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                         {/* Project Name */}
-                        <div className="absolute bottom-1.5 left-2 right-2">
-                          <span className="text-[10px] font-bold text-white drop-shadow-md truncate block">
+                        <div className="absolute bottom-3 left-4 right-4">
+                          <span className="text-sm font-bold text-white drop-shadow-lg truncate block">
                             {project.name}
                           </span>
                         </div>
