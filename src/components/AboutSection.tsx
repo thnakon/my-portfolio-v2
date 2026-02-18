@@ -3,10 +3,41 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Card, CardContent } from "@/components/ui/card"
-import { Sparkles, Code2, BrainCircuit, User, Linkedin, Github, Instagram, ArrowRight } from "lucide-react"
+import { Sparkles, Code2, Github, User, Linkedin, ArrowRight, Star, Users, BookOpen, Instagram } from "lucide-react"
 import Image from "next/image"
+import { GitHubCalendar } from 'react-github-calendar'
+import { useState, useEffect } from "react"
 
 export function AboutSection() {
+  const [stats, setStats] = useState({ followers: 0, repos: 0, stars: 0 });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const userRes = await fetch('https://api.github.com/users/thnakon');
+        const userData = await userRes.json();
+        
+        // Fetch all repos to count stars (handling pagination if needed, but thnakon has < 100)
+        const reposRes = await fetch('https://api.github.com/users/thnakon/repos?per_page=100');
+        const reposData = await reposRes.json();
+        const totalStars = reposData.reduce((acc: number, repo: any) => acc + repo.stargazers_count, 0);
+
+        setStats({
+          followers: userData.followers || 0,
+          repos: userData.public_repos || 0,
+          stars: totalStars || 0
+        });
+      } catch (error) {
+        console.error("Error fetching GitHub stats:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
       {/* Left Column: Image */}
@@ -61,9 +92,9 @@ export function AboutSection() {
               <Code2 className="h-3.5 w-3.5 mr-2" />
               Skillset
             </TabsTrigger>
-            <TabsTrigger value="philosophy" className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
-              <BrainCircuit className="h-3.5 w-3.5 mr-2" />
-              Philosophy
+            <TabsTrigger value="github" className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
+              <Github className="h-3.5 w-3.5 mr-2" />
+              GitHub
             </TabsTrigger>
             <TabsTrigger value="identity" className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
               <User className="h-3.5 w-3.5 mr-2" />
@@ -92,15 +123,52 @@ export function AboutSection() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="philosophy" className="mt-0 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+          <TabsContent value="github" className="mt-0 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
             <Card className="border bg-card/50 backdrop-blur-sm rounded-2xl overflow-hidden">
-              <CardContent className="p-8 space-y-4">
-                <blockquote className="border-l-2 pl-6 py-2 italic text-muted-foreground text-base leading-relaxed">
-                  &ldquo;Software should be invisible yet indispensable. My goal is to leverage AI to handle the complexity while keeping the human experience simple and delightful.&rdquo;
-                </blockquote>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  I believe in iterative development, rapid prototyping with AI, and a relentless focus on performance and minimalist aesthetics.
-                </p>
+              <CardContent className="p-6 space-y-6">
+                <div className="flex flex-col gap-6">
+                  {/* Contribution Graph */}
+                  <div className="w-full overflow-hidden bg-background/50 rounded-xl p-4 border flex flex-col items-center">
+                    <div className="w-full text-center mb-4">
+                      <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">Contribution Graph</h4>
+                    </div>
+                    <GitHubCalendar 
+                      username="thnakon" 
+                      fontSize={12}
+                      blockSize={11}
+                      blockMargin={4}
+                      colorScheme="light"
+                      theme={{
+                        light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+                        dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+                      }}
+                      transformData={(data) => {
+                        const fiveMonthsAgo = new Date();
+                        fiveMonthsAgo.setMonth(fiveMonthsAgo.getMonth() - 5);
+                        return data.filter(day => new Date(day.date) >= fiveMonthsAgo);
+                      }}
+                    />
+                  </div>
+
+                  {/* GitHub Stats Cards */}
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="border bg-background/50 rounded-xl p-3 flex flex-col items-center justify-center gap-1 text-center font-mono">
+                      <Users className="h-4 w-4 text-muted-foreground/60" />
+                      <span className="text-lg font-bold">{loading ? "--" : stats.followers}</span>
+                      <span className="text-[10px] uppercase tracking-wider text-muted-foreground/60 font-medium">Followers</span>
+                    </div>
+                    <div className="border bg-background/50 rounded-xl p-3 flex flex-col items-center justify-center gap-1 text-center font-mono">
+                      <BookOpen className="h-4 w-4 text-muted-foreground/60" />
+                      <span className="text-lg font-bold">{loading ? "--" : stats.repos}</span>
+                      <span className="text-[10px] uppercase tracking-wider text-muted-foreground/60 font-medium">Repos</span>
+                    </div>
+                    <div className="border bg-background/50 rounded-xl p-3 flex flex-col items-center justify-center gap-1 text-center font-mono">
+                      <Star className="h-4 w-4 text-muted-foreground/60" />
+                      <span className="text-lg font-bold">{loading ? "--" : stats.stars}</span>
+                      <span className="text-[10px] uppercase tracking-wider text-muted-foreground/60 font-medium">Stars</span>
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
