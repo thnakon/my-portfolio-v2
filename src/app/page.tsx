@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useIntro } from "@/components/intro-context";
 import { ProjectCaseStudy } from "@/components/ProjectCaseStudy";
+import { StickyProjectShowcase } from "@/components/StickyProjectShowcase";
 import { TimelineItem } from "@/components/TimelineItem";
 import { AboutSection } from "@/components/AboutSection";
 import { BentoGrid } from "@/components/BentoGrid";
@@ -215,15 +216,7 @@ export default function Home() {
           </Button>
         </div>
 
-        <div className="space-y-16 lg:space-y-32">
-          {projects.map((project, index) => (
-            <ProjectCaseStudy 
-              key={index}
-              index={index}
-              {...project}
-            />
-          ))}
-        </div>
+        <StickyProjectShowcase projects={projects} />
       </section>
 
       {/* Tech Toolkit Section */}
