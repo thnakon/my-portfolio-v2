@@ -8,10 +8,10 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useIntro } from "@/components/intro-context";
 import { ProjectCaseStudy } from "@/components/ProjectCaseStudy";
-import { StickyProjectShowcase } from "@/components/StickyProjectShowcase";
 import { TimelineItem } from "@/components/TimelineItem";
 import { AboutSection } from "@/components/AboutSection";
 import { BentoGrid } from "@/components/BentoGrid";
+import { StickyProjectShowcase } from "@/components/StickyProjectShowcase";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
@@ -206,14 +206,9 @@ export default function Home() {
 
       {/* Selected Work Section */}
       <section id="selected-work" className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1400ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
-        <div className="flex items-center justify-between mb-12">
-          <div className="space-y-1">
-            <h2 className="text-2xl font-bold tracking-tight uppercase">Selected Work</h2>
-            <p className="text-muted-foreground text-sm font-medium">A collection of featured projects and experiments.</p>
-          </div>
-          <Button variant="ghost" size="sm" className="gap-2 rounded-full font-semibold overflow-hidden group">
-            View All Projects <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Button>
+        <div className="space-y-2 mb-10">
+          <h2 className="text-2xl font-semibold tracking-tight">Selected Work</h2>
+          <p className="text-muted-foreground text-sm">A collection of featured projects and experiments.</p>
         </div>
 
         <StickyProjectShowcase projects={projects} />
