@@ -10,6 +10,7 @@ import Image from "next/image"
 
 import { Orb } from "@/components/ui/orb"
 import CardSwap, { CardSwapInner } from "@/components/CardSwap"
+import Lanyard from "@/components/Lanyard"
 
 const indexToId = (index: number) => String(index + 1).padStart(2, '0')
 
@@ -89,19 +90,10 @@ export function BentoGrid() {
                 </a>
               </div>
             </div>
-            <div className="md:col-span-2 relative h-[240px] md:h-full flex items-center justify-center">
-              {/* Hanging String */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-8 bg-muted-foreground/30 z-0" />
-              
-              {/* Circular Suspended Image */}
-              <div className="relative w-32 h-32 md:w-36 md:h-36 rounded-full border-4 border-card shadow-2xl overflow-hidden z-10 group-hover:scale-105 transition-transform duration-500 mt-2">
-                <Image 
-                  src="/profile-v3.jpg" 
-                  alt="Thanakon" 
-                  fill 
-                  sizes="(max-width: 1024px) 100vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+            <div className="md:col-span-2 relative h-[300px] md:h-full flex items-center justify-center overflow-hidden">
+              {/* Push the Canvas up so the fixed anchor (strap top) sits at the card border */}
+              <div className="absolute -top-[60px] left-0 right-0 bottom-0 z-10 pointer-events-auto">
+                <Lanyard />
               </div>
               
               {/* Subtle light effect behind image */}
