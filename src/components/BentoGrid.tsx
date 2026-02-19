@@ -9,6 +9,9 @@ import { CopyEmailButton } from "@/components/CopyEmailButton"
 import Image from "next/image"
 
 import { Orb } from "@/components/ui/orb"
+import CardSwap, { CardSwapInner } from "@/components/CardSwap"
+
+const indexToId = (index: number) => String(index + 1).padStart(2, '0')
 
 const techRow1 = [
   "Next.js", "React", "Tailwind CSS", "CSS", "Figma", "GSAP", "Framer Motion", "HTML", "PHP"
@@ -110,48 +113,33 @@ export function BentoGrid() {
 
       <Card className="md:row-span-2 border bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden group hover:bg-card/50 transition-all duration-500">
         <CardContent className="p-0 h-full flex flex-col">
-          <div className="relative flex-1 flex flex-col bg-muted/5">
+          <div className="relative flex-1 bg-muted/5 p-4 flex items-center justify-center overflow-hidden min-h-[300px]">
             {/* Background Grid Pattern */}
             <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px] dark:bg-[radial-gradient(#fff_1px,transparent_1px)]" />
             
-            <div className="relative flex-1 flex items-center overflow-hidden">
-              <div className="flex animate-marquee gap-10 items-center py-10 px-6">
-                {[...projectFolders, ...projectFolders].map((project, i) => (
-                  <div key={i} className="group/folder relative shrink-0 cursor-pointer">
-                    {/* Folder Card with Image */}
-                    <div className="relative w-64 transition-all duration-300 group-hover/folder:scale-105">
-                      {/* Folder Tab */}
-                      <div className={`absolute -top-4 left-3 w-24 h-7 rounded-t-xl ${project.color.replace('text-', 'bg-')}/20 border border-b-0 border-foreground/5`} />
-                      
-                      {/* Folder Body */}
-                      <div className={`relative w-full h-44 rounded-2xl border border-foreground/10 bg-card/80 backdrop-blur-sm shadow-md overflow-hidden group-hover/folder:shadow-2xl transition-shadow`}>
-                        {/* Project Preview Image */}
-                        <Image 
-                          src={project.image} 
-                          alt={project.name} 
-                          fill 
-                          sizes="(max-width: 768px) 100vw, 256px"
-                          className="object-cover opacity-80 group-hover/folder:opacity-100 transition-opacity duration-300"
-                        />
-                        {/* Overlay gradient */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                        {/* Project Name */}
-                        <div className="absolute bottom-3 left-4 right-4">
-                          <span className="text-sm font-bold text-white drop-shadow-lg truncate block">
-                            {project.name}
-                          </span>
-                        </div>
-                      </div>
+            <CardSwap className="z-10 mt-8">
+              {projectFolders.map((project, i) => (
+                <CardSwapInner key={i} className="border border-foreground/10 shadow-xl overflow-hidden">
+                  <div className="relative w-full h-full">
+                    <Image 
+                      src={project.image} 
+                      alt={project.name} 
+                      fill 
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4">
+                      <p className="text-white font-bold text-sm tracking-tight">{project.name}</p>
+                      <p className="text-white/60 text-[10px] font-medium uppercase tracking-wider">Archive {indexToId(i)}</p>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
+                </CardSwapInner>
+              ))}
+            </CardSwap>
             
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-card/80 to-transparent pointer-events-none z-20" />
           </div>
           
-          <div className="pt-4 px-6 pb-6 space-y-2">
+          <div className="pt-4 px-6 pb-6 space-y-2 relative z-30 bg-card/50 backdrop-blur-md border-t border-foreground/5">
             <p className="text-xs font-bold text-muted-foreground/60">
               Featured Work
             </p>
