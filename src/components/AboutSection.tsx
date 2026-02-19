@@ -11,8 +11,10 @@ import { useState, useEffect } from "react"
 export function AboutSection() {
   const [stats, setStats] = useState({ followers: 0, repos: 0, stars: 0 });
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const fetchStats = async () => {
       try {
         const userRes = await fetch('https://api.github.com/users/thnakon');
@@ -107,26 +109,38 @@ export function AboutSection() {
               <CardContent className="p-6 space-y-6">
                 <div className="flex flex-col gap-6">
                   {/* Contribution Graph */}
-                  <div className="w-full overflow-hidden bg-background/50 rounded-xl p-4 border flex flex-col items-center">
-                    <div className="w-full text-center mb-4">
-                      <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">Contribution Graph</h4>
-                    </div>
-                    <GitHubCalendar 
-                      username="thnakon" 
-                      fontSize={12}
-                      blockSize={11}
-                      blockMargin={4}
-                      colorScheme="light"
-                      theme={{
-                        light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
-                        dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
-                      }}
-                      transformData={(data) => {
-                        const fiveMonthsAgo = new Date();
-                        fiveMonthsAgo.setMonth(fiveMonthsAgo.getMonth() - 5);
-                        return data.filter(day => new Date(day.date) >= fiveMonthsAgo);
-                      }}
-                    />
+                  <div className="w-full overflow-hidden bg-background/50 rounded-xl p-4 border flex flex-col items-center min-h-[180px] justify-center">
+                    {!mounted ? (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <div className="flex gap-1">
+                          {[...Array(20)].map((_, i) => (
+                            <div key={i} className="w-3 h-3 bg-muted animate-pulse rounded-sm" />
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="w-full text-center mb-4">
+                          <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">Contribution Graph</h4>
+                        </div>
+                        <GitHubCalendar 
+                          username="thnakon" 
+                          fontSize={12}
+                          blockSize={11}
+                          blockMargin={4}
+                          colorScheme="light"
+                          theme={{
+                            light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+                            dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+                          }}
+                          transformData={(data) => {
+                            const fiveMonthsAgo = new Date();
+                            fiveMonthsAgo.setMonth(fiveMonthsAgo.getMonth() - 5);
+                            return data.filter(day => new Date(day.date) >= fiveMonthsAgo);
+                          }}
+                        />
+                      </>
+                    )}
                   </div>
 
                   {/* GitHub Stats Cards */}
