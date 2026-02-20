@@ -115,7 +115,7 @@ export default function Home() {
   }, [setDone]);
 
   return (
-    <div className="flex flex-col relative overflow-hidden">
+    <div className="flex flex-col relative overflow-x-clip">
       {/* Hero Section */}
       <div className="flex min-h-[calc(100vh-3.5rem)] flex-col relative overflow-hidden">
         {/* Background Layer */}

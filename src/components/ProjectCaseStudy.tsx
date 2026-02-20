@@ -48,7 +48,15 @@ export function ProjectCaseStudy({
   const isEven = index % 2 === 0
 
   return (
-    <div className="relative group/folder w-full">
+    <div className="relative group/folder w-full" id={`project-card-${index}`}>
+      <style suppressHydrationWarning>{`
+        @media (min-width: 768px) {
+          #project-card-${index} {
+            position: sticky;
+            top: calc(6rem + ${index * 2.5}rem);
+          }
+        }
+      `}</style>
       {/* Folder Tab */}
       <div 
         className={`absolute -top-7 ${isEven ? 'left-8' : 'right-8'} h-10 w-32 bg-card/60 backdrop-blur-xl border border-b-0 rounded-t-2xl z-0 transition-transform duration-500 group-hover/folder:-translate-y-1 flex items-center justify-center`}
@@ -59,7 +67,7 @@ export function ProjectCaseStudy({
       </div>
 
       {/* Main Folder Shell */}
-      <div className="relative z-10 bg-card/40 backdrop-blur-md border rounded-3xl overflow-hidden shadow-2xl shadow-foreground/5 transition-all duration-700 hover:bg-card/60">
+      <div className="relative z-10 bg-card/70 backdrop-blur-2xl border rounded-3xl overflow-hidden shadow-2xl shadow-foreground/5 transition-all duration-700 hover:bg-card/80">
         {/* Decorative Paper Layers Behind content */}
         <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.02] to-transparent pointer-events-none" />
         
