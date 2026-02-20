@@ -1,16 +1,18 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { ChevronRight, ArrowDown, ArrowRight } from "lucide-react";
+import { ChevronRight, ArrowDown, ArrowRight, Mail, Music, Monitor, Headphones, Keyboard, Coffee, Star, Sparkles } from "lucide-react";
 import { CopyEmailButton } from "@/components/CopyEmailButton";
 import { ContactModal } from "@/components/ContactModal";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import confetti from "canvas-confetti";
 import { useIntro } from "@/components/intro-context";
 import { ProjectCaseStudy } from "@/components/ProjectCaseStudy";
 import { TimelineItem } from "@/components/TimelineItem";
 import { AboutSection } from "@/components/AboutSection";
 import { BentoGrid } from "@/components/BentoGrid";
+import Dither from "@/components/Dither";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
@@ -109,6 +111,42 @@ export default function Home() {
   const [text, setText] = useState("");
   const fullText = "Developing innovative tools to\nempower students and businesses";
   const { isDone, setDone } = useIntro();
+
+  // Final section state
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [hasConfetti, setHasConfetti] = useState(false);
+  const [showThanks, setShowThanks] = useState(false);
+  const finalSectionRef = useRef<HTMLDivElement>(null);
+
+  // Confetti on scroll to bottom
+  useEffect(() => {
+    if (!finalSectionRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasConfetti) {
+          setHasConfetti(true);
+          const duration = 2500;
+          const end = Date.now() + duration;
+          const frame = () => {
+            confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0, y: 0.7 } });
+            confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1, y: 0.7 } });
+            if (Date.now() < end) requestAnimationFrame(frame);
+          };
+          frame();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(finalSectionRef.current);
+    return () => observer.disconnect();
+  }, [hasConfetti]);
+
+  const handleRate = useCallback((star: number) => {
+    setRating(star);
+    setShowThanks(true);
+    confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+  }, []);
 
   useEffect(() => {
     let currentText = "";
@@ -273,7 +311,7 @@ export default function Home() {
           };
 
           return (
-            <div className="relative overflow-hidden rounded-3xl border bg-card/30 backdrop-blur-sm p-8 lg:p-12">
+            <div className="relative overflow-hidden">
               <div className="flex flex-col gap-5">
                 {/* Row 1 */}
                 <div className="flex animate-marquee gap-3 whitespace-nowrap">
@@ -309,8 +347,8 @@ export default function Home() {
                 </div>
               </div>
               {/* Edge Gradients */}
-              <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-card/80 to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-card/80 to-transparent z-10 pointer-events-none" />
+              <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
             </div>
           );
         })()}
@@ -318,22 +356,180 @@ export default function Home() {
 
       {/* Experience Section */}
       <section id="experience" className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1800ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
-        <div className="flex flex-col md:flex-row gap-16">
-          <div className="md:w-1/3">
-            <h2 className="text-2xl font-bold tracking-tight uppercase mb-4">Experience</h2>
-            <p className="text-muted-foreground text-sm leading-relaxed max-w-[300px]">
-              A timeline of my professional journey and the companies I&apos;ve helped build for.
-            </p>
+        <div className="flex items-center justify-between mb-12">
+          <div className="space-y-1">
+            <h2 className="text-2xl font-bold tracking-tight uppercase">Experience</h2>
+            <p className="text-muted-foreground text-sm font-medium">A timeline of my professional journey.</p>
           </div>
-          <div className="md:w-2/3">
-            <div className="max-w-[800px]">
-              {experiences.map((exp, index) => (
-                <TimelineItem 
-                  key={index}
-                  {...exp}
-                  isLast={index === experiences.length - 1}
-                />
-              ))}
+        </div>
+
+        <div className="space-y-4">
+          {experiences.map((exp, index) => (
+            <TimelineItem 
+              key={index}
+              {...exp}
+              isLast={index === experiences.length - 1}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Bottom Bento Grid — Uses / Write to me / Last Played */}
+      {/* Bottom Bento Grid — Uses / Write to me / Last Played */}
+      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[2000ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[260px]">
+
+          {/* Uses */}
+          <div className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-foreground/[0.015] to-transparent pointer-events-none" />
+            <div className="relative z-10 space-y-6">
+              <div className="space-y-1">
+                <p className="text-[11px] font-bold text-muted-foreground/60">Daily Setup</p>
+                <h3 className="text-lg font-bold tracking-tight">Uses</h3>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { icon: Monitor, name: 'MacBook Pro 16"', detail: 'M3 Pro' },
+                  { icon: Keyboard, name: 'Keychron K2', detail: 'Mechanical' },
+                  { icon: Headphones, name: 'AirPods Pro', detail: '2nd Gen' },
+                  { icon: Coffee, name: 'Cursor IDE', detail: 'AI-First' },
+                ].map((item) => (
+                  <div key={item.name} className="flex items-center gap-2.5 group/item">
+                    <div className="h-8 w-8 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover/item:bg-foreground/[0.08] transition-colors">
+                      <item.icon className="h-3.5 w-3.5 text-foreground/50" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-[11px] font-semibold text-foreground/80 truncate leading-tight">{item.name}</p>
+                      <p className="text-[10px] text-muted-foreground/50 font-medium">{item.detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Arrow */}
+            <div className="absolute bottom-6 right-6 h-8 w-8 rounded-full border border-foreground/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+              <ArrowRight className="h-4 w-4 text-muted-foreground/40" />
+            </div>
+          </div>
+
+          {/* Write to me */}
+          <div className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-foreground/[0.015] to-transparent pointer-events-none" />
+            <div className="relative z-10 space-y-5">
+              <div className="space-y-1">
+                <p className="text-[11px] font-bold text-muted-foreground/60">Guestbook</p>
+                <h3 className="text-lg font-bold tracking-tight">Write a note</h3>
+              </div>
+              {/* Visual Note Sheets */}
+              <div className="relative h-28 w-full mt-4">
+                <div className="absolute inset-0 bg-foreground/[0.03] border border-foreground/[0.05] rounded-xl rotate-[-4deg] translate-y-2 scale-95" />
+                <div className="absolute inset-0 bg-card/40 backdrop-blur-sm border border-foreground/[0.08] rounded-xl rotate-[2deg] translate-y-1 scale-[0.98]" />
+                <div className="absolute inset-0 bg-card/60 backdrop-blur-md border border-foreground/[0.1] rounded-xl flex flex-col p-5 gap-2 transition-transform duration-500 group-hover:rotate-[-1deg] group-hover:-translate-y-1">
+                  <div className="h-1.5 w-1/2 bg-foreground/20 rounded-full mb-2" />
+                  <div className="space-y-3">
+                    <div className="h-[1px] w-full bg-foreground/[0.08]" />
+                    <div className="h-[1px] w-full bg-foreground/[0.08]" />
+                    <div className="h-[1px] w-[80%] bg-foreground/[0.08]" />
+                  </div>
+                  <div className="mt-auto self-end">
+                    <div className="h-1.5 w-10 bg-foreground/10 rounded-full" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Arrow */}
+            <div className="absolute bottom-6 right-6 h-8 w-8 rounded-full border border-foreground/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+              <ArrowRight className="h-4 w-4 text-muted-foreground/40" />
+            </div>
+          </div>
+
+          {/* Last Played */}
+          <div className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-foreground/[0.015] to-transparent pointer-events-none" />
+            <div className="relative z-10 space-y-6">
+              <div className="space-y-1">
+                <p className="text-[11px] font-bold text-muted-foreground/60">Apple Music</p>
+                <h3 className="text-lg font-bold tracking-tight">Last Played</h3>
+              </div>
+              <div className="flex items-center gap-4">
+                {/* Album art */}
+                <div className="relative h-20 w-20 rounded-xl overflow-hidden border border-foreground/[0.08] shadow-lg shrink-0 bg-gradient-to-br from-rose-500/20 via-purple-500/20 to-blue-500/20">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Music className="h-8 w-8 text-foreground/20" />
+                  </div>
+                </div>
+                {/* Song info */}
+                <div className="flex-1 min-w-0 space-y-1.5">
+                  <p className="text-sm font-bold truncate leading-tight">Die With A Smile</p>
+                  <p className="text-xs text-muted-foreground/60 truncate">Lady Gaga, Bruno Mars</p>
+                  <div className="flex items-center gap-2 pt-1">
+                    <div className="flex items-end gap-[2px] h-3">
+                      <span className="w-[3px] bg-foreground/40 rounded-full animate-[pulse_0.8s_ease-in-out_infinite]" style={{ height: '8px', animationDelay: '0s' }} />
+                      <span className="w-[3px] bg-foreground/40 rounded-full animate-[pulse_0.8s_ease-in-out_infinite]" style={{ height: '12px', animationDelay: '0.15s' }} />
+                      <span className="w-[3px] bg-foreground/40 rounded-full animate-[pulse_0.8s_ease-in-out_infinite]" style={{ height: '6px', animationDelay: '0.3s' }} />
+                      <span className="w-[3px] bg-foreground/40 rounded-full animate-[pulse_0.8s_ease-in-out_infinite]" style={{ height: '10px', animationDelay: '0.45s' }} />
+                    </div>
+                    <span className="text-[10px] font-mono text-muted-foreground/40">Playing now</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Arrow */}
+            <div className="absolute bottom-6 right-6 h-8 w-8 rounded-full border border-foreground/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+              <ArrowRight className="h-4 w-4 text-muted-foreground/40" />
+            </div>
+          </div>
+
+        </div>
+      </section>
+      {/* Final Section — Thanks for scrolling */}
+      <section
+        ref={finalSectionRef}
+        className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[2200ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+      >
+        <div className="relative rounded-3xl border border-foreground/[0.06] overflow-hidden min-h-[400px] flex items-center justify-center">
+          {/* Dither Background */}
+          <div className="absolute inset-0 z-0 opacity-30 dark:opacity-40">
+            <Dither
+              waveColor={[1.0, 1.0, 1.0]}
+              disableAnimation={false}
+              enableMouseInteraction
+              mouseRadius={0.3}
+              colorNum={4}
+              waveAmplitude={0.3}
+              waveFrequency={3}
+              waveSpeed={0.05}
+            />
+          </div>
+          {/* Radial overlay for text readability */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-background/90 via-background/60 to-transparent z-[1] pointer-events-none" />
+          
+          <div className="relative z-10 flex flex-col items-center text-center py-16 px-8 space-y-8">
+            {/* Message */}
+            <div className="space-y-3">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
+                Thanks for visiting!
+              </h2>
+              <p className="text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
+                I appreciate you taking the time to explore my work. If you&apos;d like to leave a message, feel free to drop a note in the guestbook.
+              </p>
+            </div>
+
+            {/* Guestbook Button */}
+            <Button variant="outline" className="rounded-xl text-sm font-semibold gap-2 px-6 py-5 border-foreground/10 hover:bg-foreground/[0.04] backdrop-blur-md bg-background/50">
+              <ArrowRight className="h-4 w-4" /> Leave a note
+            </Button>
+
+            {/* Site Meta */}
+            <div className="flex items-center gap-6 text-[10px] font-mono text-muted-foreground/40 uppercase tracking-widest pt-4">
+              <span>v2.0</span>
+              <span className="opacity-30">•</span>
+              <span>Next.js + TypeScript</span>
+              <span className="opacity-30">•</span>
+              <span>© {new Date().getFullYear()}</span>
             </div>
           </div>
         </div>
