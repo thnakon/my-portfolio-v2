@@ -157,12 +157,12 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
       const ctx = canvas.getContext('2d')!
 
       // Crop to face region from the original portrait
-      // The GLTF card UV maps the center-right portion of the texture as visible
-      // So we shift the crop slightly to the left in the source to pull the face into center
-      const srcCropW = img.width * 0.70       // crop width
+      // The GLTF card UV maps ONLY the left half of the texture to the front of the card.
+      // To center the face on the card, we need it at the 25% mark of the canvas.
+      const srcCropW = img.width * 0.60       // crop width
       const srcCropH = srcCropW * (680 / 512) // maintain card aspect ratio
-      const srcX = img.width * 0.08           // shift crop slightly left
-      const srcY = img.height * 0.42          // keep Y around face center
+      const srcX = img.width * 0.35           // shift crop so face (at 0.5) lands at 25% of crop
+      const srcY = img.height * 0.38          // pull up slightly
 
       ctx.drawImage(
         img,
