@@ -154,6 +154,46 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    // Disable browser's built-in scroll restoration (it's unreliable with animated layouts)
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    // --- Section Memory: restore scroll position ---
+    const savedSection = sessionStorage.getItem('portfolio-active-section');
+    if (savedSection) {
+      // Wait for animations to finish, then scroll to saved section
+      const restoreTimer = setTimeout(() => {
+        const el = document.getElementById(savedSection);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 1200); // wait for fade-in animations
+      // Clean up restore timer
+      var cleanRestore = () => clearTimeout(restoreTimer);
+    }
+
+    // --- Section Memory: track current section on scroll ---
+    const sectionIds = ['hero', 'bento', 'about', 'selected-work', 'tech-toolkit', 'experience', 'ai-workflow', 'contact'];
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.target.id) {
+            sessionStorage.setItem('portfolio-active-section', entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    // Observe all sections after a brief delay (after DOM renders)
+    const observeTimer = setTimeout(() => {
+      sectionIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) sectionObserver.observe(el);
+      });
+    }, 500);
+
     // Show the rest of the page almost immediately for better UX
     const timer = setTimeout(() => {
       setDone(true);
@@ -174,14 +214,17 @@ export default function Home() {
 
     return () => {
       clearTimeout(timer);
+      clearTimeout(observeTimer);
+      if (cleanRestore) cleanRestore();
       clearInterval(interval);
+      sectionObserver.disconnect();
     };
   }, [setDone]);
 
   return (
     <div className="flex flex-col relative overflow-x-clip">
       {/* Hero Section */}
-      <div className="flex min-h-[calc(100vh-3.5rem)] flex-col relative overflow-hidden">
+      <div id="hero" className="flex min-h-[calc(100vh-3.5rem)] flex-col relative overflow-hidden">
         {/* Background Layer */}
         <div className={`absolute inset-0 z-0 transition-opacity duration-1000 ${isDone ? "opacity-100" : "opacity-0"}`}>
           <div className="absolute inset-0 bg-grid" />
@@ -218,7 +261,7 @@ export default function Home() {
                 </span>
                 <span className="inline-flex items-center justify-center h-14 w-14 rounded-full overflow-hidden border-2 border-background shadow-xl flex-shrink-0 relative z-20 transition-transform duration-300 group-hover:scale-105">
                   <Image 
-                    src="/profile-v3.jpg" 
+                    src="/projects/warm.png" 
                     alt="Thanakon" 
                     width={56} 
                     height={56} 
@@ -258,7 +301,7 @@ export default function Home() {
       </div>
 
       {/* Bento Grid Section */}
-      <section className={`container mx-auto px-8 pb-20 transition-all duration-1000 delay-[1000ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+      <section id="bento" className={`container mx-auto px-8 pb-20 transition-all duration-1000 delay-[1000ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
         <BentoGrid />
       </section>
 
@@ -291,7 +334,7 @@ export default function Home() {
       </section>
 
       {/* Tech Toolkit Section */}
-      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1600ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+      <section id="tech-toolkit" className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1600ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
         <div className="flex items-center justify-between mb-12">
           <div className="space-y-1">
             <h2 className="text-2xl font-bold tracking-tight uppercase">Tech Toolkit</h2>
@@ -386,7 +429,7 @@ export default function Home() {
 
       {/* Bottom Bento Grid — Uses / Write to me / Last Played */}
       {/* Bottom Bento Grid — Uses / Write to me / Last Played */}
-      <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[2000ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+      <section id="contact" className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[2000ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[260px]">
 
           {/* Uses */}

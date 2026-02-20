@@ -78,7 +78,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
 
   const { nodes, materials } = useGLTF('/assets/lanyard/card.glb') as any
   const texture = useTexture('/assets/lanyard/lanyard.png')
-  const profileTexture = useTexture('/profile-v3.jpg') // User's profile image
+  const profileTexture = useTexture('/projects/warm.png') // User's profile image
 
   const [curve] = useState(
     () => new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
@@ -145,37 +145,99 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
 
   const [processedTexture, setProcessedTexture] = useState<THREE.Texture | null>(null)
 
-  // Pre-process the profile image: crop to face on a canvas
+  // Pre-process the profile image: create a clean framed card
+  // IMPORTANT: The GLTF card UV maps ONLY the LEFT HALF (0-256px) to the front face.
   useEffect(() => {
     const img = new Image()
     img.crossOrigin = 'anonymous'
     img.onload = () => {
-      // Output canvas: portrait aspect matching the ID card
       const canvas = document.createElement('canvas')
       canvas.width = 512
       canvas.height = 680
       const ctx = canvas.getContext('2d')!
 
-      // Crop to face region from the original portrait
-      // The GLTF card UV maps ONLY the left half of the texture to the front of the card.
-      // To center the face on the card, we need it at the 25% mark of the canvas.
-      const srcCropW = img.width * 0.60       // crop width
-      const srcCropH = srcCropW * (680 / 512) // maintain card aspect ratio
-      const srcX = img.width * 0.35           // shift crop so face (at 0.5) lands at 25% of crop
-      const srcY = img.height * 0.38          // pull up slightly
+      const W = 256  // usable width (left half only)
+      const H = 680
 
-      ctx.drawImage(
-        img,
-        srcX, srcY, srcCropW, srcCropH,
-        0, 0, 512, 680
-      )
+      // --- White Card Background ---
+      const r = 12
+      ctx.fillStyle = '#ffffff'
+      ctx.beginPath()
+      ctx.moveTo(r, 0)
+      ctx.lineTo(W - r, 0)
+      ctx.quadraticCurveTo(W, 0, W, r)
+      ctx.lineTo(W, H - r)
+      ctx.quadraticCurveTo(W, H, W - r, H)
+      ctx.lineTo(r, H)
+      ctx.quadraticCurveTo(0, H, 0, H - r)
+      ctx.lineTo(0, r)
+      ctx.quadraticCurveTo(0, 0, r, 0)
+      ctx.closePath()
+      ctx.fill()
+
+      // --- Centered Photo (equal padding all sides) ---
+      const pad = 14
+      const photoX = pad
+      const photoY = pad
+      const photoW = W - pad * 2
+      const photoH = H - pad * 2
+      const pr = 10
+
+      // Clip to rounded rect
+      ctx.save()
+      ctx.beginPath()
+      ctx.moveTo(photoX + pr, photoY)
+      ctx.lineTo(photoX + photoW - pr, photoY)
+      ctx.quadraticCurveTo(photoX + photoW, photoY, photoX + photoW, photoY + pr)
+      ctx.lineTo(photoX + photoW, photoY + photoH - pr)
+      ctx.quadraticCurveTo(photoX + photoW, photoY + photoH, photoX + photoW - pr, photoY + photoH)
+      ctx.lineTo(photoX + pr, photoY + photoH)
+      ctx.quadraticCurveTo(photoX, photoY + photoH, photoX, photoY + photoH - pr)
+      ctx.lineTo(photoX, photoY + pr)
+      ctx.quadraticCurveTo(photoX, photoY, photoX + pr, photoY)
+      ctx.closePath()
+      ctx.clip()
+
+      // Draw profile image - cover the photo area, centered on face
+      const imgAspect = img.width / img.height
+      const photoAspect = photoW / photoH
+      let srcX = 0, srcY = 0, srcW = img.width, srcH = img.height
+
+      if (imgAspect > photoAspect) {
+        // Image wider than card: crop sides
+        srcW = img.height * photoAspect
+        srcX = (img.width - srcW) / 2
+      } else {
+        // Image taller than card: crop top/bottom, bias toward face (upper area)
+        srcH = img.width / photoAspect
+        srcY = (img.height - srcH) * 0.3  // bias upward to center face
+      }
+
+      ctx.drawImage(img, srcX, srcY, srcW, srcH, photoX, photoY, photoW, photoH)
+      ctx.restore()
+
+      // --- Subtle Photo Border ---
+      ctx.strokeStyle = 'rgba(0,0,0,0.08)'
+      ctx.lineWidth = 1.5
+      ctx.beginPath()
+      ctx.moveTo(photoX + pr, photoY)
+      ctx.lineTo(photoX + photoW - pr, photoY)
+      ctx.quadraticCurveTo(photoX + photoW, photoY, photoX + photoW, photoY + pr)
+      ctx.lineTo(photoX + photoW, photoY + photoH - pr)
+      ctx.quadraticCurveTo(photoX + photoW, photoY + photoH, photoX + photoW - pr, photoY + photoH)
+      ctx.lineTo(photoX + pr, photoY + photoH)
+      ctx.quadraticCurveTo(photoX, photoY + photoH, photoX, photoY + photoH - pr)
+      ctx.lineTo(photoX, photoY + pr)
+      ctx.quadraticCurveTo(photoX, photoY, photoX + pr, photoY)
+      ctx.closePath()
+      ctx.stroke()
 
       const tex = new THREE.CanvasTexture(canvas)
-      tex.flipY = false  // standard for GLTF
+      tex.flipY = false
       tex.needsUpdate = true
       setProcessedTexture(tex)
     }
-    img.src = '/profile-v3.jpg'
+    img.src = '/projects/warm.png'
   }, [])
 
   return (
