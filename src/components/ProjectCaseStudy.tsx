@@ -59,7 +59,7 @@ export function ProjectCaseStudy({
       `}</style>
       {/* Folder Tab */}
       <div 
-        className={`absolute -top-7 ${isEven ? 'left-8' : 'right-8'} h-10 w-32 bg-card/60 backdrop-blur-xl border border-b-0 rounded-t-2xl z-0 transition-transform duration-500 group-hover/folder:-translate-y-1 flex items-center justify-center`}
+        className={`absolute -top-7 left-8 h-10 w-32 bg-card/60 backdrop-blur-xl border border-b-0 rounded-t-2xl z-0 transition-transform duration-500 group-hover/folder:-translate-y-1 flex items-center justify-center`}
       >
         <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground/60">
           Project 0{index + 1}
@@ -71,7 +71,7 @@ export function ProjectCaseStudy({
         {/* Decorative Paper Layers Behind content */}
         <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.02] to-transparent pointer-events-none" />
         
-        <div className={`p-8 lg:p-12 flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-20 items-center`}>
+        <div className={`p-8 lg:p-12 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center`}>
           {/* Mockup Column */}
           <div className="w-full lg:w-1/2 group/mockup">
             <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border bg-muted/20 shadow-xl transition-all duration-700 group-hover/mockup:scale-[1.01] group-hover/mockup:rotate-[0.5deg]">

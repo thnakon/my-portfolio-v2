@@ -84,9 +84,25 @@ const experiences = [
 ];
 
 const techStack = {
-  core: ["Next.js", "React", "TypeScript", "Tailwind CSS", "PostgreSQL", "Node.js"],
-  ai: ["OpenAI", "Claude", "LangChain", "Vercel AI SDK", "Prompt Engineering"],
-  tools: ["Cursor", "GitHub"]
+  core: [
+    { name: "Next.js", icon: "nextdotjs" },
+    { name: "React", icon: "react" },
+    { name: "TypeScript", icon: "typescript" },
+    { name: "Tailwind CSS", icon: "tailwindcss" },
+    { name: "PostgreSQL", icon: "postgresql" },
+    { name: "Node.js", icon: "nodedotjs" },
+  ],
+  ai: [
+    { name: "OpenAI", icon: "openai" },
+    { name: "Claude", icon: "claude" },
+    { name: "LangChain", icon: "langchain" },
+    { name: "Vercel AI SDK", icon: "vercel" },
+    { name: "Prompt Engineering", icon: "openai" },
+  ],
+  tools: [
+    { name: "Cursor", icon: "cursor" },
+    { name: "GitHub", icon: "github" },
+  ]
 };
 
 export default function Home() {
@@ -228,68 +244,76 @@ export default function Home() {
 
       {/* Tech Toolkit Section */}
       <section className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1600ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 items-start">
-          <div className="space-y-4">
+        <div className="flex items-center justify-between mb-12">
+          <div className="space-y-1">
             <h2 className="text-2xl font-bold tracking-tight uppercase">Tech Toolkit</h2>
-            <p className="text-muted-foreground text-sm leading-relaxed max-w-[300px]">
-              My current stack of preferred technologies and tools for building modern, AI-integrated software.
-            </p>
-          </div>
-          <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <Card className="border bg-card/30 backdrop-blur-sm shadow-none border-dashed">
-              <CardHeader className="pb-3">
-                <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">Core Stack</h4>
-              </CardHeader>
-              <CardContent className="flex flex-wrap gap-2">
-                {techStack.core.map(tech => (
-                  <Tooltip key={tech}>
-                    <TooltipTrigger asChild>
-                      <Badge variant="outline" className="px-3 py-1 font-mono text-[11px] bg-background hover:bg-muted transition-colors cursor-default">
-                        {tech}
-                      </Badge>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p className="text-[10px] uppercase tracking-widest font-bold">In-depth expertise</p>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
-              </CardContent>
-            </Card>
-
-            <Card className="border bg-card/30 backdrop-blur-sm shadow-none border-dashed">
-              <CardHeader className="pb-3">
-                <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">AI & Intelligence</h4>
-              </CardHeader>
-              <CardContent className="flex flex-wrap gap-2">
-                {techStack.ai.map(tech => (
-                  <Tooltip key={tech}>
-                    <TooltipTrigger asChild>
-                      <Badge variant="secondary" className="px-3 py-1 font-mono text-[11px] cursor-default">
-                        {tech}
-                      </Badge>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p className="text-[10px] uppercase tracking-widest font-bold">AI Native</p>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
-              </CardContent>
-            </Card>
-
-            <Card className="border bg-card/30 backdrop-blur-sm shadow-none border-dashed sm:col-span-2">
-              <CardHeader className="pb-3">
-                <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60">Preferred Tools</h4>
-              </CardHeader>
-              <CardContent className="flex flex-wrap gap-2">
-                {techStack.tools.map(tech => (
-                  <Badge key={tech} variant="outline" className="px-3 py-1 font-mono text-[11px] bg-muted/50 border-foreground/5 cursor-default">
-                    {tech}
-                  </Badge>
-                ))}
-              </CardContent>
-            </Card>
+            <p className="text-muted-foreground text-sm font-medium">My current stack of preferred technologies and tools.</p>
           </div>
         </div>
+
+        {(() => {
+          const techRow1 = [
+            "Next.js", "React", "Tailwind CSS", "CSS", "Figma", "GSAP", "Framer Motion", "HTML", "PHP"
+          ];
+          const techRow2 = [
+            "Laravel", "Node.js", "MySQL", "Supabase", "Bun", "ChatGPT", "Gemini", "Claude", "OpenClaw", "LLMs", "RAG", "Agentic Workflows", "Docker", "Git", "GitLab", "SourceTree"
+          ];
+          const techIcons: Record<string, string> = {
+            "Next.js": "nextdotjs", "React": "react", "Tailwind CSS": "tailwindcss", "CSS": "css3",
+            "Figma": "figma", "GSAP": "greensock", "Framer Motion": "framer", "HTML": "html5", "PHP": "php",
+            "Laravel": "laravel", "Node.js": "nodedotjs", "MySQL": "mysql", "Supabase": "supabase",
+            "Bun": "bun", "ChatGPT": "openai", "Gemini": "googlegemini", "Claude": "claude",
+            "OpenClaw": "openaigym", "LLMs": "openai", "RAG": "databricks", "Agentic Workflows": "langchain",
+            "Docker": "docker", "Git": "git", "GitLab": "gitlab", "SourceTree": "sourcetree"
+          };
+          const getIconUrl = (tech: string) => {
+            const slug = techIcons[tech];
+            if (!slug) return null;
+            return `https://cdn.jsdelivr.net/npm/simple-icons@13/icons/${slug}.svg`;
+          };
+
+          return (
+            <div className="relative overflow-hidden rounded-3xl border bg-card/30 backdrop-blur-sm p-8 lg:p-12">
+              <div className="flex flex-col gap-5">
+                {/* Row 1 */}
+                <div className="flex animate-marquee gap-3 whitespace-nowrap">
+                  {[...techRow1, ...techRow1].map((tech, i) => (
+                    <Badge key={i} variant="outline" className="px-4 py-2.5 font-mono text-[11px] bg-background border-muted-foreground/20 cursor-default shrink-0 flex items-center gap-2 rounded-xl">
+                      {getIconUrl(tech) && (
+                        <img 
+                          src={getIconUrl(tech)!} 
+                          alt={tech} 
+                          className="w-4 h-4 dark:invert" 
+                          onError={(e) => (e.currentTarget.style.display = 'none')}
+                        />
+                      )}
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+                {/* Row 2 */}
+                <div className="flex animate-marquee-reverse gap-3 whitespace-nowrap">
+                  {[...techRow2, ...techRow2].map((tech, i) => (
+                    <Badge key={i} variant="outline" className="px-4 py-2.5 font-mono text-[11px] bg-background border-muted-foreground/20 cursor-default shrink-0 flex items-center gap-2 rounded-xl">
+                      {getIconUrl(tech) && (
+                        <img 
+                          src={getIconUrl(tech)!} 
+                          alt={tech} 
+                          className="w-4 h-4 dark:invert" 
+                          onError={(e) => (e.currentTarget.style.display = 'none')}
+                        />
+                      )}
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              {/* Edge Gradients */}
+              <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-card/80 to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-card/80 to-transparent z-10 pointer-events-none" />
+            </div>
+          );
+        })()}
       </section>
 
       {/* Experience Section */}
