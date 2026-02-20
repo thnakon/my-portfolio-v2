@@ -38,29 +38,35 @@ const projects = [
     isAI: false
   },
   {
-    title: "Smart Guestbook",
-    description: "An interactive guestbook that uses natural language processing to understand user sentiment. It automatically filters spam and highlights positive testimonials, providing a seamless experience for visitors.",
-    image: "/projects/guestbook.png",
-    tags: ["Next.js", "AppScript", "OpenAI", "Supabase", "GSAP"],
+    title: "Babybib",
+    description: "Babybib is an advanced, automated bibliography generation system designed to streamline the academic citation process. Built around the APA 7th Edition standard, it empowers students and researchers to create accurate references.",
+    image: "/projects/babybib-preview.png",
+    stackImages: ["/projects/babybib2.png", "/projects/babybib3.png"],
+    githubUrl: "https://github.com/thnakon/Babybib",
+    tags: ["HTML5", "CSS3", "JavaScript", "PHP"],
     features: [
-      { text: "AI-driven sentiment analysis", icon: "Heart" },
-      { text: "Automated spam and toxic content filtering", icon: "ShieldCheck" },
-      { text: "Interactive GSAP-powered animations", icon: "MousePointer2" }
+      { text: "Architected a robust engine for automated APA 7th Edition citation standards.", icon: "Zap" },
+      { text: "Supports diverse sources including journals, books, and digital media.", icon: "Inbox" },
+      { text: "Built with a responsive UI that prioritizes user productivity and rapid work.", icon: "Smartphone" },
+      { text: "Features real-time bibliography previews and instant validation logic.", icon: "BarChart3" }
+    ],
+    isAI: false
+  },
+  {
+    title: "ScribeHub",
+    description: "ScribeHub is a premium, all-in-one platform for modern researchers. It seamlessly integrates reference management, collaborative tools, and advanced AI intelligence to streamline the entire research lifecycle.",
+    image: "/projects/ScribeHub1.png",
+    hoverImage: "/projects/ScribeHub2.png",
+    githubUrl: "https://github.com/thnakon/scribehub",
+    tags: ["React", "Next.js", "Supabase", "TypeScript", "Tailwind"],
+    features: [
+      { text: "Leveraged OpenAI's GPT-4 to create an intelligent research paper assistant.", icon: "Zap" },
+      { text: "Engineered a collaborative environment with real-time updates for research teams.", icon: "Inbox" },
+      { text: "Integrated a reference management system with automatic metadata extraction.", icon: "ShieldCheck" },
+      { text: "Developed an interactive knowledge graph for visual data discovery.", icon: "BarChart3" }
     ],
     isAI: true
   },
-  {
-    title: "Valentine's Surprise",
-    description: "A personalized, animated experience designed to deliver a special message. Focused on silky-smooth animations and a playful yet premium aesthetic, making every interaction feel meaningful.",
-    image: "/projects/valentines.png",
-    tags: ["React", "Framer Motion", "Tailwind CSS"],
-    features: [
-      { text: "Physics-based heart animations", icon: "Activity" },
-      { text: "Responsive paper-fold transitions", icon: "FoldVertical" },
-      { text: "Optimized performance on mobile devices", icon: "Smartphone" }
-    ],
-    isAI: false
-  }
 ];
 
 const experiences = [

@@ -30,6 +30,7 @@ interface ProjectCaseStudyProps {
   description: string
   image: string
   hoverImage?: string
+  stackImages?: string[]
   tags: string[]
   features: Feature[]
   githubUrl?: string
@@ -42,6 +43,7 @@ export function ProjectCaseStudy({
   description, 
   image, 
   hoverImage,
+  stackImages,
   tags, 
   features, 
   githubUrl,
@@ -97,44 +99,55 @@ export function ProjectCaseStudy({
 
               {/* Stacked Perspective Mockup */}
               <div className="relative aspect-[16/10] w-full">
-                {/* Secondary (Back) Card - POS or Alt View */}
-                {hoverImage && (
-                  <div className="absolute inset-0 z-10 translate-x-12 translate-y-8 rotate-3 scale-95 opacity-40 transition-all duration-700 ease-out group-hover/mockup:translate-x-0 group-hover/mockup:translate-y-0 group-hover/mockup:rotate-0 group-hover/mockup:scale-100 group-hover/mockup:opacity-100 group-hover/mockup:z-30">
-                    <div className="relative w-full h-full rounded-xl lg:rounded-2xl overflow-hidden border border-foreground/10 bg-muted/20 shadow-2xl">
-                      <Image 
-                        src={hoverImage} 
-                        alt={`${title} – alt view`}
-                        fill 
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {/* Primary (Front) Card - Dashboard */}
-                <div className={`absolute inset-0 z-20 transition-all duration-700 ease-out ${
-                  hoverImage 
-                    ? 'group-hover/mockup:-translate-x-1/2 group-hover/mockup:-rotate-6 group-hover/mockup:scale-90 group-hover/mockup:opacity-40 hover:!z-10' 
-                    : 'group-hover/mockup:scale-[1.02] group-hover/mockup:-rotate-[0.5deg]'
-                }`}>
-                  <div className="relative w-full h-full rounded-xl lg:rounded-2xl overflow-hidden border border-foreground/10 bg-muted/20 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
-                    <Image 
-                      src={image} 
-                      alt={title} 
-                      fill 
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover"
-                    />
-                    <div className="absolute -inset-x-2 -inset-y-6 bg-gradient-to-tr from-background/20 via-transparent to-transparent opacity-60 pointer-events-none" />
-                  </div>
-                </div>
+                {/* Visual Stack Logic (Handles 2 or 3 images) */}
+                {(() => {
+                  const displayStack = stackImages && stackImages.length > 0 
+                    ? [image, ...stackImages] 
+                    : hoverImage 
+                      ? [image, hoverImage] 
+                      : [image];
+                  
+                  return displayStack.map((imgSrc, i) => {
+                    const isLast = i === displayStack.length - 1;
+                    const isFirst = i === 0;
+                    
+                    // Style logic for each card in the stack
+                    return (
+                      <div 
+                        key={i}
+                        className={`absolute inset-0 transition-all duration-700 ease-out overflow-hidden rounded-xl lg:rounded-2xl border border-foreground/10 bg-muted/20
+                          ${isFirst 
+                            ? 'z-20 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)] group-hover/mockup:-translate-x-1/2 group-hover/mockup:-rotate-6 group-hover/mockup:scale-75 group-hover/mockup:opacity-30 group-hover/mockup:z-10' 
+                            : ''
+                          }
+                          ${!isFirst && i === 1
+                            ? 'z-10 translate-x-12 translate-y-8 rotate-3 scale-95 opacity-40 group-hover/mockup:translate-x-0 group-hover/mockup:translate-y-0 group-hover/mockup:rotate-0 group-hover/mockup:scale-100 group-hover/mockup:opacity-100 group-hover/mockup:z-30 shadow-2xl' 
+                            : ''
+                          }
+                          ${i === 2
+                            ? 'z-0 translate-x-24 translate-y-16 rotate-6 scale-90 opacity-20 group-hover/mockup:translate-x-8 group-hover/mockup:translate-y-6 group-hover/mockup:rotate-3 group-hover/mockup:scale-95 group-hover/mockup:opacity-60 group-hover/mockup:z-20 shadow-xl' 
+                            : ''
+                          }
+                        `}
+                      >
+                        <Image 
+                          src={imgSrc} 
+                          alt={`${title} view ${i + 1}`}
+                          fill 
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className="object-cover"
+                        />
+                        {isFirst && <div className="absolute -inset-x-2 -inset-y-6 bg-gradient-to-tr from-background/20 via-transparent to-transparent opacity-60 pointer-events-none" />}
+                      </div>
+                    );
+                  });
+                })()}
 
                 {/* Hover indicator pill */}
-                {hoverImage && (
+                { (hoverImage || (stackImages && stackImages.length > 0)) && (
                   <div className="absolute -bottom-6 right-8 z-40 flex items-center gap-1.5 bg-background/70 backdrop-blur-sm px-2.5 py-1 rounded-full opacity-0 group-hover/mockup:opacity-100 transition-all duration-500 delay-300">
                     <div className="h-1.5 w-1.5 rounded-full bg-foreground/60 animate-pulse" />
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-foreground/60">Hover to Swap View</span>
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-foreground/60">Hover to Stack View</span>
                   </div>
                 )}
               </div>
@@ -199,6 +212,9 @@ export function ProjectCaseStudy({
                     "Figma": "figma",
                     "PHP": "php",
                     "Python": "python",
+                    "HTML5": "html5",
+                    "CSS3": "css3",
+                    "JavaScript": "javascript",
                   };
                   const iconSlug = slug[tag];
                   return (
