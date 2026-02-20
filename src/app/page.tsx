@@ -23,23 +23,22 @@ import {
 
 const projects = [
   {
-    title: "AI Toolkit v2.5",
-    description: "",
-    longDescription: "A high-performance command center for AI engineers. Built with a focus on real-time data visualization and modularity, allowing users to orchestrate complex model training and deployment pipelines with ease.",
-    image: "/projects/ai-toolkit.png",
-    tags: ["Next.js", "OpenAI", "Tailwind CSS", "TypeScript", "Vercel AI SDK"],
+    title: "Oboun ERP",
+    description: "A comprehensive Enterprise Resource Planning system designed for SMEs. Streamlining operations across sales, inventory, and finance through high-performance automation.",
+    image: "/projects/oboun-preview.png",
+    tags: ["Laravel 11", "Vue.js 3", "MySQL", "Tailwind", "Docker"],
+    githubUrl: "https://github.com/thnakon/ERP_PMS",
     features: [
-      { text: "Modular Agentic Workflows with LangChain", icon: "Bot" },
-      { text: "Real-time training performance tracking", icon: "BarChart3" },
-      { text: "Seamless Vercel AI SDK integration", icon: "Zap" },
-      { text: "Advanced model & dataset orchestration", icon: "Inbox" }
+      { text: "Developed with Laravel 12 and Vue.js 3, ensuring long-term maintainability", icon: "Zap" },
+      { text: "Implemented complex logic for real-time multi-warehouse inventory sync", icon: "Inbox" },
+      { text: "Designed automated financial reporting with precise tax and ledger management", icon: "BarChart3" },
+      { text: "Optimized MySQL database with advanced indexing for high-scale performance", icon: "ShieldCheck" }
     ],
-    isAI: true
+    isAI: false
   },
   {
     title: "Smart Guestbook",
-    description: "Digital guestbook with sentiment analysis and automated moderation using AI.",
-    longDescription: "An interactive guestbook that uses natural language processing to understand user sentiment. It automatically filters spam and highlights positive testimonials, providing a seamless experience for visitors.",
+    description: "An interactive guestbook that uses natural language processing to understand user sentiment. It automatically filters spam and highlights positive testimonials, providing a seamless experience for visitors.",
     image: "/projects/guestbook.png",
     tags: ["Next.js", "AppScript", "OpenAI", "Supabase", "GSAP"],
     features: [
@@ -51,8 +50,7 @@ const projects = [
   },
   {
     title: "Valentine's Surprise",
-    description: "A minimal, elegant web experience for a special Valentine's Day surprise.",
-    longDescription: "A personalized, animated experience designed to deliver a special message. Focused on silky-smooth animations and a playful yet premium aesthetic, making every interaction feel meaningful.",
+    description: "A personalized, animated experience designed to deliver a special message. Focused on silky-smooth animations and a playful yet premium aesthetic, making every interaction feel meaningful.",
     image: "/projects/valentines.png",
     tags: ["React", "Framer Motion", "Tailwind CSS"],
     features: [
@@ -149,6 +147,11 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    // Show the rest of the page almost immediately for better UX
+    const timer = setTimeout(() => {
+      setDone(true);
+    }, 100);
+
     let currentText = "";
     let index = 0;
     
@@ -159,13 +162,13 @@ export default function Home() {
         index++;
       } else {
         clearInterval(interval);
-        setTimeout(() => {
-          setDone(true);
-        }, 500);
       }
-    }, 60);
+    }, 40); // Slightly faster typing
 
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(timer);
+      clearInterval(interval);
+    };
   }, [setDone]);
 
   return (
