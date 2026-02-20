@@ -117,6 +117,7 @@ export function BentoGrid() {
                       src={project.image} 
                       alt={project.name} 
                       fill 
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
                       className="object-cover"
                     />
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4">

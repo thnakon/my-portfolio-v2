@@ -26,6 +26,7 @@ const projects = [
     title: "Oboun ERP",
     description: "A comprehensive Enterprise Resource Planning system designed for SMEs. Streamlining operations across sales, inventory, and finance through high-performance automation.",
     image: "/projects/oboun-preview.png",
+    hoverImage: "/projects/oboun-pos.png",
     tags: ["Laravel 11", "Vue.js 3", "MySQL", "Tailwind", "Docker"],
     githubUrl: "https://github.com/thnakon/ERP_PMS",
     features: [

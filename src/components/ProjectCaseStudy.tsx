@@ -77,37 +77,67 @@ export function ProjectCaseStudy({
         <div className={`p-8 lg:p-12 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center`}>
           {/* Mockup Column */}
           <div className="w-full lg:w-[60%] group/mockup">
-            <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border bg-muted/20 shadow-xl transition-all duration-700 group-hover/mockup:scale-[1.01] group-hover/mockup:rotate-[0.5deg]">
-              {/* Primary Image */}
-              <Image 
-                src={image} 
-                alt={title} 
-                fill 
-                sizes="(max-width: 1024px) 100vw, 60vw"
-                className={`object-cover transition-all duration-700 grayscale-[0.2] ${
-                  hoverImage 
-                    ? 'group-hover/mockup:opacity-0 group-hover/mockup:scale-105' 
-                    : 'group-hover/mockup:grayscale-0'
-                }`}
-              />
-              {/* Hover Image (cross-fades in) */}
-              {hoverImage && (
-                <Image 
-                  src={hoverImage} 
-                  alt={`${title} – alternate view`}
-                  fill 
-                  sizes="(max-width: 1024px) 100vw, 60vw"
-                  className="object-cover transition-all duration-700 opacity-0 scale-105 group-hover/mockup:opacity-100 group-hover/mockup:scale-100"
-                />
-              )}
-              <div className="absolute -inset-x-2 -inset-y-6 bg-gradient-to-tr from-background/20 via-transparent to-transparent opacity-60" />
-              {/* Hover indicator pill */}
-              {hoverImage && (
-                <div className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-background/70 backdrop-blur-sm px-2.5 py-1 rounded-full opacity-0 group-hover/mockup:opacity-100 transition-opacity duration-500">
-                  <div className="h-1.5 w-1.5 rounded-full bg-foreground/60" />
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-foreground/60">Alt View</span>
+            <div className="relative pt-12 px-4 pb-0 lg:pt-16 lg:px-8 lg:pb-0 rounded-[2.2rem] lg:rounded-[2.5rem] bg-foreground/[0.02] border border-foreground/[0.05] overflow-hidden transition-all duration-700 group-hover/mockup:bg-foreground/[0.04]">
+              {/* Animated glow background inside frame */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-foreground/[0.02] via-transparent to-foreground/[0.02] opacity-0 group-hover/mockup:opacity-100 transition-opacity duration-700" />
+              
+              {/* Top Text Content inside Frame */}
+              <div className="relative mb-6 lg:mb-10 flex flex-col lg:flex-row lg:items-end gap-2 lg:gap-4 pr-12">
+                <h4 className="text-xl lg:text-2xl font-bold tracking-tight text-foreground transition-all duration-700 group-hover/mockup:translate-x-1">
+                  {title}
+                </h4>
+                <div className="hidden lg:block h-4 w-[1px] bg-foreground/10 mb-1.5" />
+                <p className="text-[10px] lg:text-xs font-medium text-muted-foreground/50 line-clamp-2 max-w-[280px] lg:mb-1">
+                  {description}
+                </p>
+                <div className="absolute top-0 right-0 h-8 w-8 rounded-full border border-foreground/5 flex items-center justify-center grayscale opacity-20 group-hover/mockup:opacity-100 group-hover/mockup:grayscale-0 transition-all duration-700">
+                  <ArrowUpRight className="h-4 w-4" />
                 </div>
-              )}
+              </div>
+
+              {/* Stacked Perspective Mockup */}
+              <div className="relative aspect-[16/10] w-full">
+                {/* Secondary (Back) Card - POS or Alt View */}
+                {hoverImage && (
+                  <div className="absolute inset-0 z-10 translate-x-12 translate-y-8 rotate-3 scale-95 opacity-40 transition-all duration-700 ease-out group-hover/mockup:translate-x-0 group-hover/mockup:translate-y-0 group-hover/mockup:rotate-0 group-hover/mockup:scale-100 group-hover/mockup:opacity-100 group-hover/mockup:z-30">
+                    <div className="relative w-full h-full rounded-xl lg:rounded-2xl overflow-hidden border border-foreground/10 bg-muted/20 shadow-2xl">
+                      <Image 
+                        src={hoverImage} 
+                        alt={`${title} – alt view`}
+                        fill 
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Primary (Front) Card - Dashboard */}
+                <div className={`absolute inset-0 z-20 transition-all duration-700 ease-out ${
+                  hoverImage 
+                    ? 'group-hover/mockup:-translate-x-1/2 group-hover/mockup:-rotate-6 group-hover/mockup:scale-90 group-hover/mockup:opacity-40 hover:!z-10' 
+                    : 'group-hover/mockup:scale-[1.02] group-hover/mockup:-rotate-[0.5deg]'
+                }`}>
+                  <div className="relative w-full h-full rounded-xl lg:rounded-2xl overflow-hidden border border-foreground/10 bg-muted/20 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+                    <Image 
+                      src={image} 
+                      alt={title} 
+                      fill 
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute -inset-x-2 -inset-y-6 bg-gradient-to-tr from-background/20 via-transparent to-transparent opacity-60 pointer-events-none" />
+                  </div>
+                </div>
+
+                {/* Hover indicator pill */}
+                {hoverImage && (
+                  <div className="absolute -bottom-6 right-8 z-40 flex items-center gap-1.5 bg-background/70 backdrop-blur-sm px-2.5 py-1 rounded-full opacity-0 group-hover/mockup:opacity-100 transition-all duration-500 delay-300">
+                    <div className="h-1.5 w-1.5 rounded-full bg-foreground/60 animate-pulse" />
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-foreground/60">Hover to Swap View</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -175,10 +205,9 @@ export function ProjectCaseStudy({
                     <Badge key={tag} variant="secondary" className="bg-foreground/[0.03] text-foreground/70 hover:text-foreground hover:bg-foreground/[0.06] text-[11px] items-center gap-1.5 border-transparent transition-all py-1.5 px-3 rounded-xl font-medium">
                       {iconSlug && (
                         <img
-                          src={`https://cdn.jsdelivr.net/npm/simple-icons@13/icons/${iconSlug}.svg`}
+                          src={`https://cdn.simpleicons.org/${iconSlug}`}
                           alt={tag}
-                          className="h-3 w-3 shrink-0 opacity-50 dark:invert"
-                          style={{ filter: 'brightness(0)' }}
+                          className="h-3 w-3 shrink-0 opacity-70 group-hover:opacity-100 dark:brightness-0 dark:invert transition-all"
                         />
                       )}
                       {tag}
