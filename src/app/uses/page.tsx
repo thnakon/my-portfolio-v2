@@ -170,7 +170,7 @@ export default function UsesPage() {
                   {category.items.map((item) => (
                     <div 
                       key={item.name}
-                      className={`group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] ${category.title === "Hardware" ? "max-w-xs" : ""}`}
+                      className={`group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] ${category.title === "Hardware" ? "w-full sm:w-[calc(50%-8px)]" : ""}`}
                     >
                       <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
                         <item.icon className="h-5 w-5 text-foreground/50" />
