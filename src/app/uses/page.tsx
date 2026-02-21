@@ -39,7 +39,7 @@ const categories = [
     title: "Hardware",
     description: "The tools I touch every day.",
     items: [
-      { name: "MacBook Air M2", detail: "M2 Chip • 8-Core CPU • 10-core GPU", icon: Laptop },
+      { name: "MacBook Air M2", detail: "13.6-inch", icon: Laptop },
       { name: "Lofree Flow", detail: "Low Profile", icon: Keyboard },
       { name: "Logitech G Pro", detail: "Wireless", icon: Mouse },
       { name: "ASUS ProArt", detail: "Color Accurate", icon: Monitor },
@@ -203,7 +203,7 @@ export default function UsesPage() {
             <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8">
               <div className="space-y-1 shrink-0 md:max-w-[180px] pt-4">
                 <h3 className="text-2xl font-bold tracking-tight leading-tight">MacBook Air M2</h3>
-                <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-widest leading-relaxed">M2 Chip • 8-Core CPU • 10-core GPU</p>
+                <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-widest leading-relaxed">13.6-inch</p>
               </div>
 
               <div className="relative aspect-video flex-1 overflow-hidden">
@@ -235,9 +235,6 @@ export default function UsesPage() {
               </div>
             </div>
 
-            <div className="space-y-4">
-              <p className="text-sm text-muted-foreground font-medium">13.6-inch</p>
-            </div>
           </motion.div>
 
           {/* Row 2: Development & Design (2:2 Ratio) */}
