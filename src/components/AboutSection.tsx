@@ -7,6 +7,7 @@ import { Sparkles, Code2, Github, User, Linkedin, ArrowRight, Star, Users, BookO
 import Image from "next/image"
 import { GitHubCalendar } from 'react-github-calendar'
 import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 
 export function AboutSection() {
   const [stats, setStats] = useState({ followers: 0, repos: 0, stars: 0 });
@@ -40,10 +41,35 @@ export function AboutSection() {
     fetchStats();
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8 }
+    }
+  }
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+    <motion.div 
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start"
+    >
       {/* Left Column: Image */}
-      <div className="lg:col-span-3 space-y-6">
+      <motion.div variants={itemVariants} className="lg:col-span-3 space-y-6">
         <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border bg-muted group shadow-2xl shadow-foreground/5">
           <Image 
             src="/profile-v3.jpg" 
@@ -67,10 +93,10 @@ export function AboutSection() {
             <Instagram className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
           </a>
         </div>
-      </div>
+      </motion.div>
 
       {/* Middle Column: Intro Text */}
-      <div className="lg:col-span-4 space-y-6">
+      <motion.div variants={itemVariants} className="lg:col-span-4 space-y-6">
         <div className="space-y-2">
           <h2 className="text-3xl font-bold tracking-tight uppercase">About Me</h2>
           <div className="h-1 w-12 bg-foreground" />
@@ -84,10 +110,10 @@ export function AboutSection() {
         <p className="text-muted-foreground text-sm leading-relaxed">
           I believe the future of software development lies in AI-driven innovation. My goal is to create high-performance, intelligent applications that drive sustainable business growth and deliver lasting value in an ever-evolving digital landscape.
         </p>
-      </div>
+      </motion.div>
 
-      {/* Right Column: Interactive Content */}
-      <div className="lg:col-span-5 w-full">
+      {/* Right Column: Interaction */}
+      <motion.div variants={itemVariants} className="lg:col-span-5 w-full">
         <Tabs defaultValue="github" className="w-full">
           <TabsList className="grid w-full grid-cols-3 bg-muted/50 rounded-xl p-1 mb-8">
             <TabsTrigger value="github" className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
@@ -222,7 +248,7 @@ export function AboutSection() {
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
           </a>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }
