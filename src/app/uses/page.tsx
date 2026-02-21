@@ -150,73 +150,153 @@ export default function UsesPage() {
           </p>
         </motion.div>
 
-        {/* Categories Grid - Two Explicit Columns */}
+        {/* Categories Grid - Unified for perfect alignment */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-16 items-start mb-32"
+          className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-24 items-start mb-32"
         >
-          {/* Left Column */}
-          <div className="space-y-16">
-            {leftCategories.map((category) => (
-              <motion.div key={category.title} variants={itemVariants} className="space-y-8">
-                <div className="space-y-1">
-                  <h2 className="text-xl font-bold tracking-tight uppercase">{category.title}</h2>
-                  <p className="text-sm text-muted-foreground">{category.description}</p>
+          {/* Row 1: Hardware | Empty */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            <div className="space-y-1">
+              <h2 className="text-xl font-bold tracking-tight uppercase">{categories[0].title}</h2>
+              <p className="text-sm text-muted-foreground">{categories[0].description}</p>
+            </div>
+            <div className="flex flex-col gap-4">
+              {categories[0].items.map((item) => (
+                <div 
+                  key={item.name}
+                  className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] w-full sm:w-[calc(50%-8px)]"
+                >
+                  <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
+                    <item.icon className="h-5 w-5 text-foreground/50" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
+                    <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </motion.div>
+          <div className="hidden md:block" /> {/* Empty slot next to Hardware */}
 
-                <div className={category.title === "Hardware" ? "flex flex-col gap-4" : "grid grid-cols-1 sm:grid-cols-2 gap-4"}>
-                  {category.items.map((item) => (
-                    <div 
-                      key={item.name}
-                      className={`group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] ${category.title === "Hardware" ? "w-full sm:w-[calc(50%-8px)]" : ""}`}
-                    >
-                      <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
-                        <item.icon className="h-5 w-5 text-foreground/50" />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
-                        <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
-                      </div>
-                    </div>
-                  ))}
+          {/* Row 2: Development & Design */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            <div className="space-y-1">
+              <h2 className="text-xl font-bold tracking-tight uppercase">{categories[1].title}</h2>
+              <p className="text-sm text-muted-foreground">{categories[1].description}</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {categories[1].items.map((item) => (
+                <div 
+                  key={item.name}
+                  className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
+                >
+                  <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
+                    <item.icon className="h-5 w-5 text-foreground/50" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
+                    <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
+                  </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </motion.div>
+          <motion.div variants={itemVariants} className="space-y-8">
+            <div className="space-y-1">
+              <h2 className="text-xl font-bold tracking-tight uppercase">{categories[3].title}</h2>
+              <p className="text-sm text-muted-foreground">{categories[3].description}</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {categories[3].items.map((item) => (
+                <div 
+                  key={item.name}
+                  className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
+                >
+                  <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
+                    <item.icon className="h-5 w-5 text-foreground/50" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
+                    <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
-          {/* Right Column */}
-          <div className="space-y-16">
-            {/* Spacer to leave space next to Hardware */}
-            <div className="hidden md:block h-[120px] lg:h-[150px]" />
-            
-            {rightCategories.map((category) => (
-              <motion.div key={category.title} variants={itemVariants} className="space-y-8">
-                <div className="space-y-1">
-                  <h2 className="text-xl font-bold tracking-tight uppercase">{category.title}</h2>
-                  <p className="text-sm text-muted-foreground">{category.description}</p>
+          {/* Row 3: AI Ecosystem | Music */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            <div className="space-y-1">
+              <h2 className="text-xl font-bold tracking-tight uppercase">{categories[2].title}</h2>
+              <p className="text-sm text-muted-foreground">{categories[2].description}</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {categories[2].items.map((item) => (
+                <div 
+                  key={item.name}
+                  className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
+                >
+                  <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
+                    <item.icon className="h-5 w-5 text-foreground/50" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
+                    <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </motion.div>
+          <motion.div variants={itemVariants} className="space-y-8">
+            <div className="space-y-1">
+              <h2 className="text-xl font-bold tracking-tight uppercase">{categories[5].title}</h2>
+              <p className="text-sm text-muted-foreground">{categories[5].description}</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {categories[5].items.map((item) => (
+                <div 
+                  key={item.name}
+                  className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
+                >
+                  <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
+                    <item.icon className="h-5 w-5 text-foreground/50" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
+                    <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
-                <div className={category.title === "Hardware" ? "flex flex-col gap-4" : "grid grid-cols-1 sm:grid-cols-2 gap-4"}>
-                  {category.items.map((item) => (
-                    <div 
-                      key={item.name}
-                      className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
-                    >
-                      <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
-                        <item.icon className="h-5 w-5 text-foreground/50" />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
-                        <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
-                      </div>
-                    </div>
-                  ))}
+          {/* Row 4: Social & Mobile | Empty */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            <div className="space-y-1">
+              <h2 className="text-xl font-bold tracking-tight uppercase">{categories[4].title}</h2>
+              <p className="text-sm text-muted-foreground">{categories[4].description}</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {categories[4].items.map((item) => (
+                <div 
+                  key={item.name}
+                  className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
+                >
+                  <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
+                    <item.icon className="h-5 w-5 text-foreground/50" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
+                    <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
+                  </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
       </div>
 
