@@ -201,6 +201,14 @@ export default function UsesPage() {
             className="flex flex-col gap-6"
           >
             <div className="relative aspect-video w-full overflow-hidden">
+              {/* Overlaid Title and Specs */}
+              <div className="absolute top-0 left-0 z-10 pointer-events-none">
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold tracking-tight">MacBook Air M2</h3>
+                  <p className="text-[11px] text-muted-foreground font-semibold uppercase tracking-widest">M2 Chip • 8-Core CPU • 10-core GPU</p>
+                </div>
+              </div>
+
               <Image 
                 src="/projects/macbook-air-m2.png" 
                 alt="MacBook Air M2" 
@@ -209,10 +217,6 @@ export default function UsesPage() {
               />
             </div>
             <div className="space-y-4">
-              <div className="space-y-1">
-                <h3 className="text-lg font-bold">MacBook Air M2</h3>
-                <p className="text-sm text-muted-foreground">M2 Chip • 8-Core CPU • 10-core GPU</p>
-              </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 My primary powerhouse for development and design. The M2 chip provides exceptional performance for multi-tasking and compiling, all while maintaining perfect silence in a thin, light form factor.
               </p>
