@@ -236,9 +236,7 @@ export default function UsesPage() {
             </div>
 
             <div className="space-y-4">
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                My primary powerhouse for development and design. The M2 chip provides exceptional performance for multi-tasking and compiling, all while maintaining perfect silence in a thin, light form factor.
-              </p>
+              <p className="text-sm text-muted-foreground font-medium">13.6-inch</p>
             </div>
           </motion.div>
 
