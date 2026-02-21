@@ -95,6 +95,18 @@ const categories = [
   }
 ]
 
+const leftCategories = [
+  categories[0], // Hardware
+  categories[1], // Development & Engineering
+  categories[2], // AI Ecosystem
+  categories[4], // Social & Mobile
+]
+
+const rightCategories = [
+  categories[3], // Design & Productivity
+  categories[5], // Music & Focus
+]
+
 export default function UsesPage() {
   const { isDone, setDone } = useIntro()
 
@@ -138,38 +150,73 @@ export default function UsesPage() {
           </p>
         </motion.div>
 
-        {/* Categories Grid */}
+        {/* Categories Grid - Two Explicit Columns */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-32"
+          className="grid grid-cols-1 md:grid-cols-2 gap-x-16 items-start mb-32"
         >
-          {categories.map((category) => (
-            <motion.div key={category.title} variants={itemVariants} className="space-y-8">
-              <div className="space-y-1">
-                <h2 className="text-xl font-bold tracking-tight uppercase">{category.title}</h2>
-                <p className="text-sm text-muted-foreground">{category.description}</p>
-              </div>
+          {/* Left Column */}
+          <div className="space-y-16">
+            {leftCategories.map((category) => (
+              <motion.div key={category.title} variants={itemVariants} className="space-y-8">
+                <div className="space-y-1">
+                  <h2 className="text-xl font-bold tracking-tight uppercase">{category.title}</h2>
+                  <p className="text-sm text-muted-foreground">{category.description}</p>
+                </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {category.items.map((item) => (
-                  <div 
-                    key={item.name}
-                    className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
-                  >
-                    <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
-                      <item.icon className="h-5 w-5 text-foreground/50" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {category.items.map((item) => (
+                    <div 
+                      key={item.name}
+                      className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
+                    >
+                      <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
+                        <item.icon className="h-5 w-5 text-foreground/50" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
+                        <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
+                      </div>
                     </div>
-                    <div className="min-w-0">
-                      <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
-                      <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Right Column */}
+          <div className="space-y-16">
+            {/* Spacer to leave space next to Hardware */}
+            <div className="hidden md:block h-[120px] lg:h-[150px]" />
+            
+            {rightCategories.map((category) => (
+              <motion.div key={category.title} variants={itemVariants} className="space-y-8">
+                <div className="space-y-1">
+                  <h2 className="text-xl font-bold tracking-tight uppercase">{category.title}</h2>
+                  <p className="text-sm text-muted-foreground">{category.description}</p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {category.items.map((item) => (
+                    <div 
+                      key={item.name}
+                      className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
+                    >
+                      <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
+                        <item.icon className="h-5 w-5 text-foreground/50" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
+                        <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
 
