@@ -26,10 +26,13 @@ import {
   Hash,
   GitGraph,
   Sparkles,
-  Command
+  Command,
+  ArrowRight
 } from "lucide-react"
 import { useIntro } from "@/components/intro-context"
 import { FinalSection } from "@/components/FinalSection"
+import { useState } from "react"
+import Image from "next/image"
 
 const categories = [
   {
@@ -109,6 +112,7 @@ const rightCategories = [
 
 export default function UsesPage() {
   const { isDone, setDone } = useIntro()
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
 
   useEffect(() => {
     setDone(true)
@@ -167,7 +171,9 @@ export default function UsesPage() {
               {categories[0].items.map((item) => (
                 <div 
                   key={item.name}
-                  className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] w-full sm:w-[calc(50%-8px)]"
+                  onMouseEnter={() => item.name === "MacBook Air M2" && setHoveredItem(item.name)}
+                  onMouseLeave={() => item.name === "MacBook Air M2" && setHoveredItem(null)}
+                  className={`group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] w-full sm:w-[calc(50%-8px)]`}
                 >
                   <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
                     <item.icon className="h-5 w-5 text-foreground/50" />
@@ -176,11 +182,42 @@ export default function UsesPage() {
                     <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
                     <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
                   </div>
+                  
+                  {item.name === "MacBook Air M2" && (
+                    <div className="ml-auto opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+                      <ArrowRight className="h-4 w-4 text-primary" />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
           </motion.div>
-          <div className="hidden md:block" /> {/* Empty slot next to Hardware */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ 
+              opacity: hoveredItem === "MacBook Air M2" ? 1 : 0,
+              x: hoveredItem === "MacBook Air M2" ? 0 : 20
+            }}
+            className="flex flex-col gap-6"
+          >
+            <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-foreground/[0.06] shadow-2xl">
+              <Image 
+                src="/projects/macbook-air-m2.png" 
+                alt="MacBook Air M2" 
+                fill 
+                className="object-cover"
+              />
+            </div>
+            <div className="space-y-4">
+              <div className="space-y-1">
+                <h3 className="text-lg font-bold">MacBook Air M2</h3>
+                <p className="text-sm text-muted-foreground">M2 Chip • 8-Core CPU • 10-core GPU</p>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                My primary powerhouse for development and design. The M2 chip provides exceptional performance for multi-tasking and compiling, all while maintaining perfect silence in a thin, light form factor.
+              </p>
+            </div>
+          </motion.div>
 
           {/* Row 2: Development & Design */}
           <motion.div variants={itemVariants} className="space-y-8">
