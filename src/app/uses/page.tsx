@@ -200,12 +200,12 @@ export default function UsesPage() {
             }}
             className="flex flex-col gap-6"
           >
-            <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-foreground/[0.06] shadow-2xl">
+            <div className="relative aspect-video w-full overflow-hidden">
               <Image 
                 src="/projects/macbook-air-m2.png" 
                 alt="MacBook Air M2" 
                 fill 
-                className="object-cover"
+                className="object-contain"
               />
             </div>
             <div className="space-y-4">
