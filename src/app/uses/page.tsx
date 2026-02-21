@@ -31,17 +31,15 @@ import {
 import { useIntro } from "@/components/intro-context"
 import { FinalSection } from "@/components/FinalSection"
 
-import { HardwareShowcase } from "@/components/HardwareShowcase"
-
 const categories = [
   {
-    title: "AI Ecosystem",
-    description: "My intelligent co-thinkers.",
+    title: "Hardware",
+    description: "The tools I touch every day.",
     items: [
-      { name: "Antigravity", detail: "AI Assistant", icon: Sparkles },
-      { name: "ChatGPT", detail: "GPT-4", icon: MessageSquare },
-      { name: "Gemini", detail: "Google AI", icon: Cloud },
-      { name: "Claude", detail: "Anthropic", icon: Zap },
+      { name: "MacBook Air M2", detail: "13-inch", icon: Laptop },
+      { name: "Lofree Flow", detail: "Low Profile", icon: Keyboard },
+      { name: "Logitech G Pro", detail: "Wireless", icon: Mouse },
+      { name: "ASUS ProArt", detail: "Color Accurate", icon: Monitor },
     ]
   },
   {
@@ -56,6 +54,16 @@ const categories = [
       { name: "Github", detail: "Source Control", icon: Github },
       { name: "GitLab", detail: "Source Control", icon: GitGraph },
       { name: "Sourcetree", detail: "Git Client", icon: GitGraph },
+    ]
+  },
+  {
+    title: "AI Ecosystem",
+    description: "My intelligent co-thinkers.",
+    items: [
+      { name: "Antigravity", detail: "AI Assistant", icon: Sparkles },
+      { name: "ChatGPT", detail: "GPT-4", icon: MessageSquare },
+      { name: "Gemini", detail: "Google AI", icon: Cloud },
+      { name: "Claude", detail: "Anthropic", icon: Zap },
     ]
   },
   {
@@ -130,21 +138,7 @@ export default function UsesPage() {
           </p>
         </motion.div>
 
-        {/* Hardware Showcase - New Premium Section */}
-        <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.8, delay: 0.2 }}
-           className="mb-32"
-        >
-          <div className="space-y-1 mb-12">
-            <h2 className="text-xl font-bold tracking-tight uppercase">Hardware</h2>
-            <p className="text-sm text-muted-foreground">The tools I touch every day.</p>
-          </div>
-          <HardwareShowcase />
-        </motion.div>
-
-        {/* Rest of Categories Grid */}
+        {/* Categories Grid */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
