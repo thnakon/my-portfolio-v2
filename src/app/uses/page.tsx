@@ -201,14 +201,14 @@ export default function UsesPage() {
             }}
             className="md:col-span-3 flex flex-col gap-6"
           >
-            <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8">
-              <div className="space-y-1 shrink-0 md:max-w-[180px] pt-4 flex flex-col h-full">
+            <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-8">
+              <div className="shrink-0 md:max-w-[180px] pt-4 flex flex-col justify-between">
                 <div className="space-y-1">
                   <h3 className="text-2xl font-bold tracking-tight leading-tight">MacBook Air M2</h3>
                   <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-widest leading-relaxed">13.6-inch</p>
                 </div>
                 
-                <div className="mt-auto pt-8">
+                <div className="pb-2">
                   <a 
                     href="https://www.apple.com/macbook-air-m2/" 
                     target="_blank" 
