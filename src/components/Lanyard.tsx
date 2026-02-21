@@ -79,7 +79,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
 
   const { nodes, materials } = useGLTF('/assets/lanyard/card.glb') as any
   const texture = useTexture('/assets/lanyard/lanyard.png')
-  const profileTexture = useTexture('/projects/warm.png') // User's profile image
+  const profileTexture = useTexture('/profile-v3.jpg') // User's profile image
 
   const [curve] = useState(
     () => new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
@@ -200,19 +200,22 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
       ctx.clip()
 
       // Draw profile image - cover the photo area, centered on face
-      const imgAspect = img.width / img.height
       const photoAspect = photoW / photoH
-      let srcX = 0, srcY = 0, srcW = img.width, srcH = img.height
-
-      if (imgAspect > photoAspect) {
-        // Image wider than card: crop sides
-        srcW = img.height * photoAspect
-        srcX = (img.width - srcW) / 2
-      } else {
-        // Image taller than card: crop top/bottom, bias toward face (upper area)
-        srcH = img.width / photoAspect
-        srcY = (img.height - srcH) * 0.3  // bias upward to center face
+      
+      // Even Closer Zoom for perfect face centering
+      // 1. Zoom to 30% of original width
+      const zoom = 0.3 
+      let srcW = img.width * zoom
+      let srcH = srcW / photoAspect
+      
+      if (srcH > img.height) {
+        srcH = img.height
+        srcW = srcH * photoAspect
       }
+
+      const srcX = (img.width - srcW) / 2
+      // Bias 0.85 to keep the face slightly more centered within the zoomed view
+      const srcY = (img.height - srcH) * 0.85 
 
       ctx.drawImage(img, srcX, srcY, srcW, srcH, photoX, photoY, photoW, photoH)
       ctx.restore()
@@ -238,7 +241,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
       tex.needsUpdate = true
       setProcessedTexture(tex)
     }
-    img.src = '/projects/warm.png'
+    img.src = '/profile-v3.jpg'
   }, [])
 
   return (

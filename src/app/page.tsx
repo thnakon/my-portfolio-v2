@@ -287,7 +287,7 @@ export default function Home() {
                 </span>
                 <span className="inline-flex items-center justify-center h-14 w-14 rounded-full overflow-hidden border-2 border-background shadow-xl flex-shrink-0 relative z-20 transition-transform duration-300 group-hover:scale-105">
                   <Image 
-                    src="/projects/warm.png" 
+                    src="/profile-v3.jpg" 
                     alt="Thanakon" 
                     width={56} 
                     height={56} 

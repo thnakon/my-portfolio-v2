@@ -46,7 +46,7 @@ export function AboutSection() {
       <div className="lg:col-span-3 space-y-6">
         <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border bg-muted group shadow-2xl shadow-foreground/5">
           <Image 
-            src="/projects/warm.png" 
+            src="/profile-v3.jpg" 
             alt="Thanakon" 
             fill 
             sizes="(max-width: 1024px) 100vw, 25vw"
