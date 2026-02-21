@@ -27,7 +27,8 @@ import {
   GitGraph,
   Sparkles,
   Command,
-  ArrowRight
+  ArrowRight,
+  ExternalLink
 } from "lucide-react"
 import { useIntro } from "@/components/intro-context"
 import { FinalSection } from "@/components/FinalSection"
@@ -231,6 +232,18 @@ export default function UsesPage() {
                 <div className="space-y-0.5">
                   <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest">Storage</p>
                   <p className="text-[11px] font-bold">245 GB SSD</p>
+                </div>
+                
+                <div className="pt-4">
+                  <a 
+                    href="https://www.apple.com/macbook-air-m2/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-primary hover:text-primary/80 transition-colors group/link"
+                  >
+                    Product Info
+                    <ExternalLink className="h-3 w-3 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
+                  </a>
                 </div>
               </div>
             </div>
