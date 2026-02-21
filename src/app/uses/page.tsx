@@ -159,10 +159,10 @@ export default function UsesPage() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-24 items-start mb-32"
+          className="grid grid-cols-1 md:grid-cols-4 gap-x-16 gap-y-24 items-start mb-32"
         >
-          {/* Row 1: Hardware | Empty */}
-          <motion.div variants={itemVariants} className="space-y-8">
+          {/* Row 1: Hardware | Preview (1:3 Ratio) */}
+          <motion.div variants={itemVariants} className="md:col-span-1 space-y-8">
             <div className="space-y-1">
               <h2 className="text-xl font-bold tracking-tight uppercase">{categories[0].title}</h2>
               <p className="text-sm text-muted-foreground">{categories[0].description}</p>
@@ -173,7 +173,7 @@ export default function UsesPage() {
                   key={item.name}
                   onMouseEnter={() => {}}
                   onMouseLeave={() => {}}
-                  className={`group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] w-full sm:w-[calc(50%-8px)] ${item.name === "MacBook Air M2" ? "border-foreground/20 bg-card/60 shadow-md shadow-foreground/[0.02]" : ""}`}
+                  className={`group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] w-full ${item.name === "MacBook Air M2" ? "border-foreground/20 bg-card/60 shadow-md shadow-foreground/[0.02]" : ""}`}
                 >
                   <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
                     <item.icon className="h-5 w-5 text-foreground/50" />
@@ -198,7 +198,7 @@ export default function UsesPage() {
               opacity: hoveredItem === "MacBook Air M2" ? 1 : 0,
               x: hoveredItem === "MacBook Air M2" ? 0 : 20
             }}
-            className="flex flex-col gap-6"
+            className="md:col-span-3 flex flex-col gap-6"
           >
             <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
               <div className="space-y-1 shrink-0 md:max-w-[180px]">
@@ -223,8 +223,8 @@ export default function UsesPage() {
             </div>
           </motion.div>
 
-          {/* Row 2: Development & Design */}
-          <motion.div variants={itemVariants} className="space-y-8">
+          {/* Row 2: Development & Design (2:2 Ratio) */}
+          <motion.div variants={itemVariants} className="md:col-span-2 space-y-8">
             <div className="space-y-1">
               <h2 className="text-xl font-bold tracking-tight uppercase">{categories[1].title}</h2>
               <p className="text-sm text-muted-foreground">{categories[1].description}</p>
@@ -246,7 +246,7 @@ export default function UsesPage() {
               ))}
             </div>
           </motion.div>
-          <motion.div variants={itemVariants} className="space-y-8">
+          <motion.div variants={itemVariants} className="md:col-span-2 space-y-8">
             <div className="space-y-1">
               <h2 className="text-xl font-bold tracking-tight uppercase">{categories[3].title}</h2>
               <p className="text-sm text-muted-foreground">{categories[3].description}</p>
@@ -269,8 +269,8 @@ export default function UsesPage() {
             </div>
           </motion.div>
 
-          {/* Row 3: AI Ecosystem | Music */}
-          <motion.div variants={itemVariants} className="space-y-8">
+          {/* Row 3: AI Ecosystem | Music (2:2 Ratio) */}
+          <motion.div variants={itemVariants} className="md:col-span-2 space-y-8">
             <div className="space-y-1">
               <h2 className="text-xl font-bold tracking-tight uppercase">{categories[2].title}</h2>
               <p className="text-sm text-muted-foreground">{categories[2].description}</p>
@@ -292,7 +292,7 @@ export default function UsesPage() {
               ))}
             </div>
           </motion.div>
-          <motion.div variants={itemVariants} className="space-y-8">
+          <motion.div variants={itemVariants} className="md:col-span-2 space-y-8">
             <div className="space-y-1">
               <h2 className="text-xl font-bold tracking-tight uppercase">{categories[5].title}</h2>
               <p className="text-sm text-muted-foreground">{categories[5].description}</p>
@@ -316,7 +316,7 @@ export default function UsesPage() {
           </motion.div>
 
           {/* Row 4: Social & Mobile | Empty */}
-          <motion.div variants={itemVariants} className="space-y-8">
+          <motion.div variants={itemVariants} className="md:col-span-2 space-y-8">
             <div className="space-y-1">
               <h2 className="text-xl font-bold tracking-tight uppercase">{categories[4].title}</h2>
               <p className="text-sm text-muted-foreground">{categories[4].description}</p>
