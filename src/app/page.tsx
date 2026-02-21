@@ -1,7 +1,8 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { ChevronRight, ArrowDown, ArrowRight, Mail, Music, Monitor, Headphones, Keyboard, Coffee, Star, Sparkles, MapPin } from "lucide-react";
+import Link from "next/link";
+import { ChevronRight, ArrowDown, ArrowRight, Mail, Music, Monitor, Headphones, Keyboard, Coffee, Star, Sparkles, MapPin, Laptop, Mouse } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { CopyEmailButton } from "@/components/CopyEmailButton";
 import { ContactModal } from "@/components/ContactModal";
@@ -417,8 +418,8 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[260px]">
 
           {/* Uses */}
-          <div className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative">
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-foreground/[0.015] to-transparent pointer-events-none" />
+          <Link href="/uses" className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-foreground/[0.015] to-transparent pointer-events-none transition-opacity group-hover:opacity-20" />
             <div className="relative z-10 space-y-6">
               <div className="space-y-1">
                 <p className="text-[11px] font-bold text-muted-foreground/60">Daily Setup</p>
@@ -426,10 +427,10 @@ export default function Home() {
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { icon: Monitor, name: 'MacBook Pro 16"', detail: 'M3 Pro' },
-                  { icon: Keyboard, name: 'Keychron K2', detail: 'Mechanical' },
-                  { icon: Headphones, name: 'AirPods Pro', detail: '2nd Gen' },
-                  { icon: Coffee, name: 'Cursor IDE', detail: 'AI-First' },
+                  { icon: Laptop, name: 'MacBook Air M2', detail: '13-inch' },
+                  { icon: Keyboard, name: 'Lofree Flow', detail: 'Low Profile' },
+                  { icon: Mouse, name: 'Logitech G Pro', detail: 'Wireless' },
+                  { icon: Monitor, name: 'ASUS ProArt', detail: 'Color Accurate' },
                 ].map((item) => (
                   <div key={item.name} className="flex items-center gap-2.5 group/item">
                     <div className="h-8 w-8 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover/item:bg-foreground/[0.08] transition-colors">
@@ -448,7 +449,7 @@ export default function Home() {
             <div className="absolute bottom-6 right-6 h-8 w-8 rounded-full border border-foreground/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
               <ArrowRight className="h-4 w-4 text-muted-foreground/40" />
             </div>
-          </div>
+          </Link>
 
           {/* Write to me */}
           <div className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative">
