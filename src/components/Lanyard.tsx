@@ -6,6 +6,7 @@ import { Canvas, extend, useFrame } from '@react-three/fiber'
 import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei'
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint, RapierRigidBody } from '@react-three/rapier'
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline'
+import { ThreeElement } from '@react-three/fiber'
 
 // @ts-ignore
 extend({ MeshLineGeometry, MeshLineMaterial })
@@ -14,8 +15,8 @@ extend({ MeshLineGeometry, MeshLineMaterial })
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      meshLineGeometry: any;
-      meshLineMaterial: any;
+      meshLineGeometry: ThreeElement<typeof MeshLineGeometry>
+      meshLineMaterial: ThreeElement<typeof MeshLineMaterial>
     }
   }
 }
@@ -298,7 +299,9 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
         </RigidBody>
       </group>
       <mesh ref={band}>
+        {/* @ts-ignore */}
         <meshLineGeometry attach="geometry" />
+        {/* @ts-ignore */}
         <meshLineMaterial
           attach="material"
           color="white"
