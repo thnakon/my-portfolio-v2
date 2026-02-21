@@ -39,7 +39,7 @@ const categories = [
     title: "Hardware",
     description: "The tools I touch every day.",
     items: [
-      { name: "MacBook Air M2", detail: "13-inch", icon: Laptop },
+      { name: "MacBook Air M2", detail: "M2 Chip • 8-Core CPU • 10-core GPU", icon: Laptop },
       { name: "Lofree Flow", detail: "Low Profile", icon: Keyboard },
       { name: "Logitech G Pro", detail: "Wireless", icon: Mouse },
       { name: "ASUS ProArt", detail: "Color Accurate", icon: Monitor },
@@ -200,8 +200,8 @@ export default function UsesPage() {
             }}
             className="md:col-span-3 flex flex-col gap-6"
           >
-            <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
-              <div className="space-y-1 shrink-0 md:max-w-[180px]">
+            <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8">
+              <div className="space-y-1 shrink-0 md:max-w-[180px] pt-4">
                 <h3 className="text-2xl font-bold tracking-tight leading-tight">MacBook Air M2</h3>
                 <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-widest leading-relaxed">M2 Chip • 8-Core CPU • 10-core GPU</p>
               </div>
@@ -213,6 +213,25 @@ export default function UsesPage() {
                   fill 
                   className="object-contain"
                 />
+              </div>
+
+              <div className="space-y-4 shrink-0 md:max-w-[150px] pt-4 md:text-right">
+                <div className="space-y-0.5">
+                  <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest">Color</p>
+                  <p className="text-[11px] font-bold">Midnight</p>
+                </div>
+                <div className="space-y-0.5">
+                  <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest">Display</p>
+                  <p className="text-[11px] font-bold">Liquid Retina</p>
+                </div>
+                <div className="space-y-0.5">
+                  <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest">Memory</p>
+                  <p className="text-[11px] font-bold">16 GB RAM</p>
+                </div>
+                <div className="space-y-0.5">
+                  <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest">Storage</p>
+                  <p className="text-[11px] font-bold">245 GB SSD</p>
+                </div>
               </div>
             </div>
 
