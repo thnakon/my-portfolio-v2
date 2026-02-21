@@ -166,7 +166,7 @@ export default function UsesPage() {
                   <p className="text-sm text-muted-foreground">{category.description}</p>
                 </div>
 
-                <div className="flex flex-col gap-4">
+                <div className={category.title === "Hardware" ? "flex flex-col gap-4" : "grid grid-cols-1 sm:grid-cols-2 gap-4"}>
                   {category.items.map((item) => (
                     <div 
                       key={item.name}
@@ -198,7 +198,7 @@ export default function UsesPage() {
                   <p className="text-sm text-muted-foreground">{category.description}</p>
                 </div>
 
-                <div className="flex flex-col gap-4">
+                <div className={category.title === "Hardware" ? "flex flex-col gap-4" : "grid grid-cols-1 sm:grid-cols-2 gap-4"}>
                   {category.items.map((item) => (
                     <div 
                       key={item.name}
