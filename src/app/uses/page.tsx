@@ -200,25 +200,28 @@ export default function UsesPage() {
             }}
             className="flex flex-col gap-6"
           >
-            <div className="space-y-1">
-                <h3 className="text-2xl font-bold tracking-tight">MacBook Air M2</h3>
-                <p className="text-[11px] text-muted-foreground font-semibold uppercase tracking-widest">M2 Chip • 8-Core CPU • 10-core GPU</p>
+            <div className="relative aspect-video w-full overflow-hidden">
+              {/* Title and Specs pinned to top-left of the box */}
+              <div className="absolute top-0 left-0 z-10">
+                <div className="space-y-1">
+                  <h3 className="text-2xl font-bold tracking-tight">MacBook Air M2</h3>
+                  <p className="text-[11px] text-muted-foreground font-semibold uppercase tracking-widest">M2 Chip • 8-Core CPU • 10-core GPU</p>
+                </div>
               </div>
 
-              <div className="relative aspect-video w-full overflow-hidden">
-                <Image 
-                  src="/projects/macbook-air-m2.png" 
-                  alt="MacBook Air M2" 
-                  fill 
-                  className="object-contain"
-                />
-              </div>
+              <Image 
+                src="/projects/macbook-air-m2.png" 
+                alt="MacBook Air M2" 
+                fill 
+                className="object-contain"
+              />
+            </div>
 
-              <div className="space-y-4">
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  My primary powerhouse for development and design. The M2 chip provides exceptional performance for multi-tasking and compiling, all while maintaining perfect silence in a thin, light form factor.
-                </p>
-              </div>
+            <div className="space-y-4">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                My primary powerhouse for development and design. The M2 chip provides exceptional performance for multi-tasking and compiling, all while maintaining perfect silence in a thin, light form factor.
+              </p>
+            </div>
           </motion.div>
 
           {/* Row 2: Development & Design */}
