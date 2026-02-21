@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Sparkles, ArrowRight, ArrowUpRight, MapPin, Folder, FileText, Plane } from "lucide-react"
 import { ContactModal } from "@/components/ContactModal"
 import { CopyEmailButton } from "@/components/CopyEmailButton"
+import Link from "next/link"
 import Image from "next/image"
 
 import { Orb } from "@/components/ui/orb"
@@ -85,9 +86,9 @@ export function BentoGrid() {
                 </p>
               </div>
               <div className="flex justify-start mt-4">
-                <a href="#about" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors w-fit">
+                <Link href="/about" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors w-fit">
                   Learn more <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </a>
+                </Link>
               </div>
             </div>
             <div className="md:col-span-2 relative h-[300px] md:h-full flex items-center justify-center overflow-hidden">

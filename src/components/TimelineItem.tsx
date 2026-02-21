@@ -13,6 +13,7 @@ interface TimelineItemProps {
   description: string
   highlights?: string[]
   tags?: string[]
+  hideDot?: boolean
   isLast?: boolean
 }
 
@@ -24,6 +25,7 @@ export function TimelineItem({
   description, 
   highlights, 
   tags, 
+  hideDot,
   isLast 
 }: TimelineItemProps) {
   const getIconUrl = (tech: string) => {
@@ -65,11 +67,13 @@ export function TimelineItem({
       {/* Right: Card */}
       <div className={`relative pl-6 md:pl-8 ${!isLast ? 'pb-12' : ''}`}>
         {/* Vertical connector line */}
-        {!isLast && (
+        {!hideDot && !isLast && (
           <div className="absolute left-0 top-5 bottom-0 w-[1px] bg-border/40" />
         )}
         {/* Dot */}
-        <div className="absolute left-[-4px] top-5 h-2.5 w-2.5 rounded-full bg-foreground ring-4 ring-background z-10" />
+        {!hideDot && (
+          <div className="absolute left-[-4px] top-5 h-2.5 w-2.5 rounded-full bg-foreground ring-4 ring-background z-10" />
+        )}
 
         {/* Content Card */}
         <div className="relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 transition-all duration-300 group-hover:bg-card/60 group-hover:border-foreground/[0.12] group-hover:shadow-md group-hover:shadow-foreground/[0.03]">

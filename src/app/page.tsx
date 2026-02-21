@@ -1,7 +1,8 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { ChevronRight, ArrowDown, ArrowRight, Mail, Music, Monitor, Headphones, Keyboard, Coffee, Star, Sparkles } from "lucide-react";
+import { ChevronRight, ArrowDown, ArrowRight, Mail, Music, Monitor, Headphones, Keyboard, Coffee, Star, Sparkles, MapPin } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { CopyEmailButton } from "@/components/CopyEmailButton";
 import { ContactModal } from "@/components/ContactModal";
 import Image from "next/image";
@@ -12,7 +13,7 @@ import { ProjectCaseStudy } from "@/components/ProjectCaseStudy";
 import { TimelineItem } from "@/components/TimelineItem";
 import { AboutSection } from "@/components/AboutSection";
 import { BentoGrid } from "@/components/BentoGrid";
-import Dither from "@/components/Dither";
+import { FinalSection } from "@/components/FinalSection";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
@@ -143,41 +144,23 @@ export default function Home() {
   const fullText = "Developing innovative tools to\nempower students and businesses";
   const { isDone, setDone } = useIntro();
 
-  // Final section state
-  const [rating, setRating] = useState(0);
-  const [hoverRating, setHoverRating] = useState(0);
-  const [hasConfetti, setHasConfetti] = useState(false);
-  const [showThanks, setShowThanks] = useState(false);
   const finalSectionRef = useRef<HTMLDivElement>(null);
 
-  // Confetti on scroll to bottom
-  useEffect(() => {
-    if (!finalSectionRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasConfetti) {
-          setHasConfetti(true);
-          const duration = 2500;
-          const end = Date.now() + duration;
-          const frame = () => {
-            confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0, y: 0.7 } });
-            confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1, y: 0.7 } });
-            if (Date.now() < end) requestAnimationFrame(frame);
-          };
-          frame();
-        }
-      },
-      { threshold: 0.5 }
-    );
-    observer.observe(finalSectionRef.current);
-    return () => observer.disconnect();
-  }, [hasConfetti]);
+  // Timeline Scroll Logic
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start center", "end center"]
+  });
 
-  const handleRate = useCallback((star: number) => {
-    setRating(star);
-    setShowThanks(true);
-    confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
-  }, []);
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  // Map progress to Y position (from top dot to bottom end)
+  const dotY = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   useEffect(() => {
     // Disable browser's built-in scroll restoration (it's unreliable with animated layouts)
@@ -185,18 +168,18 @@ export default function Home() {
       window.history.scrollRestoration = 'manual';
     }
 
+    let restoreTimer: NodeJS.Timeout;
+
     // --- Section Memory: restore scroll position ---
     const savedSection = sessionStorage.getItem('portfolio-active-section');
     if (savedSection) {
       // Wait for animations to finish, then scroll to saved section
-      const restoreTimer = setTimeout(() => {
+      restoreTimer = setTimeout(() => {
         const el = document.getElementById(savedSection);
         if (el) {
           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }, 1200); // wait for fade-in animations
-      // Clean up restore timer
-      var cleanRestore = () => clearTimeout(restoreTimer);
     }
 
     // --- Section Memory: track current section on scroll ---
@@ -228,24 +211,24 @@ export default function Home() {
     let currentText = "";
     let index = 0;
     
-    const interval = setInterval(() => {
+    const typingInterval = setInterval(() => {
       if (index < fullText.length) {
         currentText += fullText[index];
         setText(currentText);
         index++;
       } else {
-        clearInterval(interval);
+        clearInterval(typingInterval);
       }
-    }, 40); // Slightly faster typing
+    }, 40);
 
     return () => {
       clearTimeout(timer);
       clearTimeout(observeTimer);
-      if (cleanRestore) cleanRestore();
-      clearInterval(interval);
+      if (restoreTimer) clearTimeout(restoreTimer);
+      clearInterval(typingInterval);
       sectionObserver.disconnect();
     };
-  }, [setDone]);
+  }, [setDone, fullText]);
 
   return (
     <div className="flex flex-col relative overflow-x-clip">
@@ -442,14 +425,34 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="space-y-4">
-          {experiences.map((exp, index) => (
-            <TimelineItem 
-              key={index}
-              {...exp}
-              isLast={index === experiences.length - 1}
+        <div className="relative">
+          {/* Global Vertical Line for the whole section */}
+          <div className="absolute left-[3px] md:left-[224px] top-5 bottom-0 w-[1px] bg-border/40" />
+          
+          {/* Animated Scrolling Profile Image */}
+          <motion.div 
+            style={{ top: dotY }}
+            className="absolute left-[-11px] md:left-[210px] h-7 w-7 rounded-full border-2 border-background overflow-hidden shadow-lg z-20 mt-1.5"
+          >
+            <Image 
+              src="/profile-v3.jpg" 
+              alt="Thanakon" 
+              width={28} 
+              height={28} 
+              className="object-cover h-full w-full scale-125"
             />
-          ))}
+          </motion.div>
+
+          <div ref={timelineRef} className="space-y-4">
+            {experiences.map((exp, index) => (
+              <TimelineItem 
+                key={index}
+                {...exp}
+                hideDot={true}
+                isLast={index === experiences.length - 1}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -564,55 +567,7 @@ export default function Home() {
 
         </div>
       </section>
-      {/* Final Section — Thanks for scrolling */}
-      <section
-        ref={finalSectionRef}
-        className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[2200ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
-      >
-        <div className="relative rounded-3xl border border-foreground/[0.06] overflow-hidden min-h-[400px] flex items-center justify-center">
-          {/* Dither Background */}
-          <div className="absolute inset-0 z-0 opacity-30 dark:opacity-40">
-            <Dither
-              waveColor={[1.0, 1.0, 1.0]}
-              disableAnimation={false}
-              enableMouseInteraction
-              mouseRadius={0.3}
-              colorNum={4}
-              waveAmplitude={0.3}
-              waveFrequency={3}
-              waveSpeed={0.05}
-            />
-          </div>
-          {/* Radial overlay for text readability */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-background/90 via-background/60 to-transparent z-[1] pointer-events-none" />
-          
-          <div className="relative z-10 flex flex-col items-center text-center py-16 px-8 space-y-8">
-            {/* Message */}
-            <div className="space-y-3">
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
-                Thanks for visiting!
-              </h2>
-              <p className="text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
-                I appreciate you taking the time to explore my work. If you&apos;d like to leave a message, feel free to drop a note in the guestbook.
-              </p>
-            </div>
-
-            {/* Guestbook Button */}
-            <Button variant="outline" className="rounded-xl text-sm font-semibold gap-2 px-6 py-5 border-foreground/10 hover:bg-foreground/[0.04] backdrop-blur-md bg-background/50">
-              <ArrowRight className="h-4 w-4" /> Leave a note
-            </Button>
-
-            {/* Site Meta */}
-            <div className="flex items-center gap-6 text-[10px] font-mono text-muted-foreground/40 uppercase tracking-widest pt-4">
-              <span>v2.0</span>
-              <span className="opacity-30">•</span>
-              <span>Next.js + TypeScript</span>
-              <span className="opacity-30">•</span>
-              <span>© {new Date().getFullYear()}</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FinalSection />
     </div>
   );
 }
