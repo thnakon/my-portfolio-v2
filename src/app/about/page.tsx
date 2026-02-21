@@ -34,13 +34,17 @@ export default function AboutPage() {
   }, [setDone])
 
   return (
-    <div className={`pt-32 pb-32 transition-all duration-1000 ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
-      <section className="container mx-auto px-8 mb-32">
+    <div className="pt-32 pb-32">
+      {/* About Section */}
+      <section className={`container mx-auto px-8 mb-32 transition-all duration-1000 ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
         <AboutSection />
       </section>
 
       {/* Experience Section */}
-      <section className="container mx-auto px-8 pb-32">
+      <section 
+        id="experience" 
+        className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1800ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+      >
         <div className="flex items-center justify-between mb-12">
           <div className="space-y-1">
             <h2 className="text-2xl font-bold tracking-tight uppercase">Experience</h2>
