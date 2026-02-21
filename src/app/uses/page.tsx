@@ -112,7 +112,7 @@ const rightCategories = [
 
 export default function UsesPage() {
   const { isDone, setDone } = useIntro()
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
+  const [hoveredItem, setHoveredItem] = useState<string | null>("MacBook Air M2")
 
   useEffect(() => {
     setDone(true)
@@ -171,9 +171,9 @@ export default function UsesPage() {
               {categories[0].items.map((item) => (
                 <div 
                   key={item.name}
-                  onMouseEnter={() => item.name === "MacBook Air M2" && setHoveredItem(item.name)}
-                  onMouseLeave={() => item.name === "MacBook Air M2" && setHoveredItem(null)}
-                  className={`group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] w-full sm:w-[calc(50%-8px)]`}
+                  onMouseEnter={() => {}}
+                  onMouseLeave={() => {}}
+                  className={`group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] w-full sm:w-[calc(50%-8px)] ${item.name === "MacBook Air M2" ? "border-foreground/20 bg-card/60 shadow-md shadow-foreground/[0.02]" : ""}`}
                 >
                   <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
                     <item.icon className="h-5 w-5 text-foreground/50" />
@@ -184,7 +184,7 @@ export default function UsesPage() {
                   </div>
                   
                   {item.name === "MacBook Air M2" && (
-                    <div className="ml-auto opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+                    <div className="ml-auto opacity-100 transition-all duration-300">
                       <ArrowRight className="h-4 w-4 text-primary" />
                     </div>
                   )}
