@@ -40,10 +40,10 @@ const categories = [
     title: "Hardware",
     description: "The tools I touch every day.",
     items: [
-      { name: "MacBook Air M2", detail: "13.6-inch", icon: Laptop, logo: "apple" },
+      { name: "MacBook Air M2", detail: "13.6-inch", icon: Laptop },
       { name: "Lofree Flow", detail: "Low Profile", icon: Keyboard },
-      { name: "Logitech G Pro", detail: "Wireless", icon: Mouse, logo: "logitechg" },
-      { name: "ASUS ProArt", detail: "Color Accurate", icon: Monitor, logo: "asus" },
+      { name: "Logitech G Pro", detail: "Wireless", icon: Mouse },
+      { name: "ASUS ProArt", detail: "Color Accurate", icon: Monitor },
     ]
   },
   {
@@ -254,16 +254,8 @@ export default function UsesPage() {
                     onClick={() => hasDetail && setHoveredItem(item.name)}
                     className={`group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] w-full cursor-pointer ${isHovered ? "border-foreground/20 bg-card/60 shadow-md shadow-foreground/[0.02]" : ""}`}
                   >
-                    <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors overflow-hidden">
-                      {item.logo ? (
-                        <img 
-                          src={`https://cdn.simpleicons.org/${item.logo}`} 
-                          alt={item.name} 
-                          className={`h-5 w-5 object-contain transition-all duration-300 group-hover:scale-110 active:scale-95 ${isHovered ? "grayscale-0" : "grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100"}`}
-                        />
-                      ) : (
-                        <item.icon className={`h-5 w-5 transition-colors ${isHovered ? "text-primary" : "text-foreground/50"}`} />
-                      )}
+                    <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
+                      <item.icon className={`h-5 w-5 transition-colors ${isHovered ? "text-primary" : "text-foreground/50"}`} />
                     </div>
                     <div className="min-w-0">
                       <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
