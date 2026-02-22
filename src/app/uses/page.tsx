@@ -150,6 +150,19 @@ const hardwareDetails = {
       { label: "DPI", value: "100 - 25,600" },
       { label: "Battery", value: "Up to 60 hours" },
     ]
+  },
+  "ASUS ProArt": {
+    title: "ASUS ProArt",
+    subtitle: "Color Accurate",
+    description: "Professional-grade monitor designed for creative workflows.",
+    image: "/projects/asus-proart.png",
+    link: "https://www.asus.com/displays-desktops/monitors/proart/filter?Series=ProArt",
+    specs: [
+      { label: "Resolution", value: "4K UHD" },
+      { label: "Panel", value: "IPS" },
+      { label: "Color Space", value: "100% sRGB" },
+      { label: "Delta E", value: "< 2 Accuracy" },
+    ]
   }
 }
 
