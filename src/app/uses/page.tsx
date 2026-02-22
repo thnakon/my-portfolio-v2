@@ -111,6 +111,35 @@ const rightCategories = [
   categories[5], // Music & Focus
 ]
 
+const hardwareDetails = {
+  "MacBook Air M2": {
+    title: "MacBook Air M2",
+    subtitle: "13.6-inch",
+    description: "My primary powerhouse for development and design.",
+    image: "/projects/macbook-air-m2.png",
+    link: "https://www.apple.com/macbook-air-m2/",
+    specs: [
+      { label: "Color", value: "Midnight" },
+      { label: "Display", value: "Liquid Retina" },
+      { label: "Memory", value: "16 GB RAM" },
+      { label: "Storage", value: "245 GB SSD" },
+    ]
+  },
+  "Lofree Flow": {
+    title: "Lofree Flow",
+    subtitle: "Low Profile",
+    description: "The smoothest low-profile mechanical keyboard experience.",
+    image: "/projects/lofree-flow.png",
+    link: "https://www.lofree.co/products/lofree-flow-artistic-mechanical-keyboard",
+    specs: [
+      { label: "Switch", value: "Phantom (Tactile)" },
+      { label: "Material", value: "Aluminum" },
+      { label: "Mount", value: "Gasket Mount" },
+      { label: "Keycaps", value: "PBT Dye-sub" },
+    ]
+  }
+}
+
 export default function UsesPage() {
   const { isDone, setDone } = useIntro()
   const [hoveredItem, setHoveredItem] = useState<string | null>("MacBook Air M2")
@@ -169,87 +198,87 @@ export default function UsesPage() {
               <p className="text-sm text-muted-foreground">{categories[0].description}</p>
             </div>
             <div className="flex flex-col gap-4">
-              {categories[0].items.map((item) => (
-                <div 
-                  key={item.name}
-                  onMouseEnter={() => {}}
-                  onMouseLeave={() => {}}
-                  className={`group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] w-full ${item.name === "MacBook Air M2" ? "border-foreground/20 bg-card/60 shadow-md shadow-foreground/[0.02]" : ""}`}
-                >
-                  <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
-                    <item.icon className="h-5 w-5 text-foreground/50" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
-                    <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
-                  </div>
-                  
-                  {item.name === "MacBook Air M2" && (
-                    <div className="ml-auto opacity-100 transition-all duration-300">
-                      <ArrowRight className="h-4 w-4 text-primary" />
+              {categories[0].items.map((item) => {
+                const isHovered = hoveredItem === item.name || (!hoveredItem && item.name === "MacBook Air M2")
+                const hasDetail = !!hardwareDetails[item.name as keyof typeof hardwareDetails]
+                
+                return (
+                  <div 
+                    key={item.name}
+                    onMouseEnter={() => hasDetail && setHoveredItem(item.name)}
+                    onMouseLeave={() => setHoveredItem("MacBook Air M2")}
+                    className={`group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] w-full ${isHovered ? "border-foreground/20 bg-card/60 shadow-md shadow-foreground/[0.02]" : ""}`}
+                  >
+                    <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
+                      <item.icon className={`h-5 w-5 transition-colors ${isHovered ? "text-primary" : "text-foreground/50"}`} />
                     </div>
-                  )}
-                </div>
-              ))}
+                    <div className="min-w-0">
+                      <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
+                      <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
+                    </div>
+                    
+                    {hasDetail && isHovered && (
+                      <div className="ml-auto opacity-100 transition-all duration-300">
+                        <ArrowRight className="h-4 w-4 text-primary" />
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </motion.div>
           <motion.div 
+            key={hoveredItem}
             initial={{ opacity: 0, x: 20 }}
-            animate={{ 
-              opacity: hoveredItem === "MacBook Air M2" ? 1 : 0,
-              x: hoveredItem === "MacBook Air M2" ? 0 : 20
-            }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
             className="md:col-span-3 flex flex-col gap-6"
           >
-            <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-8">
-              <div className="shrink-0 md:max-w-[180px] pt-4 flex flex-col justify-between">
-                <div className="space-y-1">
-                  <h3 className="text-2xl font-bold tracking-tight leading-tight">MacBook Air M2</h3>
-                  <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-widest leading-relaxed">13.6-inch</p>
-                </div>
-                
-                <div className="pb-2">
-                  <a 
-                    href="https://www.apple.com/macbook-air-m2/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-primary hover:text-primary/80 transition-colors group/link"
-                  >
-                    Product Info
-                    <ExternalLink className="h-3 w-3 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
-                  </a>
-                </div>
-              </div>
+            {(() => {
+              const details = hardwareDetails[hoveredItem as keyof typeof hardwareDetails] || hardwareDetails["MacBook Air M2"]
+              
+              return (
+                <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-8 min-h-[200px]">
+                  <div className="shrink-0 md:max-w-[180px] pt-4 flex flex-col justify-between">
+                    <div className="space-y-1">
+                      <h3 className="text-2xl font-bold tracking-tight leading-tight">{details.title}</h3>
+                      <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-widest leading-relaxed">{details.subtitle}</p>
+                    </div>
+                    
+                    <div className="pb-2">
+                      <a 
+                        href={details.link}
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-primary hover:text-primary/80 transition-colors group/link"
+                      >
+                        Product Info
+                        <ExternalLink className="h-3 w-3 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
+                      </a>
+                    </div>
+                  </div>
 
-              <div className="relative aspect-video flex-1 overflow-hidden">
-                <Image 
-                  src="/projects/macbook-air-m2.png" 
-                  alt="MacBook Air M2" 
-                  fill 
-                  className="object-contain"
-                />
-              </div>
+                  <div className="relative aspect-video flex-1 overflow-hidden">
+                    <Image 
+                      src={details.image}
+                      alt={details.title}
+                      fill 
+                      className="object-contain"
+                    />
+                  </div>
 
-              <div className="space-y-4 shrink-0 md:max-w-[150px] pt-4 md:text-right">
-                <div className="space-y-0.5">
-                  <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest">Color</p>
-                  <p className="text-[11px] font-bold">Midnight</p>
+                  <div className="space-y-4 shrink-0 md:max-w-[150px] pt-4 md:text-right">
+                    {details.specs.map((spec) => (
+                      <div key={spec.label} className="space-y-0.5">
+                        <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest">{spec.label}</p>
+                        <p className="text-[11px] font-bold">{spec.value}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="space-y-0.5">
-                  <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest">Display</p>
-                  <p className="text-[11px] font-bold">Liquid Retina</p>
-                </div>
-                <div className="space-y-0.5">
-                  <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest">Memory</p>
-                  <p className="text-[11px] font-bold">16 GB RAM</p>
-                </div>
-                <div className="space-y-0.5">
-                  <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest">Storage</p>
-                  <p className="text-[11px] font-bold">245 GB SSD</p>
-                </div>
-              </div>
-            </div>
-
+              )
+            })()}
           </motion.div>
 
           {/* Row 2: Development & Design (2:2 Ratio) */}
