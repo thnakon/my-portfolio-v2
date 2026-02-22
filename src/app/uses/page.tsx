@@ -137,6 +137,19 @@ const hardwareDetails = {
       { label: "Mount", value: "Gasket Mount" },
       { label: "Keycaps", value: "PBT Dye-sub" },
     ]
+  },
+  "Logitech G Pro": {
+    title: "Logitech G Pro",
+    subtitle: "Wireless",
+    description: "Iconic shape with pro-grade performance and accuracy.",
+    image: "/projects/gpro-wireless.png",
+    link: "https://www.logitechg.com/en-us/products/gaming-mice/pro-wireless-mouse.910-005270.html",
+    specs: [
+      { label: "Sensor", value: "HERO 25K" },
+      { label: "Weight", value: "80 grams" },
+      { label: "DPI", value: "100 - 25,600" },
+      { label: "Battery", value: "Up to 60 hours" },
+    ]
   }
 }
 
