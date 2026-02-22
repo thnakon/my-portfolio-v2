@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/tooltip";
 import { experiences } from "@/data/experiences";
 import { projects } from "@/data/projects";
+import { blogs } from "@/data/blogs";
 
 const getIconSlug = (tag: string) => {
   const map: Record<string, string> = {
@@ -394,6 +395,48 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          ))}
+        </div>
+      </section>
+      
+      {/* Recent Journal Section */}
+      <section id="blog" className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1500ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+        <div className="flex items-center justify-between mb-12">
+          <div className="space-y-1">
+            <h2 className="text-2xl font-bold tracking-tight uppercase">Recent Journal</h2>
+            <p className="text-muted-foreground text-sm font-medium">Thoughts on design, engineering, and the future of AI.</p>
+          </div>
+          <Link href="/blog">
+            <Button variant="ghost" size="sm" className="gap-2 rounded-full font-semibold overflow-hidden group">
+              Explore Blog <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogs.slice(0, 3).map((post, index) => (
+            <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
+              <div className="space-y-4">
+                <div className="aspect-[16/9] bg-foreground/[0.03] border border-foreground/[0.05] rounded-3xl overflow-hidden relative transition-all duration-500 group-hover:border-foreground/10 group-hover:shadow-2xl">
+                  <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:scale-110 transition-transform duration-700">
+                     <span className="text-4xl font-black uppercase text-foreground">{post.category}</span>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 rounded-full bg-background/80 backdrop-blur-sm border border-foreground/[0.05] text-[9px] font-black uppercase tracking-widest text-muted-foreground/60">
+                      {post.category}
+                    </span>
+                  </div>
+                </div>
+                <div className="space-y-2 px-1">
+                  <h3 className="text-lg font-bold group-hover:text-foreground/70 transition-colors leading-tight">{post.title}</h3>
+                  <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-widest text-muted-foreground/30">
+                    <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                    <span className="opacity-30">•</span>
+                    <span>{post.readingTime}</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
       </section>
