@@ -216,7 +216,7 @@ export default function UsesPage() {
 
   return (
     <div className="min-h-screen bg-background pt-32">
-      <div className="container mx-auto px-8 max-w-[1200px]">
+      <div className="container mx-auto px-8">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

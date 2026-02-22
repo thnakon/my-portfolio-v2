@@ -138,9 +138,9 @@ export function BentoGrid() {
               Featured Work
             </p>
             <h3 className="font-bold text-lg tracking-tight">Project Archives</h3>
-            <a href="#selected-work" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors">
-              View all project details <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
+            <Link href="/work" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors group/link">
+              View all project details <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+            </Link>
           </div>
         </CardContent>
       </Card>

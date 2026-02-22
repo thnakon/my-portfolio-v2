@@ -2,7 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ChevronRight, ArrowDown, ArrowRight, Mail, Music, Monitor, Headphones, Keyboard, Coffee, Star, Sparkles, MapPin, Laptop, Mouse } from "lucide-react";
+import { 
+  ChevronRight, ArrowDown, ArrowRight, Mail, Music, Monitor, Headphones, 
+  Keyboard, Coffee, Star, Sparkles, MapPin, Laptop, Mouse, Github,
+  Plus, ExternalLink
+} from "lucide-react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { CopyEmailButton } from "@/components/CopyEmailButton";
 import { ContactModal } from "@/components/ContactModal";
@@ -23,54 +27,40 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { experiences } from "@/data/experiences";
+import { projects } from "@/data/projects";
 
-const projects = [
-  {
-    title: "Oboun ERP",
-    description: "A comprehensive Enterprise Resource Planning system designed for SMEs. Streamlining operations across sales, inventory, and finance through high-performance automation.",
-    image: "/projects/oboun-preview.png",
-    hoverImage: "/projects/oboun-pos.png",
-    tags: ["Laravel 11", "Vue.js 3", "MySQL", "Tailwind", "Docker"],
-    githubUrl: "https://github.com/thnakon/ERP_PMS",
-    features: [
-      { text: "Developed with Laravel 12 and Vue.js 3, ensuring long-term maintainability", icon: "Zap" },
-      { text: "Implemented complex logic for real-time multi-warehouse inventory sync", icon: "Inbox" },
-      { text: "Designed automated financial reporting with precise tax and ledger management", icon: "BarChart3" },
-      { text: "Optimized MySQL database with advanced indexing for high-scale performance", icon: "ShieldCheck" }
-    ],
-    isAI: false
-  },
-  {
-    title: "Babybib",
-    description: "Babybib is an advanced, automated bibliography generation system designed to streamline the academic citation process. Built around the APA 7th Edition standard, it empowers students and researchers to create accurate references.",
-    image: "/projects/babybib-preview.png",
-    stackImages: ["/projects/babybib2.png", "/projects/babybib3.png"],
-    githubUrl: "https://github.com/thnakon/Babybib",
-    tags: ["HTML5", "CSS3", "JavaScript", "PHP"],
-    features: [
-      { text: "Architected a robust engine for automated APA 7th Edition citation standards.", icon: "Zap" },
-      { text: "Supports diverse sources including journals, books, and digital media.", icon: "Inbox" },
-      { text: "Built with a responsive UI that prioritizes user productivity and rapid work.", icon: "Smartphone" },
-      { text: "Features real-time bibliography previews and instant validation logic.", icon: "BarChart3" }
-    ],
-    isAI: false
-  },
-  {
-    title: "ScribeHub",
-    description: "ScribeHub is a premium, all-in-one platform for modern researchers. It seamlessly integrates reference management, collaborative tools, and advanced AI intelligence to streamline the entire research lifecycle.",
-    image: "/projects/ScribeHub1.png",
-    hoverImage: "/projects/ScribeHub2.png",
-    githubUrl: "https://github.com/thnakon/scribehub",
-    tags: ["React", "Next.js", "Supabase", "TypeScript", "Tailwind"],
-    features: [
-      { text: "Leveraged OpenAI's GPT-4 to create an intelligent research paper assistant.", icon: "Zap" },
-      { text: "Engineered a collaborative environment with real-time updates for research teams.", icon: "Inbox" },
-      { text: "Integrated a reference management system with automatic metadata extraction.", icon: "ShieldCheck" },
-      { text: "Developed an interactive knowledge graph for visual data discovery.", icon: "BarChart3" }
-    ],
-    isAI: true
-  },
-];
+const getIconSlug = (tag: string) => {
+  const map: Record<string, string> = {
+    "Next.js": "nextdotjs",
+    "React": "react",
+    "Tailwind": "tailwindcss",
+    "Tailwind CSS": "tailwindcss",
+    "TypeScript": "typescript",
+    "MySQL": "mysql",
+    "PHP": "php",
+    "Laravel": "laravel",
+    "Laravel 11": "laravel",
+    "Laravel 12": "laravel",
+    "Vue.js 3": "vuedotjs",
+    "Vu3.js": "vuedotjs",
+    "Supabase": "supabase",
+    "Docker": "docker",
+    "GSAP": "greensock",
+    "Framer Motion": "framer",
+    "Node.js": "nodedotjs",
+    "PostgreSQL": "postgresql",
+    "OpenAI": "openai",
+    "HTML5": "html5",
+    "CSS3": "css3",
+    "JavaScript": "javascript",
+    "Figma": "figma",
+    "Vercel": "vercel",
+    "Claude": "claude",
+    "Gemini": "googlegemini"
+  };
+  return map[tag] || tag.toLowerCase().replace(/\s+/g, "");
+};
+
 
 
 const techStack = {
@@ -282,18 +272,128 @@ export default function Home() {
             <h2 className="text-2xl font-bold tracking-tight uppercase">Selected Work</h2>
             <p className="text-muted-foreground text-sm font-medium">A collection of featured projects and experiments.</p>
           </div>
-          <Button variant="ghost" size="sm" className="gap-2 rounded-full font-semibold overflow-hidden group">
-            View All Projects <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Button>
+          <Link href="/work">
+            <Button variant="ghost" size="sm" className="gap-2 rounded-full font-semibold overflow-hidden group">
+              View All Projects <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
         </div>
 
-        <div className="space-y-16 lg:space-y-32">
+        <div className="flex flex-col gap-0 relative">
           {projects.map((project, index) => (
-            <ProjectCaseStudy 
-              key={index}
-              index={index}
-              {...project}
-            />
+            <div 
+              key={index} 
+              className="sticky top-24 md:top-32 w-full"
+              style={{ 
+                zIndex: index + 1 
+              }}
+            >
+              <div className="bg-background py-20 lg:py-32 border-t border-foreground/[0.03]">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                  
+                  {/* Left Side: Mockup Card (5 cols) */}
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="lg:col-span-7 relative group"
+                  >
+                    <div className="relative aspect-[16/10] bg-white dark:bg-black rounded-[3rem] p-8 lg:p-12 overflow-hidden shadow-2xl border border-foreground/[0.03] dark:border-white/5">
+                      {/* Grid overlay */}
+                      <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" 
+                           style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+                      
+                      <div className="relative z-10 h-full flex flex-col justify-between">
+                        <div className="flex justify-between items-start">
+                          <h4 className="text-foreground text-xl lg:text-2xl font-medium leading-tight max-w-[80%]">
+                            {project.overview.split('.')[0]}.
+                          </h4>
+                          <ArrowRight className="h-8 w-8 text-foreground/20" />
+                        </div>
+                        
+                        {/* Stacked Images/Screenshots */}
+                        <div className="relative mt-8 h-full">
+                          {/* Main screenshot */}
+                          <div className="absolute top-4 left-1/2 -translate-x-1/2 w-[85%] aspect-[16/10] bg-zinc-900 rounded-2xl shadow-2xl border border-white/10 overflow-hidden transform rotate-0 duration-700">
+                            <Image 
+                              src={project.image} 
+                              alt={project.title}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                          {/* Secondary screenshot overlay (if exists) */}
+                          {project.stackImages?.[0] && (
+                            <div className="absolute -bottom-8 -left-4 w-[60%] aspect-[16/10] bg-zinc-800 rounded-2xl shadow-2xl border border-white/10 overflow-hidden transform rotate-0 duration-700 z-20">
+                              <Image 
+                                src={project.stackImages[0]} 
+                                alt={`${project.title} secondary`}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Right Side: Info (5 cols) */}
+                  <div className="lg:col-span-5 space-y-10 pt-4">
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-4">
+                        <div className="h-[2px] w-8 bg-foreground/20" />
+                        <h3 className="text-3xl lg:text-4xl font-semibold tracking-tight text-foreground">{project.title}</h3>
+                      </div>
+                      <p className="text-muted-foreground text-lg leading-relaxed max-w-xl">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    {/* Features List */}
+                    <div className="space-y-4">
+                      {project.features.slice(0, 3).map((feature, i) => (
+                        <div key={i} className="flex items-start gap-3 group/feature">
+                          <Sparkles className="h-4 w-4 text-foreground/30 mt-1 shrink-0 transition-transform group-hover/feature:rotate-12" />
+                          <p className="text-muted-foreground/90 font-medium leading-snug">{feature.text}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Tech Badges & Actions */}
+                    <div className="space-y-8">
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag) => (
+                          <div key={tag} className="flex items-center gap-2 bg-card border border-foreground/[0.08] px-3.5 py-1.5 rounded-xl shadow-sm hover:border-foreground/20 transition-colors">
+                            <img 
+                              src={`https://cdn.simpleicons.org/${getIconSlug(tag)}`} 
+                              className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 transition-opacity dark:invert"
+                              alt={tag}
+                              onError={(e) => (e.currentTarget.style.display = 'none')}
+                            />
+                            <span className="text-[10px] font-bold text-muted-foreground/80 uppercase tracking-widest">{tag}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="flex items-center gap-4">
+                        <Link href={`/work/${project.slug}`} className="flex-1 sm:flex-none">
+                          <Button size="lg" className="w-full rounded-2xl px-12 h-14 font-black uppercase tracking-widest text-[11px] gap-3 bg-foreground text-background hover:scale-[1.02] transition-transform">
+                            Full Case Study <ArrowRight className="h-4 w-4" />
+                          </Button>
+                        </Link>
+                        {project.githubUrl && (
+                          <Link href={project.githubUrl} target="_blank" className="h-14 w-14 rounded-2xl border border-foreground/10 flex items-center justify-center hover:bg-foreground/[0.03] transition-all hover:scale-105 group">
+                            <Github className="h-5 w-5 text-muted-foreground/40 group-hover:text-foreground transition-colors" />
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </section>

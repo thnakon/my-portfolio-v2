@@ -39,7 +39,7 @@ export function Footer() {
               <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 mb-2 whitespace-nowrap">Navigation</h4>
               <div className="grid grid-cols-2 md:flex md:flex-col gap-x-8 gap-y-2 text-left md:text-right">
                 <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Home</Link>
-                <Link href="/projects" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Projects</Link>
+                <Link href="/work" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Work</Link>
                 <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About</Link>
                 <Link href="/guestbook" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Guestbook</Link>
               </div>
