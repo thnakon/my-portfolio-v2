@@ -40,24 +40,24 @@ const categories = [
     title: "Hardware",
     description: "The tools I touch every day.",
     items: [
-      { name: "MacBook Air M2", detail: "13.6-inch", icon: Laptop },
+      { name: "MacBook Air M2", detail: "13.6-inch", icon: Laptop, logo: "apple" },
       { name: "Lofree Flow", detail: "Low Profile", icon: Keyboard },
-      { name: "Logitech G Pro", detail: "Wireless", icon: Mouse },
-      { name: "ASUS ProArt", detail: "Color Accurate", icon: Monitor },
+      { name: "Logitech G Pro", detail: "Wireless", icon: Mouse, logo: "logitechg" },
+      { name: "ASUS ProArt", detail: "Color Accurate", icon: Monitor, logo: "asus" },
     ]
   },
   {
     title: "Development & Engineering",
     description: "Where the magic happens.",
     items: [
-      { name: "VS Code", detail: "Main IDE", icon: Code2 },
-      { name: "Warp", detail: "Terminal", icon: Terminal },
-      { name: "TablePlus", detail: "DB Manager", icon: Database },
-      { name: "Postman", detail: "API Testing", icon: Globe },
-      { name: "Docker", detail: "Containers", icon: Box },
-      { name: "Github", detail: "Source Control", icon: Github },
-      { name: "GitLab", detail: "Source Control", icon: GitGraph },
-      { name: "Sourcetree", detail: "Git Client", icon: GitGraph },
+      { name: "VS Code", detail: "Main IDE", icon: Code2, logo: "visualstudiocode" },
+      { name: "Warp", detail: "Terminal", icon: Terminal, logo: "warp" },
+      { name: "TablePlus", detail: "DB Manager", icon: Database, logo: "tableplus" },
+      { name: "Postman", detail: "API Testing", icon: Globe, logo: "postman" },
+      { name: "Docker", detail: "Containers", icon: Box, logo: "docker" },
+      { name: "Github", detail: "Source Control", icon: Github, logo: "github" },
+      { name: "GitLab", detail: "Source Control", icon: GitGraph, logo: "gitlab" },
+      { name: "Sourcetree", detail: "Git Client", icon: GitGraph, logo: "sourcetree" },
     ]
   },
   {
@@ -65,36 +65,36 @@ const categories = [
     description: "My intelligent co-thinkers.",
     items: [
       { name: "Antigravity", detail: "AI Assistant", icon: Sparkles },
-      { name: "ChatGPT", detail: "GPT-4", icon: MessageSquare },
-      { name: "Gemini", detail: "Google AI", icon: Cloud },
-      { name: "Claude", detail: "Anthropic", icon: Zap },
+      { name: "ChatGPT", detail: "GPT-4", icon: MessageSquare, logo: "openai" },
+      { name: "Gemini", detail: "Google AI", icon: Cloud, logo: "googlegemini" },
+      { name: "Claude", detail: "Anthropic", icon: Zap, logo: "anthropic" },
     ]
   },
   {
     title: "Design & Productivity",
     description: "Keeping things organized.",
     items: [
-      { name: "Figma", detail: "UI Design", icon: Figma },
-      { name: "1Password", detail: "Auth", icon: Lock },
-      { name: "Notion", detail: "Workflow", icon: FileText },
-      { name: "Raycast", detail: "Launcher", icon: Command },
-      { name: "Notes", detail: "Knowledge", icon: FileText },
+      { name: "Figma", detail: "UI Design", icon: Figma, logo: "figma" },
+      { name: "1Password", detail: "Auth", icon: Lock, logo: "1password" },
+      { name: "Notion", detail: "Workflow", icon: FileText, logo: "notion" },
+      { name: "Raycast", detail: "Launcher", icon: Command, logo: "raycast" },
+      { name: "Notes", detail: "Knowledge", icon: FileText, logo: "apple" },
     ]
   },
   {
     title: "Social & Mobile",
     description: "Staying connected.",
     items: [
-      { name: "Line", detail: "Chat", icon: MessageSquare },
-      { name: "Discord", detail: "Community", icon: Hash },
-      { name: "Xcode", detail: "iOS Dev", icon: Smartphone },
+      { name: "Line", detail: "Chat", icon: MessageSquare, logo: "line" },
+      { name: "Discord", detail: "Community", icon: Hash, logo: "discord" },
+      { name: "Xcode", detail: "iOS Dev", icon: Smartphone, logo: "xcode" },
     ]
   },
   {
     title: "Music & Focus",
     description: "Fueling the flow state.",
     items: [
-      { name: "Apple Music", detail: "Music & Focus", icon: Music },
+      { name: "Apple Music", detail: "Music & Focus", icon: Music, logo: "applemusic" },
     ]
   }
 ]
@@ -194,6 +194,26 @@ export default function UsesPage() {
     }
   }
 
+  const CategoryItem = ({ item }: { item: any }) => (
+    <div className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]">
+      <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors overflow-hidden">
+        {item.logo ? (
+          <img 
+            src={`https://cdn.simpleicons.org/${item.logo}`} 
+            alt={item.name} 
+            className="h-5 w-5 object-contain transition-all duration-300 group-hover:scale-110 grayscale group-hover:grayscale-0 active:scale-95"
+          />
+        ) : (
+          <item.icon className="h-5 w-5 text-foreground/50 transition-colors group-hover:text-primary" />
+        )}
+      </div>
+      <div className="min-w-0">
+        <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight transition-colors group-hover:text-foreground">{item.name}</p>
+        <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
+      </div>
+    </div>
+  )
+
   return (
     <div className="min-h-screen bg-background pt-32">
       <div className="container mx-auto px-8 max-w-[1200px]">
@@ -234,8 +254,16 @@ export default function UsesPage() {
                     onClick={() => hasDetail && setHoveredItem(item.name)}
                     className={`group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02] w-full cursor-pointer ${isHovered ? "border-foreground/20 bg-card/60 shadow-md shadow-foreground/[0.02]" : ""}`}
                   >
-                    <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
-                      <item.icon className={`h-5 w-5 transition-colors ${isHovered ? "text-primary" : "text-foreground/50"}`} />
+                    <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors overflow-hidden">
+                      {item.logo ? (
+                        <img 
+                          src={`https://cdn.simpleicons.org/${item.logo}`} 
+                          alt={item.name} 
+                          className={`h-5 w-5 object-contain transition-all duration-300 group-hover:scale-110 active:scale-95 ${isHovered ? "grayscale-0" : "grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100"}`}
+                        />
+                      ) : (
+                        <item.icon className={`h-5 w-5 transition-colors ${isHovered ? "text-primary" : "text-foreground/50"}`} />
+                      )}
                     </div>
                     <div className="min-w-0">
                       <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
@@ -314,18 +342,7 @@ export default function UsesPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {categories[1].items.map((item) => (
-                <div 
-                  key={item.name}
-                  className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
-                >
-                  <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
-                    <item.icon className="h-5 w-5 text-foreground/50" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
-                    <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
-                  </div>
-                </div>
+                <CategoryItem key={item.name} item={item} />
               ))}
             </div>
           </motion.div>
@@ -336,18 +353,7 @@ export default function UsesPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {categories[3].items.map((item) => (
-                <div 
-                  key={item.name}
-                  className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
-                >
-                  <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
-                    <item.icon className="h-5 w-5 text-foreground/50" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
-                    <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
-                  </div>
-                </div>
+                <CategoryItem key={item.name} item={item} />
               ))}
             </div>
           </motion.div>
@@ -360,18 +366,7 @@ export default function UsesPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {categories[2].items.map((item) => (
-                <div 
-                  key={item.name}
-                  className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
-                >
-                  <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
-                    <item.icon className="h-5 w-5 text-foreground/50" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
-                    <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
-                  </div>
-                </div>
+                <CategoryItem key={item.name} item={item} />
               ))}
             </div>
           </motion.div>
@@ -382,18 +377,7 @@ export default function UsesPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {categories[5].items.map((item) => (
-                <div 
-                  key={item.name}
-                  className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
-                >
-                  <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
-                    <item.icon className="h-5 w-5 text-foreground/50" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
-                    <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
-                  </div>
-                </div>
+                <CategoryItem key={item.name} item={item} />
               ))}
             </div>
           </motion.div>
@@ -406,18 +390,7 @@ export default function UsesPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {categories[4].items.map((item) => (
-                <div 
-                  key={item.name}
-                  className="group relative rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-4 flex items-center gap-4 transition-all duration-300 hover:bg-card/60 hover:border-foreground/[0.12] hover:shadow-md hover:shadow-foreground/[0.02]"
-                >
-                  <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors">
-                    <item.icon className="h-5 w-5 text-foreground/50" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[13px] font-bold text-foreground/90 truncate leading-tight">{item.name}</p>
-                    <p className="text-[11px] text-muted-foreground/60 font-medium truncate">{item.detail}</p>
-                  </div>
-                </div>
+                <CategoryItem key={item.name} item={item} />
               ))}
             </div>
           </motion.div>
