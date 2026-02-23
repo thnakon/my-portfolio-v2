@@ -26,19 +26,19 @@ export function AuthModal({ onClose }: AuthModalProps) {
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="relative w-full max-w-sm bg-zinc-950 border border-white/10 rounded-[2rem] p-8 shadow-2xl overflow-hidden"
+        className="relative w-full max-w-sm bg-background border border-foreground/[0.08] rounded-[2.5rem] p-8 shadow-2xl overflow-hidden"
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 text-muted-foreground hover:text-white transition-colors"
+          className="absolute top-6 right-6 text-muted-foreground hover:text-foreground transition-colors"
         >
           <X className="h-5 w-5" />
         </button>
 
         <div className="space-y-6">
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight text-white">Sign in</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground">Sign in</h2>
             <p className="text-muted-foreground text-sm">
               to continue to thnakon.dev
             </p>
@@ -47,7 +47,7 @@ export function AuthModal({ onClose }: AuthModalProps) {
           <div className="space-y-3 pt-4">
             <Button
               onClick={() => signIn("github")}
-              className="w-full h-14 rounded-2xl bg-white text-black hover:bg-zinc-200 transition-all font-bold text-sm gap-3 group"
+              className="w-full h-14 rounded-2xl bg-foreground text-background hover:opacity-90 transition-all font-bold text-sm gap-3 group"
             >
               <Github className="h-5 w-5" />
               Continue with GitHub
@@ -56,7 +56,7 @@ export function AuthModal({ onClose }: AuthModalProps) {
             <Button
               onClick={() => signIn("google")}
               variant="outline"
-              className="w-full h-14 rounded-2xl border-white/10 bg-transparent text-white hover:bg-white/5 transition-all font-bold text-sm gap-3"
+              className="w-full h-14 rounded-2xl border-foreground/[0.08] bg-transparent text-foreground hover:bg-foreground/[0.03] transition-all font-bold text-sm gap-3"
             >
               <Chrome className="h-5 w-5" />
               Continue with Google
