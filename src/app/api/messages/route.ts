@@ -42,7 +42,7 @@ export async function POST(req: Request) {
     const message = await prisma.message.create({
       data: {
         content,
-        color: color || "pastel-yellow",
+        color: color || "black",
         rotation: rotation || 0,
         x: x || 0,
         y: y || 0,

@@ -12,15 +12,15 @@ interface NoteEditorProps {
 
 export function NoteEditor({ onSave, onClose }: NoteEditorProps) {
   const [content, setContent] = useState("")
-  const [color, setColor] = useState("pastel-yellow")
+  const [color, setColor] = useState("black")
   const [isSaving, setIsSaving] = useState(false)
 
   const colors = [
-    { id: "pastel-yellow", class: "bg-[#FEF9C3] border-[#FEF08A]" },
-    { id: "pastel-pink", class: "bg-[#FCE7F3] border-[#FBCFE8]" },
-    { id: "pastel-blue", class: "bg-[#E0F2FE] border-[#BAE6FD]" },
-    { id: "pastel-green", class: "bg-[#DCFCE7] border-[#BBF7D0]" },
-    { id: "pastel-purple", class: "bg-[#F3E8FF] border-[#E9D5FF]" },
+    { id: "black", label: "Black", class: "bg-zinc-800 border-zinc-900" },
+    { id: "red", label: "Red", class: "bg-rose-600 border-rose-700" },
+    { id: "blue", label: "Blue", class: "bg-blue-600 border-blue-700" },
+    { id: "green", label: "Green", class: "bg-emerald-600 border-emerald-700" },
+    { id: "purple", label: "Purple", class: "bg-purple-600 border-purple-700" },
   ]
 
   const handleSubmit = async () => {
