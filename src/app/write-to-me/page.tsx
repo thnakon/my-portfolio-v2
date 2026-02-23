@@ -63,12 +63,12 @@ export default function GuestbookPage() {
     <div className="pt-32 pb-32">
 
       {/* Header Overlay */}
-      <header className="relative z-10 container mx-auto px-8 pb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <header className="relative z-10 container mx-auto px-8 mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
         <div className="space-y-4">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-extrabold tracking-tighter leading-none text-foreground"
+            className="text-4xl md:text-5xl font-extrabold tracking-tight uppercase"
           >
             Write to me
           </motion.h1>
@@ -76,7 +76,7 @@ export default function GuestbookPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg text-muted-foreground max-w-xl font-medium"
+            className="text-muted-foreground text-lg max-w-2xl leading-relaxed"
           >
             Leave a note, share a thought, or just say hi. Your messages are pinned here for everyone to see.
           </motion.p>
