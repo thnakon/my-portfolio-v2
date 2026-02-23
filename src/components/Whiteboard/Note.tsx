@@ -95,6 +95,7 @@ export function Note({ message, isAdmin, onDelete }: NoteProps) {
                 src={message.user.image}
                 alt={message.user.name || "User"}
                 fill
+                sizes="20px"
                 className="object-cover"
               />
             </div>
