@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { formatDistanceToNow } from "date-fns"
 import Image from "next/image"
-import { Trash2 } from "lucide-react"
+import { Trash2, Pencil } from "lucide-react"
 
 interface NoteProps {
   message: {
@@ -16,16 +16,19 @@ interface NoteProps {
     y: number
     rating?: number | null
     emoji?: string | null
+    userId: string
     user: {
       name: string | null
       image: string | null
     }
   }
   isAdmin?: boolean
+  isOwner?: boolean
   onDelete?: (id: string) => Promise<void>
+  onEdit?: (message: any) => void
 }
 
-export function Note({ message, isAdmin, onDelete }: NoteProps) {
+export function Note({ message, isAdmin, isOwner, onDelete, onEdit }: NoteProps) {
   const markerColors: Record<string, string> = {
     "black": "text-zinc-800 dark:text-zinc-200",
     "blue": "text-blue-600 dark:text-blue-400",
@@ -48,15 +51,25 @@ export function Note({ message, isAdmin, onDelete }: NoteProps) {
       whileHover={{ scale: 1.02, zIndex: 50 }}
       className={`relative w-full p-4 cursor-default selection:bg-black/5 font-handwriting ${selectedColor} group`}
     >
-      {/* Admin Delete Button */}
-      {isAdmin && onDelete && (
-        <button
-          onClick={() => onDelete(message.id)}
-          className="absolute -top-2 -right-2 p-1.5 bg-background border border-foreground/[0.08] text-rose-500 rounded-lg shadow-sm opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:bg-rose-50 dark:hover:bg-rose-950/20"
-        >
-          <Trash2 className="h-3.5 w-3.5" />
-        </button>
-      )}
+      {/* Actions (Hover) */}
+      <div className="absolute -top-2 -right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10 font-sans">
+        {isOwner && onEdit && (
+          <button
+            onClick={() => onEdit(message)}
+            className="p-1.5 bg-background border border-foreground/[0.08] text-foreground rounded-lg shadow-sm hover:bg-foreground/[0.03] transition-colors"
+          >
+            <Pencil className="h-3.5 w-3.5" />
+          </button>
+        )}
+        {(isAdmin || isOwner) && onDelete && (
+          <button
+            onClick={() => onDelete(message.id)}
+            className="p-1.5 bg-background border border-foreground/[0.08] text-rose-500 rounded-lg shadow-sm hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-colors"
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+          </button>
+        )}
+      </div>
 
       {/* Content (Markers have slightly varying thickness and opacity) */}
       <div className="relative">

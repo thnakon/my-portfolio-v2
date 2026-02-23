@@ -8,13 +8,19 @@ import { Button } from "@/components/ui/button"
 interface NoteEditorProps {
   onSave: (note: { content: string; color: string; rating: number | null; emoji: string | null }) => Promise<void>
   onClose: () => void
+  initialData?: {
+    content: string
+    color: string
+    rating: number | null
+    emoji: string | null
+  }
 }
 
-export function NoteEditor({ onSave, onClose }: NoteEditorProps) {
-  const [content, setContent] = useState("")
-  const [color, setColor] = useState("black")
-  const [rating, setRating] = useState<number | null>(null)
-  const [selectedEmoji, setSelectedEmoji] = useState<string | null>(null)
+export function NoteEditor({ onSave, onClose, initialData }: NoteEditorProps) {
+  const [content, setContent] = useState(initialData?.content || "")
+  const [color, setColor] = useState(initialData?.color || "black")
+  const [rating, setRating] = useState<number | null>(initialData?.rating || null)
+  const [selectedEmoji, setSelectedEmoji] = useState<string | null>(initialData?.emoji || null)
   const [isSaving, setIsSaving] = useState(false)
 
   const emojis = ["✨", "🚀", "❤️", "💡", "🔥", "🎨", "💻", "☕"]
@@ -69,9 +75,11 @@ export function NoteEditor({ onSave, onClose }: NoteEditorProps) {
 
         <div className="space-y-8">
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight text-foreground">Write a note</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground">
+              {initialData ? "Edit your note" : "Write a note"}
+            </h2>
             <p className="text-muted-foreground text-sm">
-              share a thought or just say hi to everyone.
+              {initialData ? "update your message for everyone to see." : "share a thought or just say hi to everyone."}
             </p>
           </div>
 
@@ -150,7 +158,7 @@ export function NoteEditor({ onSave, onClose }: NoteEditorProps) {
             {isSaving ? (
               <Loader2 className="h-5 w-5 animate-spin" />
             ) : (
-              "Post your note"
+              initialData ? "Save changes" : "Post your note"
             )}
           </Button>
         </div>

@@ -16,6 +16,7 @@ export default function GuestbookPage() {
   const [messages, setMessages] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [isEditorOpen, setIsEditorOpen] = useState(false)
+  const [editingMessage, setEditingMessage] = useState<any>(null)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 
@@ -39,7 +40,11 @@ export default function GuestbookPage() {
   }
 
   const handleDeleteNote = async (id: string) => {
-    if (session?.user?.email !== "thnakon.d@gmail.com") return
+    const message = messages.find(m => m.id === id)
+    const isOwner = message?.userId === (session?.user as any)?.id
+    const isAdmin = session?.user?.email === "thnakon.d@gmail.com"
+
+    if (!isAdmin && !isOwner) return
     
     if (!confirm("Are you sure you want to delete this note?")) return
 
@@ -56,24 +61,44 @@ export default function GuestbookPage() {
     }
   }
 
-  const handleSaveNote = async (note: { 
+  const handleEditNote = (message: any) => {
+    setEditingMessage(message)
+    setIsEditorOpen(true)
+  }
+
+  const handleSaveNote = async (noteData: { 
     content: string; 
     color: string; 
     rating: number | null; 
     emoji: string | null 
   }) => {
-    const rotation = (Math.random() - 0.5) * 10
-
     try {
-      const res = await fetch("/api/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...note, rotation }),
-      })
+      if (editingMessage) {
+        // Update existing note
+        const res = await fetch(`/api/messages/${editingMessage.id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(noteData),
+        })
 
-      if (res.ok) {
-        const newMessage = await res.json()
-        setMessages([newMessage, ...messages])
+        if (res.ok) {
+          const updatedMessage = await res.json()
+          setMessages(messages.map(m => m.id === updatedMessage.id ? updatedMessage : m))
+          setEditingMessage(null)
+        }
+      } else {
+        // Create new note
+        const rotation = (Math.random() - 0.5) * 10
+        const res = await fetch("/api/messages", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...noteData, rotation }),
+        })
+
+        if (res.ok) {
+          const newMessage = await res.json()
+          setMessages([newMessage, ...messages])
+        }
       }
     } catch (error) {
       console.error("Failed to save note:", error)
@@ -141,6 +166,7 @@ export default function GuestbookPage() {
           <Button
             onClick={() => {
               if (status === "authenticated") {
+                setEditingMessage(null)
                 setIsEditorOpen(true)
               } else {
                 setIsAuthModalOpen(true)
@@ -181,7 +207,9 @@ export default function GuestbookPage() {
                     <Note 
                       message={message} 
                       isAdmin={isAdmin}
+                      isOwner={message.userId === (session?.user as any)?.id}
                       onDelete={handleDeleteNote}
+                      onEdit={handleEditNote}
                     />
                   </div>
                 ))}
@@ -199,7 +227,11 @@ export default function GuestbookPage() {
         {isEditorOpen && (
           <NoteEditor
             onSave={handleSaveNote}
-            onClose={() => setIsEditorOpen(false)}
+            onClose={() => {
+              setIsEditorOpen(false)
+              setEditingMessage(null)
+            }}
+            initialData={editingMessage}
           />
         )}
         {isAuthModalOpen && (
