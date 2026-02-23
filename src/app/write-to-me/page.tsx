@@ -175,7 +175,7 @@ export default function GuestbookPage() {
 
       {/* Main Whiteboard Area */}
       <main className="flex-1 relative container mx-auto px-8 pb-32">
-        <div className="relative w-full min-h-[400px] border-2 border-dashed border-foreground/[0.05] rounded-[3rem] overflow-hidden bg-foreground/[0.01]">
+        <div className="relative w-full min-h-[1200px] border-2 border-dashed border-foreground/[0.05] rounded-[3rem] overflow-hidden bg-foreground/[0.01]">
           {/* Grid Background */}
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
           
