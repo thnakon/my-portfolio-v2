@@ -83,9 +83,9 @@ export function Note({ message, isAdmin, onDelete }: NoteProps) {
         )}
 
         {/* Signature / Info */}
-        <div className="flex items-center gap-2 mt-4 opacity-40 group-hover:opacity-100 transition-opacity">
+        <div className="flex items-center gap-2 mt-4 opacity-80 group-hover:opacity-100 transition-opacity">
           {message.user.image && (
-            <div className="relative h-5 w-5 rounded-full overflow-hidden grayscale group-hover:grayscale-0 transition-all font-sans">
+            <div className="relative h-5 w-5 rounded-full overflow-hidden transition-all font-sans">
               <Image
                 src={message.user.image}
                 alt={message.user.name || "User"}
@@ -95,12 +95,12 @@ export function Note({ message, isAdmin, onDelete }: NoteProps) {
               />
             </div>
           )}
-          <div className="flex items-center gap-1.5 font-sans text-[10px] font-medium tracking-wide pointer-events-none">
+          <div className="flex items-center gap-1.5 font-sans text-[10px] font-bold tracking-wide pointer-events-none">
             <span className="truncate max-w-[100px]">
               {message.user.name || "Anonymous"}
             </span>
             <span className="opacity-50">•</span>
-            <span className="opacity-50">
+            <span className="opacity-70">
               {formatDistanceToNow(new Date(message.createdAt))} ago
             </span>
           </div>
