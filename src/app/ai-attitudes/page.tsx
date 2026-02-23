@@ -62,12 +62,7 @@ export default function AttitudesAIPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden pt-32">
-      {/* Background Decor */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-foreground/[0.03] rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-foreground/[0.02] rounded-full blur-[120px]" />
-      </div>
+    <div className="pt-32">
 
       <main className="container mx-auto px-8 relative z-10">
         {/* Header Section */}

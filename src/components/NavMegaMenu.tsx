@@ -28,7 +28,7 @@ export function NavMegaMenu() {
               {/* Left Side: Two Large Cards */}
               <div className="col-span-8 grid grid-cols-2 gap-4">
                 <Link
-                  href="/contact"
+                  href="/write-to-me"
                   className="group relative flex h-full min-h-[140px] flex-col justify-end overflow-hidden rounded-xl bg-muted p-4 transition-all hover:ring-2 hover:ring-primary/20"
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />

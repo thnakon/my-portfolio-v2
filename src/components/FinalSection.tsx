@@ -7,6 +7,8 @@ import Dither from "@/components/Dither"
 import confetti from "canvas-confetti"
 import { useIntro } from "@/components/intro-context"
 
+import Link from "next/link"
+
 export function FinalSection() {
   const { isDone } = useIntro()
   const finalSectionRef = useRef<HTMLDivElement>(null)
@@ -71,9 +73,11 @@ export function FinalSection() {
             </p>
           </div>
 
-          <Button variant="outline" className="rounded-xl text-sm font-semibold gap-2 px-6 py-5 border-foreground/10 hover:bg-foreground/[0.04] backdrop-blur-md bg-background/50">
-            <ArrowRight className="h-4 w-4" /> Leave a note
-          </Button>
+          <Link href="/write-to-me">
+            <Button variant="outline" className="rounded-xl text-sm font-semibold gap-2 px-6 py-5 border-foreground/10 hover:bg-foreground/[0.04] backdrop-blur-md bg-background/50">
+              <ArrowRight className="h-4 w-4" /> Leave a note
+            </Button>
+          </Link>
 
           {/* Site Meta */}
           <div className="flex items-center gap-6 text-[10px] font-mono text-muted-foreground/40 uppercase tracking-widest pt-4">

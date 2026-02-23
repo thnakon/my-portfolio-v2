@@ -30,12 +30,7 @@ export default function WorkPage() {
   if (!mounted) return null
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden pt-32">
-      {/* Background Decor */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-foreground/[0.03] rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-foreground/[0.02] rounded-full blur-[120px]" />
-      </div>
+    <div className="pt-32">
 
       <main className="container mx-auto px-8 pb-32 relative z-10">
         {/* Header Section */}
@@ -139,7 +134,7 @@ export default function WorkPage() {
             </Link>
 
             {/* Write to me */}
-            <div className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative">
+            <Link href="/write-to-me" className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative">
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-foreground/[0.015] to-transparent pointer-events-none" />
               <div className="relative z-10 space-y-5">
                 <div className="space-y-1">
@@ -168,7 +163,7 @@ export default function WorkPage() {
               <div className="absolute bottom-6 right-6 h-8 w-8 rounded-full border border-foreground/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
                 <ArrowRight className="h-4 w-4 text-muted-foreground/40" />
               </div>
-            </div>
+            </Link>
 
             {/* Last Played */}
             <div className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative">

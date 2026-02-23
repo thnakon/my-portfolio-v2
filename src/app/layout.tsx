@@ -8,6 +8,14 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+import { Gochi_Hand } from "next/font/google";
+
+const gochiHand = Gochi_Hand({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-gochi",
+});
+
 export const metadata: Metadata = {
   title: "My Portfolio",
   description: "A minimalist developer portfolio",
@@ -21,6 +29,7 @@ import { SidebarLabel } from "@/components/SidebarLabel";
 import { Footer } from "@/components/Footer";
 import { IntroProvider } from "@/components/intro-context";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { AuthContext } from "@/components/auth-context";
 
 export default function RootLayout({
   children,
@@ -29,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${gochiHand.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -37,16 +46,18 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider>
-            <IntroProvider>
-              <div className="relative min-h-screen flex flex-col">
-                <SidebarLabel />
-                <Navbar />
-                <main className="flex-1">
-                  {children}
-                </main>
-                <Footer />
-              </div>
-            </IntroProvider>
+            <AuthContext>
+              <IntroProvider>
+                <div className="relative min-h-screen flex flex-col">
+                  <SidebarLabel />
+                  <Navbar />
+                  <main className="flex-1">
+                    {children}
+                  </main>
+                  <Footer />
+                </div>
+              </IntroProvider>
+            </AuthContext>
           </TooltipProvider>
         </ThemeProvider>
       </body>
