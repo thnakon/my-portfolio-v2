@@ -7,6 +7,7 @@ import { Plus, Github, Chrome, Loader2, Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Note } from "@/components/Whiteboard/Note"
 import { NoteEditor } from "@/components/Whiteboard/NoteEditor"
+import { FinalSection } from "@/components/FinalSection"
 import Image from "next/image"
 
 export default function GuestbookPage() {
@@ -180,14 +181,11 @@ export default function GuestbookPage() {
             </div>
           )}
         </div>
-        
-        {/* Board Labels */}
-        <div className="flex justify-between mt-8 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/30 px-4">
-          <span>Board v1.0</span>
-          <span>Pinned by visitors</span>
-          <span>© {new Date().getFullYear()}</span>
-        </div>
       </main>
+
+      <section className="mt-20">
+        <FinalSection />
+      </section>
 
       <AnimatePresence>
         {isEditorOpen && (
