@@ -60,22 +60,11 @@ export default function GuestbookPage() {
   if (!mounted) return null
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden flex flex-col">
-      {/* Whiteboard Background Texture */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cardboard.png')]" />
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-foreground/[0.02] to-transparent pointer-events-none" />
+    <div className="pt-32 pb-32">
 
       {/* Header Overlay */}
-      <header className="relative z-10 container mx-auto px-8 pt-32 pb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <header className="relative z-10 container mx-auto px-8 pb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
         <div className="space-y-4">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3 text-muted-foreground/60 font-mono text-[11px] uppercase tracking-[0.2em]"
-          >
-            <Plus className="h-3 w-3" />
-            <span>Community Whiteboard</span>
-          </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
