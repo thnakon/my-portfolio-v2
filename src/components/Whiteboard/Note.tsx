@@ -46,12 +46,7 @@ export function Note({ message, isAdmin, onDelete }: NoteProps) {
       initial={{ opacity: 0, scale: 0.9, rotate: message.rotation - 5 }}
       animate={{ opacity: 1, scale: 1, rotate: message.rotation }}
       whileHover={{ scale: 1.02, zIndex: 50 }}
-      className={`absolute w-72 p-4 cursor-default selection:bg-black/5 font-handwriting ${selectedColor} group`}
-      style={{
-        left: `${message.x}%`,
-        top: `${message.y}%`,
-        transform: `translate(-50%, -50%)`,
-      }}
+      className={`relative w-full p-4 cursor-default selection:bg-black/5 font-handwriting ${selectedColor} group`}
     >
       {/* Admin Delete Button */}
       {isAdmin && onDelete && (
