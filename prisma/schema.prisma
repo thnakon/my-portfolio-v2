@@ -62,8 +62,12 @@ model Message {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   
   // Design properties for the whiteboard
-  color     String   @default("pastel-yellow")
+  color     String   @default("black")
   rotation  Float    @default(0)
   x         Float    @default(0)
   y         Float    @default(0)
+  
+  // New features
+  rating    Int?
+  emoji     String?
 }

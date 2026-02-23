@@ -36,17 +36,37 @@ export default function GuestbookPage() {
     }
   }
 
-  const handleSaveNote = async (note: { content: string; color: string }) => {
-    // Generate random positions (avoiding edges)
-    const x = Math.random() * 80 + 10
-    const y = Math.random() * 70 + 15
-    const rotation = (Math.random() - 0.5) * 15
+  const handleDeleteNote = async (id: string) => {
+    if (session?.user?.email !== "thnakon.d@gmail.com") return
+    
+    if (!confirm("Are you sure you want to delete this note?")) return
+
+    try {
+      const res = await fetch(`/api/messages/${id}`, {
+        method: "DELETE",
+      })
+
+      if (res.ok) {
+        setMessages(messages.filter((m) => m.id !== id))
+      }
+    } catch (error) {
+      console.error("Failed to delete note:", error)
+    }
+  }
+
+  const handleSaveNote = async (note: { 
+    content: string; 
+    color: string; 
+    rating: number | null; 
+    emoji: string | null 
+  }) => {
+    const rotation = (Math.random() - 0.5) * 10
 
     try {
       const res = await fetch("/api/messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...note, x, y, rotation }),
+        body: JSON.stringify({ ...note, rotation }),
       })
 
       if (res.ok) {
@@ -60,9 +80,10 @@ export default function GuestbookPage() {
 
   if (!mounted) return null
 
+  const isAdmin = session?.user?.email === "thnakon.d@gmail.com"
+
   return (
     <div className="pt-32 pb-32">
-
       {/* Header Overlay */}
       <header className="relative z-10 container mx-auto px-8 mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
         <div className="space-y-4">
@@ -153,7 +174,7 @@ export default function GuestbookPage() {
 
       {/* Main Whiteboard Area */}
       <main className="flex-1 relative container mx-auto px-8 pb-32">
-        <div className="relative w-full h-[600px] md:h-[800px] border-2 border-dashed border-foreground/[0.05] rounded-[3rem] overflow-hidden bg-foreground/[0.01]">
+        <div className="relative w-full min-h-[800px] border-2 border-dashed border-foreground/[0.05] rounded-[3rem] overflow-hidden bg-foreground/[0.01]">
           {/* Grid Background */}
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
           
@@ -172,10 +193,16 @@ export default function GuestbookPage() {
               </div>
             </div>
           ) : (
-            <div className="absolute inset-0 p-12">
-              <AnimatePresence>
-                {messages.map((message) => (
-                  <Note key={message.id} message={message} />
+            <div className="relative p-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-24 gap-x-12">
+              <AnimatePresence mode="popLayout">
+                {messages.map((message, index) => (
+                  <div key={message.id} className="relative flex justify-center items-center h-48">
+                    <Note 
+                      message={message} 
+                      isAdmin={isAdmin}
+                      onDelete={handleDeleteNote}
+                    />
+                  </div>
                 ))}
               </AnimatePresence>
             </div>

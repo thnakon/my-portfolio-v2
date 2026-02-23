@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const { content, color, rotation, x, y } = await req.json()
+    const { content, color, rotation, x, y, rating, emoji } = await req.json()
 
     if (!content || content.length > 500) {
       return NextResponse.json({ error: "Invalid content" }, { status: 400 })
@@ -46,6 +46,8 @@ export async function POST(req: Request) {
         rotation: rotation || 0,
         x: x || 0,
         y: y || 0,
+        rating: rating ? parseInt(rating) : null,
+        emoji: emoji || null,
         userId: session.user.id,
       },
       include: {

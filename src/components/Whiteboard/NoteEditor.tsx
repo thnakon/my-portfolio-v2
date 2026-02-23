@@ -6,14 +6,18 @@ import { X, Send, Palette, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface NoteEditorProps {
-  onSave: (note: { content: string; color: string }) => Promise<void>
+  onSave: (note: { content: string; color: string; rating: number | null; emoji: string | null }) => Promise<void>
   onClose: () => void
 }
 
 export function NoteEditor({ onSave, onClose }: NoteEditorProps) {
   const [content, setContent] = useState("")
   const [color, setColor] = useState("black")
+  const [rating, setRating] = useState<number | null>(null)
+  const [selectedEmoji, setSelectedEmoji] = useState<string | null>(null)
   const [isSaving, setIsSaving] = useState(false)
+
+  const emojis = ["✨", "🚀", "❤️", "💡", "🔥", "🎨", "💻", "☕"]
 
   const colors = [
     { id: "black", label: "Black", class: "bg-zinc-800 border-zinc-900" },
@@ -27,7 +31,7 @@ export function NoteEditor({ onSave, onClose }: NoteEditorProps) {
     if (!content.trim() || isSaving) return
     setIsSaving(true)
     try {
-      await onSave({ content, color })
+      await onSave({ content, color, rating, emoji: selectedEmoji })
       onClose()
     } catch (error) {
       console.error(error)
@@ -50,52 +54,89 @@ export function NoteEditor({ onSave, onClose }: NoteEditorProps) {
       >
         <div className="p-6 space-y-6">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-bold tracking-tight">Leave a note</h3>
-            <Button variant="ghost" size="icon" onClick={onClose} className="rounded-full">
+            <h3 className="font-bold uppercase tracking-tight">Write a note</h3>
+            <button 
+              onClick={onClose}
+              className="text-muted-foreground/40 hover:text-foreground transition-colors"
+            >
               <X className="h-5 w-5" />
-            </Button>
+            </button>
           </div>
+
+          <textarea
+            autoFocus
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Write something..."
+            className="w-full h-32 bg-transparent text-xl font-handwriting resize-none focus:outline-none placeholder:opacity-30"
+          />
 
           <div className="space-y-4">
-            <textarea
-              autoFocus
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="What's on your mind? (max 500 chars)"
-              maxLength={500}
-              className="w-full h-40 bg-foreground/[0.02] border border-foreground/[0.08] rounded-xl p-4 resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-medium text-lg"
-            />
-
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-2">
-                <Palette className="h-4 w-4 text-muted-foreground mr-1" />
-                <div className="flex gap-2">
-                  {colors.map((c) => (
-                    <button
-                      key={c.id}
-                      onClick={() => setColor(c.id)}
-                      className={`h-8 w-8 rounded-lg border-2 transition-all ${c.class} ${
-                        color === c.id ? "scale-110 border-foreground/40 shadow-md" : "border-transparent opacity-60 hover:opacity-100"
-                      }`}
-                    />
-                  ))}
-                </div>
+            {/* Color Selection */}
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">Marker Color</span>
+              <div className="flex gap-2">
+                {colors.map((c) => (
+                  <button
+                    key={c.id}
+                    onClick={() => setColor(c.id)}
+                    className={`h-8 w-8 rounded-full border-2 transition-all ${c.class} ${
+                      color === c.id ? "scale-110 ring-2 ring-primary ring-offset-2 ring-offset-background" : "opacity-60 hover:opacity-100"
+                    }`}
+                    title={c.label}
+                  />
+                ))}
               </div>
+            </div>
 
-              <Button
-                onClick={handleSubmit}
-                disabled={!content.trim() || isSaving}
-                className="rounded-xl px-6 h-11 font-bold gap-2"
-              >
-                {isSaving ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Send className="h-4 w-4" />
-                )}
-                Post Note
-              </Button>
+            {/* Emoji Selection */}
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">Emoji (Optional)</span>
+              <div className="flex flex-wrap gap-2">
+                {emojis.map((e) => (
+                  <button
+                    key={e}
+                    onClick={() => setSelectedEmoji(selectedEmoji === e ? null : e)}
+                    className={`h-9 w-9 flex items-center justify-center rounded-xl bg-foreground/[0.03] border transition-all text-lg ${
+                      selectedEmoji === e ? "border-primary bg-primary/5 scale-110" : "border-transparent hover:bg-foreground/[0.06]"
+                    }`}
+                  >
+                    {e}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Rating Selection */}
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">Rating (Optional)</span>
+              <div className="flex gap-2 text-2xl">
+                {[1, 2, 3, 4, 5].map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setRating(rating === s ? null : s)}
+                    className={`transition-all hover:scale-125 ${
+                      rating && s <= rating ? "text-yellow-400" : "text-muted-foreground/20"
+                    }`}
+                  >
+                    ★
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
+
+          <Button
+            onClick={handleSubmit}
+            disabled={!content.trim() || isSaving}
+            className="w-full h-12 rounded-xl font-bold uppercase tracking-widest"
+          >
+            {isSaving ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              "Post Note"
+            )}
+          </Button>
         </div>
       </motion.div>
     </motion.div>
