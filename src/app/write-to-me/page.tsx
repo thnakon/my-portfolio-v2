@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useSession, signIn } from "next-auth/react"
+import { useSession, signIn, signOut } from "next-auth/react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Plus, Github, Chrome, Loader2, Info } from "lucide-react"
+import { Plus, Github, Chrome, Loader2, Info, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Note } from "@/components/Whiteboard/Note"
 import { NoteEditor } from "@/components/Whiteboard/NoteEditor"
@@ -125,12 +125,22 @@ export default function GuestbookPage() {
                 <span className="text-[13px] font-bold truncate leading-tight">
                   {session.user?.name}
                 </span>
-                <button
-                  onClick={() => setIsEditorOpen(true)}
-                  className="text-[11px] text-primary font-bold uppercase tracking-wider text-left hover:underline"
-                >
-                  Write a note
-                </button>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setIsEditorOpen(true)}
+                    className="text-[11px] text-primary font-bold uppercase tracking-wider hover:underline"
+                  >
+                    Write a note
+                  </button>
+                  <span className="h-1 w-1 rounded-full bg-foreground/10" />
+                  <button
+                    onClick={() => signOut()}
+                    className="text-[11px] text-muted-foreground/60 font-bold uppercase tracking-wider hover:text-rose-500 transition-colors flex items-center gap-1"
+                  >
+                    <LogOut className="h-3 w-3" />
+                    Log out
+                  </button>
+                </div>
               </div>
             </div>
           ) : (
