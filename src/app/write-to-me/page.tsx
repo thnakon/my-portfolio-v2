@@ -7,6 +7,7 @@ import { Plus, Github, Chrome, Loader2, Info, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Note } from "@/components/Whiteboard/Note"
 import { NoteEditor } from "@/components/Whiteboard/NoteEditor"
+import { AuthModal } from "@/components/Whiteboard/AuthModal"
 import { FinalSection } from "@/components/FinalSection"
 import Image from "next/image"
 
@@ -15,6 +16,7 @@ export default function GuestbookPage() {
   const [messages, setMessages] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [isEditorOpen, setIsEditorOpen] = useState(false)
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -110,7 +112,7 @@ export default function GuestbookPage() {
           transition={{ delay: 0.2 }}
           className="flex flex-wrap items-center gap-4"
         >
-          {status === "authenticated" ? (
+          {status === "authenticated" && (
             <div className="flex items-center gap-4 bg-card/60 backdrop-blur-md border border-foreground/[0.08] rounded-2xl p-2 pr-6">
               {session.user?.image && (
                 <Image
@@ -134,28 +136,6 @@ export default function GuestbookPage() {
                 </button>
               </div>
             </div>
-          ) : (
-            <div className="flex flex-col gap-3">
-              <p className="text-[11px] font-black uppercase tracking-widest text-muted-foreground/40 text-center md:text-left">
-                Sign in to leave a note
-              </p>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  onClick={() => signIn("github")}
-                  className="rounded-xl px-4 h-11 border-foreground/10 hover:bg-foreground/[0.03] gap-2"
-                >
-                  <Github className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => signIn("google")}
-                  className="rounded-xl px-4 h-11 border-foreground/10 hover:bg-foreground/[0.03] gap-2"
-                >
-                  <Chrome className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
           )}
           
           <Button
@@ -163,7 +143,7 @@ export default function GuestbookPage() {
               if (status === "authenticated") {
                 setIsEditorOpen(true)
               } else {
-                signIn()
+                setIsAuthModalOpen(true)
               }
             }}
             className="rounded-2xl px-8 h-14 text-[13px] font-black uppercase tracking-[0.1em] shadow-xl shadow-primary/10 transition-all hover:scale-[1.02] active:scale-[0.98]"
@@ -220,6 +200,11 @@ export default function GuestbookPage() {
           <NoteEditor
             onSave={handleSaveNote}
             onClose={() => setIsEditorOpen(false)}
+          />
+        )}
+        {isAuthModalOpen && (
+          <AuthModal
+            onClose={() => setIsAuthModalOpen(false)}
           />
         )}
       </AnimatePresence>
