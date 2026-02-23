@@ -29,7 +29,7 @@ export const blogs: BlogPost[] = [
     date: "2024-03-20",
     category: "Design",
     readingTime: "5 min read",
-    image: "/blog/minimal-design.jpg",
+    image: "/blog/minimal-design.png",
     tags: ["Minimalism", "Design", "Aesthetics"]
   },
   {
@@ -48,7 +48,7 @@ export const blogs: BlogPost[] = [
     date: "2024-03-15",
     category: "AI",
     readingTime: "8 min read",
-    image: "/blog/ai-coding.jpg",
+    image: "/blog/ai-coding.png",
     tags: ["AI", "Coding", "Workflows"]
   },
   {
@@ -67,7 +67,7 @@ export const blogs: BlogPost[] = [
     date: "2024-03-10",
     category: "Development",
     readingTime: "6 min read",
-    image: "/blog/nextjs-performance.jpg",
+    image: "/blog/nextjs-performance.png",
     tags: ["Next.js", "React", "Performance"]
   }
 ];

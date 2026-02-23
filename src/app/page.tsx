@@ -418,10 +418,14 @@ export default function Home() {
             <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
               <div className="space-y-4">
                 <div className="aspect-[16/9] bg-foreground/[0.03] border border-foreground/[0.05] rounded-3xl overflow-hidden relative transition-all duration-500 group-hover:border-foreground/10 group-hover:shadow-2xl">
-                  <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:scale-110 transition-transform duration-700">
-                     <span className="text-4xl font-black uppercase text-foreground">{post.category}</span>
-                  </div>
-                  <div className="absolute top-4 left-4">
+                  <Image 
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute top-4 left-4 z-20">
                     <span className="px-3 py-1 rounded-full bg-background/80 backdrop-blur-sm border border-foreground/[0.05] text-[9px] font-black uppercase tracking-widest text-muted-foreground/60">
                       {post.category}
                     </span>
@@ -627,24 +631,33 @@ export default function Home() {
           </Link>
 
           {/* Last Played */}
-          <div className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative">
+          <Link 
+            href="https://music.youtube.com/watch?v=GCkhFdMdGOY&list=OLAK5uy_lGltRMFUZ_XFtWZUPF5KuNGOYwyWigmeo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative"
+          >
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-foreground/[0.015] to-transparent pointer-events-none" />
             <div className="relative z-10 space-y-6">
               <div className="space-y-1">
-                <p className="text-[11px] font-bold text-muted-foreground/60">Apple Music</p>
-                <h3 className="text-lg font-bold tracking-tight">Last Played</h3>
+                <p className="text-[11px] font-bold text-muted-foreground/60 uppercase tracking-widest">YouTube Music</p>
+                <h3 className="text-lg font-bold tracking-tight">On Repeat</h3>
               </div>
               <div className="flex items-center gap-4">
                 {/* Album art */}
-                <div className="relative h-20 w-20 rounded-xl overflow-hidden border border-foreground/[0.08] shadow-lg shrink-0 bg-gradient-to-br from-rose-500/20 via-purple-500/20 to-blue-500/20">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Music className="h-8 w-8 text-foreground/20" />
-                  </div>
+                <div className="relative h-20 w-20 rounded-xl overflow-hidden border border-foreground/[0.08] shadow-lg shrink-0">
+                  <Image 
+                    src="/fashion.jpg"
+                    alt="FaSHioN - Cortis"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
                 </div>
                 {/* Song info */}
                 <div className="flex-1 min-w-0 space-y-1.5">
-                  <p className="text-sm font-bold truncate leading-tight">Die With A Smile</p>
-                  <p className="text-xs text-muted-foreground/60 truncate">Lady Gaga, Bruno Mars</p>
+                  <p className="text-sm font-bold truncate leading-tight uppercase tracking-tight">FaSHioN</p>
+                  <p className="text-xs text-muted-foreground/60 truncate font-medium">Cortis</p>
                   <div className="flex items-center gap-2 pt-1">
                     <div className="flex items-end gap-[2px] h-3">
                       <span className="w-[3px] bg-foreground/40 rounded-full animate-[pulse_0.8s_ease-in-out_infinite]" style={{ height: '8px', animationDelay: '0s' }} />
@@ -652,7 +665,7 @@ export default function Home() {
                       <span className="w-[3px] bg-foreground/40 rounded-full animate-[pulse_0.8s_ease-in-out_infinite]" style={{ height: '6px', animationDelay: '0.3s' }} />
                       <span className="w-[3px] bg-foreground/40 rounded-full animate-[pulse_0.8s_ease-in-out_infinite]" style={{ height: '10px', animationDelay: '0.45s' }} />
                     </div>
-                    <span className="text-[10px] font-mono text-muted-foreground/40">Playing now</span>
+                    <span className="text-[10px] font-mono text-muted-foreground/40 tracking-tighter">Now Playing</span>
                   </div>
                 </div>
               </div>
@@ -662,7 +675,7 @@ export default function Home() {
             <div className="absolute bottom-6 right-6 h-8 w-8 rounded-full border border-foreground/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
               <ArrowRight className="h-4 w-4 text-muted-foreground/40" />
             </div>
-          </div>
+          </Link>
 
         </div>
       </section>

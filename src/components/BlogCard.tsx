@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowUpRight, Calendar, Clock, Tag } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { BlogPost } from "@/data/blogs"
 
 interface BlogCardProps {
@@ -23,14 +24,12 @@ export function BlogCard({ post, index }: BlogCardProps) {
         {/* Image Container */}
         <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-foreground/[0.05] bg-muted/30 transition-all duration-500 group-hover:border-foreground/[0.1] group-hover:shadow-2xl">
           <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.02] to-transparent z-10" />
-          <div 
-            className="w-full h-full bg-zinc-900 flex items-center justify-center transition-transform duration-700 group-hover:scale-105"
-          >
-            {/* Visual Placeholder for Blog Images */}
-            <div className="text-foreground/10 text-6xl font-black uppercase tracking-tighter opacity-20 rotate-[-10deg]">
-              {post.category}
-            </div>
-          </div>
+          <Image 
+            src={post.image}
+            alt={post.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+          />
           
           {/* Category Badge */}
           <div className="absolute top-4 left-4 z-20">
