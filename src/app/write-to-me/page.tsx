@@ -193,7 +193,7 @@ export default function GuestbookPage() {
               </div>
             </div>
           ) : (
-            <div className="relative p-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-12">
+            <div className="relative p-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-8">
               <AnimatePresence mode="popLayout">
                 {messages.map((message, index) => (
                   <div key={message.id} className="relative">
