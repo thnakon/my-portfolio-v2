@@ -125,22 +125,13 @@ export default function GuestbookPage() {
                 <span className="text-[13px] font-bold truncate leading-tight">
                   {session.user?.name}
                 </span>
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => setIsEditorOpen(true)}
-                    className="text-[11px] text-primary font-bold uppercase tracking-wider hover:underline"
-                  >
-                    Write a note
-                  </button>
-                  <span className="h-1 w-1 rounded-full bg-foreground/10" />
-                  <button
-                    onClick={() => signOut()}
-                    className="text-[11px] text-muted-foreground/60 font-bold uppercase tracking-wider hover:text-rose-500 transition-colors flex items-center gap-1"
-                  >
-                    <LogOut className="h-3 w-3" />
-                    Log out
-                  </button>
-                </div>
+                <button
+                  onClick={() => signOut()}
+                  className="text-[11px] text-rose-500 font-bold uppercase tracking-wider flex items-center gap-1 hover:opacity-80 transition-opacity"
+                >
+                  <LogOut className="h-3 w-3" />
+                  Log out
+                </button>
               </div>
             </div>
           ) : (
@@ -184,7 +175,7 @@ export default function GuestbookPage() {
 
       {/* Main Whiteboard Area */}
       <main className="flex-1 relative container mx-auto px-8 pb-32">
-        <div className="relative w-full min-h-[800px] border-2 border-dashed border-foreground/[0.05] rounded-[3rem] overflow-hidden bg-foreground/[0.01]">
+        <div className="relative w-full min-h-[400px] border-2 border-dashed border-foreground/[0.05] rounded-[3rem] overflow-hidden bg-foreground/[0.01]">
           {/* Grid Background */}
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
           
