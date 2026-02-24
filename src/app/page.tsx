@@ -134,8 +134,8 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
                   <div className="bg-background/80 backdrop-blur-md rounded-full p-2 shadow-2xl border border-foreground/[0.05] scale-90 group-hover:scale-100 transition-transform duration-500">
                     <RotatingText 
                       text="VIEW PROJECT • VIEW PROJECT • VIEW PROJECT • " 
-                      radius={50} 
-                      fontSize="9px"
+                      radius={40} 
+                      fontSize="8px"
                       className="text-foreground"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
