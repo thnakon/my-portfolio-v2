@@ -7,7 +7,7 @@ import {
   Keyboard, Coffee, Star, Sparkles, MapPin, Laptop, Mouse, Github,
   Plus, ExternalLink
 } from "lucide-react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { CopyEmailButton } from "@/components/CopyEmailButton";
 import { ContactModal } from "@/components/ContactModal";
 import Image from "next/image";
@@ -21,6 +21,7 @@ import { BentoGrid } from "@/components/BentoGrid";
 import { FinalSection } from "@/components/FinalSection";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { RotatingText } from "@/components/RotatingText";
 import {
   Tooltip,
   TooltipContent,
@@ -85,6 +86,158 @@ const techStack = {
     { name: "GitHub", icon: "github" },
   ]
 };
+
+function ProjectItem({ project, index }: { project: any; index: number }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  return (
+    <div 
+      className="sticky top-24 md:top-32 w-full"
+      style={{ 
+        zIndex: index + 1 
+      }}
+    >
+      <div className="bg-background py-20 lg:py-32 border-t border-foreground/[0.03]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          {/* Left Side: Mockup Card (5 cols) */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-7 relative group"
+            onMouseMove={handleMouseMove}
+          >
+            <Link href={`/work/${project.slug}`} className="block relative h-full">
+              <div className="relative aspect-[16/10] bg-white dark:bg-black rounded-[3rem] p-8 lg:p-12 overflow-hidden shadow-2xl border border-foreground/[0.03] dark:border-white/5 transition-all duration-500 group-hover:border-foreground/10 group-hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)]">
+                {/* Grid overlay */}
+                <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" 
+                     style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+                
+                {/* Rotating Text Hover Overlay (Mouse-following) */}
+                <motion.div 
+                  className="absolute z-50 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    left: mouseX,
+                    top: mouseY,
+                    x: "-50%",
+                    y: "-50%",
+                  }}
+                >
+                  <div className="bg-background/80 backdrop-blur-md rounded-full p-2 shadow-2xl border border-foreground/[0.05] scale-90 group-hover:scale-100 transition-transform duration-500">
+                    <RotatingText 
+                      text="VIEW PROJECT • VIEW PROJECT • VIEW PROJECT • " 
+                      radius={50} 
+                      fontSize="9px"
+                      className="text-foreground"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <ExternalLink className="h-5 w-5 text-foreground/40" />
+                    </div>
+                  </div>
+                </motion.div>
+
+                <div className="relative z-10 h-full flex flex-col justify-between">
+                  <div className="flex justify-between items-start">
+                    <h4 className="text-foreground text-xl lg:text-2xl font-medium leading-tight max-w-[80%] transition-transform duration-500 group-hover:-translate-y-1">
+                      {project.overview.split('.')[0]}.
+                    </h4>
+                    <ArrowRight className="h-8 w-8 text-foreground/20 transition-all duration-500 group-hover:text-foreground group-hover:translate-x-1" />
+                  </div>
+                  
+                  {/* Stacked Images/Screenshots */}
+                  <div className="relative mt-8 h-full transition-transform duration-700 group-hover:scale-[1.02]">
+                    {/* Main screenshot */}
+                    <div className="absolute top-4 left-1/2 -translate-x-1/2 w-[85%] aspect-[16/10] bg-zinc-900 rounded-2xl shadow-2xl border border-white/10 overflow-hidden transform transition-all duration-700">
+                      <Image 
+                        src={project.image} 
+                        alt={project.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    {/* Secondary screenshot overlay (if exists) */}
+                    {project.stackImages?.[0] && (
+                      <div className="absolute -bottom-8 -left-4 w-[60%] aspect-[16/10] bg-zinc-800 rounded-2xl shadow-2xl border border-white/10 overflow-hidden transform transition-all duration-700 z-20 group-hover:-translate-x-2 group-hover:translate-y-2">
+                        <Image 
+                          src={project.stackImages[0]} 
+                          alt={`${project.title} secondary`}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+
+          {/* Right Side: Info (5 cols) */}
+          <div className="lg:col-span-5 space-y-10 pt-4">
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <div className="h-[2px] w-8 bg-foreground/20" />
+                <h3 className="text-3xl lg:text-4xl font-semibold tracking-tight text-foreground">{project.title}</h3>
+              </div>
+              <p className="text-muted-foreground text-lg leading-relaxed max-w-xl">
+                {project.description}
+              </p>
+            </div>
+
+            {/* Features List */}
+            <div className="space-y-4">
+              {project.features.slice(0, 3).map((feature: any, i: number) => (
+                <div key={i} className="flex items-start gap-3 group/feature">
+                  <Sparkles className="h-4 w-4 text-foreground/30 mt-1 shrink-0 transition-transform group-hover/feature:rotate-12" />
+                  <p className="text-muted-foreground/90 font-medium leading-snug">{feature.text}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Tech Badges & Actions */}
+            <div className="space-y-8">
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag: string) => (
+                  <div key={tag} className="flex items-center gap-2 bg-card border border-foreground/[0.08] px-3.5 py-1.5 rounded-xl shadow-sm hover:border-foreground/20 transition-colors">
+                    <img 
+                      src={`https://cdn.simpleicons.org/${getIconSlug(tag)}`} 
+                      className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 transition-opacity dark:invert"
+                      alt={tag}
+                      onError={(e) => (e.currentTarget.style.display = 'none')}
+                    />
+                    <span className="text-[10px] font-bold text-muted-foreground/80 uppercase tracking-widest">{tag}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-4">
+                <Link href={`/work/${project.slug}`} className="flex-1 sm:flex-none">
+                  <Button size="lg" className="w-full rounded-2xl px-12 h-14 font-black uppercase tracking-widest text-[11px] gap-3 bg-foreground text-background hover:scale-[1.02] transition-transform">
+                    Full Case Study <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+                {project.githubUrl && (
+                  <Link href={project.githubUrl} target="_blank" className="h-14 w-14 rounded-2xl border border-foreground/10 flex items-center justify-center hover:bg-foreground/[0.03] transition-all hover:scale-105 group">
+                    <Github className="h-5 w-5 text-muted-foreground/40 group-hover:text-foreground transition-colors" />
+                  </Link>
+                )}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const [text, setText] = useState("");
@@ -190,7 +343,10 @@ export default function Home() {
         <main className="flex-1 flex flex-col items-center pt-20 lg:pt-32 relative z-10">
           <section className="container mx-auto px-4 pb-16 text-center relative z-10">
             {/* Badge */}
-            <div className={`flex justify-center mb-8 transition-all duration-1000 delay-300 ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+            <Link 
+              href="/work"
+              className={`flex justify-center mb-8 transition-all duration-1000 delay-300 ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            >
               <div className="flex items-center gap-2.5 px-0 py-0 text-[12px] font-medium transition-colors cursor-pointer group">
                 <span className="px-2 py-0.5 rounded-full bg-muted/80 text-muted-foreground border border-muted-foreground/20 font-bold text-[10px] uppercase tracking-wider">
                   Upcoming
@@ -198,7 +354,7 @@ export default function Home() {
                 <span className="text-foreground/90 font-medium animate-shimmer-text">A new project is launching soon!</span>
                 <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/70 group-hover:translate-x-0.5 transition-transform" />
               </div>
-            </div>
+            </Link>
             
             {/* Animated H1 */}
             <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl mb-6 min-h-[1.2em] flex items-center justify-center whitespace-pre-line">
@@ -282,119 +438,7 @@ export default function Home() {
 
         <div className="flex flex-col gap-0 relative">
           {projects.map((project, index) => (
-            <div 
-              key={index} 
-              className="sticky top-24 md:top-32 w-full"
-              style={{ 
-                zIndex: index + 1 
-              }}
-            >
-              <div className="bg-background py-20 lg:py-32 border-t border-foreground/[0.03]">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-                  
-                  {/* Left Side: Mockup Card (5 cols) */}
-                  <motion.div 
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    className="lg:col-span-7 relative group"
-                  >
-                    <div className="relative aspect-[16/10] bg-white dark:bg-black rounded-[3rem] p-8 lg:p-12 overflow-hidden shadow-2xl border border-foreground/[0.03] dark:border-white/5">
-                      {/* Grid overlay */}
-                      <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" 
-                           style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
-                      
-                      <div className="relative z-10 h-full flex flex-col justify-between">
-                        <div className="flex justify-between items-start">
-                          <h4 className="text-foreground text-xl lg:text-2xl font-medium leading-tight max-w-[80%]">
-                            {project.overview.split('.')[0]}.
-                          </h4>
-                          <ArrowRight className="h-8 w-8 text-foreground/20" />
-                        </div>
-                        
-                        {/* Stacked Images/Screenshots */}
-                        <div className="relative mt-8 h-full">
-                          {/* Main screenshot */}
-                          <div className="absolute top-4 left-1/2 -translate-x-1/2 w-[85%] aspect-[16/10] bg-zinc-900 rounded-2xl shadow-2xl border border-white/10 overflow-hidden transform rotate-0 duration-700">
-                            <Image 
-                              src={project.image} 
-                              alt={project.title}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                          {/* Secondary screenshot overlay (if exists) */}
-                          {project.stackImages?.[0] && (
-                            <div className="absolute -bottom-8 -left-4 w-[60%] aspect-[16/10] bg-zinc-800 rounded-2xl shadow-2xl border border-white/10 overflow-hidden transform rotate-0 duration-700 z-20">
-                              <Image 
-                                src={project.stackImages[0]} 
-                                alt={`${project.title} secondary`}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Right Side: Info (5 cols) */}
-                  <div className="lg:col-span-5 space-y-10 pt-4">
-                    <div className="space-y-6">
-                      <div className="flex items-center gap-4">
-                        <div className="h-[2px] w-8 bg-foreground/20" />
-                        <h3 className="text-3xl lg:text-4xl font-semibold tracking-tight text-foreground">{project.title}</h3>
-                      </div>
-                      <p className="text-muted-foreground text-lg leading-relaxed max-w-xl">
-                        {project.description}
-                      </p>
-                    </div>
-
-                    {/* Features List */}
-                    <div className="space-y-4">
-                      {project.features.slice(0, 3).map((feature, i) => (
-                        <div key={i} className="flex items-start gap-3 group/feature">
-                          <Sparkles className="h-4 w-4 text-foreground/30 mt-1 shrink-0 transition-transform group-hover/feature:rotate-12" />
-                          <p className="text-muted-foreground/90 font-medium leading-snug">{feature.text}</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Tech Badges & Actions */}
-                    <div className="space-y-8">
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
-                          <div key={tag} className="flex items-center gap-2 bg-card border border-foreground/[0.08] px-3.5 py-1.5 rounded-xl shadow-sm hover:border-foreground/20 transition-colors">
-                            <img 
-                              src={`https://cdn.simpleicons.org/${getIconSlug(tag)}`} 
-                              className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 transition-opacity dark:invert"
-                              alt={tag}
-                              onError={(e) => (e.currentTarget.style.display = 'none')}
-                            />
-                            <span className="text-[10px] font-bold text-muted-foreground/80 uppercase tracking-widest">{tag}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="flex items-center gap-4">
-                        <Link href={`/work/${project.slug}`} className="flex-1 sm:flex-none">
-                          <Button size="lg" className="w-full rounded-2xl px-12 h-14 font-black uppercase tracking-widest text-[11px] gap-3 bg-foreground text-background hover:scale-[1.02] transition-transform">
-                            Full Case Study <ArrowRight className="h-4 w-4" />
-                          </Button>
-                        </Link>
-                        {project.githubUrl && (
-                          <Link href={project.githubUrl} target="_blank" className="h-14 w-14 rounded-2xl border border-foreground/10 flex items-center justify-center hover:bg-foreground/[0.03] transition-all hover:scale-105 group">
-                            <Github className="h-5 w-5 text-muted-foreground/40 group-hover:text-foreground transition-colors" />
-                          </Link>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
+            <ProjectItem key={index} project={project} index={index} />
           ))}
         </div>
       </section>

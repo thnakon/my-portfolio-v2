@@ -95,4 +95,104 @@ export const projects: Project[] = [
     ],
     isAI: true
   },
+  {
+    slug: "mai-lon",
+    title: "Mai-lon",
+    description: "A single platform that helps students \"study hard, succeed in their careers, and live a good life.\"",
+    overview: "Designed to empower student journeys from academic excellence to professional success.",
+    image: "/projects/5.png",
+    hoverImage: "/projects/6.png",
+    tags: ["Next.js 14", "Supabase", "Tailwind CSS", "TypeScript", "shadcn/ui"],
+    githubUrl: "https://github.com/thnakon/Mai-Lon",
+    liveUrl: "#", // Placeholder
+    architecture: [
+      "Framework: Next.js 14 with App Router for optimal performance",
+      "Backend: Supabase for real-time data, authentication, and vector search",
+      "UI Library: shadcn/ui for accessible and modular components",
+      "Styling: Modern Tailwind CSS for a refined, student-focused aesthetic"
+    ],
+    deployment: "Vercel serverless deployment with automated CI/CD and production-grade monitoring.",
+    features: [
+      { text: "Academic Excellence: Comprehensive study tools and lecture management.", icon: "Zap" },
+      { text: "Career Success: Career tracking and professional networking resources.", icon: "Inbox" },
+      { text: "Personal Well-being: Features for balanced living and lifestyle management.", icon: "BarChart3" },
+      { text: "Unified Experience: A single workspace for all student-related activities.", icon: "Smartphone" }
+    ],
+    isAI: false
+  },
+  {
+    slug: "klin-dental-clinic",
+    title: "Medical Platform (Internship)",
+    description: "Klin Dental Clinic: A comprehensive dental clinic management and booking platform.",
+    overview: "Developed during an internship to streamline patient scheduling and clinic operations.",
+    image: "/projects/1.png",
+    hoverImage: "/projects/2.png",
+    tags: ["Laravel", "Bootstrap", "MySQL", "JavaScript"],
+    githubUrl: undefined,
+    liveUrl: undefined,
+    architecture: [
+      "Framework: Laravel for robust server-side logic and API management",
+      "Database: MySQL for secure and relational patient data storage",
+      "Frontend: JavaScript and Bootstrap for a responsive and intuitive clinical interface",
+      "Standards: Industry-standard medical data handling and appointment logic"
+    ],
+    deployment: "On-premise deployment with automated backup systems and local network optimization.",
+    features: [
+      { text: "Patient Scheduling: Efficient booking system for dental appointments.", icon: "Zap" },
+      { text: "Clinic Operations: Tools to manage daily tasks and patient records.", icon: "Inbox" },
+      { text: "Management Dashboard: Real-time overview of clinic performance and status.", icon: "BarChart3" },
+      { text: "Secure Records: Encrypted patient history and medical documentation.", icon: "ShieldCheck" }
+    ],
+    isAI: false
+  },
+  {
+    slug: "singha-enterprise",
+    title: "Enterprise Web (Internship)",
+    description: "Contribution to the development of the official Singha website during an internship. Focused on enhancing web performance and implementing new features.",
+    overview: "Worked on a high-traffic enterprise platform, optimizing frontend performance and modularity.",
+    image: "/projects/sigha1.png",
+    hoverImage: "/projects/sigha2.png",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Performance Optimization"],
+    githubUrl: undefined,
+    liveUrl: "https://www.singha.com",
+    architecture: [
+      "Frontend: Next.js with server-side rendering for optimal SEO and performance",
+      "Styling: Tailored CSS and Tailwind for high-fidelity enterprise UI",
+      "Optimization: Implemented lazy loading, image optimization, and code splitting",
+      "Scale: Modular architecture for enterprise-level codebase maintainability"
+    ],
+    deployment: "Enterprise-grade hosting with global CDN (Content Delivery Network) for low-latency access.",
+    features: [
+      { text: "Performance Tuning: Significant improvements in Core Web Vitals.", icon: "Zap" },
+      { text: "Feature Implementation: Developed interactive components for product showcases.", icon: "Inbox" },
+      { text: "Enterprise Scale: Handled complex workflows within a large-scale codebase.", icon: "Monitor" },
+      { text: "High Fidelity: Translated complex design requirements into pixel-perfect web interfaces.", icon: "Star" }
+    ],
+    isAI: false
+  },
+  {
+    slug: "portfolio-v1",
+    title: "My Portfolio v1",
+    description: "A high-performance personal portfolio website built with a focus on premium aesthetics, narrative storytelling, and cutting-edge web technologies.",
+    overview: "My first major portfolio redesign focusing on high-end interaction design and performance.",
+    image: "/projects/portfolio-home.png",
+    hoverImage: "/projects/portfolio-about.png",
+    tags: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Lucide"],
+    githubUrl: "https://github.com/thnakon/my-portfolio",
+    liveUrl: "https://my-portfolio-silk-sigma-85.vercel.app/",
+    architecture: [
+      "Framework: Next.js with App Router for modern dev experience",
+      "Animations: Framer Motion for complex, high-fidelity UI transitions",
+      "Icons: Lucide for a consistent and professional stroke-based icon style",
+      "Styling: Tailwind CSS for rapid and modular design implementation"
+    ],
+    deployment: "Vercel deployment with optimized asset delivery and serverless handling.",
+    features: [
+      { text: "Narrative Storytelling: Engaging content layouts that tell a story.", icon: "Zap" },
+      { text: "Premium Aesthetics: Minimalist and high-contrast design language.", icon: "Star" },
+      { text: "Motion Design: Smooth interactions and page transitions.", icon: "Sparkles" },
+      { text: "Responsive: Fully optimized for all device categories and screen sizes.", icon: "Smartphone" }
+    ],
+    isAI: false
+  },
 ];
