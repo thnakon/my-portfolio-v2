@@ -45,7 +45,7 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Social & Status */}
+            {/* Social Links Only */}
             <div className="flex flex-col md:items-end gap-6">
               <div className="flex items-center gap-4">
                 <Link href="https://github.com/thnakon" target="_blank" className="h-10 w-10 rounded-xl border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-all">
@@ -57,16 +57,6 @@ export function Footer() {
                 <Link href="https://twitter.com" target="_blank" className="h-10 w-10 rounded-xl border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-all">
                   <Twitter className="h-5 w-5" />
                 </Link>
-              </div>
-
-              <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-muted/50 border border-foreground/5 w-fit">
-                <div className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-foreground/40 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-foreground"></span>
-                </div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-muted-foreground">
-                  Status: Operational
-                </span>
               </div>
             </div>
           </div>
