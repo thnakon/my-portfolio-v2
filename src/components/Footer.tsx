@@ -78,9 +78,11 @@ export function Footer() {
           <div className="flex items-center gap-4 text-[11px] text-muted-foreground">
             <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
+            <span className="opacity-20">/</span>
+            <Link href="/sitemap.xml" className="hover:text-foreground transition-colors">Sitemap</Link>
           </div>
           <p className="text-[10px] text-muted-foreground flex items-center gap-1">
-            Built with Next.js & TypeScript <ExternalLink className="h-2.5 w-2.5" />
+            Built with Next.js, TypeScript & Framer Motion <ExternalLink className="h-2.5 w-2.5" />
           </p>
         </div>
       </div>
