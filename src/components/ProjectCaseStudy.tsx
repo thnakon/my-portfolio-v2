@@ -129,14 +129,14 @@ export function ProjectCaseStudy({
         </div>
 
         {/* FOLDER FRONT FLAP */}
-        <div className="absolute inset-x-0 bottom-0 h-[40%] z-20 bg-card/80 backdrop-blur-2xl border-t border-foreground/10 rounded-b-2xl shadow-[0_-10px_30px_rgba(0,0,0,0.1)] flex items-center">
-          <div className="w-full h-full p-5 flex flex-col justify-between relative overflow-hidden">
+        <div className="absolute inset-x-0 bottom-0 h-[50%] z-20 bg-card/80 backdrop-blur-2xl border-t border-foreground/10 rounded-b-2xl shadow-[0_-10px_30px_rgba(0,0,0,0.1)] flex items-stretch">
+          <div className="w-full p-5 flex flex-col justify-between relative">
             {/* Background Number */}
             <span className="absolute -right-2 -bottom-4 text-7xl font-black text-foreground/[0.03] select-none pointer-events-none">
               {String(index + 1).padStart(2, '0')}
             </span>
 
-            <div className="space-y-3 relative z-10">
+            <div className="space-y-2 relative z-10">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="text-[10px] font-black text-foreground/20">#{String(index + 1).padStart(2, '0')}</span>
@@ -168,7 +168,7 @@ export function ProjectCaseStudy({
               </div>
             </div>
 
-            <div className="pt-4 relative z-10">
+            <div className="pt-2 relative z-10">
               <Link href={`/work/${slug}`} className="block">
                 <Button 
                   variant="outline" 
