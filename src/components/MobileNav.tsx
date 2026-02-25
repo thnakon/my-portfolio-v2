@@ -52,7 +52,7 @@ export function MobileNav() {
       <Button
         variant="ghost"
         size="icon"
-        className="md:hidden h-9 w-9 rounded-xl border border-foreground/[0.08]"
+        className="md:hidden h-9 w-9"
         onClick={() => setOpen(true)}
       >
         <Menu className="h-5 w-5" />
