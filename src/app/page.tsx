@@ -30,36 +30,8 @@ import {
 import { experiences } from "@/data/experiences";
 import { projects } from "@/data/projects";
 import { blogs } from "@/data/blogs";
+import { getTechIconSlug } from "@/lib/utils/tech-icons";
 
-const getIconSlug = (tag: string) => {
-  const t = tag.toLowerCase();
-  
-  if (t.includes("next.js") || t.includes("nextjs")) return "nextdotjs";
-  if (t.includes("react")) return "react";
-  if (t.includes("tailwind")) return "tailwindcss";
-  if (t.includes("typescript") || t === "ts") return "typescript";
-  if (t.includes("javascript") || t === "js") return "javascript";
-  if (t.includes("three")) return "threedotjs";
-  if (t.includes("prisma")) return "prisma";
-  if (t.includes("framer")) return "framer";
-  if (t.includes("gsap") || t.includes("greensock")) return "greensock";
-  if (t.includes("mysql")) return "mysql";
-  if (t.includes("postgresql") || t.includes("postgres")) return "postgresql";
-  if (t.includes("supabase")) return "supabase";
-  if (t.includes("laravel")) return "laravel";
-  if (t.includes("vue")) return "vuedotjs";
-  if (t.includes("docker")) return "docker";
-  if (t.includes("openai")) return "openai";
-  if (t.includes("claude")) return "claude";
-  if (t.includes("gemini")) return "googlegemini";
-  if (t.includes("figma")) return "figma";
-  if (t.includes("vercel")) return "vercel";
-  if (t === "html5" || t === "html") return "html5";
-  if (t === "css3" || t === "css") return "css3";
-  if (t.includes("php")) return "php";
-
-  return t.replace(/\s+/g, "");
-};
 
 
 
@@ -206,7 +178,7 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
                 {project.tags.map((tag: string) => (
                   <div key={tag} className="flex items-center gap-2 bg-card border border-foreground/[0.08] px-3.5 py-1.5 rounded-xl shadow-sm hover:border-foreground/20 transition-colors">
                     <img 
-                      src={`https://cdn.simpleicons.org/${getIconSlug(tag)}`} 
+                      src={`https://cdn.simpleicons.org/${getTechIconSlug(tag)}`} 
                       className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 transition-opacity dark:invert"
                       alt={tag}
                       onError={(e) => (e.currentTarget.style.display = 'none')}

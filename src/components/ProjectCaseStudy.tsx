@@ -7,6 +7,7 @@ import Link from "next/link"
 import { ArrowRight, Github } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { getTechIconSlug } from "@/lib/utils/tech-icons"
 
 interface Feature {
   text: string
@@ -153,35 +154,17 @@ export function ProjectCaseStudy({
               
               {/* Tech Stack Badges */}
               <div className="flex flex-wrap gap-1.5 pt-1">
-                {tags.slice(0, 4).map((tag) => {
-                  const slugMap: Record<string, string> = {
-                    "Next.js": "nextdotjs",
-                    "React": "react",
-                    "Tailwind CSS": "tailwindcss",
-                    "Tailwind": "tailwindcss",
-                    "TypeScript": "typescript",
-                    "OpenAI": "openai",
-                    "Supabase": "supabase",
-                    "Laravel": "laravel",
-                    "Vue.js 3": "vuedotjs",
-                    "MySQL": "mysql",
-                    "PHP": "php",
-                    "Node.js": "nodedotjs",
-                  };
-                  const iconSlug = slugMap[tag];
-                  return (
-                    <div key={tag} className="flex items-center gap-1 bg-foreground/[0.03] border border-foreground/[0.05] px-2 py-0.5 rounded-md">
-                      {iconSlug && (
-                        <img 
-                          src={`https://cdn.simpleicons.org/${iconSlug}`} 
-                          alt={tag} 
-                          className="h-2.5 w-2.5 opacity-60 dark:invert"
-                        />
-                      )}
-                      <span className="text-[9px] font-medium text-muted-foreground/70">{tag}</span>
-                    </div>
-                  );
-                })}
+                {tags.slice(0, 6).map((tag) => (
+                  <div key={tag} className="flex items-center gap-1 bg-foreground/[0.03] border border-foreground/[0.05] px-2 py-0.5 rounded-md">
+                    <img 
+                      src={`https://cdn.simpleicons.org/${getTechIconSlug(tag)}`} 
+                      alt={tag} 
+                      className="h-2.5 w-2.5 opacity-60 dark:invert"
+                      onError={(e) => (e.currentTarget.style.display = "none")}
+                    />
+                    <span className="text-[9px] font-medium text-muted-foreground/70">{tag}</span>
+                  </div>
+                ))}
               </div>
             </div>
 

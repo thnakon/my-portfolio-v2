@@ -15,6 +15,7 @@ import { projects } from "@/data/projects"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ContactModal } from "@/components/ContactModal"
+import { getTechIconSlug } from "@/lib/utils/tech-icons"
 
 const iconMap: Record<string, any> = {
   Zap,
@@ -82,30 +83,6 @@ export default function ProjectPage() {
     { id: "stack", label: "Tech Stack", icon: Cpu }
   ]
 
-  const getIconSlug = (tag: string) => {
-    const map: Record<string, string> = {
-      "Next.js": "nextdotjs",
-      "React": "react",
-      "Tailwind": "tailwindcss",
-      "Tailwind CSS": "tailwindcss",
-      "TypeScript": "typescript",
-      "MySQL": "mysql",
-      "PHP": "php",
-      "Laravel": "laravel",
-      "Laravel 11": "laravel",
-      "Laravel 12": "laravel",
-      "Vue.js 3": "vuedotjs",
-      "Vu3.js": "vuedotjs",
-      "Supabase": "supabase",
-      "Docker": "docker",
-      "PostgreSQL": "postgresql",
-      "Node.js": "nodedotjs",
-      "JavaScript": "javascript",
-      "HTML5": "html5",
-      "CSS3": "css3"
-    }
-    return map[tag] || tag.toLowerCase().replace('.', 'dot').replace(' ', '');
-  }
 
   return (
     <div className="min-h-screen bg-background relative overflow-x-clip text-foreground">
@@ -157,7 +134,7 @@ export default function ProjectPage() {
                {project.tags.map(tag => (
                  <div key={tag} className="flex items-center gap-1.5 bg-foreground/[0.03] border border-foreground/[0.06] px-3 py-1 rounded-full">
                     <img 
-                      src={`https://cdn.simpleicons.org/${getIconSlug(tag)}`} 
+                      src={`https://cdn.simpleicons.org/${getTechIconSlug(tag)}`} 
                       className="h-3 w-3 dark:invert opacity-60"
                       alt={tag}
                       onError={(e) => (e.currentTarget.style.display = 'none')}
@@ -305,7 +282,7 @@ export default function ProjectPage() {
                    <div key={tag} className="p-4 rounded-2xl bg-foreground/[0.02] border border-foreground/[0.05] hover:bg-foreground/[0.04] transition-colors flex flex-col gap-3">
                       <div className="h-10 w-10 rounded-xl bg-foreground/[0.03] border border-foreground/5 flex items-center justify-center">
                         <img 
-                          src={`https://cdn.simpleicons.org/${getIconSlug(tag)}`} 
+                          src={`https://cdn.simpleicons.org/${getTechIconSlug(tag)}`} 
                           className="h-5 w-5 dark:invert opacity-70"
                           alt={tag}
                           onError={(e) => (e.currentTarget.style.display = 'none')}
