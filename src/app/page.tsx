@@ -437,7 +437,7 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col gap-0 relative">
-          {projects.map((project, index) => (
+          {projects.slice(0, 3).map((project, index) => (
             <ProjectItem key={index} project={project} index={index} />
           ))}
         </div>
