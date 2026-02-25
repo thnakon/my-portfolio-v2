@@ -168,10 +168,14 @@ export function ProjectCaseStudy({
               </div>
             </div>
 
-            <div className="flex items-center gap-4 pt-2 relative z-10">
-              <Link href={`/work/${slug}`} className="w-full">
-                <Button size="sm" className="w-full rounded-xl font-bold uppercase tracking-widest text-[9px] h-9 group shadow-xl">
-                  View Case <ArrowRight className="ml-1 h-3 w-3 transition-transform group-hover:translate-x-1" />
+            <div className="pt-4 relative z-10">
+              <Link href={`/work/${slug}`} className="block">
+                <Button 
+                  variant="outline" 
+                  className="w-full rounded-xl border-foreground/10 bg-background/50 backdrop-blur-sm text-foreground/80 font-black uppercase tracking-[0.2em] text-[8px] h-10 group/btn hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-300"
+                >
+                  View Case Study
+                  <ArrowRight className="ml-2 h-3 w-3 transition-all duration-300 group-hover/btn:translate-x-1" />
                 </Button>
               </Link>
             </div>
