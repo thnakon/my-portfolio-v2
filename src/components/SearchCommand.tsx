@@ -17,9 +17,11 @@ import {
   Search,
   BookOpen,
   Briefcase,
+  Brain,
   User,
   Zap,
   Link as LinkIcon,
+  Info,
 } from "lucide-react"
 
 import {
@@ -130,7 +132,7 @@ export function SearchCommand() {
 
           <CommandGroup heading="Others">
             <CommandItem onSelect={() => runCommand(() => router.push("/ai-attitudes"))}>
-              <Zap className="mr-2 h-4 w-4" />
+              <Brain className="mr-2 h-4 w-4" />
               <span>AI Attitudes 2026</span>
             </CommandItem>
             <CommandItem onSelect={() => runCommand(() => router.push("/uses"))}>
@@ -140,6 +142,10 @@ export function SearchCommand() {
             <CommandItem onSelect={() => runCommand(() => router.push("/links"))}>
               <LinkIcon className="mr-2 h-4 w-4" />
               <span>Links / Socials Page</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => router.push("/attribution"))}>
+              <Info className="mr-2 h-4 w-4" />
+              <span>Attribution</span>
             </CommandItem>
           </CommandGroup>
 
