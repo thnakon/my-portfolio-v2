@@ -195,4 +195,29 @@ export const projects: Project[] = [
     ],
     isAI: false
   },
+  {
+    slug: "portfolio-v2",
+    title: "My Portfolio v2",
+    description: "The second iteration of my personal portfolio, focusing on agentic coding workflows and premium minimalist aesthetics.",
+    overview: "A state-of-the-art developer portfolio built with a focus on AI collaboration, high-end performance, and monochrome design.",
+    image: "/projects/port-v2-1.png",
+    hoverImage: "/projects/port-v2-2.png",
+    tags: ["Next.js 16", "React 19", "Tailwind CSS 4", "Framer Motion", "GSAP"],
+    githubUrl: "https://github.com/thnakon/my-portfolio-v2",
+    liveUrl: "https://thanakon.dev",
+    architecture: [
+      "Core: Next.js 16 with App Router and React 19 features",
+      "AI: Developed using agentic coding workflows and AI pair programming",
+      "Animations: GSAP for high-fidelity interactive elements and Framer Motion",
+      "Styling: Tailwind CSS 4 for a future-proof, high-performance design system"
+    ],
+    deployment: "Vercel edge deployment with automated CI/CD and global CDN delivery.",
+    features: [
+      { text: "Agentic Workflow: Built entirely with AI agents and advanced coding assistants.", icon: "Zap" },
+      { text: "Premium Design: High-end monochrome aesthetic with minimalist focus.", icon: "Star" },
+      { text: "Interactive UI: Shaders, 3D elements, and smooth micro-animations.", icon: "Sparkles" },
+      { text: "Search Engine: Integrated command palette for instant site-wide discovery.", icon: "Search" }
+    ],
+    isAI: true
+  },
 ];
