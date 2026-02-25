@@ -152,7 +152,7 @@ export const projects: Project[] = [
     overview: "Worked on a high-traffic enterprise platform, optimizing frontend performance and modularity.",
     image: "/projects/sigha1.png",
     hoverImage: "/projects/sigha2.png",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Performance Optimization"],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     githubUrl: undefined,
     liveUrl: "https://www.singha.com",
     architecture: [
