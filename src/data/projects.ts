@@ -198,26 +198,26 @@ export const projects: Project[] = [
   {
     slug: "portfolio-v2",
     title: "My Portfolio v2",
-    description: "The second iteration of my personal portfolio, focusing on agentic coding workflows and premium minimalist aesthetics.",
-    overview: "A state-of-the-art developer portfolio built with a focus on AI collaboration, high-end performance, and monochrome design.",
+    description: "A premium minimalist portfolio iteration showcasing advanced web development techniques and high-end animations.",
+    overview: "A state-of-the-art developer portfolio built with the latest stack for performance, interaction, and aesthetics.",
     image: "/projects/port-v2-1.png",
     hoverImage: "/projects/port-v2-2.png",
-    tags: ["Next.js 16", "React 19", "Tailwind CSS 4", "Framer Motion", "GSAP"],
+    tags: ["Next.js 16", "React 19", "Tailwind CSS 4", "TypeScript", "Three.js", "Framer Motion", "GSAP", "Prisma", "MySQL"],
     githubUrl: "https://github.com/thnakon/my-portfolio-v2",
     liveUrl: "https://thanakon.dev",
     architecture: [
-      "Core: Next.js 16 with App Router and React 19 features",
-      "AI: Developed using agentic coding workflows and AI pair programming",
-      "Animations: GSAP for high-fidelity interactive elements and Framer Motion",
-      "Styling: Tailwind CSS 4 for a future-proof, high-performance design system"
+      "Frontend: Next.js 16 (App Router) with React 19 concurrent features",
+      "Animations: High-fidelity motion with GSAP, Framer Motion, and Lenis",
+      "3D Graphics: Interactive components using Three.js and React Three Fiber",
+      "Backend: Prisma ORM with MySQL for robust data management and NextAuth"
     ],
-    deployment: "Vercel edge deployment with automated CI/CD and global CDN delivery.",
+    deployment: "Optimized Vercel deployment with edge functions and global asset distribution.",
     features: [
-      { text: "Agentic Workflow: Built entirely with AI agents and advanced coding assistants.", icon: "Zap" },
-      { text: "Premium Design: High-end monochrome aesthetic with minimalist focus.", icon: "Star" },
-      { text: "Interactive UI: Shaders, 3D elements, and smooth micro-animations.", icon: "Sparkles" },
-      { text: "Search Engine: Integrated command palette for instant site-wide discovery.", icon: "Search" }
+      { text: "Advanced Web Development: Built with a focus on modern architectures and clean code.", icon: "Code2" },
+      { text: "Creative Interaction: Seamless 3D elements and refined micro-animations.", icon: "Sparkles" },
+      { text: "Performance First: Optimized bundle size, asset loading, and Core Web Vitals.", icon: "Zap" },
+      { text: "Command System: Intelligent site-wide search and navigation palette.", icon: "Search" }
     ],
-    isAI: true
+    isAI: false
   },
 ];

@@ -34,11 +34,16 @@ import { blogs } from "@/data/blogs";
 const getIconSlug = (tag: string) => {
   const map: Record<string, string> = {
     "Next.js": "nextdotjs",
+    "Next.js 16": "nextdotjs",
     "React": "react",
+    "React 19": "react",
     "Tailwind": "tailwindcss",
     "Tailwind CSS": "tailwindcss",
+    "Tailwind CSS 4": "tailwindcss",
     "TypeScript": "typescript",
     "MySQL": "mysql",
+    "Prisma": "prisma",
+    "Three.js": "threedotjs",
     "PHP": "php",
     "Laravel": "laravel",
     "Laravel 11": "laravel",
