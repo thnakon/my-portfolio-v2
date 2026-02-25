@@ -130,6 +130,7 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
                         src={project.image} 
                         alt={project.title}
                         fill
+                        priority={index < 2}
                         className="object-cover"
                       />
                     </div>
@@ -140,6 +141,7 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
                           src={project.stackImages[0]} 
                           alt={`${project.title} secondary`}
                           fill
+                          priority={index === 0}
                           className="object-cover"
                         />
                       </div>
@@ -347,6 +349,7 @@ export default function Home() {
                     alt="Thanakon" 
                     width={56} 
                     height={56} 
+                    priority
                     className="object-cover h-full w-full scale-125"
                   />
                 </span>
@@ -475,18 +478,9 @@ export default function Home() {
           const techRow2 = [
             "Laravel", "Node.js", "MySQL", "Supabase", "Bun", "ChatGPT", "Gemini", "Claude", "OpenClaw", "LLMs", "RAG", "Agentic Workflows", "Docker", "Git", "GitLab", "SourceTree"
           ];
-          const techIcons: Record<string, string> = {
-            "Next.js": "nextdotjs", "React": "react", "Tailwind CSS": "tailwindcss", "CSS": "css3",
-            "Figma": "figma", "GSAP": "greensock", "Framer Motion": "framer", "HTML": "html5", "PHP": "php",
-            "Laravel": "laravel", "Node.js": "nodedotjs", "MySQL": "mysql", "Supabase": "supabase",
-            "Bun": "bun", "ChatGPT": "openai", "Gemini": "googlegemini", "Claude": "claude",
-            "OpenClaw": "openaigym", "LLMs": "openai", "RAG": "databricks", "Agentic Workflows": "langchain",
-            "Docker": "docker", "Git": "git", "GitLab": "gitlab", "SourceTree": "sourcetree"
-          };
           const getIconUrl = (tech: string) => {
-            const slug = techIcons[tech];
-            if (!slug) return null;
-            return `https://cdn.jsdelivr.net/npm/simple-icons@13/icons/${slug}.svg`;
+            const slug = getTechIconSlug(tech);
+            return `https://cdn.simpleicons.org/${slug}`;
           };
 
           return (
@@ -556,6 +550,7 @@ export default function Home() {
               alt="Thanakon" 
               width={28} 
               height={28} 
+              priority
               className="object-cover h-full w-full scale-125"
             />
           </motion.div>

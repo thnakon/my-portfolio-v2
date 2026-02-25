@@ -12,6 +12,7 @@ import Image from "next/image"
 import { Orb } from "@/components/ui/orb"
 import CardSwap, { CardSwapInner } from "@/components/CardSwap"
 import Lanyard from "@/components/Lanyard"
+import { getTechIconSlug } from "@/lib/utils/tech-icons"
 
 const indexToId = (index: number) => String(index + 1).padStart(2, '0')
 
@@ -31,40 +32,11 @@ const projectFolders = [
   { name: "Portfolio v1", image: "/projects/portfolio-v1-preview.png", color: "text-slate-500" },
 ]
 
-const techIcons: Record<string, string> = {
-  "Next.js": "nextdotjs",
-  "React": "react",
-  "Tailwind CSS": "tailwindcss",
-  "CSS": "css3",
-  "Figma": "figma",
-  "GSAP": "greensock",
-  "Framer Motion": "framer",
-  "HTML": "html5",
-  "PHP": "php",
-  "Laravel": "laravel",
-  "Node.js": "nodedotjs",
-  "MySQL": "mysql",
-  "Supabase": "supabase",
-  "Bun": "bun",
-  "ChatGPT": "openai",
-  "Gemini": "googlegemini",
-  "Claude": "claude",
-  "OpenClaw": "openaigym",
-  "LLMs": "openai",
-  "RAG": "databricks",
-  "Agentic Workflows": "langchain",
-  "Docker": "docker",
-  "Git": "git",
-  "GitLab": "gitlab",
-  "SourceTree": "sourcetree"
-}
 
 export function BentoGrid() {
   const getIconUrl = (tech: string) => {
-    const slug = techIcons[tech];
-    if (!slug) return null;
-    if (slug.startsWith('/')) return slug;
-    return `https://cdn.jsdelivr.net/npm/simple-icons@13/icons/${slug}.svg`;
+    const slug = getTechIconSlug(tech);
+    return `https://cdn.simpleicons.org/${slug}`;
   }
 
   return (

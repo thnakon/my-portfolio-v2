@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle2, MapPin } from "lucide-react"
+import { getTechIconSlug } from "@/lib/utils/tech-icons"
 
 interface ExperienceHighlight {
   text: string
@@ -29,26 +30,7 @@ export function TimelineItem({
   isLast 
 }: TimelineItemProps) {
   const getIconUrl = (tech: string) => {
-    const slugMap: Record<string, string> = {
-      "Docker": "docker",
-      "Laravel": "laravel",
-      "Vue.js": "vuedotjs",
-      "MySQL": "mysql",
-      "React": "react",
-      "Next.js": "nextdotjs",
-      "TypeScript": "typescript",
-      "Supabase": "supabase",
-      "Tailwind": "tailwindcss",
-      "Python": "python",
-      "GitLab": "gitlab",
-      "Figma": "figma",
-      "PHP": "php",
-      "HTML5": "html5",
-      "CSS3": "css3",
-      "JS": "javascript",
-      "Bootstrap": "bootstrap",
-    };
-    const slug = slugMap[tech] || tech.toLowerCase();
+    const slug = getTechIconSlug(tech);
     return `https://cdn.simpleicons.org/${slug}`;
   };
 

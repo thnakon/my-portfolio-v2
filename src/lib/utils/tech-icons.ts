@@ -22,8 +22,8 @@ export const getTechIconSlug = (tag: string) => {
   if (t.includes("figma")) return "figma";
   if (t.includes("vercel")) return "vercel";
   if (t.includes("node.js") || t.includes("nodejs")) return "nodedotjs";
-  if (t === "html5" || t === "html") return "html5";
-  if (t === "css3" || t === "css") return "css3";
+  if (t.includes("html")) return "html5";
+  if (t.includes("css")) return "css3";
   if (t.includes("php")) return "php";
   if (t.includes("shadcn")) return "shadcnui";
   if (t.includes("lucide")) return "lucide";

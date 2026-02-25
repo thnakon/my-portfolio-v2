@@ -240,6 +240,10 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
       tex.flipY = false
       tex.needsUpdate = true
       setProcessedTexture(tex)
+      
+      return () => {
+        tex.dispose();
+      };
     }
     img.src = '/profile-v3.jpg'
   }, [])
