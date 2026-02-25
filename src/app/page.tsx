@@ -32,40 +32,33 @@ import { projects } from "@/data/projects";
 import { blogs } from "@/data/blogs";
 
 const getIconSlug = (tag: string) => {
-  const map: Record<string, string> = {
-    "Next.js": "nextdotjs",
-    "Next.js 16": "nextdotjs",
-    "React": "react",
-    "React 19": "react",
-    "Tailwind": "tailwindcss",
-    "Tailwind CSS": "tailwindcss",
-    "Tailwind CSS 4": "tailwindcss",
-    "TypeScript": "typescript",
-    "MySQL": "mysql",
-    "Prisma": "prisma",
-    "Three.js": "threedotjs",
-    "PHP": "php",
-    "Laravel": "laravel",
-    "Laravel 11": "laravel",
-    "Laravel 12": "laravel",
-    "Vue.js 3": "vuedotjs",
-    "Vu3.js": "vuedotjs",
-    "Supabase": "supabase",
-    "Docker": "docker",
-    "GSAP": "greensock",
-    "Framer Motion": "framer",
-    "Node.js": "nodedotjs",
-    "PostgreSQL": "postgresql",
-    "OpenAI": "openai",
-    "HTML5": "html5",
-    "CSS3": "css3",
-    "JavaScript": "javascript",
-    "Figma": "figma",
-    "Vercel": "vercel",
-    "Claude": "claude",
-    "Gemini": "googlegemini"
-  };
-  return map[tag] || tag.toLowerCase().replace(/\s+/g, "");
+  const t = tag.toLowerCase();
+  
+  if (t.includes("next.js") || t.includes("nextjs")) return "nextdotjs";
+  if (t.includes("react")) return "react";
+  if (t.includes("tailwind")) return "tailwindcss";
+  if (t.includes("typescript") || t === "ts") return "typescript";
+  if (t.includes("javascript") || t === "js") return "javascript";
+  if (t.includes("three")) return "threedotjs";
+  if (t.includes("prisma")) return "prisma";
+  if (t.includes("framer")) return "framer";
+  if (t.includes("gsap") || t.includes("greensock")) return "greensock";
+  if (t.includes("mysql")) return "mysql";
+  if (t.includes("postgresql") || t.includes("postgres")) return "postgresql";
+  if (t.includes("supabase")) return "supabase";
+  if (t.includes("laravel")) return "laravel";
+  if (t.includes("vue")) return "vuedotjs";
+  if (t.includes("docker")) return "docker";
+  if (t.includes("openai")) return "openai";
+  if (t.includes("claude")) return "claude";
+  if (t.includes("gemini")) return "googlegemini";
+  if (t.includes("figma")) return "figma";
+  if (t.includes("vercel")) return "vercel";
+  if (t === "html5" || t === "html") return "html5";
+  if (t === "css3" || t === "css") return "css3";
+  if (t.includes("php")) return "php";
+
+  return t.replace(/\s+/g, "");
 };
 
 
