@@ -204,7 +204,7 @@ export const projects: Project[] = [
     hoverImage: "/projects/port-v2-2.png",
     tags: ["Next.js 16", "React 19", "Tailwind CSS 4", "TypeScript", "Three.js", "Framer Motion", "GSAP", "Prisma", "MySQL"],
     githubUrl: "https://github.com/thnakon/my-portfolio-v2",
-    liveUrl: "https://thanakon.dev",
+    liveUrl: "https://my-portfolio-v2-eight-iota.vercel.app/",
     architecture: [
       "Frontend: Next.js 16 (App Router) with React 19 concurrent features",
       "Animations: High-fidelity motion with GSAP, Framer Motion, and Lenis",

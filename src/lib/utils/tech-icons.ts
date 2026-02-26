@@ -28,6 +28,9 @@ export const getTechIconSlug = (tag: string) => {
   if (t.includes("shadcn")) return "shadcnui";
   if (t.includes("lucide")) return "lucide";
   if (t.includes("bootstrap")) return "bootstrap";
+  if (t.includes("chatgpt")) return "openai";
+  if (t.includes("rag") || t.includes("llm") || t.includes("agentic") || t.includes("openclaw")) return "openai";
+  if (t.includes("css3") || t === "css") return "css3";
 
   return t.replace(/\s+/g, "");
 };
