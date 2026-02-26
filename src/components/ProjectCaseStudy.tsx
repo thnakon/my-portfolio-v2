@@ -4,10 +4,15 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, Github } from "lucide-react"
+import { ArrowRight, Github, ZoomIn } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { getTechIconSlug } from "@/lib/utils/tech-icons"
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 interface Feature {
   text: string
@@ -42,6 +47,7 @@ export function ProjectCaseStudy({
   index 
 }: ProjectCaseStudyProps) {
   const [isHovered, setIsHovered] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
   
   const displayStack = stackImages && stackImages.length > 0 
     ? [image, ...stackImages] 
@@ -79,7 +85,7 @@ export function ProjectCaseStudy({
               
               {/* PHOTO 2 (Right/Back) */}
               <motion.div 
-                className="absolute w-[85%] aspect-[4/3] rounded-xl overflow-hidden border border-foreground/10 shadow-lg pointer-events-auto bg-muted"
+                className="absolute w-[85%] aspect-[4/3] rounded-xl overflow-hidden border border-foreground/10 shadow-lg pointer-events-auto bg-muted cursor-zoom-in group/image2"
                 initial={false}
                 animate={{ 
                   y: isHovered ? -110 : 0,
@@ -89,19 +95,25 @@ export function ProjectCaseStudy({
                   zIndex: isHovered ? 12 : 10
                 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                onClick={() => setSelectedImage(displayStack[1] || displayStack[0])}
               >
                 <Image 
                   src={displayStack[1] || displayStack[0]} 
                   alt={`${title} 2`}
                   fill 
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover/image2:scale-105"
                 />
+                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover/image2:opacity-100 transition-opacity flex items-center justify-center">
+                  <div className="bg-background/80 backdrop-blur-md p-2 rounded-full border border-foreground/10 scale-0 group-hover/image2:scale-100 transition-transform duration-300">
+                    <ZoomIn className="h-4 w-4 text-foreground/60" />
+                  </div>
+                </div>
               </motion.div>
 
               {/* PHOTO 1 (Left/Front) */}
               <motion.div 
-                className="absolute w-[85%] aspect-[4/3] rounded-xl overflow-hidden border border-foreground/10 shadow-2xl pointer-events-auto bg-muted"
+                className="absolute w-[85%] aspect-[4/3] rounded-xl overflow-hidden border border-foreground/10 shadow-2xl pointer-events-auto bg-muted cursor-zoom-in group/image1"
                 initial={false}
                 animate={{ 
                   y: isHovered ? -120 : 0,
@@ -111,15 +123,21 @@ export function ProjectCaseStudy({
                   zIndex: isHovered ? 15 : 11
                 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                onClick={() => setSelectedImage(displayStack[0])}
               >
                 <Image 
                   src={displayStack[0]} 
                   alt={`${title} 1`}
                   fill 
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover/image1:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover/image1:opacity-100 transition-opacity flex items-center justify-center">
+                  <div className="bg-background/80 backdrop-blur-md p-2 rounded-full border border-foreground/10 scale-0 group-hover/image1:scale-100 transition-transform duration-300">
+                    <ZoomIn className="h-4 w-4 text-foreground/60" />
+                  </div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover/image1:opacity-100 transition-opacity duration-500" />
               </motion.div>
 
               {/* Stacked Papers Background Effect (Behind Photos) */}
@@ -181,6 +199,24 @@ export function ProjectCaseStudy({
         {/* BACKGROUND DECORATIVE PAPERS */}
         <div className="absolute inset-x-2 bottom-0 h-[82%] -z-10 translate-y-2 rounded-2xl border bg-card/20 border-foreground/5 transition-transform duration-700 group-hover/folder:translate-y-4" />
       </div>
+
+      {/* Image Preview Lightbox */}
+      <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
+        <DialogContent className="max-w-[95vw] md:max-w-[80vw] h-fit p-0 bg-transparent border-none overflow-hidden flex items-center justify-center">
+          <DialogTitle className="sr-only">{title} Preview</DialogTitle>
+          {selectedImage && (
+            <div className="relative w-full aspect-video rounded-3xl overflow-hidden border border-foreground/10 shadow-[0_50px_100px_rgba(0,0,0,0.2)] bg-muted/80 backdrop-blur-sm">
+              <Image 
+                src={selectedImage} 
+                alt={`${title} Preview`}
+                fill
+                className="object-contain p-4 md:p-8"
+                priority
+              />
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

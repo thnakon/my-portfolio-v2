@@ -23,11 +23,25 @@ export function Navbar() {
   const currentTheme = mounted ? resolvedTheme : "light"
   const logoSrc = currentTheme === "dark" ? "/logo-dark.png" : "/logo.png"
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (window.location.pathname === "/") {
+      e.preventDefault()
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      })
+    }
+  }
+
   return (
     <nav className={`sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-1000 ${isDone ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}>
       <div className="max-w-[1600px] mx-auto flex h-14 items-center justify-between px-8">
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center space-x-2">
+          <Link 
+            href="/" 
+            className="flex items-center space-x-2"
+            onClick={handleLogoClick}
+          >
             <Image 
               src={logoSrc}
               alt="Logo" 
