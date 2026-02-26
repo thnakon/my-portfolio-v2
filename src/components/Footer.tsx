@@ -34,18 +34,25 @@ export function Footer() {
 
           {/* Quick Links & Social/Status Combined for Right Alignment */}
           <div className="flex flex-col md:flex-row gap-12 md:gap-20 md:items-start text-right">
-            {/* Quick Links */}
+            {/* Navigation */}
             <div className="flex flex-col gap-3 md:items-end">
               <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 mb-2 whitespace-nowrap">Navigation</h4>
-              <div className="grid grid-cols-2 md:flex md:flex-col gap-x-8 gap-y-2 text-left md:text-right">
+              <div className="flex flex-col gap-2 text-left md:text-right">
                 <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Home</Link>
                 <Link href="/work" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Work</Link>
                 <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About</Link>
+                <Link href="/write-to-me" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-medium">Write to me</Link>
+              </div>
+            </div>
+
+            {/* Explore */}
+            <div className="flex flex-col gap-3 md:items-end">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 mb-2 whitespace-nowrap">Explore</h4>
+              <div className="flex flex-col gap-2 text-left md:text-right">
                 <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Blog</Link>
                 <Link href="/links" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Links</Link>
                 <Link href="/uses" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Uses</Link>
                 <Link href="/attribution" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Attribution</Link>
-                <Link href="/write-to-me" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-medium">Write to me</Link>
               </div>
             </div>
 
