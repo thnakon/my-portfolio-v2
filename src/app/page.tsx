@@ -11,22 +11,27 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue } from "fram
 import { CopyEmailButton } from "@/components/CopyEmailButton";
 import { ContactModal } from "@/components/ContactModal";
 import Image from "next/image";
-import { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import confetti from "canvas-confetti";
 import { useIntro } from "@/components/intro-context";
 import { ProjectCaseStudy } from "@/components/ProjectCaseStudy";
 import { TimelineItem } from "@/components/TimelineItem";
-import { AboutSection } from "@/components/AboutSection";
-import { BentoGrid } from "@/components/BentoGrid";
-import { FinalSection } from "@/components/FinalSection";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { RotatingText } from "@/components/RotatingText";
+import dynamic from "next/dynamic";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { AboutSection } from "@/components/AboutSection";
+import { FinalSection } from "@/components/FinalSection";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { RotatingText } from "@/components/RotatingText";
+
+const DynamicBentoGrid = dynamic(() => import("@/components/BentoGrid").then(mod => mod.BentoGrid), {
+  ssr: false,
+  loading: () => <div className="h-[400px] w-full bg-muted/5 animate-pulse rounded-2xl" />
+});
 import { experiences } from "@/data/experiences";
 import { projects } from "@/data/projects";
 import { blogs } from "@/data/blogs";
@@ -35,27 +40,39 @@ import { getTechIconSlug } from "@/lib/utils/tech-icons";
 
 
 
-const techStack = {
-  core: [
-    { name: "Next.js", icon: "nextdotjs" },
-    { name: "React", icon: "react" },
-    { name: "TypeScript", icon: "typescript" },
-    { name: "Tailwind CSS", icon: "tailwindcss" },
-    { name: "PostgreSQL", icon: "postgresql" },
-    { name: "Node.js", icon: "nodedotjs" },
-  ],
-  ai: [
-    { name: "OpenAI", icon: "openai" },
-    { name: "Claude", icon: "claude" },
-    { name: "LangChain", icon: "langchain" },
-    { name: "Vercel AI SDK", icon: "vercel" },
-    { name: "Prompt Engineering", icon: "openai" },
-  ],
-  tools: [
-    { name: "Cursor", icon: "cursor" },
-    { name: "GitHub", icon: "github" },
-  ]
-};
+// --- Memoized Components ---
+const MemoizedProjectItem = React.memo(ProjectItem);
+const MemoizedTimelineItem = React.memo(TimelineItem);
+
+function TypingH1({ fullText, isDone }: { fullText: string; isDone: boolean }) {
+  const [text, setText] = useState("");
+  
+  useEffect(() => {
+    let currentText = "";
+    let index = 0;
+    
+    const typingInterval = setInterval(() => {
+      if (index < fullText.length) {
+        currentText += fullText[index];
+        setText(currentText);
+        index++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 40);
+
+    return () => clearInterval(typingInterval);
+  }, [fullText]);
+
+  return (
+    <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl mb-6 min-h-[1.2em] flex items-center justify-center whitespace-pre-line">
+      {text}
+      {!isDone && (
+        <span className="inline-block w-[3px] h-[0.8em] bg-foreground ml-1 animate-pulse" />
+      )}
+    </h1>
+  );
+}
 
 function ProjectItem({ project, index }: { project: any; index: number }) {
   const mouseX = useMotionValue(0);
@@ -212,7 +229,6 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
 }
 
 export default function Home() {
-  const [text, setText] = useState("");
   const fullText = "Developing innovative tools to\nempower students and businesses";
   const { isDone, setDone } = useIntro();
 
@@ -273,34 +289,20 @@ export default function Home() {
         const el = document.getElementById(id);
         if (el) sectionObserver.observe(el);
       });
-    }, 500);
+    }, 1500);
 
-    // Show the rest of the page almost immediately for better UX
+    // Show the rest of the page after a slight delay for better UX
     const timer = setTimeout(() => {
       setDone(true);
-    }, 100);
-
-    let currentText = "";
-    let index = 0;
-    
-    const typingInterval = setInterval(() => {
-      if (index < fullText.length) {
-        currentText += fullText[index];
-        setText(currentText);
-        index++;
-      } else {
-        clearInterval(typingInterval);
-      }
-    }, 40);
+    }, 500);
 
     return () => {
       clearTimeout(timer);
       clearTimeout(observeTimer);
       if (restoreTimer) clearTimeout(restoreTimer);
-      clearInterval(typingInterval);
       sectionObserver.disconnect();
     };
-  }, [setDone, fullText]);
+  }, [setDone]);
 
   return (
     <div className="flex flex-col relative overflow-x-clip">
@@ -329,12 +331,7 @@ export default function Home() {
             </Link>
             
             {/* Animated H1 */}
-            <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl mb-6 min-h-[1.2em] flex items-center justify-center whitespace-pre-line">
-              {text}
-              {!isDone && (
-                <span className="inline-block w-[3px] h-[0.8em] bg-foreground ml-1 animate-pulse" />
-              )}
-            </h1>
+            <TypingH1 fullText={fullText} isDone={isDone} />
             
             {/* Subtitle & Image */}
             <div className={`mx-auto max-w-[800px] text-muted-foreground text-base md:text-lg mb-10 leading-relaxed flex items-center justify-center flex-wrap gap-x-3 transition-all duration-1000 delay-500 ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
@@ -385,9 +382,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Bento Grid Section */}
       <section id="bento" className={`container mx-auto px-8 pb-20 transition-all duration-1000 delay-[1000ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
-        <BentoGrid />
+        <DynamicBentoGrid />
       </section>
 
       {/* About Section */}
@@ -411,7 +407,7 @@ export default function Home() {
 
         <div className="flex flex-col gap-0 relative">
           {projects.slice(0, 3).map((project, index) => (
-            <ProjectItem key={index} project={project} index={index} />
+            <MemoizedProjectItem key={index} project={project} index={index} />
           ))}
         </div>
       </section>
@@ -557,7 +553,7 @@ export default function Home() {
 
           <div ref={timelineRef} className="space-y-4">
             {experiences.map((exp, index) => (
-              <TimelineItem 
+              <MemoizedTimelineItem 
                 key={index}
                 {...exp}
                 hideDot={true}

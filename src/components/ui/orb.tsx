@@ -44,9 +44,10 @@ export function Orb({
         resize={{ debounce: resizeDebounce }}
         gl={{
           alpha: true,
-          antialias: true,
+          antialias: false,
           premultipliedAlpha: true,
         }}
+        dpr={1.5}
       >
         <Scene
           colors={colors}

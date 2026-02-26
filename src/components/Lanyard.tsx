@@ -42,7 +42,7 @@ export default function Lanyard({ position = [0, 0, 13], gravity = [0, -40, 0], 
     <div className="w-full h-full relative z-0 min-h-[200px]">
       <Canvas
         camera={{ position: position, fov: fov }}
-        dpr={[1, isMobile ? 1.5 : 2]}
+        dpr={isMobile ? 1 : 1.5}
         gl={{ alpha: transparent }}
         onCreated={({ gl }) => {
           gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)
@@ -50,7 +50,7 @@ export default function Lanyard({ position = [0, 0, 13], gravity = [0, -40, 0], 
         className="w-full h-full"
       >
         <ambientLight intensity={Math.PI} />
-        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+        <Physics gravity={gravity} timeStep={1 / 30}>
           <Band isMobile={isMobile} />
         </Physics>
         <Environment blur={0.75}>

@@ -9,10 +9,20 @@ import { CopyEmailButton } from "@/components/CopyEmailButton"
 import Link from "next/link"
 import Image from "next/image"
 
-import { Orb } from "@/components/ui/orb"
 import CardSwap, { CardSwapInner } from "@/components/CardSwap"
-import Lanyard from "@/components/Lanyard"
 import { getTechIconSlug } from "@/lib/utils/tech-icons"
+import dynamic from "next/dynamic"
+import React from "react"
+
+// Lazy load heavy 3D components
+const Lanyard = dynamic(() => import("@/components/Lanyard"), { 
+  ssr: false,
+  loading: () => <div className="h-full w-full bg-muted/5 animate-pulse rounded-2xl" />
+})
+
+const Orb = dynamic(() => import("@/components/ui/orb").then(mod => mod.Orb), { 
+  ssr: false 
+})
 
 const indexToId = (index: number) => String(index + 1).padStart(2, '0')
 
@@ -33,7 +43,7 @@ const projectFolders = [
 ]
 
 
-export function BentoGrid() {
+export const BentoGrid = React.memo(function BentoGrid() {
   const getIconUrl = (tech: string) => {
     const slug = getTechIconSlug(tech);
     return `https://cdn.simpleicons.org/${slug}`;
@@ -262,4 +272,4 @@ export function BentoGrid() {
 
     </div>
   )
-}
+})
