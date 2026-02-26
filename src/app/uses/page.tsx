@@ -199,7 +199,7 @@ export default function UsesPage() {
       <div className="h-10 w-10 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover:bg-foreground/[0.08] transition-colors overflow-hidden">
         {item.logo ? (
           <img 
-            src={`https://cdn.simpleicons.org/${item.logo}`} 
+            src={`https://cdn.jsdelivr.net/npm/simple-icons@v14/icons/${item.logo}.svg`} 
             alt={item.name} 
             className="h-5 w-5 object-contain transition-all duration-300 group-hover:scale-110 grayscale group-hover:grayscale-0 active:scale-95"
           />

@@ -148,6 +148,7 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
                         src={project.image} 
                         alt={project.title}
                         fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                         priority={index < 2}
                         className="object-cover"
                       />
@@ -159,6 +160,7 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
                           src={project.stackImages[0]} 
                           alt={`${project.title} secondary`}
                           fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                           priority={index === 0}
                           className="object-cover"
                         />
@@ -198,7 +200,7 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
                 {project.tags.map((tag: string) => (
                   <div key={tag} className="flex items-center gap-2 bg-card border border-foreground/[0.08] px-3.5 py-1.5 rounded-xl shadow-sm hover:border-foreground/20 transition-colors">
                     <img 
-                      src={`https://cdn.simpleicons.org/${getTechIconSlug(tag)}`} 
+                      src={`https://cdn.jsdelivr.net/npm/simple-icons@v14/icons/${getTechIconSlug(tag)}.svg`} 
                       className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 transition-opacity dark:invert"
                       alt={tag}
                       onError={(e) => (e.currentTarget.style.display = 'none')}
@@ -436,6 +438,7 @@ export default function Home() {
                     src={post.image}
                     alt={post.title}
                     fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -477,7 +480,7 @@ export default function Home() {
           ];
           const getIconUrl = (tech: string) => {
             const slug = getTechIconSlug(tech);
-            return `https://cdn.simpleicons.org/${slug}`;
+            return `https://cdn.jsdelivr.net/npm/simple-icons@v14/icons/${slug}.svg`;
           };
 
           return (
@@ -656,6 +659,7 @@ export default function Home() {
                     src="/fashion.jpg"
                     alt="FaSHioN - Cortis"
                     fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />

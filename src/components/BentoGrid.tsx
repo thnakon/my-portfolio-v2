@@ -46,7 +46,7 @@ const projectFolders = [
 export const BentoGrid = React.memo(function BentoGrid() {
   const getIconUrl = (tech: string) => {
     const slug = getTechIconSlug(tech);
-    return `https://cdn.simpleicons.org/${slug}`;
+    return `https://cdn.jsdelivr.net/npm/simple-icons@v14/icons/${slug}.svg`;
   }
 
   return (

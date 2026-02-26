@@ -134,7 +134,7 @@ export default function ProjectPage() {
                {project.tags.map(tag => (
                  <div key={tag} className="flex items-center gap-1.5 bg-foreground/[0.03] border border-foreground/[0.06] px-3 py-1 rounded-full">
                     <img 
-                      src={`https://cdn.simpleicons.org/${getTechIconSlug(tag)}`} 
+                      src={`https://cdn.jsdelivr.net/npm/simple-icons@v14/icons/${getTechIconSlug(tag)}.svg`} 
                       className="h-3 w-3 dark:invert opacity-60"
                       alt={tag}
                       onError={(e) => (e.currentTarget.style.display = 'none')}
@@ -171,7 +171,7 @@ export default function ProjectPage() {
                animate={{ opacity: 1, y: 0 }}
                className="aspect-video relative rounded-3xl overflow-hidden border border-foreground/10 shadow-[0_50px_100px_rgba(0,0,0,0.1)] bg-muted"
             >
-              <Image src={project.image} fill className="object-cover" alt="Main View" priority />
+              <Image src={project.image} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" alt="Main View" priority />
               <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/40 to-transparent" />
               <div className="absolute bottom-6 left-6 flex items-center gap-2">
                  <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
@@ -184,7 +184,7 @@ export default function ProjectPage() {
                animate={{ opacity: 1, y: 0 }}
                className="aspect-video relative rounded-3xl overflow-hidden border border-foreground/10 shadow-[0_50px_100px_rgba(0,0,0,0.1)] bg-muted"
             >
-              <Image src={project.hoverImage || project.stackImages?.[0] || project.image} fill className="object-cover" alt="Detail View" />
+              <Image src={project.hoverImage || project.stackImages?.[0] || project.image} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" alt="Detail View" />
               <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/40 to-transparent" />
               <div className="absolute bottom-6 left-6 flex items-center gap-2">
                  <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
@@ -282,7 +282,7 @@ export default function ProjectPage() {
                    <div key={tag} className="p-4 rounded-2xl bg-foreground/[0.02] border border-foreground/[0.05] hover:bg-foreground/[0.04] transition-colors flex flex-col gap-3">
                       <div className="h-10 w-10 rounded-xl bg-foreground/[0.03] border border-foreground/5 flex items-center justify-center">
                         <img 
-                          src={`https://cdn.simpleicons.org/${getTechIconSlug(tag)}`} 
+                          src={`https://cdn.jsdelivr.net/npm/simple-icons@v14/icons/${getTechIconSlug(tag)}.svg`} 
                           className="h-5 w-5 dark:invert opacity-70"
                           alt={tag}
                           onError={(e) => (e.currentTarget.style.display = 'none')}

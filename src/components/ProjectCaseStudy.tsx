@@ -153,7 +153,7 @@ export function ProjectCaseStudy({
                 {tags.slice(0, 6).map((tag) => (
                   <div key={tag} className="flex items-center gap-1 bg-foreground/[0.03] border border-foreground/[0.05] px-2 py-0.5 rounded-md">
                     <img 
-                      src={`https://cdn.simpleicons.org/${getTechIconSlug(tag)}`} 
+                      src={`https://cdn.jsdelivr.net/npm/simple-icons@v14/icons/${getTechIconSlug(tag)}.svg`} 
                       alt={tag} 
                       className="h-2.5 w-2.5 opacity-60 dark:invert"
                       onError={(e) => (e.currentTarget.style.display = "none")}

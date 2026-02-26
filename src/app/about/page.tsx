@@ -174,6 +174,7 @@ export default function AboutPage() {
                     src="/fashion.jpg"
                     alt="FaSHioN - Cortis"
                     fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
