@@ -299,7 +299,7 @@ export default function WorkPage() {
           onMouseLeave={handleMouseLeave}
           onMouseEnter={handleMouseEnter}
           onScroll={handleScroll}
-          className="w-[calc(100%+4rem)] -mx-8 overflow-hidden py-20 -my-20 select-none overflow-x-auto no-scrollbar scroll-smooth cursor-grab active:cursor-grabbing"
+          className="w-[calc(100%+2rem)] -mx-4 sm:w-[calc(100%+4rem)] sm:-mx-8 overflow-hidden py-20 -my-20 select-none overflow-x-auto no-scrollbar scroll-smooth cursor-grab active:cursor-grabbing"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           <div className="flex shrink-0 gap-8">
