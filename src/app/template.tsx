@@ -51,11 +51,13 @@ export default function Template({ children }: { children: React.ReactNode }) {
       <motion.div
         variants={veilVariants}
         className="pointer-events-none fixed inset-0 z-[89] bg-black/25"
+        style={{ willChange: "opacity" }}
       />
 
       <motion.div
         variants={curtainVariants}
         className="pointer-events-none fixed inset-0 z-[90]"
+        style={{ willChange: "transform" }}
       >
         <CurvedCurtain />
       </motion.div>

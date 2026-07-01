@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
  * both use the exact same shape and colour.
  */
 export function CurvedCurtain({
-  color = "rgba(12, 12, 14, 0.6)",
+  color = "rgba(12, 12, 14, 1)",
   className,
 }: {
   color?: string;
@@ -23,7 +23,7 @@ export function CurvedCurtain({
 }) {
   return (
     <div
-      className={cn("absolute inset-0 backdrop-blur-xl", className)}
+      className={cn("absolute inset-0", className)}
       style={{ backgroundColor: color }}
       aria-hidden
     >

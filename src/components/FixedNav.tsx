@@ -17,7 +17,7 @@ export function FixedNav() {
   ];
 
   return (
-    <nav className="absolute top-8 right-8 z-50 flex flex-col items-end space-y-1.5 pointer-events-auto">
+    <nav className="absolute top-4 right-4 sm:top-8 sm:right-8 z-50 flex flex-col items-end space-y-1.5 pointer-events-auto">
       {navItems.map((item) => (
         <Link
           key={item.name}

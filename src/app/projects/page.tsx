@@ -236,7 +236,7 @@ export default function WorkPage() {
   const selectedProject = projects.find((p) => p.slug === selectedSlug);
 
   return (
-    <div className="relative w-full min-h-screen md:h-screen md:overflow-hidden bg-white text-black flex flex-col justify-between p-8 selection:bg-black selection:text-white">
+    <div className="relative w-full min-h-screen md:h-screen md:overflow-hidden bg-white text-black flex flex-col justify-between p-4 sm:p-8 selection:bg-black selection:text-white">
       <style>{`
         .no-scrollbar::-webkit-scrollbar {
           display: none;
@@ -244,7 +244,7 @@ export default function WorkPage() {
       `}</style>
       
       {/* Top Left: Back Button & Language Switcher */}
-      <div className="absolute top-8 left-8 z-50 flex items-center gap-6">
+      <div className="absolute top-4 left-4 sm:top-8 sm:left-8 z-50 flex items-center gap-4 sm:gap-6">
         <Link
           href="/"
           className="h-10 w-10 bg-black rounded-full flex items-center justify-center text-white hover:scale-105 transition-transform duration-200 cursor-pointer shadow-md"

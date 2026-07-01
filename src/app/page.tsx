@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { useIntro } from "@/components/intro-context";
 import { useLanguage } from "@/components/language-context";
 import GridScramble from "@/components/GridScramble";
@@ -12,7 +13,16 @@ export default function Home() {
   const { language, setLanguage, t } = useLanguage();
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-white text-black flex flex-col justify-between p-8 selection:bg-black selection:text-white">
+    <div className="relative w-full h-screen overflow-hidden bg-white text-black flex flex-col justify-between p-4 sm:p-8 selection:bg-black selection:text-white">
+      {/* Top Center: Logo */}
+      <div
+        className={`absolute top-4 sm:top-8 left-1/2 -translate-x-1/2 z-20 transition-all duration-1000 ${
+          isDone ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+        }`}
+      >
+        <Image src="/logo.png" alt="Logo" width={36} height={36} priority />
+      </div>
+
       {/* Top Left: Title & Name */}
       <div
         className={`z-20 transition-all duration-1000 ${
@@ -22,10 +32,10 @@ export default function Home() {
         <p className="text-[10px] sm:text-[11px] font-bold text-neutral-400 tracking-[0.15em] mb-1 uppercase">
           {t("home.role")}
         </p>
-        <h1 className="text-[34px] font-bold tracking-tight leading-none uppercase text-black">
+        <h1 className="text-2xl sm:text-[34px] font-bold tracking-tight leading-none uppercase text-black">
           {t("home.name.first")}
         </h1>
-        <h2 className="text-[34px] font-bold tracking-tight leading-none uppercase text-black mt-1">
+        <h2 className="text-2xl sm:text-[34px] font-bold tracking-tight leading-none uppercase text-black mt-1">
           {t("home.name.last")}
         </h2>
       </div>

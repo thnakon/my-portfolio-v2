@@ -35,8 +35,8 @@ const techRow2 = [
 ]
 
 const projectFolders = [
-  { name: "Singha", image: "/projects/singha-preview.png", color: "text-amber-500" },
-  { name: "Klin Dental", image: "/projects/klin-dental-preview.png", color: "text-blue-500" },
+  { name: "Singha", image: "/projects/singha-preview.jpg", color: "text-amber-500" },
+  { name: "Klin Dental", image: "/projects/klin-dental-preview.jpg", color: "text-blue-500" },
   { name: "Babybib", image: "/projects/babybib-preview.png", color: "text-purple-500" },
   { name: "Oboun", image: "/projects/oboun-preview.png", color: "text-emerald-500" },
   { name: "Portfolio v1", image: "/projects/portfolio-v1-preview.png", color: "text-slate-500" },
