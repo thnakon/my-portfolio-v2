@@ -6,6 +6,7 @@ export interface Feature {
 export interface Project {
   slug: string;
   title: string;
+  date: string;
   description: string;
   overview: string;
   image: string;
@@ -22,35 +23,112 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "wishdom-by-f1",
+    title: "Wishdom by F1",
+    date: "May 2026 – Jul 2026",
+    description: "Real-time booking system for a tutoring center and co-working space, supporting hourly, daily, weekly, and monthly reservations.",
+    overview: "A fully automated booking platform integrating LINE chat-based reservations alongside standard web booking, with automated payment slip verification.",
+    image: "/projects/wishdom-preview.png",
+    tags: ["Next.js", "React", "Supabase", "LINE API", "TypeScript"],
+    githubUrl: undefined,
+    liveUrl: "https://www.wishdombyf1forall.com",
+    architecture: [
+      "Frontend: Next.js with React for a seamless booking experience",
+      "Backend: Supabase for real-time data and authentication",
+      "Integration: LINE Messaging API with automated reply bot",
+      "Payments: Automated slip verification to reduce manual checks"
+    ],
+    deployment: "Hosted on Vercel with Supabase global edge infrastructure for low-latency real-time updates.",
+    features: [
+      { text: "Built LINE chat-based booking with an automated reply API alongside standard web booking.", icon: "Zap" },
+      { text: "Implemented automatic payment slip verification to increase transparency and reduce manual checks.", icon: "ShieldCheck" },
+      { text: "Automated the full booking lifecycle — confirmation, cancellation, and rescheduling.", icon: "BarChart3" },
+      { text: "Replaced a previously untracked manual process with a fully auditable system.", icon: "Inbox" }
+    ],
+    isAI: false
+  },
+  {
+    slug: "provision-provider",
+    title: "Provision Provider",
+    date: "May 2026",
+    description: "Restored and modernized the company website for an AV, Lighting & Sound Systems installer — delivered in 7 days.",
+    overview: "Revitalized a non-functioning company website within a legacy tech stack, delivering full restoration with modern UI in 7 days.",
+    image: "/projects/provision-preview.png",
+    tags: ["HTML/CSS", "JavaScript", "PHP"],
+    githubUrl: undefined,
+    liveUrl: "https://provisionprovider.com",
+    architecture: [
+      "Legacy Stack: Worked within existing technology to preserve stability",
+      "UI Modernization: Refreshed design while maintaining data continuity",
+      "Content: Updated all audio/visual/lighting systems installer content",
+      "Delivery: Full project completed and deployed in 7 days"
+    ],
+    deployment: "Deployed on existing server infrastructure with updated content and optimized asset loading.",
+    features: [
+      { text: "Restored a non-functioning company website database back to full working order.", icon: "Zap" },
+      { text: "Modernized the site's UI while working within an existing legacy technology stack.", icon: "Inbox" },
+      { text: "Delivered the full project within 7 days, including updated content and new data entries.", icon: "BarChart3" },
+      { text: "Updated all audio/visual/lighting product listings and company information.", icon: "ShieldCheck" }
+    ],
+    isAI: false
+  },
+  {
+    slug: "wainai-wing-jhing-mai",
+    title: "Wainai Wing Jhing Mai",
+    date: "Apr 2026 – May 2026",
+    description: "Temple database website covering Mueang Chiang Mai district, built with Laravel and MySQL.",
+    overview: "A comprehensive temple directory covering Mueang Chiang Mai, independently designed and built from database structure to UI/UX.",
+    image: "/projects/wainai-preview.png",
+    tags: ["Laravel", "MySQL", "HTML/CSS", "JavaScript"],
+    githubUrl: undefined,
+    liveUrl: undefined,
+    architecture: [
+      "Backend: Laravel for robust routing and MVC architecture",
+      "Database: MySQL with a custom-designed schema for temple data",
+      "Data: Independently collected and photographed primary source data",
+      "UI/UX: Designed from the ground up for accessible browsing"
+    ],
+    deployment: "Shared hosting with optimized database queries for efficient directory lookups.",
+    features: [
+      { text: "Designed and developed a temple database covering Mueang Chiang Mai district.", icon: "Zap" },
+      { text: "Independently collected and photographed primary source data for the database.", icon: "Inbox" },
+      { text: "Designed the full database structure, system architecture, and UI/UX from scratch.", icon: "BarChart3" },
+      { text: "Built with Laravel and MySQL for reliable data management.", icon: "ShieldCheck" }
+    ],
+    isAI: false
+  },
+  {
     slug: "oboun-erp",
     title: "Oboun ERP",
-    description: "Enterprise Resource Planning system designed for SMEs automation.",
-    overview: "A developer-first ERP optimized for performance and seamless integration.",
+    date: "Aug 2025 – Mar 2026",
+    description: "Pharmacy Management System developed as a final project, improving inventory tracking and automating drug safety alerts.",
+    overview: "A full-scale ERP system for pharmacy management with automated safety alerts, inventory accuracy improvements, and streamlined workflows.",
     image: "/projects/oboun-preview.png",
     hoverImage: "/projects/oboun-pos.png",
-    tags: ["Laravel 11", "Vue.js 3", "MySQL", "Tailwind", "Docker"],
+    tags: ["Laravel", "Vue.js 3", "MySQL", "Tailwind", "Docker"],
     githubUrl: "https://github.com/thnakon/ERP_PMS",
-    liveUrl: "https://erp.oboun.com",
+    liveUrl: undefined,
     architecture: [
       "Routing: Built on Laravel with full SPA capabilities via Vue.js",
       "Database: MySQL with advanced indexing for sub-second queries",
-      "Authentication: Custom Breeze-based auth with multi-tenancy support",
-      "Styling: Modern Tailwind CSS for highly responsive dashboard layouts"
+      "Authentication: Custom auth with role-based access control",
+      "Containers: Docker for consistent dev and production environments"
     ],
-    deployment: "Hosted on AWS with automatic CI/CD workflows via GitHub Actions. DNS managed by Cloudflare for high security and performance.",
+    deployment: "Self-hosted with Docker containerization and automated backup workflows.",
     features: [
-      { text: "Developed with Laravel 12 and Vue.js 3, ensuring long-term maintainability", icon: "Zap" },
-      { text: "Implemented complex logic for real-time multi-warehouse inventory sync", icon: "Inbox" },
-      { text: "Designed automated financial reporting with precise tax and ledger management", icon: "BarChart3" },
-      { text: "Optimized MySQL database with advanced indexing for high-scale performance", icon: "ShieldCheck" }
+      { text: "Improved inventory tracking accuracy (Survey Satisfaction x̄ = 4.47).", icon: "BarChart3" },
+      { text: "Built automated drug safety alerts for Pregnancy and G6PD conditions.", icon: "ShieldCheck" },
+      { text: "Streamlined pharmacy workflows and ensured data integrity across departments.", icon: "Zap" },
+      { text: "Designed a complete ERP from database structure to UI/UX.", icon: "Inbox" }
     ],
     isAI: false
   },
   {
     slug: "babybib",
     title: "Babybib",
-    description: "Automated bibliography generation system standardizing APA 7th Edition.",
-    overview: "A high-performance citation engine for automated academic formatting.",
+    date: "Nov 2025 – Jan 2026",
+    description: "Automated bibliography generation system reducing manual citation time by 70% via automation.",
+    overview: "A high-performance citation engine integrating Open Library and Google Books APIs for intelligent academic formatting.",
     image: "/projects/babybib-preview.png",
     stackImages: ["/projects/babybib2.png", "/projects/babybib3.png"],
     githubUrl: "https://github.com/thnakon/Babybib",
@@ -59,97 +137,24 @@ export const projects: Project[] = [
     architecture: [
        "Core Engine: PHP-based regex parser for dynamic citation building",
        "Frontend: Zero-dependency JavaScript for ultra-fast performance",
-       "Standards: Strict adherance to APA 7th Edition logic",
-       "Validation: Real-time source verification and metadata extraction"
+       "APIs: Open Library and Google Books API for metadata extraction",
+       "Standards: Strict adherance to APA 7th Edition logic"
     ],
-    deployment: "Optimized for lightweight hosting with minimal server overhead. Static assets served via global CDN for global accessibility.",
+    deployment: "Optimized for lightweight hosting with minimal server overhead. Static assets served via global CDN.",
     features: [
-      { text: "Architected a robust engine for automated APA 7th Edition citation standards.", icon: "Zap" },
-      { text: "Supports diverse sources including journals, books, and digital media.", icon: "Inbox" },
-      { text: "Built with a responsive UI that prioritizes user productivity and rapid work.", icon: "Smartphone" },
-      { text: "Features real-time bibliography previews and instant validation logic.", icon: "BarChart3" }
-    ],
-    isAI: false
-  },
-  {
-    slug: "scribehub",
-    title: "ScribeHub",
-    description: "All-in-one platform for modern researchers with AI intelligence.",
-    overview: "An AI-powered assistant for intelligent research and data interaction.",
-    image: "/projects/ScribeHub1.png",
-    hoverImage: "/projects/ScribeHub2.png",
-    githubUrl: "https://github.com/thnakon/scribehub",
-    tags: ["React", "Next.js", "Supabase", "TypeScript", "Tailwind"],
-    architecture: [
-      "AI Engine: Integrated OpenAI GPT-4 with RAG for document analysis",
-      "Persistence: Supabase with Row Level Security for sensitive data",
-      "Real-time: Collaborative features via Supabase Realtime",
-      "Navigation: Next.js App Router with dynamic ISR routes"
-    ],
-    deployment: "Hosted on Vercel with serverless functions. Data secured via Supabase's global edge infrastructure.",
-    features: [
-      { text: "Leveraged OpenAI's GPT-4 to create an intelligent research paper assistant.", icon: "Zap" },
-      { text: "Engineered a collaborative environment with real-time updates for research teams.", icon: "Inbox" },
-      { text: "Integrated a reference management system with automatic metadata extraction.", icon: "ShieldCheck" },
-      { text: "Developed an interactive knowledge graph for visual data discovery.", icon: "BarChart3" }
-    ],
-    isAI: true
-  },
-  {
-    slug: "mai-lon",
-    title: "Mai-lon",
-    description: "A single platform that helps students \"study hard, succeed in their careers, and live a good life.\"",
-    overview: "Designed to empower student journeys from academic excellence to professional success.",
-    image: "/projects/5.png",
-    hoverImage: "/projects/6.png",
-    tags: ["Next.js 14", "Supabase", "Tailwind CSS", "TypeScript", "shadcn/ui"],
-    githubUrl: "https://github.com/thnakon/Mai-Lon",
-    liveUrl: "#", // Placeholder
-    architecture: [
-      "Framework: Next.js 14 with App Router for optimal performance",
-      "Backend: Supabase for real-time data, authentication, and vector search",
-      "UI Library: shadcn/ui for accessible and modular components",
-      "Styling: Modern Tailwind CSS for a refined, student-focused aesthetic"
-    ],
-    deployment: "Vercel serverless deployment with automated CI/CD and production-grade monitoring.",
-    features: [
-      { text: "Academic Excellence: Comprehensive study tools and lecture management.", icon: "Zap" },
-      { text: "Career Success: Career tracking and professional networking resources.", icon: "Inbox" },
-      { text: "Personal Well-being: Features for balanced living and lifestyle management.", icon: "BarChart3" },
-      { text: "Unified Experience: A single workspace for all student-related activities.", icon: "Smartphone" }
-    ],
-    isAI: false
-  },
-  {
-    slug: "klin-dental-clinic",
-    title: "Medical Platform (Internship)",
-    description: "Klin Dental Clinic: A comprehensive dental clinic management and booking platform.",
-    overview: "Developed during an internship to streamline patient scheduling and clinic operations.",
-    image: "/projects/1.png",
-    hoverImage: "/projects/2.png",
-    tags: ["Laravel", "Bootstrap", "MySQL", "JavaScript"],
-    githubUrl: undefined,
-    liveUrl: undefined,
-    architecture: [
-      "Framework: Laravel for robust server-side logic and API management",
-      "Database: MySQL for secure and relational patient data storage",
-      "Frontend: JavaScript and Bootstrap for a responsive and intuitive clinical interface",
-      "Standards: Industry-standard medical data handling and appointment logic"
-    ],
-    deployment: "On-premise deployment with automated backup systems and local network optimization.",
-    features: [
-      { text: "Patient Scheduling: Efficient booking system for dental appointments.", icon: "Zap" },
-      { text: "Clinic Operations: Tools to manage daily tasks and patient records.", icon: "Inbox" },
-      { text: "Management Dashboard: Real-time overview of clinic performance and status.", icon: "BarChart3" },
-      { text: "Secure Records: Encrypted patient history and medical documentation.", icon: "ShieldCheck" }
+      { text: "Reduced manual citation time by 70% via intelligent automation.", icon: "Zap" },
+      { text: "Integrated Smart Search using Open Library and Google Books APIs.", icon: "Inbox" },
+      { text: "Organized references with a project-based management system.", icon: "BarChart3" },
+      { text: "Features real-time bibliography previews and instant validation logic.", icon: "ShieldCheck" }
     ],
     isAI: false
   },
   {
     slug: "singha-enterprise",
     title: "Enterprise Web (Internship)",
-    description: "Contribution to the development of the official Singha website during an internship. Focused on enhancing web performance and implementing new features.",
-    overview: "Worked on a high-traffic enterprise platform, optimizing frontend performance and modularity.",
+    date: "Apr 2025 – Jun 2025",
+    description: "Contributed to developing and updating new products and building new APIs for Singha's official website during internship.",
+    overview: "Worked on a high-traffic enterprise platform at Merge Digital Agency, contributing to real-world client features and API development.",
     image: "/projects/sigha1.png",
     hoverImage: "/projects/sigha2.png",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
@@ -158,63 +163,65 @@ export const projects: Project[] = [
     architecture: [
       "Frontend: Next.js with server-side rendering for optimal SEO and performance",
       "Styling: Tailored CSS and Tailwind for high-fidelity enterprise UI",
-      "Optimization: Implemented lazy loading, image optimization, and code splitting",
+      "APIs: Developed and updated APIs for real-world client product features",
       "Scale: Modular architecture for enterprise-level codebase maintainability"
     ],
-    deployment: "Enterprise-grade hosting with global CDN (Content Delivery Network) for low-latency access.",
+    deployment: "Enterprise-grade hosting with global CDN for low-latency access.",
     features: [
-      { text: "Performance Tuning: Significant improvements in Core Web Vitals.", icon: "Zap" },
-      { text: "Feature Implementation: Developed interactive components for product showcases.", icon: "Inbox" },
-      { text: "Enterprise Scale: Handled complex workflows within a large-scale codebase.", icon: "Monitor" },
-      { text: "High Fidelity: Translated complex design requirements into pixel-perfect web interfaces.", icon: "Star" }
+      { text: "Contributed to developing and updating new products for a real-world client.", icon: "Zap" },
+      { text: "Built and updated new APIs as part of the Singha core development team.", icon: "Inbox" },
+      { text: "Built real-time object detection using YOLO (Python) for product automation.", icon: "ShieldCheck" },
+      { text: "Developed full-lifecycle Laravel web applications in a professional agency setting.", icon: "BarChart3" }
     ],
     isAI: false
   },
   {
-    slug: "portfolio-v1",
-    title: "My Portfolio v1",
-    description: "A high-performance personal portfolio website built with a focus on premium aesthetics, narrative storytelling, and cutting-edge web technologies.",
-    overview: "My first major portfolio redesign focusing on high-end interaction design and performance.",
-    image: "/projects/portfolio-home.png",
-    hoverImage: "/projects/portfolio-about.png",
-    tags: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Lucide"],
-    githubUrl: "https://github.com/thnakon/my-portfolio",
-    liveUrl: "https://my-portfolio-silk-sigma-85.vercel.app/",
+    slug: "klin-dental-clinic",
+    title: "Medical Platform (Internship)",
+    date: "Apr 2025 – Jun 2025",
+    description: "Klin Dental Clinic: A comprehensive dental clinic management and booking platform built during internship.",
+    overview: "Developed during an internship at Merge Digital Agency to streamline patient scheduling and clinic operations.",
+    image: "/projects/1.png",
+    hoverImage: "/projects/2.png",
+    tags: ["Laravel", "Bootstrap", "MySQL", "JavaScript"],
+    githubUrl: undefined,
+    liveUrl: undefined,
     architecture: [
-      "Framework: Next.js with App Router for modern dev experience",
-      "Animations: Framer Motion for complex, high-fidelity UI transitions",
-      "Icons: Lucide for a consistent and professional stroke-based icon style",
-      "Styling: Tailwind CSS for rapid and modular design implementation"
+      "Framework: Laravel for robust server-side logic and API management",
+      "Database: MySQL for secure and relational patient data storage",
+      "Frontend: JavaScript and Bootstrap for a responsive clinical interface",
+      "Standards: Industry-standard medical data handling and appointment logic"
     ],
-    deployment: "Vercel deployment with optimized asset delivery and serverless handling.",
+    deployment: "On-premise deployment with automated backup systems and local network optimization.",
     features: [
-      { text: "Narrative Storytelling: Engaging content layouts that tell a story.", icon: "Zap" },
-      { text: "Premium Aesthetics: Minimalist and high-contrast design language.", icon: "Star" },
-      { text: "Motion Design: Smooth interactions and page transitions.", icon: "Sparkles" },
-      { text: "Responsive: Fully optimized for all device categories and screen sizes.", icon: "Smartphone" }
+      { text: "Patient Scheduling: Efficient booking system for dental appointments.", icon: "Zap" },
+      { text: "Clinic Operations: Tools to manage daily tasks and patient records.", icon: "Inbox" },
+      { text: "Management Dashboard: Real-time overview of clinic performance.", icon: "BarChart3" },
+      { text: "Secure Records: Encrypted patient history and medical documentation.", icon: "ShieldCheck" }
     ],
     isAI: false
   },
   {
     slug: "portfolio-v2",
     title: "My Portfolio v2",
-    description: "A premium minimalist portfolio iteration showcasing advanced web development techniques and high-end animations.",
-    overview: "A state-of-the-art developer portfolio built with the latest stack for performance, interaction, and aesthetics.",
+    date: "2025 – Present",
+    description: "A premium minimalist portfolio built with the latest stack for performance, interaction, and aesthetics.",
+    overview: "A state-of-the-art developer portfolio showcasing advanced web development techniques and high-end animations.",
     image: "/projects/port-v2-1.png",
     hoverImage: "/projects/port-v2-2.png",
-    tags: ["Next.js 16", "React 19", "Tailwind CSS 4", "TypeScript", "Three.js", "Framer Motion", "GSAP", "Prisma", "MySQL"],
+    tags: ["Next.js 16", "React 19", "TypeScript", "Framer Motion", "Prisma", "MySQL"],
     githubUrl: "https://github.com/thnakon/my-portfolio-v2",
     liveUrl: "https://my-portfolio-v2-eight-iota.vercel.app/",
     architecture: [
       "Frontend: Next.js 16 (App Router) with React 19 concurrent features",
-      "Animations: High-fidelity motion with GSAP, Framer Motion, and Lenis",
-      "3D Graphics: Interactive components using Three.js and React Three Fiber",
-      "Backend: Prisma ORM with MySQL for robust data management and NextAuth"
+      "Animations: High-fidelity motion with Framer Motion and view transitions",
+      "Backend: Prisma ORM with MySQL for robust data management and NextAuth",
+      "Styling: Tailwind CSS 4 for modern utility-first design"
     ],
     deployment: "Optimized Vercel deployment with edge functions and global asset distribution.",
     features: [
       { text: "Advanced Web Development: Built with a focus on modern architectures and clean code.", icon: "Code2" },
-      { text: "Creative Interaction: Seamless 3D elements and refined micro-animations.", icon: "Sparkles" },
+      { text: "Creative Interaction: Seamless shared layout transitions and micro-animations.", icon: "Sparkles" },
       { text: "Performance First: Optimized bundle size, asset loading, and Core Web Vitals.", icon: "Zap" },
       { text: "Command System: Intelligent site-wide search and navigation palette.", icon: "Search" }
     ],

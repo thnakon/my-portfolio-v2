@@ -7,7 +7,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-inter), var(--font-thai), sans-serif;
   --font-mono: var(--font-geist-mono);
   --font-handwriting: var(--font-gochi);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -246,4 +246,13 @@
   body {
     @apply bg-background text-foreground;
   }
+  html[lang="th"] body {
+    font-weight: 300;
+  }
+}
+
+/* Hide the entrance curtain instantly when it has already played this session
+   (class set by a blocking script in layout.tsx) so there is no dark flash. */
+html.intro-done #intro-curtain {
+  display: none !important;
 }

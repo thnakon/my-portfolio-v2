@@ -1,211 +1,171 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import Image from "next/image"
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
-import { AboutSection } from "@/components/AboutSection"
-import { FinalSection } from "@/components/FinalSection"
-import { TimelineItem } from "@/components/TimelineItem"
-import { useIntro } from "@/components/intro-context"
-import Link from "next/link"
-import { Laptop, Keyboard, Mouse, Monitor, ArrowRight, Music } from "lucide-react"
-import { experiences } from "@/data/experiences"
+import Link from "next/link";
+import Image from "next/image";
+import { ChevronLeft } from "lucide-react";
+import { useIntro } from "@/components/intro-context";
+import { useEffect } from "react";
+import { useLanguage } from "@/components/language-context";
+
+function ArrowIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-3.5 w-3.5 shrink-0 ml-1"
+    >
+      <line x1="7" y1="17" x2="17" y2="7"></line>
+      <polyline points="7 7 17 7 17 17"></polyline>
+    </svg>
+  );
+}
 
 export default function AboutPage() {
-  const { isDone, setDone } = useIntro()
-
-  // Timeline Scroll Logic
-  const timelineRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start center", "end center"]
-  })
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  })
-
-  // Map progress to Y position (from top dot to bottom end)
-  const dotY = useTransform(smoothProgress, [0, 1], ["0%", "100%"])
+  const { setDone } = useIntro();
+  const { language, setLanguage } = useLanguage();
 
   useEffect(() => {
-    // Trigger animations immediately for stand-alone pages
-    setDone(true)
-  }, [setDone])
+    setDone(true);
+  }, [setDone]);
 
   return (
-    <div className="pt-32 pb-32">
-      {/* About Section */}
-      <section className="container mx-auto px-8 mb-32">
-        <AboutSection />
-      </section>
-
-      {/* Experience Section */}
-      <section 
-        id="experience" 
-        className={`container mx-auto px-8 pb-32 transition-all duration-1000 delay-[1200ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
-      >
-        <div className="flex items-center justify-between mb-12">
-          <div className="space-y-1">
-            <h2 className="text-2xl font-bold tracking-tight uppercase">Experience</h2>
-            <p className="text-muted-foreground text-sm font-medium">A timeline of my professional journey.</p>
-          </div>
-        </div>
-
-        <div className="relative">
-          {/* Global Vertical Line for the whole section */}
-          <div className="absolute left-[3px] md:left-[224px] top-5 bottom-0 w-[1px] bg-border/40" />
-          
-          {/* Animated Scrolling Profile Image */}
-          <motion.div 
-            style={{ top: dotY }}
-            className="absolute left-[-11px] md:left-[210px] h-7 w-7 rounded-full border-2 border-background overflow-hidden shadow-lg z-20 mt-1.5"
+    <div className="relative w-full min-h-screen md:h-screen md:overflow-hidden bg-white text-black flex flex-col items-center justify-center p-8 selection:bg-black selection:text-white">
+      {/* Top Left: Back Button & Language Switcher */}
+      <div className="absolute top-8 left-8 z-50 flex items-center gap-6">
+        <Link
+          href="/"
+          className="h-10 w-10 bg-black rounded-full flex items-center justify-center text-white hover:scale-105 transition-transform duration-200 cursor-pointer shadow-md"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </Link>
+        <div className="flex items-center gap-2 font-mono text-[10px] sm:text-[11px] tracking-widest uppercase">
+          <button
+            onClick={() => setLanguage("en")}
+            className={`cursor-pointer transition-all duration-200 ${
+              language === "en"
+                ? "text-black dark:text-white font-bold"
+                : "text-neutral-400 dark:text-neutral-500 font-normal hover:text-black dark:hover:text-white"
+            }`}
           >
-            <Image 
-              src="/profile-v3.jpg" 
-              alt="Thanakon" 
-              width={28} 
-              height={28} 
-              className="object-cover h-full w-full scale-125"
-            />
-          </motion.div>
-
-          <div ref={timelineRef} className="space-y-4">
-            {experiences.map((exp, index) => (
-              <TimelineItem 
-                key={index}
-                {...exp}
-                hideDot={true}
-                isLast={index === experiences.length - 1}
-              />
-            ))}
-          </div>
+            EN
+          </button>
+          <span className="text-neutral-300 dark:text-neutral-800">/</span>
+          <button
+            onClick={() => setLanguage("th")}
+            className={`cursor-pointer transition-all duration-200 ${
+              language === "th"
+                ? "text-black dark:text-white font-bold"
+                : "text-neutral-400 dark:text-neutral-500 font-normal hover:text-black dark:hover:text-white"
+            }`}
+          >
+            TH
+          </button>
         </div>
-      </section>
+      </div>
 
-      {/* Bottom Bento Grid — Uses / Write to me / Last Played */}
-      <section id="contact" className={`container mx-auto px-8 mt-32 pb-32 transition-all duration-1000 delay-[2000ms] ${isDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[260px]">
+      {/* Main 2-Column Grid */}
+      <div className="max-w-6xl w-full z-10 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 items-center">
+        {/* Left Column: Portrait Image */}
+        <div className="relative aspect-[3/4] w-full max-w-[280px] mx-auto rounded-3xl overflow-hidden shadow-xl border border-neutral-100 group">
+          <Image
+            src="/profile-v3.jpg"
+            alt="Thanakon"
+            fill
+            sizes="(max-width: 1024px) 100vw, 280px"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            priority
+          />
+        </div>
 
-          {/* Uses */}
-          <Link href="/uses" className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative">
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-foreground/[0.015] to-transparent pointer-events-none transition-opacity group-hover:opacity-20" />
-            <div className="relative z-10 space-y-6">
-              <div className="space-y-1">
-                <p className="text-[11px] font-bold text-muted-foreground/60">Daily Setup</p>
-                <h3 className="text-lg font-bold tracking-tight">Uses</h3>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { icon: Laptop, name: 'MacBook Air M2', detail: '13-inch' },
-                  { icon: Keyboard, name: 'Lofree Flow', detail: 'Low Profile' },
-                  { icon: Mouse, name: 'Logitech G Pro', detail: 'Wireless' },
-                  { icon: Monitor, name: 'ASUS ProArt', detail: 'Color Accurate' },
-                ].map((item) => (
-                  <div key={item.name} className="flex items-center gap-2.5 group/item">
-                    <div className="h-8 w-8 rounded-xl bg-foreground/[0.04] border border-foreground/[0.06] flex items-center justify-center shrink-0 group-hover/item:bg-foreground/[0.08] transition-colors">
-                      <item.icon className="h-3.5 w-3.5 text-foreground/50" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-[11px] font-semibold text-foreground/80 truncate leading-tight">{item.name}</p>
-                      <p className="text-[10px] text-muted-foreground/50 font-medium">{item.detail}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+        {/* Right Column: About Content */}
+        <div className="flex flex-col space-y-6">
+          <div>
+            <p className="text-[10px] font-normal text-neutral-400 tracking-[0.2em] uppercase mb-3">
+              ABOUT
+            </p>
             
-            {/* Arrow */}
-            <div className="absolute bottom-6 right-6 h-8 w-8 rounded-full border border-foreground/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-              <ArrowRight className="h-4 w-4 text-muted-foreground/40" />
-            </div>
-          </Link>
+            <h1 className="text-[32px] sm:text-[40px] md:text-[48px] font-bold text-black tracking-tight leading-tight max-w-3xl">
+              Full-stack developer <br />
+              building intelligent <br />
+              web systems.
+            </h1>
+          </div>
 
-          {/* Write to me */}
-          <Link href="/write-to-me" className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative">
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-foreground/[0.015] to-transparent pointer-events-none" />
-            <div className="relative z-10 space-y-5">
-              <div className="space-y-1">
-                <p className="text-[11px] font-bold text-muted-foreground/60">Guestbook</p>
-                <h3 className="text-lg font-bold tracking-tight">Write a note</h3>
-              </div>
-              {/* Visual Note Sheets */}
-              <div className="relative h-28 w-full mt-4">
-                <div className="absolute inset-0 bg-foreground/[0.03] border border-foreground/[0.05] rounded-xl rotate-[-4deg] translate-y-2 scale-95" />
-                <div className="absolute inset-0 bg-card/40 backdrop-blur-sm border border-foreground/[0.08] rounded-xl rotate-[2deg] translate-y-1 scale-[0.98]" />
-                <div className="absolute inset-0 bg-card/60 backdrop-blur-md border border-foreground/[0.1] rounded-xl flex flex-col p-5 gap-2 transition-transform duration-500 group-hover:rotate-[-1deg] group-hover:-translate-y-1">
-                  <div className="h-1.5 w-1/2 bg-foreground/20 rounded-full mb-2" />
-                  <div className="space-y-3">
-                    <div className="h-[1px] w-full bg-foreground/[0.08]" />
-                    <div className="h-[1px] w-full bg-foreground/[0.08]" />
-                    <div className="h-[1px] w-[80%] bg-foreground/[0.08]" />
-                  </div>
-                  <div className="mt-auto self-end">
-                    <div className="h-1.5 w-10 bg-foreground/10 rounded-full" />
-                  </div>
-                </div>
-              </div>
-            </div>
+          <p className="text-[13px] sm:text-[14px] text-neutral-600 max-w-2xl leading-relaxed">
+            I design and implement digital experiences that naturally connect systems architecture, automated workflows, and frontend experiences. I specialize in leveraging AI agents and modern web frameworks (Next.js, Laravel) to build next-generation applications.
+          </p>
 
-            {/* Arrow */}
-            <div className="absolute bottom-6 right-6 h-8 w-8 rounded-full border border-foreground/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-              <ArrowRight className="h-4 w-4 text-muted-foreground/40" />
+          {/* Footer Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full pt-4">
+            <div className="border-t border-neutral-200 pt-3">
+              <p className="text-[10px] font-normal text-neutral-400 tracking-wider uppercase">
+                NAME
+              </p>
+              <p className="text-[11px] font-bold text-neutral-900 uppercase mt-1 tracking-wide">
+                THANAKON DUANGKUMWATTANASIRI (WARM)
+              </p>
             </div>
-          </Link>
-
-          <Link 
-            href="https://music.youtube.com/watch?v=GCkhFdMdGOY&list=OLAK5uy_lGltRMFUZ_XFtWZUPF5KuNGOYwyWigmeo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-2xl border border-foreground/[0.06] bg-card/30 backdrop-blur-sm p-6 flex flex-col group hover:bg-card/60 hover:border-foreground/[0.12] transition-all duration-300 overflow-hidden relative"
-          >
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-foreground/[0.015] to-transparent pointer-events-none" />
-            <div className="relative z-10 space-y-6">
-              <div className="space-y-1">
-                <p className="text-[11px] font-bold text-muted-foreground/60 uppercase tracking-widest">YouTube Music</p>
-                <h3 className="text-lg font-bold tracking-tight">On Repeat</h3>
-              </div>
-              <div className="flex items-center gap-4">
-                {/* Album art */}
-                <div className="relative h-20 w-20 rounded-xl overflow-hidden border border-foreground/[0.08] shadow-lg shrink-0">
-                  <Image 
-                    src="/fashion.jpg"
-                    alt="FaSHioN - Cortis"
-                    fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                </div>
-                {/* Song info */}
-                <div className="flex-1 min-w-0 space-y-1.5">
-                  <p className="text-sm font-bold truncate leading-tight uppercase tracking-tight">FaSHioN</p>
-                  <p className="text-xs text-muted-foreground/60 truncate font-medium">Cortis</p>
-                  <div className="flex items-center gap-2 pt-1">
-                    <div className="flex items-end gap-[2px] h-3">
-                      <span className="w-[3px] bg-foreground/40 rounded-full animate-[pulse_0.8s_ease-in-out_infinite]" style={{ height: '8px', animationDelay: '0s' }} />
-                      <span className="w-[3px] bg-foreground/40 rounded-full animate-[pulse_0.8s_ease-in-out_infinite]" style={{ height: '12px', animationDelay: '0.15s' }} />
-                      <span className="w-[3px] bg-foreground/40 rounded-full animate-[pulse_0.8s_ease-in-out_infinite]" style={{ height: '6px', animationDelay: '0.3s' }} />
-                      <span className="w-[3px] bg-foreground/40 rounded-full animate-[pulse_0.8s_ease-in-out_infinite]" style={{ height: '10px', animationDelay: '0.45s' }} />
-                    </div>
-                    <span className="text-[10px] font-mono text-muted-foreground/40 tracking-tighter">Now Playing</span>
-                  </div>
-                </div>
+            <div className="border-t border-neutral-200 pt-3">
+              <p className="text-[10px] font-normal text-neutral-400 tracking-wider uppercase">
+                ROLE
+              </p>
+              <p className="text-[11px] font-bold text-neutral-900 uppercase mt-1 tracking-wide">
+                FULL-STACK DEVELOPER
+              </p>
+            </div>
+            <div className="border-t border-neutral-200 pt-3">
+              <p className="text-[10px] font-normal text-neutral-400 tracking-wider uppercase">
+                CONTACT
+              </p>
+              <div className="flex flex-col space-y-1.5 mt-1.5 items-start">
+                <a
+                  href="mailto:thnakon.d@gmail.com"
+                  className="text-[11px] font-bold text-neutral-900 uppercase hover:opacity-60 hover:-translate-x-1.5 transition-all duration-300 tracking-wide inline-flex items-center"
+                >
+                  thnakon.d@gmail.com <ArrowIcon />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/thanankon-duangkumwattanasiri-1709823a8/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] font-bold text-neutral-900 uppercase hover:opacity-60 hover:-translate-x-1.5 transition-all duration-300 tracking-wide inline-flex items-center"
+                >
+                  LinkedIn <ArrowIcon />
+                </a>
+                <a
+                  href="https://github.com/thnakon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] font-bold text-neutral-900 uppercase hover:opacity-60 hover:-translate-x-1.5 transition-all duration-300 tracking-wide inline-flex items-center"
+                >
+                  GitHub <ArrowIcon />
+                </a>
+                <a
+                  href="https://x.com/Obounwarm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] font-bold text-neutral-900 uppercase hover:opacity-60 hover:-translate-x-1.5 transition-all duration-300 tracking-wide inline-flex items-center"
+                >
+                  Twitter / X <ArrowIcon />
+                </a>
+                <a
+                  href="https://www.instagram.com/itzwarm_/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] font-bold text-neutral-900 uppercase hover:opacity-60 hover:-translate-x-1.5 transition-all duration-300 tracking-wide inline-flex items-center"
+                >
+                  Instagram <ArrowIcon />
+                </a>
               </div>
             </div>
-
-            {/* Arrow */}
-            <div className="absolute bottom-6 right-6 h-8 w-8 rounded-full border border-foreground/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-              <ArrowRight className="h-4 w-4 text-muted-foreground/40" />
-            </div>
-          </Link>
-
+          </div>
         </div>
-      </section>
-
-      <FinalSection />
+      </div>
     </div>
-  )
+  );
 }

@@ -183,7 +183,7 @@ export function ProjectCaseStudy({
             </div>
 
             <div className="pt-2 relative z-10">
-              <Link href={`/work/${slug}`} className="block">
+              <Link href={`/projects/${slug}`} className="block">
                 <Button 
                   variant="outline" 
                   className="w-full rounded-xl border-foreground/10 bg-background/50 backdrop-blur-sm text-foreground/80 font-black uppercase tracking-[0.2em] text-[8px] h-10 group/btn hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-300"

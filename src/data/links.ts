@@ -62,7 +62,7 @@ export const socialLinks: LinkItem[] = [
 export const portfolioLinks: LinkItem[] = [
   {
     title: "Selected Work",
-    url: "/work",
+    url: "/projects",
     description: "Explore my premium project case studies",
     icon: PenTool,
     category: "portfolio",

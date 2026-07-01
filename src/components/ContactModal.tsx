@@ -48,9 +48,24 @@ export function ContactModal({ children }: ContactModalProps) {
 
   const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(email)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      if (typeof window !== "undefined") {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(email)
+        } else {
+          // Fallback copy for non-secure HTTP context
+          const textArea = document.createElement("textarea")
+          textArea.value = email
+          textArea.style.position = "fixed"
+          textArea.style.opacity = "0"
+          document.body.appendChild(textArea)
+          textArea.focus()
+          textArea.select()
+          document.execCommand("copy")
+          document.body.removeChild(textArea)
+        }
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      }
     } catch (err) {
       console.error("Failed to copy!", err)
     }
@@ -163,36 +178,36 @@ export function ContactModal({ children }: ContactModalProps) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Book a Call */}
                   <div 
-                    className="group relative flex items-center gap-4 rounded-2xl border p-4 transition-all hover:bg-muted/50 cursor-pointer"
+                    className="group relative flex items-center gap-4 rounded-2xl bg-neutral-50 p-4 transition-all hover:bg-neutral-100/80 cursor-pointer"
                     onClick={() => setView("book")}
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-foreground">
-                      <Calendar className="h-6 w-6" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-100 text-foreground group-hover:bg-neutral-200/50 transition-colors">
+                      <Calendar className="h-6 w-6 text-neutral-700" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-semibold text-foreground">Book a Call</h3>
-                      <p className="text-[13px] text-muted-foreground">Schedule a 30-min chat</p>
+                      <h3 className="font-semibold text-foreground text-sm">Book a Call</h3>
+                      <p className="text-[12px] text-muted-foreground">Schedule a 30-min chat</p>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                    <ArrowUpRight className="h-4 w-4 text-neutral-400 opacity-0 transition-opacity group-hover:opacity-100" />
                   </div>
 
                   {/* Email Me */}
                   <div 
-                    className="group relative flex items-center gap-4 rounded-2xl border p-4 transition-all hover:bg-muted/50 cursor-pointer"
+                    className="group relative flex items-center gap-4 rounded-2xl bg-neutral-50 p-4 transition-all hover:bg-neutral-100/80 cursor-pointer"
                     onClick={copyEmail}
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-foreground">
-                      <Mail className="h-6 w-6" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-100 text-foreground group-hover:bg-neutral-200/50 transition-colors">
+                      <Mail className="h-6 w-6 text-neutral-700" />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-foreground">Email Me</h3>
-                      <p className="text-[13px] text-muted-foreground truncate max-w-[120px]">{email}</p>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-foreground text-sm">Email Me</h3>
+                      <p className="text-[12px] text-muted-foreground truncate">{email}</p>
                     </div>
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-background border shadow-sm flex-shrink-0">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-100 flex-shrink-0 group-hover:bg-neutral-200/50 transition-colors">
                       {copied ? (
                         <Check className="h-4 w-4 text-green-600" />
                       ) : (
-                        <Copy className="h-4 w-4 text-muted-foreground" />
+                        <Copy className="h-4 w-4 text-neutral-500" />
                       )}
                     </div>
                   </div>
@@ -201,15 +216,15 @@ export function ContactModal({ children }: ContactModalProps) {
                 {/* Message Section */}
                 <div className="space-y-4 pt-2">
                   <div>
-                    <h4 className="text-[13px] font-semibold text-muted-foreground tracking-wider mb-3">
+                    <h4 className="text-[11px] font-bold uppercase tracking-wider text-neutral-400 mb-2">
                       Or write me a message here
                     </h4>
                     <Button 
-                      variant="outline" 
-                      className="w-full justify-start h-12 rounded-xl gap-3 text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all border-dashed"
+                      variant="ghost" 
+                      className="w-full justify-start h-12 rounded-xl gap-3 text-neutral-500 hover:text-black hover:bg-neutral-50 transition-all border-none bg-neutral-50/50"
                       onClick={() => setView("message")}
                     >
-                      <div className="h-1.5 w-1.5 rounded-full bg-foreground/60 animate-pulse" />
+                      <div className="h-1.5 w-1.5 rounded-full bg-neutral-400 animate-pulse" />
                       Tap to open
                     </Button>
                   </div>
@@ -217,10 +232,10 @@ export function ContactModal({ children }: ContactModalProps) {
 
                 {/* Socials */}
                 <div className="space-y-4 pt-4 flex flex-col items-center">
-                  <h4 className="text-[13px] font-semibold text-muted-foreground tracking-wider underline underline-offset-4 decoration-border/50">
+                  <h4 className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
                     Connect on socials
                   </h4>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-6">
                     {[
                       { icon: Twitter, href: "https://x.com/Obounwarm", name: "Twitter" },
                       { icon: Linkedin, href: "https://www.linkedin.com/in/thanankon-duangkumwattanasiri-1709823a8/?trk=public-profile-join-page", name: "LinkedIn" },
@@ -232,9 +247,10 @@ export function ContactModal({ children }: ContactModalProps) {
                         href={social.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex h-11 w-11 items-center justify-center rounded-xl border bg-background transition-all hover:bg-muted hover:scale-110 active:scale-95 shadow-sm"
+                        className="text-neutral-400 hover:text-black hover:scale-110 active:scale-95 transition-all p-1"
+                        title={social.name}
                       >
-                        <social.icon className="h-5 w-5 text-foreground/80" />
+                        <social.icon className="h-5 w-5" />
                       </a>
                     ))}
                   </div>
@@ -265,11 +281,11 @@ export function ContactModal({ children }: ContactModalProps) {
               <div className="space-y-4 pb-10 flex-1">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="text-[13px] font-semibold text-muted-foreground tracking-wider">Name</Label>
+                    <Label htmlFor="name" className="text-[13px] font-semibold text-neutral-400 tracking-wider">Name</Label>
                     <Input 
                       id="name" 
                       placeholder="Your name" 
-                      className="rounded-xl h-11 border-muted-foreground/20 focus-visible:ring-foreground" 
+                      className="rounded-xl h-11 border-none shadow-none bg-neutral-50 focus-visible:ring-1 focus-visible:ring-neutral-200 focus-visible:bg-neutral-100/50 transition-all duration-200" 
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
@@ -277,12 +293,12 @@ export function ContactModal({ children }: ContactModalProps) {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-[13px] font-semibold text-muted-foreground tracking-wider">Email</Label>
+                    <Label htmlFor="email" className="text-[13px] font-semibold text-neutral-400 tracking-wider">Email</Label>
                     <Input 
                       id="email" 
                       type="email" 
                       placeholder="email@example.com" 
-                      className="rounded-xl h-11 border-muted-foreground/20 focus-visible:ring-foreground" 
+                      className="rounded-xl h-11 border-none shadow-none bg-neutral-50 focus-visible:ring-1 focus-visible:ring-neutral-200 focus-visible:bg-neutral-100/50 transition-all duration-200" 
                       required
                       value={emailInput}
                       onChange={(e) => setEmailInput(e.target.value)}
@@ -292,15 +308,15 @@ export function ContactModal({ children }: ContactModalProps) {
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <Label htmlFor="message" className="text-[13px] font-semibold text-muted-foreground tracking-wider">Message</Label>
-                    <span className="text-[11px] font-medium text-muted-foreground tabular-nums">
+                    <Label htmlFor="message" className="text-[13px] font-semibold text-neutral-400 tracking-wider">Message</Label>
+                    <span className="text-[11px] font-medium text-neutral-400 tabular-nums">
                       {message.length}/1000
                     </span>
                   </div>
                   <Textarea 
                     id="message" 
                     placeholder="Tell me about your project..." 
-                    className="min-h-[150px] rounded-xl border-muted-foreground/20 focus-visible:ring-foreground resize-none py-3"
+                    className="min-h-[150px] rounded-xl border-none shadow-none bg-neutral-50 focus-visible:ring-1 focus-visible:ring-neutral-200 focus-visible:bg-neutral-100/50 resize-none py-3 px-4 transition-all duration-200"
                     maxLength={1000}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -348,11 +364,11 @@ export function ContactModal({ children }: ContactModalProps) {
               <div className="space-y-4 pb-10 flex-1">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="book-name" className="text-[13px] font-semibold text-muted-foreground tracking-wider">Name</Label>
+                    <Label htmlFor="book-name" className="text-[13px] font-semibold text-neutral-400 tracking-wider">Name</Label>
                     <Input 
                       id="book-name" 
                       placeholder="Your name" 
-                      className="rounded-xl h-11 border-muted-foreground/20 focus-visible:ring-foreground" 
+                      className="rounded-xl h-11 border-none shadow-none bg-neutral-50 focus-visible:ring-1 focus-visible:ring-neutral-200 focus-visible:bg-neutral-100/50 transition-all duration-200" 
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
@@ -360,12 +376,12 @@ export function ContactModal({ children }: ContactModalProps) {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="book-email" className="text-[13px] font-semibold text-muted-foreground tracking-wider">Email</Label>
+                    <Label htmlFor="book-email" className="text-[13px] font-semibold text-neutral-400 tracking-wider">Email</Label>
                     <Input 
                       id="book-email" 
                       type="email" 
                       placeholder="email@example.com" 
-                      className="rounded-xl h-11 border-muted-foreground/20 focus-visible:ring-foreground" 
+                      className="rounded-xl h-11 border-none shadow-none bg-neutral-50 focus-visible:ring-1 focus-visible:ring-neutral-200 focus-visible:bg-neutral-100/50 transition-all duration-200" 
                       required
                       value={emailInput}
                       onChange={(e) => setEmailInput(e.target.value)}
@@ -375,35 +391,35 @@ export function ContactModal({ children }: ContactModalProps) {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="book-date" className="text-[13px] font-semibold text-muted-foreground tracking-wider">Preferred Date</Label>
+                    <Label htmlFor="book-date" className="text-[13px] font-semibold text-neutral-400 tracking-wider">Preferred Date</Label>
                     <div className="relative">
                       <Input 
                         id="book-date" 
                         type="date" 
-                        className="rounded-xl h-11 border-muted-foreground/20 focus-visible:ring-foreground pl-10" 
+                        className="rounded-xl h-11 border-none shadow-none bg-neutral-50 focus-visible:ring-1 focus-visible:ring-neutral-200 focus-visible:bg-neutral-100/50 transition-all duration-200 pl-10" 
                         required
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
                         onClick={(e) => e.currentTarget.showPicker?.()}
                         disabled={isSending}
                       />
-                      <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                      <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="book-time" className="text-[13px] font-semibold text-muted-foreground tracking-wider">Preferred Time</Label>
+                    <Label htmlFor="book-time" className="text-[13px] font-semibold text-neutral-400 tracking-wider">Preferred Time</Label>
                     <div className="relative">
                       <Input 
                         id="book-time" 
                         type="time" 
-                        className="rounded-xl h-11 border-muted-foreground/20 focus-visible:ring-foreground pl-10" 
+                        className="rounded-xl h-11 border-none shadow-none bg-neutral-50 focus-visible:ring-1 focus-visible:ring-neutral-200 focus-visible:bg-neutral-100/50 transition-all duration-200 pl-10" 
                         required
                         value={time}
                         onChange={(e) => setTime(e.target.value)}
                         onClick={(e) => e.currentTarget.showPicker?.()}
                         disabled={isSending}
                       />
-                      <Clock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                      <Clock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" />
                     </div>
                   </div>
                 </div>

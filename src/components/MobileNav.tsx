@@ -68,7 +68,7 @@ export function MobileNav() {
               <Layout className="mr-2 h-4 w-4" />
               <span>Home</span>
             </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => router.push("/work"))}>
+            <CommandItem onSelect={() => runCommand(() => router.push("/projects"))}>
               <Briefcase className="mr-2 h-4 w-4" />
               <span>Work</span>
             </CommandItem>
@@ -92,7 +92,7 @@ export function MobileNav() {
             {projects.map((project) => (
               <CommandItem 
                 key={project.slug}
-                onSelect={() => runCommand(() => router.push(`/work/${project.slug}`))}
+                onSelect={() => runCommand(() => router.push(`/projects/${project.slug}`))}
               >
                 <Layers className="mr-2 h-4 w-4" />
                 <span>{project.title}</span>

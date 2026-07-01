@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Gochi_Hand, Geist_Mono, Noto_Sans_Thai } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -8,12 +8,21 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-import { Gochi_Hand } from "next/font/google";
-
 const gochiHand = Gochi_Hand({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-gochi",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+});
+
+const notoSansThai = Noto_Sans_Thai({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["thai"],
+  variable: "--font-thai",
 });
 
 export const metadata: Metadata = {
@@ -24,12 +33,12 @@ export const metadata: Metadata = {
   },
 };
 
-import { Navbar } from "@/components/Navbar";
-import { SidebarLabel } from "@/components/SidebarLabel";
-import { Footer } from "@/components/Footer";
 import { IntroProvider } from "@/components/intro-context";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthContext } from "@/components/auth-context";
+import { FixedNav } from "@/components/FixedNav";
+import { Preloader } from "@/components/Preloader";
+import { LanguageProvider } from "@/components/language-context";
 
 export default function RootLayout({
   children,
@@ -38,7 +47,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
-      <body className={`${inter.variable} ${gochiHand.variable} font-sans antialiased`}>
+      <body
+        className={`${inter.variable} ${gochiHand.variable} ${geistMono.variable} ${notoSansThai.variable} font-sans antialiased`}
+      >
+        {/* Skip the entrance animation if it already played this session (no flash). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('intro-played'))document.documentElement.classList.add('intro-done')}catch(e){}",
+          }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -47,16 +65,18 @@ export default function RootLayout({
         >
           <TooltipProvider>
             <AuthContext>
-              <IntroProvider>
-                <div className="relative min-h-screen flex flex-col">
-                  <SidebarLabel />
-                  <Navbar />
-                  <main className="flex-1">
-                    {children}
-                  </main>
-                  <Footer />
-                </div>
-              </IntroProvider>
+              <LanguageProvider>
+                <IntroProvider>
+                  <Preloader />
+                  <div className="relative min-h-screen flex flex-col selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
+                    <FixedNav />
+                    {/* Fixed Navigation across all pages */}
+                    <main className="flex-1 w-full h-full relative">
+                      {children}
+                    </main>
+                  </div>
+                </IntroProvider>
+              </LanguageProvider>
             </AuthContext>
           </TooltipProvider>
         </ThemeProvider>

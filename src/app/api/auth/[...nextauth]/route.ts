@@ -6,6 +6,9 @@ import { prisma } from "@/lib/prisma"
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
+  session: {
+    strategy: "jwt" as const,
+  },
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID!,
@@ -17,9 +20,9 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    session: async ({ session, user }: { session: any; user: any }) => {
-      if (session?.user) {
-        session.user.id = user.id
+    session: async ({ session, token }: { session: any; token: any }) => {
+      if (session?.user && token?.sub) {
+        session.user.id = token.sub
       }
       return session
     },
@@ -30,3 +33,4 @@ export const authOptions = {
 const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }
+

@@ -52,7 +52,7 @@ export function Navbar() {
           </Link>
           <div className="hidden md:flex gap-1 text-[13px] font-medium text-foreground">
             <Link href="/about" className="px-3 py-1.5 rounded-md transition-colors hover:bg-muted hover:text-foreground">About</Link>
-            <Link href="/work" className="px-3 py-1.5 rounded-md transition-colors hover:bg-muted hover:text-foreground">Work</Link>
+            <Link href="/projects" className="px-3 py-1.5 rounded-md transition-colors hover:bg-muted hover:text-foreground">Work</Link>
             <Link href="/blog" className="px-3 py-1.5 rounded-md transition-colors hover:bg-muted hover:text-foreground">Blog</Link>
             <NavMegaMenu />
           </div>
